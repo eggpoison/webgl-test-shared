@@ -1,6 +1,6 @@
 {
    "name": "webgl-test-shared",
-   "version": "1.0.8",
+   "version": "1.0.9",
    "description": "Shared files for webgl-test",
    "main": "lib/index.js",
    "types": "lib/index.d.ts",
@@ -19,5 +19,6 @@
    "dependencies": {},
    "devDependencies": {
       "typescript": "^4.7.4"
-   }
+   },
+   "files": ["lib/**"]
 }
