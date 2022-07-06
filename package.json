@@ -1,6 +1,6 @@
 {
    "name": "webgl-test-shared",
-   "version": "1.0.7",
+   "version": "1.0.8",
    "description": "Shared files for webgl-test",
    "main": "lib/index.js",
    "types": "lib/index.d.ts",
@@ -12,7 +12,7 @@
       "build": "tsc"
    },
    "publishConfig": {
-      "registry": "https://npm.pkg.github.com/eggpoison"
+      "registry": "https://registry.yarnpkg.com/eggpoison"
    },
    "author": "eggpoison <edward.mageev3@gmail.com>",
    "license": "MIT",
