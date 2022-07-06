@@ -1,10 +1,16 @@
 {
-  "name": "webgl-test-shared",
-  "version": "1.0.0",
-  "description": "Shared files for webgl-test",
-  "main": "index.ts",
-  "repository": "https://github.com/eggpoison/webgl-test-shared.git",
-  "author": "eggpoison",
-  "license": "MIT",
-  "private": true
+ "name": "webgl-test-shared",
+ "version": "1.0.1",
+ "description": "Shared files for webgl-test",
+ "main": "index.ts",
+ "repository": {
+  "url": "https://github.com/eggpoison/webgl-test-shared.git",
+  "type": "git"
+ },
+ "publishConfig": {
+  "registry": "https://npm.pkg.github.com/eggpoison"
+ },
+ "author": "eggpoison <edward.mageev3@gmail.com>",
+ "license": "MIT",
+ "dependencies": {}
 }
