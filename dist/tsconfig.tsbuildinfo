@@ -1,0 +1,74 @@
+{
+  "program": {
+    "fileInfos": {
+      "../../../../usr/share/nodejs/typescript/lib/lib.d.ts": {
+        "version": "77daf49ac8b4189a68f643a3866c862cbee4257598eba0c42623eada7c5bd868",
+        "signature": "77daf49ac8b4189a68f643a3866c862cbee4257598eba0c42623eada7c5bd868"
+      },
+      "../../../../usr/share/nodejs/typescript/lib/lib.es5.d.ts": {
+        "version": "7c1b028965a993eef7d465ac1fd75e35cb558372031dea10b5366038f640a182",
+        "signature": "7c1b028965a993eef7d465ac1fd75e35cb558372031dea10b5366038f640a182"
+      },
+      "../../../../usr/share/nodejs/typescript/lib/lib.dom.d.ts": {
+        "version": "e2a6b996a0ecae268e90e0a15d8cbf6ba57cb14d72d5462b3bad4fd7ff000567",
+        "signature": "e2a6b996a0ecae268e90e0a15d8cbf6ba57cb14d72d5462b3bad4fd7ff000567"
+      },
+      "../../../../usr/share/nodejs/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "46b20a85418541653779e6c6b3c1b5fd4b6b33d4ab3d19ebdd348424b0607f30",
+        "signature": "46b20a85418541653779e6c6b3c1b5fd4b6b33d4ab3d19ebdd348424b0607f30"
+      },
+      "../../../../usr/share/nodejs/typescript/lib/lib.scripthost.d.ts": {
+        "version": "855b8297fcd1dc449a4beeccc155c945a3b89e738bde6a56c083b181f0a6085a",
+        "signature": "855b8297fcd1dc449a4beeccc155c945a3b89e738bde6a56c083b181f0a6085a"
+      },
+      "../biomes.ts": {
+        "version": "57b60c05517f3c6e0b5d4a3f4124d13b1225dd0603eec8636f37b68128c6ca2b",
+        "signature": "342ddc5bec26140fd7dabc9581a3952b0656acfe6193f6c879e197ad2a7c4dc5"
+      },
+      "../Tile.ts": {
+        "version": "9fca454b43334ff2342be683f1b2e06f0fcad96ecc613f909c977e1a40380faa",
+        "signature": "473a7e7f2f71d8353584d64dc0e7b6c7f97253a133f7f72501135b184642e214"
+      },
+      "../index.ts": {
+        "version": "ddd56ceebe967fbf16fd5b5b0199ad63a0259a4b78d24532dda7035ceac49a90",
+        "signature": "367a22ea0db7ceb1e611320210eca7600e9de72ce8b0dc766ecaf753342256ed"
+      }
+    },
+    "options": {
+      "target": 1,
+      "module": 5,
+      "declaration": true,
+      "declarationMap": true,
+      "outDir": "./",
+      "composite": true,
+      "configFilePath": "../tsconfig.json"
+    },
+    "referencedMap": {
+      "../biomes.ts": [
+        "../Tile.ts"
+      ],
+      "../Tile.ts": [
+        "../biomes.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "../biomes.ts": [
+        "../Tile.ts"
+      ],
+      "../Tile.ts": [
+        "../biomes.ts"
+      ]
+    },
+    "semanticDiagnosticsPerFile": [
+      "../../../../usr/share/nodejs/typescript/lib/lib.d.ts",
+      "../../../../usr/share/nodejs/typescript/lib/lib.es5.d.ts",
+      "../../../../usr/share/nodejs/typescript/lib/lib.dom.d.ts",
+      "../../../../usr/share/nodejs/typescript/lib/lib.webworker.importscripts.d.ts",
+      "../../../../usr/share/nodejs/typescript/lib/lib.scripthost.d.ts",
+      "../Tile.ts",
+      "../index.ts",
+      "../biomes.ts"
+    ]
+  },
+  "version": "3.8.3"
+}

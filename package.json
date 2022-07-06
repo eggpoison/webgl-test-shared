@@ -1,8 +1,7 @@
 {
  "name": "webgl-test-shared",
- "version": "1.0.2",
+ "version": "1.0.3",
  "description": "Shared files for webgl-test",
- "main": "index.ts",
  "repository": {
   "url": "https://github.com/eggpoison/webgl-test-shared.git",
   "type": "git"
