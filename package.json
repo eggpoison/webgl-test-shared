@@ -1,6 +1,6 @@
 {
  "name": "webgl-test-shared",
- "version": "1.0.1",
+ "version": "1.0.2",
  "description": "Shared files for webgl-test",
  "main": "index.ts",
  "repository": {
