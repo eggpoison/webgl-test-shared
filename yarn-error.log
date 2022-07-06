@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
      "name": "webgl-test-shared",
-     "version": "1.0.5",
+     "version": "1.0.7",
      "description": "Shared files for webgl-test",
      "main": "lib/index.js",
      "types": "lib/index.d.ts",
