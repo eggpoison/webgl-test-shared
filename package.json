@@ -1,0 +1,10 @@
+{
+  "name": "webgl-test-shared",
+  "version": "1.0.0",
+  "description": "Shared files for webgl-test",
+  "main": "index.ts",
+  "repository": "https://github.com/eggpoison/webgl-test-shared.git",
+  "author": "eggpoison",
+  "license": "MIT",
+  "private": true
+}
