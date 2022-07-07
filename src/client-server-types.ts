@@ -1,5 +1,9 @@
 import Tile from "./Tile";
 
+type PlayerData = {
+   name: string;
+}
+
 export interface ServerToClientEvents {
    terrain: (tiles: Array<Array<Tile>>) => void;
    message: (message: string) => void;
@@ -8,7 +12,7 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
    chatMessage: (message: string) => void;
-   name: (name: string) => void;
+   playerData: (playerData: PlayerData) => void;
 }
 
 export interface InterServerEvents {}
