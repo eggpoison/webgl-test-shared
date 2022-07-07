@@ -3,7 +3,7 @@ import Tile from "./Tile";
 export interface ServerToClientEvents {
    terrain: (tiles: Array<Array<Tile>>) => void;
    message: (message: string) => void;
-   chatMessage: (clientID: string, message: string) => void;
+   chatMessage: (senderName: string, message: string) => void;
 }
 
 export interface ClientToServerEvents {
@@ -12,4 +12,6 @@ export interface ClientToServerEvents {
 
 export interface InterServerEvents {}
 
-export interface SocketData {}
+export interface SocketData {
+   name: string;
+}
