@@ -1,6 +1,6 @@
 import Tile from "./Tile";
 
-type PlayerData = {
+export type PlayerData = {
    name: string;
    position: [number, number];
 }
