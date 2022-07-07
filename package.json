@@ -8,7 +8,7 @@
    "author": "eggpoison <edwrd.magee@gmail.com>",
    "license": "MIT",
    "scripts": {
-      "build": "tsc"
+      "build": "tsc --build"
    },
    "devDependencies": {
       "typescript": "^4.7.4"
