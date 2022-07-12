@@ -25,7 +25,7 @@ type TileEffects = {
 
 type TileTypeInfo = {
    readonly textureSource: string;
-   /** How quickly an entity loses velocity on the tile (1 = instant, 0 = maintains) */
+   /** How quickly an entity loses velocity on the tile (1 = instant, 0 = no loss) */
    readonly friction: number;
    readonly effects?: TileEffects;
 }

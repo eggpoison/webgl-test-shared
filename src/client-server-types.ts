@@ -14,13 +14,15 @@ export interface ServerToClientEvents {
    message: (message: string) => void;
    chatMessage: (senderName: string, message: string) => void;
    newPlayer: (playerData: SocketData) => void;
-   playerMovement: (clientID: string, movement: number) => void;
+   playerMovement: (clientID: string, movementHash: number) => void;
+   position: () => void;
 } 
 
 export interface ClientToServerEvents {
    chatMessage: (message: string) => void;
    playerData: (data: PlayerData) => void;
-   playerMovement: (movement: number) => void;
+   playerMovement: (movementHash: number) => void;
+   position: (position: [number, number]) => void;
 }
 
 export interface InterServerEvents {}
