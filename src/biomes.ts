@@ -2,7 +2,7 @@ import { TileInfo, TileType } from "./Tile";
 
 export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields";
 
-type TileGenerationInfo = {
+export type TileGenerationInfo = {
    readonly info: Omit<TileInfo, "biome" | "fogAmount">;
    readonly minWeight?: number;
    readonly maxWeight?: number;
@@ -12,7 +12,7 @@ type TileGenerationInfo = {
    readonly maxDist?: number;
 }
 
-type BiomeGenerationInfo = {
+export type BiomeGenerationInfo = {
    readonly minHeight?: number;
    readonly maxHeight?: number;
    readonly minTemperature?: number;
@@ -21,7 +21,7 @@ type BiomeGenerationInfo = {
    readonly maxHumidity?: number;
 }
 
-type Biome = {
+export type Biome = {
    readonly name: BiomeName;
    readonly generationInfo?: Readonly<BiomeGenerationInfo>;
    readonly tiles: ReadonlyArray<TileGenerationInfo>;
