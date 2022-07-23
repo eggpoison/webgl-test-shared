@@ -50,7 +50,7 @@ export const TILE_TYPE_INFO_RECORD: { [key in TileType]: TileTypeInfo } = {
       friction: DEFAULT_FRICTION
    },
    [TileType.rock]: {
-      textureSource: "grass.png",
+      textureSource: "rock.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.sand]: {
