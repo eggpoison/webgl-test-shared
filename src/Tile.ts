@@ -34,47 +34,47 @@ const DEFAULT_FRICTION = 0.5;
 
 export const TILE_TYPE_INFO_RECORD: { [key in TileType]: TileTypeInfo } = {
    [TileType.grass]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.dirt]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.water]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.sludge]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.rock]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.sand]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.sandstone]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.snow]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: 0.7
    },
    [TileType.ice]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: 0.15
    },
    [TileType.magma]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.lava]: {
-      textureSource: "grass.jpg",
+      textureSource: "grass.png",
       friction: 0.8
    }
 };
