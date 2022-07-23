@@ -30,7 +30,7 @@ interface SettingsType {
 const SETTINGS: SettingsType = {
    TPS: 60,
    TILE_SIZE: 64,
-   BOARD_SIZE: 1,
+   BOARD_SIZE: 8,
    CHUNK_SIZE: 8,
    DIMENSIONS: -1,
    START_TIME: 8,
