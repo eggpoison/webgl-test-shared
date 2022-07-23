@@ -1,4 +1,4 @@
-import { BiomeName } from "./biomes";
+import { Biome } from "./biomes";
 
 export enum TileType {
    grass,
@@ -81,13 +81,13 @@ export const TILE_TYPE_INFO_RECORD: { [key in TileType]: TileTypeInfo } = {
 
 export interface TileInfo {
    type: TileType;
-   biome: BiomeName;
+   biome: Biome;
    isWall: boolean;
 }
 
 class Tile implements TileInfo {
    public readonly type: TileType;
-   public readonly biome: BiomeName;
+   public readonly biome: Biome;
    public readonly isWall: boolean;
 
    constructor({ type, biome, isWall }: TileInfo) {
