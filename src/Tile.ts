@@ -80,9 +80,9 @@ export const TILE_TYPE_INFO_RECORD: { [key in TileType]: TileTypeInfo } = {
 };
 
 export interface TileInfo {
-   readonly type: TileType;
-   readonly biome: BiomeName;
-   readonly isWall: boolean;
+   type: TileType;
+   biome: BiomeName;
+   isWall: boolean;
 }
 
 class Tile implements TileInfo {
