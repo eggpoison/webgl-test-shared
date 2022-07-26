@@ -38,11 +38,11 @@ export const TILE_TYPE_INFO_RECORD: { [key in TileType]: TileTypeInfo } = {
       friction: DEFAULT_FRICTION
    },
    [TileType.dirt]: {
-      textureSource: "grass.png",
+      textureSource: "dirt.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.water]: {
-      textureSource: "grass.png",
+      textureSource: "water.png",
       friction: DEFAULT_FRICTION
    },
    [TileType.sludge]: {
