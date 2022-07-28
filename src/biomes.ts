@@ -48,28 +48,6 @@ export const BIOMES: ReadonlyArray<Biome> = [
       ]
    },
    {
-      name: "mountains",
-      generationInfo: {
-         minHeight: 0.8
-      },
-      tiles: [
-         {
-            info: {
-               type: TileType.rock,
-               isWall: true
-            },
-            minWeight: 0.8,
-            minDist: 2
-         },
-         {
-            info: {
-               type: TileType.rock,
-               isWall: false
-            }
-         }
-      ]
-   },
-   {
       name: "tundra",
       generationInfo: {
          maxTemperature: 0.2,
@@ -126,6 +104,28 @@ export const BIOMES: ReadonlyArray<Biome> = [
          {
             info: {
                type: TileType.sand,
+               isWall: false
+            }
+         }
+      ]
+   },
+   {
+      name: "mountains",
+      generationInfo: {
+         minHeight: 0.8
+      },
+      tiles: [
+         {
+            info: {
+               type: TileType.rock,
+               isWall: true
+            },
+            minWeight: 0.8,
+            minDist: 2
+         },
+         {
+            info: {
+               type: TileType.rock,
                isWall: false
             }
          }
