@@ -72,7 +72,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
    {
       name: "tundra",
       generationInfo: {
-         maxTemperature: 0.3,
+         maxTemperature: 0.2,
          maxHumidity: 0.5
       },
       tiles: [
