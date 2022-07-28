@@ -27,7 +27,7 @@ export type Biome = {
    readonly tiles: ReadonlyArray<TileGenerationInfo>;
 }
 
-const BIOMES: ReadonlyArray<Biome> = [
+export const BIOMES: ReadonlyArray<Biome> = [
    {
       name: "magmaFields",
       tiles: [
@@ -167,5 +167,3 @@ const BIOMES: ReadonlyArray<Biome> = [
       ]
    }
 ];
-
-export default BIOMES;

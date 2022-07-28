@@ -27,7 +27,7 @@ interface SettingsType {
    readonly SERVER_PORT: number;
 }
 
-const SETTINGS: SettingsType = {
+export const SETTINGS: SettingsType = {
    TPS: 60,
    TILE_SIZE: 64,
    BOARD_SIZE: 8,
@@ -44,5 +44,3 @@ const SETTINGS: SettingsType = {
 };
 
 SETTINGS.DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;
-
-export default SETTINGS;
