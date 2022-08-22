@@ -6,12 +6,12 @@ export interface SocketData {
    clientID: string;
 }
 
-export type MovementPacket = {
+export type EntityPacket = {
    readonly positions: Array<[number, number]>;
    readonly entityID: number;
 }
 
-export type Packet = MovementPacket;
+export type Packet = EntityPacket;
 
 export interface ServerToClientEvents {
    terrain: (tiles: Array<Array<Tile>>) => void;
@@ -20,7 +20,7 @@ export interface ServerToClientEvents {
    playerMovement: (clientID: string, movementHash: number) => void;
    position: () => void;
    clientDisconnect: (clientID: string) => void;
-   entityPacket: () => void;
+   entityPacket: EntityPacket;
 }
 
 export interface ClientToServerEvents {
