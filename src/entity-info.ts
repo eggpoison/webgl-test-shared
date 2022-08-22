@@ -1,10 +1,12 @@
-type EntityInfo = {
+export type EntityType = "passive" | "neutral" | "hostile" | "resource";
+
+type BaseEntityInfo = {
    readonly name: string;
    readonly id: number;
-   readonly type: "passive" | "neutral" | "hostile";
+   readonly type: EntityType;
 }
 
-export const ENTITY_INFO_RECORD: ReadonlyArray<EntityInfo> = [
+export const ENTITY_INFO_RECORD: ReadonlyArray<BaseEntityInfo> = [
    {
       name: "cow",
       id: 0,
