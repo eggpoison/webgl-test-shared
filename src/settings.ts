@@ -21,8 +21,6 @@ interface SettingsType {
    readonly SHOW_FOG_OF_WAR: boolean;
    /** The colour of wall outlines */
    readonly WALL_OUTLINE_WIDTH: number;
-   /** The IP address of the server */
-   readonly SERVER_IP_ADDRESS: string;
    /** Which port the server is hosted in */
    readonly SERVER_PORT: number;
 }
@@ -39,7 +37,6 @@ export const SETTINGS: SettingsType = {
    SHOW_FOG_OF_WAR: false,
    BACKGROUND_COLOUR: "#09120b",
    WALL_OUTLINE_WIDTH: 5,
-   SERVER_IP_ADDRESS: "172.22.69.13",
    SERVER_PORT: 8000
 };
 
