@@ -13,6 +13,7 @@ export interface ServerToClientEvents {
    playerMovement: (clientID: string, movementHash: number) => void;
    position: () => void;
    clientDisconnect: (clientID: string) => void;
+   entityPacket: (positions: Array<[number, number]>, entityID: number) => void;
 }
 
 export interface ClientToServerEvents {
