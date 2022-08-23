@@ -1,7 +1,9 @@
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
+export type EntityType = "cow" | "player";
+
 type BaseEntityInfo = {
-   readonly category: "mob" | "resource";
+   readonly category: "mob" | "resource" | "other";
 }
 
 interface MobEntityInfo extends BaseEntityInfo {
@@ -13,11 +15,16 @@ interface ResourceEntityInfo extends BaseEntityInfo {
    readonly category: "resource";
 }
 
-export type EntityType = "cow";
+interface OtherEntityInfo extends BaseEntityInfo {
+   readonly category: "other";
+}
 
-export const ENTITY_INFO_RECORD: Record<EntityType, MobEntityInfo | ResourceEntityInfo> = {
+export const ENTITY_INFO_RECORD: Record<EntityType, MobEntityInfo | ResourceEntityInfo | OtherEntityInfo> = {
    cow: {
       category: "mob",
       behaviour: "passive"
+   },
+   player: {
+      category: "other"
    }
 };
