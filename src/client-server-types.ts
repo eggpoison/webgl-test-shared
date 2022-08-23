@@ -1,6 +1,22 @@
+import { EntityType } from "./entity-info";
 import { Tile } from "./Tile";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
+
+export type BaseEntityData = {
+   readonly id: number;
+   readonly position: [number, number];
+   readonly velocity: [number, number];
+   readonly acceleration: [number, number];
+   readonly terminalVelocity: [number, number];
+}
+
+export interface NewEntityData extends BaseEntityData {
+   /** The type of entity (e.g. "cow") */
+   readonly type: EntityType;
+}
+
+export interface UpdatedEntityData extends BaseEntityData {}
 
 export interface SocketData {}
 
