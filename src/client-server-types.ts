@@ -24,10 +24,9 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
+   initialPlayerData: (name: string, position: [number, number]) => void;
    chatMessage: (message: string) => void;
-   socketData: (socketData: SocketData) => void;
-   playerMovement: (movementHash: number) => void;
-   position: (position: [number, number]) => void;
+   playerMovement: (position: [number, number], movementHash: number) => void;
 }
 
 export interface InterServerEvents {}
