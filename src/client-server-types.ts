@@ -19,12 +19,21 @@ export interface NewEntityData extends BaseEntityData {
 
 export interface UpdatedEntityData extends BaseEntityData {}
 
+export type GameDataPacket = {
+   readonly newEntities: Array<NewEntityData>;
+   readonly updatedEntities: Array<UpdatedEntityData>;
+   /** Array of all removed entities' id's */
+   readonly removedEntities: Array<number>;
+}
+
+// Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
 export interface ServerToClientEvents {
+   initialGameData: (gameTicks: number, tiles: Array<Array<Tile>>) => void;
+   gameDataPacket: (gameDataPacket: GameDataPacket) => void;
    chatMessage: (senderName: string, message: string) => void;
    clientDisconnect: (clientID: string) => void;
-   initialGameData: (gameTicks: number, tiles: Array<Array<Tile>>) => void;
 }
 
 export interface ClientToServerEvents {
