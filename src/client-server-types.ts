@@ -4,26 +4,18 @@ import { Point, Vector } from "./utils";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
-export type BaseEntityData = {
+export type EntityData = {
    readonly id: number;
+   /** The type of entity (e.g. "cow") */
+   readonly type: EntityType;
    readonly position: Point;
    readonly velocity: Vector | null;
    readonly acceleration: Vector | null;
    readonly terminalVelocity: number;
 }
 
-export interface NewEntityData extends BaseEntityData {
-   /** The type of entity (e.g. "cow") */
-   readonly type: EntityType;
-}
-
-export interface UpdatedEntityData extends BaseEntityData {}
-
 export type GameDataPacket = {
-   readonly newEntities: Array<NewEntityData>;
-   readonly updatedEntities: Array<UpdatedEntityData>;
-   /** Array of all removed entities' id's */
-   readonly removedEntities: Array<number>;
+   readonly nearbyEntities: ReadonlyArray<EntityData>;
 }
 
 // Note to stupid future self: don't remove this, it's important
