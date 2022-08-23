@@ -1,6 +1,5 @@
 import { EntityType } from "./entity-info";
 import { Tile } from "./Tile";
-import { Point, Vector } from "./utils";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
@@ -8,9 +7,9 @@ export type EntityData = {
    readonly id: number;
    /** The type of entity (e.g. "cow") */
    readonly type: EntityType;
-   readonly position: Point;
-   readonly velocity: Vector | null;
-   readonly acceleration: Vector | null;
+   readonly position: [number, number]; // Point
+   readonly velocity: [number, number] | null; // Vector
+   readonly acceleration: [number, number] | null; // Vector
    readonly terminalVelocity: number;
 }
 
