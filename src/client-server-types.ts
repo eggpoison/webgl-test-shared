@@ -1,5 +1,7 @@
 import { Tile } from "./Tile";
 
+export interface SocketData {}
+
 export interface ServerToClientEvents {
    chatMessage: (senderName: string, message: string) => void;
    clientDisconnect: (clientID: string) => void;
