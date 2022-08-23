@@ -33,7 +33,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.lava,
+               type: "lava",
                isWall: false
             },
             minWeight: 0.2,
@@ -41,7 +41,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.magma,
+               type: "magma",
                isWall: false
             }
          }
@@ -56,7 +56,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.rock,
+               type: "rock",
                isWall: true
             },
             minWeight: 0.8,
@@ -64,7 +64,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.ice,
+               type: "ice",
                isWall: false
             },
             minWeight: 0.6,
@@ -72,7 +72,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.snow,
+               type: "snow",
                isWall: false
             }
          }
@@ -87,7 +87,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.sandstone,
+               type: "sandstone",
                isWall: true
             },
             minWeight: 0.6,
@@ -95,7 +95,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.sandstone,
+               type: "sandstone",
                isWall: false
             },
             minWeight: 0.5,
@@ -103,7 +103,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.sand,
+               type: "sand",
                isWall: false
             }
          }
@@ -117,7 +117,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.rock,
+               type: "rock",
                isWall: true
             },
             minWeight: 0.8,
@@ -125,7 +125,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.rock,
+               type: "rock",
                isWall: false
             }
          }
@@ -140,7 +140,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.dirt,
+               type: "dirt",
                isWall: false
             },
             minWeight: 0.5,
@@ -148,7 +148,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
          },
          {
             info: {
-               type: TileType.sludge,
+               type: "sludge",
                isWall: false
             }
          }
@@ -160,7 +160,7 @@ export const BIOMES: ReadonlyArray<Biome> = [
       tiles: [
          {
             info: {
-               type: TileType.grass,
+               type: "grass",
                isWall: false
             }
          }
