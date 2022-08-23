@@ -49,6 +49,10 @@ export class Point {
       const angle = targetPoint.angleBetween(this);
       return new Vector(distance, angle);
    }
+
+   public copy(): Point {
+      return new Point(this.x, this.y);
+   }
 }
 
 export class Vector {
@@ -70,8 +74,12 @@ export class Vector {
       return (this.convertToPoint().add(other.convertToPoint())).convertToVector();
    }
 
+   public copy(): Vector {
+      return new Vector(this.magnitude, this.direction);
+   }
+
    public static randomUnitVector(): Vector {
-      const theta = randFloat(0, 360);
+      const theta = randFloat(0, 2 * Math.PI);
       return new Vector(1, theta);
    }
 }
