@@ -87,3 +87,7 @@ export class Vector {
 export function lerp(start: number, end: number, amount: number): number {
    return start * (1 - amount) + end * amount;
 }
+
+export type Mutable<T> = {
+   -readonly [P in keyof T]: T[P];
+ };
