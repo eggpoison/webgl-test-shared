@@ -19,7 +19,9 @@ interface OtherEntityInfo extends BaseEntityInfo {
    readonly category: "other";
 }
 
-export const ENTITY_INFO_RECORD: Record<EntityType, MobEntityInfo | ResourceEntityInfo | OtherEntityInfo> = {
+export type EntityInfo = MobEntityInfo | ResourceEntityInfo | OtherEntityInfo;
+
+export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
    cow: {
       category: "mob",
       behaviour: "passive"
