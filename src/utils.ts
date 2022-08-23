@@ -53,6 +53,14 @@ export class Point {
    public copy(): Point {
       return new Point(this.x, this.y);
    }
+
+   public package(): [number, number] {
+      return [this.x, this.y];
+   }
+
+   public static unpackage(packagedPoint: [number, number]): Point {
+      return new Point(packagedPoint[0], packagedPoint[1]);
+   }
 }
 
 export class Vector {
@@ -81,6 +89,14 @@ export class Vector {
    public static randomUnitVector(): Vector {
       const theta = randFloat(0, 2 * Math.PI);
       return new Vector(1, theta);
+   }
+
+   public package(): [number, number] {
+      return [this.magnitude, this.direction];
+   }
+
+   public static unpackage(packagedVector: [number, number]): Vector {
+      return new Vector(packagedVector[0], packagedVector[1]);
    }
 }
 
