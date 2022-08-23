@@ -7,8 +7,8 @@ export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY
 export type BaseEntityData = {
    readonly id: number;
    readonly position: Point;
-   readonly velocity: Vector;
-   readonly acceleration: Vector;
+   readonly velocity: Vector | null;
+   readonly acceleration: Vector | null;
    readonly terminalVelocity: number;
 }
 
