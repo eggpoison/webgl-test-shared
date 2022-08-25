@@ -28,6 +28,13 @@ export class Point {
       );
    };
 
+   public subtract(other: Point): Point {
+      return new Point(
+         this.x - other.x,
+         this.y - other.y
+      );
+   }
+
    public dot(other: Point): number {
       return this.x * other.x + this.y * other.y;
    }
@@ -52,6 +59,14 @@ export class Point {
 
    public copy(): Point {
       return new Point(this.x, this.y);
+   }
+
+   public package(): [number, number] {
+      return [this.x, this.y];
+   }
+
+   public static unpackage(packagedPoint: [number, number]): Point {
+      return new Point(packagedPoint[0], packagedPoint[1]);
    }
 }
 
@@ -82,8 +97,26 @@ export class Vector {
       const theta = randFloat(0, 2 * Math.PI);
       return new Vector(1, theta);
    }
+
+   public package(): [number, number] {
+      return [this.magnitude, this.direction];
+   }
+
+   public static unpackage(packagedVector: [number, number]): Vector {
+      return new Vector(packagedVector[0], packagedVector[1]);
+   }
 }
 
 export function lerp(start: number, end: number, amount: number): number {
    return start * (1 - amount) + end * amount;
+}
+
+export type Mutable<T> = {
+   -readonly [P in keyof T]: T[P];
+};
+
+export function randItem<T>(arr: Array<T> | ReadonlyArray<T>): T {
+   if (arr.length === 0) throw new Error("Array has no items in it!");
+
+   return arr[Math.floor(Math.random() * arr.length)];
 }

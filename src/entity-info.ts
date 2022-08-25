@@ -4,6 +4,7 @@ export type EntityType = "cow" | "player";
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
+   readonly clientArgs?: ReadonlyArray<unknown>;
 }
 
 interface MobEntityInfo extends BaseEntityInfo {
@@ -29,4 +30,9 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
    player: {
       category: "other"
    }
+};
+
+export interface EntityInfoClientArgs {
+   player: (displayName: string) => void,
+   cow: () => void
 };

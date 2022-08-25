@@ -1,29 +1,25 @@
-import { EntityType } from "./entity-info";
+import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { Tile } from "./Tile";
-import { Point, Vector } from "./utils";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
-export type BaseEntityData = {
+export type EntityData<T extends EntityType> = {
    readonly id: number;
-   readonly position: Point;
-   readonly velocity: Vector | null;
-   readonly acceleration: Vector | null;
-   readonly terminalVelocity: number;
-}
-
-export interface NewEntityData extends BaseEntityData {
    /** The type of entity (e.g. "cow") */
-   readonly type: EntityType;
+   readonly type: T;
+   readonly position: [number, number]; // Point
+   readonly velocity: [number, number] | null; // Vector
+   readonly acceleration: [number, number] | null; // Vector
+   readonly terminalVelocity: number;
+   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
 }
-
-export interface UpdatedEntityData extends BaseEntityData {}
 
 export type GameDataPacket = {
-   readonly newEntities: Array<NewEntityData>;
-   readonly updatedEntities: Array<UpdatedEntityData>;
-   /** Array of all removed entities' id's */
-   readonly removedEntities: Array<number>;
+   readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
+}
+
+export type PlayerMovementPacket = {
+
 }
 
 // Note to stupid future self: don't remove this, it's important
