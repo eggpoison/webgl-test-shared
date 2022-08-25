@@ -8,7 +8,7 @@ interface SettingsType {
    /** Number of tiles in the width and height of a chunk */
    readonly CHUNK_SIZE: number;
    /** Width and height of the board in tiles */
-   DIMENSIONS: number;
+   BOARD_DIMENSIONS: number;
    /** Affects the amount of friction entities experience */
    readonly GLOBAL_FRICTION_CONSTANT: number;
    /** The colour of the background visible near the borders */
@@ -32,7 +32,7 @@ export const SETTINGS: SettingsType = {
    TILE_SIZE: 64,
    BOARD_SIZE: 8,
    CHUNK_SIZE: 8,
-   DIMENSIONS: -1,
+   BOARD_DIMENSIONS: -1,
    GLOBAL_FRICTION_CONSTANT: 7.5,
    BACKGROUND_COLOUR: "#09120b",
    START_TIME: 8,
@@ -43,4 +43,4 @@ export const SETTINGS: SettingsType = {
    SERVER_PORT: 8000
 };
 
-SETTINGS.DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;
+SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;

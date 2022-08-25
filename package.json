@@ -1,10 +1,6 @@
 {
    "name": "webgl-test-shared",
-<<<<<<< HEAD
-   "version": "1.2.16",
-=======
    "version": "1.2.24",
->>>>>>> ae5d5597122f4c95cc0650be224d1dddc2f872eb
    "description": "Shared files for webgl-test",
    "main": "lib/index.js",
    "types": "lib/index.d.ts",
