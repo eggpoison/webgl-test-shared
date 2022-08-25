@@ -14,19 +14,15 @@ export type TileType =
    "magma" |
 "lava";
 
-type TileEffects = {
+export type TileTypeInfo = {
+   /** How quickly an entity loses velocity on the tile (1 = instant, 0 = no loss) */
+   readonly friction: number;
    readonly moveSpeedMultiplier?: number;
    readonly walkDamage?: number;
    // readonly statusEffectOnWalk?: {
    //    readonly type: StatusEffectType;
    //    readonly duration: number;
    // }
-}
-
-export type TileTypeInfo = {
-   /** How quickly an entity loses velocity on the tile (1 = instant, 0 = no loss) */
-   readonly friction: number;
-   readonly effects?: TileEffects;
 }
 
 export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
