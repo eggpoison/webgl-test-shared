@@ -114,3 +114,9 @@ export function lerp(start: number, end: number, amount: number): number {
 export type Mutable<T> = {
    -readonly [P in keyof T]: T[P];
 };
+
+export function randItem<T>(arr: Array<T> | ReadonlyArray<T>): T {
+   if (arr.length === 0) throw new Error("Array has no items in it!");
+
+   return arr[Math.floor(Math.random() * arr.length)];
+}
