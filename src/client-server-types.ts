@@ -8,8 +8,9 @@ export type EntityData<T extends EntityType> = {
    /** The type of entity (e.g. "cow") */
    readonly type: T;
    readonly position: [number, number]; // Point
-   readonly velocity: [number, number] | null; // Vector
-   readonly acceleration: [number, number] | null; // Vector
+   readonly velocity: [number, number] | null; // Vector | null
+   readonly acceleration: [number, number] | null; // Vector | null
+   readonly rotation: number;
    readonly terminalVelocity: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
 }
