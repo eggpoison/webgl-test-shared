@@ -120,3 +120,7 @@ export function randItem<T>(arr: Array<T> | ReadonlyArray<T>): T {
 
    return arr[Math.floor(Math.random() * arr.length)];
 }
+
+export function flipAngle(angle: number): number {
+   return ((angle % Math.PI) + Math.PI) % Math.PI;
+}
