@@ -124,3 +124,10 @@ export function randItem<T>(arr: Array<T> | ReadonlyArray<T>): T {
 export function flipAngle(angle: number): number {
    return ((angle % Math.PI) + Math.PI) % Math.PI;
 }
+
+export function rotatePoint(point: Point, origin: Point, rotation: number): Point {
+   // math ew
+   const x = Math.cos(rotation) * (point.x - origin.x) + Math.sin(rotation) * (point.y - origin.y) + origin.x;
+   const y = -Math.sin(rotation) * (point.x - origin.x) + Math.cos(rotation) * (point.y - origin.y) + origin.y;
+   return new Point(x, y);
+}
