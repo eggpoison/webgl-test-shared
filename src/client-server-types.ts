@@ -1,7 +1,5 @@
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { Tile } from "./Tile";
-import { Point, Vector } from "./utils";
-
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
 export type EntityData<T extends EntityType> = {
@@ -14,6 +12,7 @@ export type EntityData<T extends EntityType> = {
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
+   readonly chunkCoords: [number, number];
 }
 
 export type GameDataPacket = {
