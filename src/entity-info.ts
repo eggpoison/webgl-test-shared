@@ -2,6 +2,11 @@ export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
 export type EntityType = "cow" | "player";
 
+export enum CowSpecies {
+   brown,
+   black
+}
+
 export type CircularHitbox = {
    readonly type: "circular";
    readonly radius: number;
@@ -17,7 +22,6 @@ export type Hitbox = CircularHitbox | RectangularHitbox;
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
-   readonly clientArgs?: ReadonlyArray<unknown>;
    readonly hitbox: Hitbox;
 }
 
@@ -57,5 +61,5 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
 
 export interface EntityInfoClientArgs {
    player: (displayName: string) => void,
-   cow: () => void
+   cow: (species: CowSpecies) => void
 };
