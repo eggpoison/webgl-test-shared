@@ -18,7 +18,7 @@ export type Hitbox = CircularHitbox | RectangularHitbox;
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
    readonly clientArgs?: ReadonlyArray<unknown>;
-   readonly hitbox: Hitbox
+   readonly hitbox: Hitbox;
 }
 
 interface MobEntityInfo extends BaseEntityInfo {
@@ -42,7 +42,7 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
       behaviour: "passive",
       hitbox: {
          type: "rectangular",
-         width: 64,
+         width: 56,
          height: 128
       }
    },
