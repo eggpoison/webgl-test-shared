@@ -125,9 +125,9 @@ export function flipAngle(angle: number): number {
    return ((angle % Math.PI) + Math.PI) % Math.PI;
 }
 
-export function rotatePoint(point: Point, origin: Point, rotation: number): Point {
+export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
    // math ew
-   const x = Math.cos(rotation) * (point.x - origin.x) + Math.sin(rotation) * (point.y - origin.y) + origin.x;
-   const y = -Math.sin(rotation) * (point.x - origin.x) + Math.cos(rotation) * (point.y - origin.y) + origin.y;
+   const x = Math.cos(rotation) * (point.x - pivotPoint.x) + Math.sin(rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
+   const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
    return new Point(x, y);
 }
