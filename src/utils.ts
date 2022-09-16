@@ -134,6 +134,6 @@ export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): 
 
 export function roundNum(num: number, dp: number): number {
    const power = Math.pow(10, dp)
-   const roundedNum = Math.round((num + Number.EPSILON) * power) / power;
+   const roundedNum = Math.round((num + 2e-52) * power) / power;
    return roundedNum;
 }
