@@ -131,3 +131,9 @@ export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): 
    const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
    return new Point(x, y);
 }
+
+export function roundNum(num: number, dp: number): number {
+   const power = Math.pow(10, dp)
+   const roundedNum = Math.round((num + Number.EPSILON) * power) / power;
+   return roundedNum;
+}
