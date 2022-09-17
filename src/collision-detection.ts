@@ -128,3 +128,37 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: n
 
    return true;
 }
+
+/** Uses the separating axis theorem to check for intersection between rectangles */
+export function rectanglePointsDoIntersect(tl1: Point, tr1: Point, bl1: Point, br1: Point, tl2: Point, tr2: Point, bl2: Point, br2: Point): boolean {
+   const rect1vertices: ReadonlyArray<Point> = [tl1, tr1, bl1, br1];
+   const rect2vertices: ReadonlyArray<Point> = [tl2, tr2, bl2, br2];
+
+   // Find axes to check intervals with
+   const cornerPairs: ReadonlyArray<[Point, Point]> = [
+      [tl1, tr1],
+      [tr1, br1],
+      [tl2, tr2],
+      [tl2, bl2]
+   ];
+   const axes = new Array<Vector>();
+   for (const pair of cornerPairs) {
+      const direction = pair[0].angleBetween(pair[1]);
+      const axis = new Vector(1, direction);
+      axes.push(axis);
+   }
+
+   for (const axis of axes) {
+      const min1 = findMin(rect1vertices, axis);
+      const max1 = findMax(rect1vertices, axis);
+      const min2 = findMin(rect2vertices, axis);
+      const max2 = findMax(rect2vertices, axis);
+
+      const isIntersection = min2 < max1 && min1 < max2;
+      if (!isIntersection) {
+         return false;
+      }
+   }
+
+   return true;
+}
