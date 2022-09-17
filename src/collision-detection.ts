@@ -129,25 +129,19 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: n
    return true;
 }
 
-/** Uses the separating axis theorem to check for intersection between rectangles */
-export function rectanglePointsDoIntersect(tl1: Point, tr1: Point, bl1: Point, br1: Point, tl2: Point, tr2: Point, bl2: Point, br2: Point): boolean {
+/** Computes the axis for the line created by two points */
+export function computeSideAxis(point1: Point, point2: Point): Vector {
+   const direction = point1.angleBetween(point2);
+   const axis = new Vector(1, direction);
+   return axis;
+}
+
+/** Allows for precomputation of points for optimization */
+export function rectanglePointsDoIntersect(tl1: Point, tr1: Point, bl1: Point, br1: Point, tl2: Point, tr2: Point, bl2: Point, br2: Point, axes1: ReadonlyArray<Vector>, axes2: ReadonlyArray<Vector>): boolean {
    const rect1vertices: ReadonlyArray<Point> = [tl1, tr1, bl1, br1];
    const rect2vertices: ReadonlyArray<Point> = [tl2, tr2, bl2, br2];
 
-   // Find axes to check intervals with
-   const cornerPairs: ReadonlyArray<[Point, Point]> = [
-      [tl1, tr1],
-      [tr1, br1],
-      [tl2, tr2],
-      [tl2, bl2]
-   ];
-   const axes = new Array<Vector>();
-   for (const pair of cornerPairs) {
-      const direction = pair[0].angleBetween(pair[1]);
-      const axis = new Vector(1, direction);
-      axes.push(axis);
-   }
-
+   const axes = axes1.concat(axes2);
    for (const axis of axes) {
       const min1 = findMin(rect1vertices, axis);
       const max1 = findMax(rect1vertices, axis);
