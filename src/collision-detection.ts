@@ -67,7 +67,7 @@ export function circleAndRectangleDoIntersect(circlePos: Point, circleRadius: nu
 }
 
 /** Uses the separating axis theorem to check for intersection between rectangles */
-export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, pos2: Point, w2: number, h2: number): boolean {
+export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: number, pos2: Point, w2: number, h2: number, r2: number): boolean {
    const rect1x1 = pos1.x - w1 / 2;
    const rect1x2 = pos1.x + w1 / 2;
    const rect1y1 = pos1.y - h1 / 2;
@@ -77,15 +77,25 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, pos2:
    const rect2y1 = pos2.y - h2 / 2;
    const rect2y2 = pos2.y + h2 / 2;
 
-   // Calculate corner positions
-   const tl1 = new Point(rect1x1, rect1y2);
-   const tr1 = new Point(rect1x2, rect1y2);
-   const bl1 = new Point(rect1x1, rect1y1);
-   const br1 = new Point(rect1x2, rect1y1);
-   const tl2 = new Point(rect2x1, rect2y2);
-   const tr2 = new Point(rect2x2, rect2y2);
-   const bl2 = new Point(rect2x1, rect2y1);
-   const br2 = new Point(rect2x2, rect2y1);
+   // Calculate vertex positions
+   let tl1 = new Point(rect1x1, rect1y2);
+   let tr1 = new Point(rect1x2, rect1y2);
+   let bl1 = new Point(rect1x1, rect1y1);
+   let br1 = new Point(rect1x2, rect1y1);
+   let tl2 = new Point(rect2x1, rect2y2);
+   let tr2 = new Point(rect2x2, rect2y2);
+   let bl2 = new Point(rect2x1, rect2y1);
+   let br2 = new Point(rect2x2, rect2y1);
+
+   // Rotate vertices
+   tl1 = rotatePoint(tl1, pos1, r1);
+   tr1 = rotatePoint(tr1, pos1, r1);
+   bl1 = rotatePoint(bl1, pos1, r1);
+   br1 = rotatePoint(br1, pos1, r1);
+   tl2 = rotatePoint(tl2, pos2, r2);
+   tr2 = rotatePoint(tr2, pos2, r2);
+   bl2 = rotatePoint(bl2, pos2, r2);
+   br2 = rotatePoint(br2, pos2, r2);
 
    const rect1vertices: ReadonlyArray<Point> = [tl1, tr1, bl1, br1];
    const rect2vertices: ReadonlyArray<Point> = [tl2, tr2, bl2, br2];
