@@ -5,3 +5,5 @@ export * from "./client-server-types";
 export * from "./entity-info";
 export * from "./collision-detection";
 export * from "./utils";
+export * from "./items/items";
+export * from "./items/Item";

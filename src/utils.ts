@@ -137,3 +137,5 @@ export function roundNum(num: number, dp: number): number {
    const roundedNum = Math.round((num + 2e-52) * power) / power;
    return roundedNum;
 }
+
+export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
