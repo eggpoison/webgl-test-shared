@@ -14,7 +14,7 @@ export type EntityData<T extends EntityType> = {
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
-   readonly chunkCoords: [number, number];
+   readonly chunks: ReadonlyArray<[number, number]>; // Array of chunk coordinates
 }
 
 export type GameDataPacket = {
