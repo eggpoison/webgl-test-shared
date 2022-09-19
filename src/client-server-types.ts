@@ -1,8 +1,15 @@
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemInfo } from "./items/items";
-import { Tile } from "./Tile";
+import { Tile, TileType } from "./Tile";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
+
+export type TileUpdate = {
+   readonly x: number;
+   readonly y: number;
+   readonly type: TileType;
+   readonly isWall: boolean;
+}
 
 export type EntityData<T extends EntityType> = {
    readonly id: number;
@@ -19,6 +26,7 @@ export type EntityData<T extends EntityType> = {
 
 export type GameDataPacket = {
    readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
+   readonly tileUpdates: ReadonlyArray<TileUpdate>;
 }
 
 export type PlayerDataPacket = {
