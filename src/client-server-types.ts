@@ -44,7 +44,7 @@ export interface ServerAttackPacket extends AttackPacket {
 export interface SocketData {}
 
 export interface ServerToClientEvents {
-   initialGameData: (gameTicks: number, tiles: Array<Array<Tile>>) => void;
+   initialGameData: (gameTicks: number, tiles: Array<Array<Tile>>, playerID: number) => void;
    gameDataPacket: (gameDataPacket: GameDataPacket) => void;
    attackPacket: (serverAttackPacket: ServerAttackPacket) => void;
    chatMessage: (senderName: string, message: string) => void;
