@@ -7,22 +7,22 @@ export enum CowSpecies {
    black
 }
 
-export type CircularHitbox = {
+export type CircularHitboxInfo = {
    readonly type: "circular";
    readonly radius: number;
 }
 
-export type RectangularHitbox = {
+export type RectangularHitboxInfo = {
    readonly type: "rectangular";
    readonly width: number;
    readonly height: number;
 }
 
-export type Hitbox = CircularHitbox | RectangularHitbox;
+export type HitboxInfo = CircularHitboxInfo | RectangularHitboxInfo;
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
-   readonly hitbox: Hitbox;
+   readonly hitbox: HitboxInfo;
 }
 
 interface MobEntityInfo extends BaseEntityInfo {

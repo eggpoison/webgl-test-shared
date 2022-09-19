@@ -19,10 +19,6 @@ export type TileTypeInfo = {
    readonly friction: number;
    readonly moveSpeedMultiplier?: number;
    readonly walkDamage?: number;
-   // readonly statusEffectOnWalk?: {
-   //    readonly type: StatusEffectType;
-   //    readonly duration: number;
-   // }
 }
 
 export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
