@@ -65,9 +65,9 @@ export interface TileInfo {
 }
 
 export class Tile implements TileInfo {
-   public readonly type: TileType;
-   public readonly biome: BiomeName;
-   public readonly isWall: boolean;
+   public type: TileType;
+   public biome: BiomeName;
+   public isWall: boolean;
 
    constructor({ type, biome, isWall }: TileInfo) {
       this.type = type;
