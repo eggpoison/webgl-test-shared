@@ -59,8 +59,6 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
 };
 
 export interface TileInfo {
-   readonly x: number;
-   readonly y: number;
    type: TileType;
    biome: BiomeName;
    isWall: boolean;
