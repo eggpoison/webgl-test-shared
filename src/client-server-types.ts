@@ -44,9 +44,8 @@ export type PlayerDataPacket = {
 }
 
 export type AttackPacket = {
-   readonly targetID: number;
-   readonly distance: number;
-   readonly angle: number;
+   /** The id's of all entities in range of the attack */
+   readonly targetEntites: ReadonlyArray<number>;
    readonly heldItem: ItemInfo | null;
 }
 
