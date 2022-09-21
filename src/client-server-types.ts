@@ -24,9 +24,15 @@ export type EntityData<T extends EntityType> = {
    readonly chunks: ReadonlyArray<[number, number]>; // Array of chunk coordinates
 }
 
+export type ServerAttackInfo = {
+   readonly senderID: number;
+   readonly targetID: number;
+}
+
 export type GameDataPacket = {
    readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
    readonly tileUpdates: ReadonlyArray<TileUpdate>;
+   readonly attackEntities: ReadonlyArray<ServerAttackInfo>;
 }
 
 export type PlayerDataPacket = {
@@ -44,17 +50,12 @@ export type AttackPacket = {
    readonly heldItem: ItemInfo | null;
 }
 
-export interface ServerAttackPacket extends AttackPacket {
-   readonly senderID: number;
-}
-
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
 export interface ServerToClientEvents {
    initialGameData: (gameTicks: number, tiles: ReadonlyArray<ReadonlyArray<Tile>>, playerID: number) => void;
    gameDataPacket: (gameDataPacket: GameDataPacket) => void;
-   attackPacket: (serverAttackPacket: ServerAttackPacket) => void;
    chatMessage: (senderName: string, message: string) => void;
    clientDisconnect: (clientID: string) => void;
 }
