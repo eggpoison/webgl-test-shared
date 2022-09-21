@@ -45,7 +45,8 @@ export type PlayerDataPacket = {
 
 export type AttackPacket = {
    /** The id's of all entities in range of the attack */
-   readonly targetEntites: ReadonlyArray<number>;
+   // Note: have to calculate the attacked entity in the server because the client doesn't have access to components
+   readonly targetEntities: ReadonlyArray<number>;
    readonly heldItem: ItemInfo | null;
 }
 
