@@ -32,7 +32,7 @@ export type ServerAttackInfo = {
 export type GameDataPacket = {
    readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
    readonly tileUpdates: ReadonlyArray<TileUpdate>;
-   readonly attackEntities: ReadonlyArray<ServerAttackInfo>;
+   readonly attackInfo: ReadonlyArray<ServerAttackInfo>;
 }
 
 export type PlayerDataPacket = {
