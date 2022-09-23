@@ -25,8 +25,9 @@ export type EntityData<T extends EntityType> = {
 }
 
 export type ServerAttackInfo = {
-   readonly attackingEntityID: number;
    readonly targetEntityID: number;
+   /** How far through being hit the target entity is */
+   readonly progress: number;
 }
 
 export type GameDataPacket = {
