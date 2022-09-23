@@ -25,14 +25,14 @@ export type EntityData<T extends EntityType> = {
 }
 
 export type ServerAttackInfo = {
-   readonly senderID: number;
-   readonly targetID: number;
+   readonly attackingEntityID: number;
+   readonly targetEntityID: number;
 }
 
 export type GameDataPacket = {
    readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
    readonly tileUpdates: ReadonlyArray<TileUpdate>;
-   readonly attackInfo: ReadonlyArray<ServerAttackInfo>;
+   readonly ongoingAttacks: ReadonlyArray<ServerAttackInfo>;
 }
 
 export type PlayerDataPacket = {
