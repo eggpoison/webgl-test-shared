@@ -9,8 +9,6 @@ interface SettingsType {
    readonly CHUNK_SIZE: number;
    /** Width and height of the board in tiles */
    BOARD_DIMENSIONS: number;
-   /** Affects the amount of friction entities experience */
-   readonly GLOBAL_FRICTION_CONSTANT: number;
    /** The colour of the background visible near the borders */
    readonly BACKGROUND_COLOUR: string;
    /** The game's starting time, in in-game hours */
@@ -33,7 +31,6 @@ export const SETTINGS: SettingsType = {
    BOARD_SIZE: 8,
    CHUNK_SIZE: 8,
    BOARD_DIMENSIONS: -1,
-   GLOBAL_FRICTION_CONSTANT: 7.5,
    BACKGROUND_COLOUR: "#09120b",
    START_TIME: 8,
    FOG_REVEAL_TIME: 0.5,

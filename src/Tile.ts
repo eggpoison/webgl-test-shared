@@ -23,35 +23,36 @@ export type TileTypeInfo = {
 
 export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    grass: {
-      friction: 0.5
+      friction: 0.65
    },
    dirt: {
-      friction: 0.5
+      friction: 0.65
    },
    water: {
-      friction: 0.5
+      friction: 0.65
    },
    sludge: {
       friction: 0.75
    },
    rock: {
-      friction: 0.5
+      friction: 0.65
    },
    sand: {
-      friction: 0.5
+      friction: 0.65
    },
    sandstone: {
-      friction: 0.5
+      friction: 0.65
    },
    snow: {
-      friction: 0.75
+      friction: 0.8,
+      moveSpeedMultiplier: 0.8
    },
    ice: {
       friction: 0.15,
       moveSpeedMultiplier: 1.3
    },
    magma: {
-      friction: 0.5
+      friction: 0.65
    },
    lava: {
       friction: 0.85
