@@ -4,44 +4,43 @@ import { Tile, TileType } from "./Tile";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
-export type TileUpdate = {
+export type TileUpdateData = {
    readonly x: number;
    readonly y: number;
    readonly type: TileType;
    readonly isWall: boolean;
 }
 
-export type EntityData<T extends EntityType> = {
+export type ServerEntityData = {
    readonly id: number;
-   /** The type of entity (e.g. "cow") */
-   readonly type: T;
+   readonly type: EntityType;
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
    readonly acceleration: [number, number] | null; // Vector | null
    readonly terminalVelocity: number;
    readonly rotation: number;
-   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
+   readonly clientArgs: Parameters<EntityInfoClientArgs[EntityType]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
 }
 
-export type ServerItemInfo = {
+export type ServerItemData = {
    readonly itemID: ItemID;
    readonly count: number;
    readonly position: number;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>;
 }
 
-export type ServerAttackInfo = {
+export type ServerAttackData = {
    readonly targetEntityID: number;
    /** How far through being hit the target entity is */
    readonly progress: number;
 }
 
 export type GameDataPacket = {
-   readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
-
-   readonly tileUpdates: ReadonlyArray<TileUpdate>;
-   readonly serverAttackInfoArray: ReadonlyArray<ServerAttackInfo>;
+   readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
+   readonly serverItemInfoArray: ReadonlyArray<ServerItemData>;
+   readonly tileUpdates: ReadonlyArray<TileUpdateData>;
+   readonly serverAttackInfoArray: ReadonlyArray<ServerAttackData>;
 }
 
 export type PlayerDataPacket = {
