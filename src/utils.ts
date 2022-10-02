@@ -89,6 +89,10 @@ export class Vector {
       return (this.convertToPoint().add(other.convertToPoint())).convertToVector();
    }
 
+   public subtract(other: Vector): Vector {
+      return (this.convertToPoint().subtract(other.convertToPoint())).convertToVector();
+   }
+
    public copy(): Vector {
       return new Vector(this.magnitude, this.direction);
    }
