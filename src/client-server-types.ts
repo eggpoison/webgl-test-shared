@@ -29,6 +29,7 @@ export type ServerItemData = {
    readonly count: number;
    readonly position: [number, number];
    readonly chunkCoordinates: ReadonlyArray<[number, number]>;
+   readonly rotation: number;
 }
 
 export type ServerAttackData = {
