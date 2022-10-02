@@ -24,6 +24,7 @@ export type ServerEntityData = {
 }
 
 export type ServerItemData = {
+   readonly id: number;
    readonly itemID: ItemID;
    readonly count: number;
    readonly position: [number, number];
@@ -38,9 +39,9 @@ export type ServerAttackData = {
 
 export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
-   readonly serverItemInfoArray: ReadonlyArray<ServerItemData>;
+   readonly serverItemDataArray: ReadonlyArray<ServerItemData>;
    readonly tileUpdates: ReadonlyArray<TileUpdateData>;
-   readonly serverAttackInfoArray: ReadonlyArray<ServerAttackData>;
+   readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
 }
 
 export type PlayerDataPacket = {
