@@ -26,7 +26,7 @@ export type ServerEntityData = {
 export type ServerItemData = {
    readonly itemID: ItemID;
    readonly count: number;
-   readonly position: number;
+   readonly position: [number, number];
    readonly chunkCoordinates: ReadonlyArray<[number, number]>;
 }
 
