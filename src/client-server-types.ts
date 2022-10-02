@@ -1,5 +1,5 @@
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
-import { ItemInfo } from "./items/items";
+import { ItemID, ItemInfo } from "./items";
 import { Tile, TileType } from "./Tile";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
@@ -21,7 +21,14 @@ export type EntityData<T extends EntityType> = {
    readonly terminalVelocity: number;
    readonly rotation: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
-   readonly chunks: ReadonlyArray<[number, number]>; // Array of chunk coordinates
+   readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
+}
+
+export type ServerItemInfo = {
+   readonly itemID: ItemID;
+   readonly count: number;
+   readonly position: number;
+   readonly chunkCoordinates: ReadonlyArray<[number, number]>;
 }
 
 export type ServerAttackInfo = {
@@ -32,6 +39,7 @@ export type ServerAttackInfo = {
 
 export type GameDataPacket = {
    readonly nearbyEntities: ReadonlyArray<EntityData<EntityType>>;
+
    readonly tileUpdates: ReadonlyArray<TileUpdate>;
    readonly serverAttackInfoArray: ReadonlyArray<ServerAttackInfo>;
 }

@@ -45,7 +45,7 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    },
    snow: {
       friction: 0.8,
-      moveSpeedMultiplier: 0.8
+      moveSpeedMultiplier: 0.75
    },
    ice: {
       friction: 0.15,

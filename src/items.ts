@@ -22,7 +22,7 @@ export interface WeaponItemInfo extends ToolItemInfo {
 
 export type ItemInfo = FoodItem | WeaponItemInfo;
 
-export const ITEM_RECORD: Record<ItemID, ItemInfo> = {
+export const ITEM_INFO_RECORD: Record<ItemID, ItemInfo> = {
    1: {
       name: "Wooden Sword",
       toolType: "weapon",

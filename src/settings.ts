@@ -23,6 +23,8 @@ interface SettingsType {
    readonly WALL_OUTLINE_WIDTH: number;
    /** Which port the server is hosted in */
    readonly SERVER_PORT: number;
+   /** Size of the items in units */
+   readonly ITEM_SIZE: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -37,7 +39,8 @@ export const SETTINGS: SettingsType = {
    ENTITY_INVULNERABILITY_DURATION: 0.15,
    SHOW_FOG_OF_WAR: false,
    WALL_OUTLINE_WIDTH: 5,
-   SERVER_PORT: 8000
+   SERVER_PORT: 8000,
+   ITEM_SIZE: 16
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;
