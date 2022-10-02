@@ -1,4 +1,6 @@
-export type ItemID = "wooden_sword" | "berry";
+export type ItemID = "wooden_sword"
+   | "berry"
+   | "raw_beef";
 
 export interface BaseItemInfo {
    readonly name: string;
@@ -32,5 +34,9 @@ export const ITEM_INFO_RECORD: Record<ItemID, ItemInfo> = {
    berry: {
       name: "Berry",
       healAmount: 5
+   },
+   raw_beef: {
+      name: "Raw Beef",
+      healAmount: 2
    }
 };
