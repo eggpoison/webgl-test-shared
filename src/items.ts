@@ -1,4 +1,4 @@
-export type ItemID = 1 | 2;
+export type ItemID = "wooden_sword" | "berry";
 
 export interface BaseItemInfo {
    readonly name: string;
@@ -23,13 +23,13 @@ export interface WeaponItemInfo extends ToolItemInfo {
 export type ItemInfo = FoodItem | WeaponItemInfo;
 
 export const ITEM_INFO_RECORD: Record<ItemID, ItemInfo> = {
-   1: {
+   wooden_sword: {
       name: "Wooden Sword",
       toolType: "weapon",
       useTime: 0.4,
       damage: 3
    },
-   2: {
+   berry: {
       name: "Berry",
       healAmount: 5
    }
