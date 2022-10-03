@@ -1,10 +1,19 @@
+import { BiomeName } from "./biomes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemID, ItemInfo } from "./items";
-import { Tile, TileType } from "./Tile";
+import { TileType } from "./tiles";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
-export type TileUpdateData = {
+export type ServerTileData = {
+   readonly x: number;
+   readonly y: number;
+   readonly type: TileType;
+   readonly biome: BiomeName;
+   readonly isWall: boolean;
+}
+
+export type ServerTileUpdateData = {
    readonly x: number;
    readonly y: number;
    readonly type: TileType;
@@ -41,7 +50,7 @@ export type ServerAttackData = {
 export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
    readonly serverItemDataArray: ReadonlyArray<ServerItemData>;
-   readonly tileUpdates: ReadonlyArray<TileUpdateData>;
+   readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
 }
 
@@ -64,7 +73,7 @@ export type AttackPacket = {
 export interface SocketData {}
 
 export interface ServerToClientEvents {
-   initialGameData: (gameTicks: number, tiles: ReadonlyArray<ReadonlyArray<Tile>>, playerID: number) => void;
+   initialGameData: (gameTicks: number, tiles: ReadonlyArray<ReadonlyArray<ServerTileData>>, playerID: number) => void;
    gameDataPacket: (gameDataPacket: GameDataPacket) => void;
    chatMessage: (senderName: string, message: string) => void;
    clientDisconnect: (clientID: string) => void;
