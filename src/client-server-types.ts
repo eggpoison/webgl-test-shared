@@ -54,12 +54,18 @@ export type GameDataPacket = {
    readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
 }
 
+export type InitialPlayerDataPacket = {
+   readonly username: string;
+   readonly position: [number, number];
+}
+
 export type PlayerDataPacket = {
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
    readonly acceleration: [number, number] | null; // Vector | null
    readonly rotation: number;
    readonly terminalVelocity: number;
+   readonly visibleChunkBounds: VisibleChunkBounds;
 }
 
 export type AttackPacket = {
@@ -80,11 +86,10 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
-   initialPlayerData: (name: string, position: [number, number], visibleChunkBounds: VisibleChunkBounds) => void;
+   initialPlayerDataPacket: (initialPlayerDataPacket: InitialPlayerDataPacket) => void;
    playerDataPacket: (playerDataPacket: PlayerDataPacket) => void;
    chatMessage: (message: string) => void;
    playerMovement: (position: [number, number], movementHash: number) => void;
-   newVisibleChunkBounds: (visibleChunkBounds: VisibleChunkBounds) => void;
    attackPacket: (attackPacket: AttackPacket) => void;
 }
 
