@@ -57,6 +57,7 @@ export type GameDataPacket = {
 export type InitialPlayerDataPacket = {
    readonly username: string;
    readonly position: [number, number];
+   readonly visibleChunkBounds: VisibleChunkBounds;
 }
 
 export type PlayerDataPacket = {
