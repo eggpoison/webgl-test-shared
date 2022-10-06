@@ -80,18 +80,18 @@ export type AttackPacket = {
 export interface SocketData {}
 
 export interface ServerToClientEvents {
-   initialGameData: (gameTicks: number, tiles: ReadonlyArray<ReadonlyArray<ServerTileData>>, playerID: number) => void;
-   gameDataPacket: (gameDataPacket: GameDataPacket) => void;
-   chatMessage: (senderName: string, message: string) => void;
-   clientDisconnect: (clientID: string) => void;
+   initial_game_data: (gameTicks: number, tiles: ReadonlyArray<ReadonlyArray<ServerTileData>>, playerID: number) => void;
+   game_data_packet: (gameDataPacket: GameDataPacket) => void;
+   chat_message: (senderName: string, message: string) => void;
+   client_disconnect: (clientID: string) => void;
 }
 
 export interface ClientToServerEvents {
-   initialPlayerDataPacket: (initialPlayerDataPacket: InitialPlayerDataPacket) => void;
-   playerDataPacket: (playerDataPacket: PlayerDataPacket) => void;
-   chatMessage: (message: string) => void;
-   playerMovement: (position: [number, number], movementHash: number) => void;
-   attackPacket: (attackPacket: AttackPacket) => void;
+   initial_player_data_packet: (initialPlayerDataPacket: InitialPlayerDataPacket) => void;
+   player_data_packet: (playerDataPacket: PlayerDataPacket) => void;
+   chat_message: (message: string) => void;
+   player_movement: (position: [number, number], movementHash: number) => void;
+   attack_packet: (attackPacket: AttackPacket) => void;
 }
 
 export interface InterServerEvents {}
