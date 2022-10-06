@@ -46,8 +46,8 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
       behaviour: "passive",
       hitbox: {
          type: "rectangular",
-         width: 56,
-         height: 128
+         width: 50,
+         height: 100
       }
    },
    player: {
