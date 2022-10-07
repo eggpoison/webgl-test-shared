@@ -32,7 +32,7 @@ export type ServerEntityData = {
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
 }
 
-export type ServerItemData = {
+export type ServerItemEntityData = {
    readonly id: number;
    readonly itemID: ItemID;
    readonly count: number;
@@ -49,7 +49,7 @@ export type ServerAttackData = {
 
 export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
-   readonly serverItemDataArray: ReadonlyArray<ServerItemData>;
+   readonly serverItemDataArray: ReadonlyArray<ServerItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
    // Array of the IDs of all items the player picked up
