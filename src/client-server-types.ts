@@ -52,6 +52,8 @@ export type GameDataPacket = {
    readonly serverItemDataArray: ReadonlyArray<ServerItemData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
+   // Array of the IDs of all items the player picked up
+   readonly pickedUpItems: ReadonlyArray<number>;
 }
 
 export type InitialPlayerDataPacket = {
