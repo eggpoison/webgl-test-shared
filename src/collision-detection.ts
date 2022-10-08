@@ -1,5 +1,7 @@
 import { Point, rotatePoint, Vector } from "./utils";
 
+export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
+
 const findMin = (vertices: ReadonlyArray<Point>, axis: Vector): number => {
    const axisPoint = axis.convertToPoint();
 
@@ -137,16 +139,13 @@ export function computeSideAxis(point1: Point, point2: Point): Vector {
 }
 
 /** Allows for precomputation of points for optimization */
-export function rectanglePointsDoIntersect(tl1: Point, tr1: Point, bl1: Point, br1: Point, tl2: Point, tr2: Point, bl2: Point, br2: Point, axes1: ReadonlyArray<Vector>, axes2: ReadonlyArray<Vector>): boolean {
-   const rect1vertices: ReadonlyArray<Point> = [tl1, tr1, bl1, br1];
-   const rect2vertices: ReadonlyArray<Point> = [tl2, tr2, bl2, br2];
-
+export function rectanglePointsDoIntersect(vertexPositions1: HitboxVertexPositions, vertexPositions2: HitboxVertexPositions, axes1: ReadonlyArray<Vector>, axes2: ReadonlyArray<Vector>): boolean {
    const axes = axes1.concat(axes2);
    for (const axis of axes) {
-      const min1 = findMin(rect1vertices, axis);
-      const max1 = findMax(rect1vertices, axis);
-      const min2 = findMin(rect2vertices, axis);
-      const max2 = findMax(rect2vertices, axis);
+      const min1 = findMin(vertexPositions1, axis);
+      const max1 = findMax(vertexPositions1, axis);
+      const min2 = findMin(vertexPositions2, axis);
+      const max2 = findMax(vertexPositions2, axis);
 
       const isIntersection = min2 < max1 && min1 < max2;
       if (!isIntersection) {

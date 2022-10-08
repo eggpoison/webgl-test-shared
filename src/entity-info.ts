@@ -70,6 +70,6 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
 };
 
 export interface EntityInfoClientArgs {
-   player: (displayName: string) => void,
-   cow: (species: CowSpecies) => void
+   player: (displayName: string) => void;
+   cow: (species: CowSpecies) => void;
 };
