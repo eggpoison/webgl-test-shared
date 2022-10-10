@@ -45,8 +45,7 @@ export class Point {
    }
 
    public angleBetween(other: Point): number {
-      const angle = Math.atan2(other.y - this.y, other.x - this.x);
-      return angle;
+      return Math.atan2(other.y - this.y, other.x - this.x);
    }
 
    public convertToVector(other?: Point): Vector {
@@ -130,9 +129,10 @@ export function flipAngle(angle: number): number {
 }
 
 export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
+   const _rotation = -rotation + Math.PI / 2;
    // math ew
-   const x = Math.cos(rotation) * (point.x - pivotPoint.x) + Math.sin(rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
-   const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
+   const x = Math.cos(_rotation) * (point.x - pivotPoint.x) + Math.sin(_rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
+   const y = -Math.sin(_rotation) * (point.x - pivotPoint.x) + Math.cos(_rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
    return new Point(x, y);
 }
 
