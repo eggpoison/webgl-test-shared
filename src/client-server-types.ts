@@ -20,6 +20,10 @@ export type ServerTileUpdateData = {
    readonly isWall: boolean;
 }
 
+export type ServerEntitySpecialData = {
+   readonly mobAIType: string;
+}
+
 export type ServerEntityData = {
    readonly id: number;
    readonly type: EntityType;
@@ -30,6 +34,7 @@ export type ServerEntityData = {
    readonly rotation: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[EntityType]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
+   readonly special?: ServerEntitySpecialData;
 }
 
 export type ServerItemEntityData = {
@@ -89,6 +94,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
+   initial_game_data_request: () => void;
    initial_player_data_packet: (initialPlayerDataPacket: InitialPlayerDataPacket) => void;
    player_data_packet: (playerDataPacket: PlayerDataPacket) => void;
    chat_message: (message: string) => void;

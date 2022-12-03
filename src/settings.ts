@@ -25,6 +25,8 @@ interface SettingsType {
    readonly SERVER_PORT: number;
    /** Size of the items in units */
    readonly ITEM_SIZE: number;
+   /** The amount of in-game seconds that pass in one real second */
+   readonly TIME_PASS_RATE: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -40,7 +42,8 @@ export const SETTINGS: SettingsType = {
    SHOW_FOG_OF_WAR: false,
    WALL_OUTLINE_WIDTH: 5,
    SERVER_PORT: 8000,
-   ITEM_SIZE: 16
+   ITEM_SIZE: 16,
+   TIME_PASS_RATE: 60
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;
