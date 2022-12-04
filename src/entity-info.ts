@@ -1,6 +1,6 @@
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
-export type EntityType = "cow" | "player";
+export type EntityType = "cow" | "zombie" | "player";
 
 export enum CowSpecies {
    brown,
@@ -60,6 +60,14 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
          height: 100
       }
    },
+   zombie: {
+      category: "mob",
+      behaviour: "hostile",
+      hitbox: {
+         type: "circular",
+         radius: 32,
+      }
+   },
    player: {
       category: "other",
       hitbox: {
@@ -71,5 +79,6 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
 
 export interface EntityInfoClientArgs {
    player: (displayName: string) => void;
+   zombie: (zombieType: number) => void;
    cow: (species: CowSpecies) => void;
 };

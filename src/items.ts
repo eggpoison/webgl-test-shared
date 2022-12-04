@@ -1,4 +1,4 @@
-export type ItemID = "wooden_sword"
+export type ItemType = "wooden_sword"
    | "berry"
    | "raw_beef"
    | "cooked_beef";
@@ -25,7 +25,7 @@ export interface WeaponItemInfo extends ToolItemInfo {
 
 export type ItemInfo = FoodItem | WeaponItemInfo;
 
-export const ITEM_INFO_RECORD: Record<ItemID, ItemInfo> = {
+export const ITEM_INFO_RECORD: Record<ItemType, ItemInfo> = {
    wooden_sword: {
       name: "Wooden Sword",
       toolType: "weapon",

@@ -1,6 +1,6 @@
 import { BiomeName } from "./biomes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
-import { ItemID, ItemInfo } from "./items";
+import { ItemType, ItemInfo } from "./items";
 import { TileType } from "./tiles";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
@@ -34,31 +34,40 @@ export type ServerEntityData = {
    readonly rotation: number;
    readonly clientArgs: Parameters<EntityInfoClientArgs[EntityType]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
+   readonly secondsSinceLastHit: number | null 
    readonly special?: ServerEntitySpecialData;
 }
 
 export type ServerItemEntityData = {
    readonly id: number;
-   readonly itemID: ItemID;
+   readonly itemID: ItemType;
    readonly count: number;
    readonly position: [number, number];
    readonly chunkCoordinates: ReadonlyArray<[number, number]>;
    readonly rotation: number;
 }
 
-export type ServerAttackData = {
-   readonly targetEntityID: number;
-   /** How far through being hit the target entity is */
-   readonly progress: number;
+export type HitData = {
+   readonly damage: number;
+   readonly angleFromDamageSource: number | null;
 }
 
 export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
    readonly serverItemDataArray: ReadonlyArray<ServerItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
-   readonly serverAttackDataArray: ReadonlyArray<ServerAttackData>;
-   // Array of the IDs of all items the player picked up
+   // Array of the IDs of all item entities the player picked up
    readonly pickedUpItems: ReadonlyArray<number>;
+   /** How many ticks have passed in the server */
+   readonly serverTicks: number;
+   /** Any hits the player took on the server-side */
+   readonly hitsTaken: ReadonlyArray<HitData>;
+}
+
+export type ServerItemData = {
+   /** Unique identifier for the item */
+   readonly id: number;
+   readonly type: ItemType;
 }
 
 export type InitialPlayerDataPacket = {
