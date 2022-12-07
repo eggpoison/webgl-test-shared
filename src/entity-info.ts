@@ -1,6 +1,8 @@
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
-export type EntityType = "cow" | "zombie" | "player";
+export type EntityType = "cow" | "zombie" | "tombstone" | "player";
+type NarrowEntityType<E extends EntityType> = E;
+export type MobType = NarrowEntityType<"cow" | "zombie">;
 
 export enum CowSpecies {
    brown,
@@ -68,6 +70,14 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
          radius: 32,
       }
    },
+   tombstone: {
+      category: "other",
+      hitbox: {
+         type: "rectangular",
+         width: 64,
+         height: 64
+      }
+   },
    player: {
       category: "other",
       hitbox: {
@@ -78,7 +88,8 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
 };
 
 export interface EntityInfoClientArgs {
-   player: (displayName: string) => void;
-   zombie: (zombieType: number) => void;
    cow: (species: CowSpecies) => void;
+   zombie: (zombieType: number) => void;
+   tombstone: (tombstoneType: number) => void;
+   player: (displayName: string) => void;
 };
