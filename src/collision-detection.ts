@@ -7,7 +7,7 @@ const findMin = (vertices: ReadonlyArray<Point>, axis: Vector): number => {
 
    let min: number = 999999;
    for (const vertex of vertices) {
-      const dot = axisPoint.dot(vertex);
+      const dot = axisPoint.calculateDotProduct(vertex);
       if (dot < min) min = dot;
    }
 
@@ -19,7 +19,7 @@ const findMax = (vertices: ReadonlyArray<Point>, axis: Vector): number => {
 
    let max: number = -999999;
    for (const vertex of vertices) {
-      const dot = axisPoint.dot(vertex);
+      const dot = axisPoint.calculateDotProduct(vertex);
       if (dot > max) max = dot;
    }
 
@@ -27,7 +27,7 @@ const findMax = (vertices: ReadonlyArray<Point>, axis: Vector): number => {
 }
 
 export function circlesDoIntersect(pos1: Point, radius1: number, pos2: Point, radius2: number): boolean {
-   const distance = pos1.distanceFrom(pos2);
+   const distance = pos1.calculateDistanceBetween(pos2);
    return distance <= radius1 + radius2;
 }
 
@@ -111,7 +111,7 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: n
    ];
    const axes = new Array<Vector>();
    for (const pair of cornerPairs) {
-      const direction = pair[0].angleBetween(pair[1]);
+      const direction = pair[0].calculateAngleBetween(pair[1]);
       const axis = new Vector(1, direction);
       axes.push(axis);
    }
@@ -133,7 +133,7 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: n
 
 /** Computes the axis for the line created by two points */
 export function computeSideAxis(point1: Point, point2: Point): Vector {
-   const direction = point1.angleBetween(point2);
+   const direction = point1.calculateAngleBetween(point2);
    const axis = new Vector(1, direction);
    return axis;
 }

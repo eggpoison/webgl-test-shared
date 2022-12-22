@@ -21,38 +21,33 @@ export class Point {
       this.y = y;
    }
 
-   public add(other: Point): Point {
-      return new Point(
-         this.x + other.x,
-         this.y + other.y
-      );
+   public add(other: Point): void {
+      this.x += other.x;
+      this.y += other.y;
    };
 
-   public subtract(other: Point): Point {
-      return new Point(
-         this.x - other.x,
-         this.y - other.y
-      );
+   public subtract(other: Point): void {
+      this.x -= other.x;
+      this.y -= other.y;
    }
 
-   public dot(other: Point): number {
+   public calculateDotProduct(other: Point): number {
       return this.x * other.x + this.y * other.y;
    }
 
-   public distanceFrom(other: Point): number {
-      const distance = Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
-      return distance;
+   public calculateDistanceBetween(other: Point): number {
+      return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
    }
 
-   public angleBetween(other: Point): number {
+   public calculateAngleBetween(other: Point): number {
       return Math.atan2(other.y - this.y, other.x - this.x);
    }
 
    public convertToVector(other?: Point): Vector {
       const targetPoint = other || new Point(0, 0);
 
-      const distance = this.distanceFrom(targetPoint);
-      const angle = targetPoint.angleBetween(this);
+      const distance = this.calculateDistanceBetween(targetPoint);
+      const angle = targetPoint.calculateAngleBetween(this);
       return new Vector(distance, angle);
    }
 
@@ -84,12 +79,21 @@ export class Vector {
       return new Point(x, y);
    }
 
-   public add(other: Vector): Vector {
-      return (this.convertToPoint().add(other.convertToPoint())).convertToVector();
+   public add(other: Vector): void {
+      const cartesianForm = this.convertToPoint();
+      cartesianForm.add(other.convertToPoint());
+      
+      const polarForm = cartesianForm.convertToVector();
+      this.magnitude = polarForm.magnitude;
+      this.direction = polarForm.direction;
    }
 
-   public subtract(other: Vector): Vector {
-      return (this.convertToPoint().subtract(other.convertToPoint())).convertToVector();
+   public subtract(other: Vector): void {
+      const cartesianForm = this.convertToPoint();
+      cartesianForm.subtract(other.convertToPoint());
+      const polarForm = cartesianForm.convertToVector();
+      this.magnitude = polarForm.magnitude;
+      this.direction = polarForm.direction;
    }
 
    public copy(): Vector {
@@ -140,4 +144,18 @@ export function roundNum(num: number, dp: number): number {
    const power = Math.pow(10, dp)
    const roundedNum = Math.round((num + 2e-52) * power) / power;
    return roundedNum;
+}
+
+/**
+ * Calculates the curved weight of a given weight value from 0-1
+ * Note: the power param must be above 0
+ * */
+export function curveWeight(baseWeight: number, power: number, flatWeight?: number): number {
+   let curvedWeight = -Math.pow(-baseWeight + 1, power) + 1;
+
+   if (typeof flatWeight !== "undefined") {
+      curvedWeight += flatWeight * (1 - baseWeight)
+   }
+   
+   return curvedWeight;
 }

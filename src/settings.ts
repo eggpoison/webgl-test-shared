@@ -13,12 +13,8 @@ interface SettingsType {
    readonly BACKGROUND_COLOUR: string;
    /** The game's starting time, in in-game hours */
    readonly START_TIME: number;
-   /** The number of seconds it takes for fog of war to be revealed after the player steps on it */
-   readonly FOG_REVEAL_TIME: number;
    /** How long an entity is invulnerable after being hit, in seconds */
    readonly ENTITY_INVULNERABILITY_DURATION: number;
-   /** Whether the fog of war is shown */
-   readonly SHOW_FOG_OF_WAR: boolean;
    /** The colour of wall outlines */
    readonly WALL_OUTLINE_WIDTH: number;
    /** Which port the server is hosted in */
@@ -27,6 +23,8 @@ interface SettingsType {
    readonly ITEM_SIZE: number;
    /** The amount of in-game seconds that pass in one real second */
    readonly TIME_PASS_RATE: number;
+   /** The number of player slots that the player has */
+   readonly PLAYER_ITEM_SLOTS: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -37,13 +35,12 @@ export const SETTINGS: SettingsType = {
    BOARD_DIMENSIONS: -1,
    BACKGROUND_COLOUR: "#09120b",
    START_TIME: 8,
-   FOG_REVEAL_TIME: 0.5,
    ENTITY_INVULNERABILITY_DURATION: 0.15,
-   SHOW_FOG_OF_WAR: false,
    WALL_OUTLINE_WIDTH: 5,
    SERVER_PORT: 8000,
    ITEM_SIZE: 16,
-   TIME_PASS_RATE: 300
+   TIME_PASS_RATE: 300,
+   PLAYER_ITEM_SLOTS: 5
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;

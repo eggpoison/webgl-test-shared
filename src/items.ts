@@ -1,4 +1,8 @@
-export type ItemType = "wooden_sword"
+import { EntityType } from "./entity-info";
+
+export type ItemType = "wood"
+   | "workbench"
+   | "wooden_sword"
    | "berry"
    | "raw_beef"
    | "cooked_beef";
@@ -7,12 +11,21 @@ export interface BaseItemInfo {
    readonly name: string;
 }
 
-export interface FoodItem extends BaseItemInfo {
-   readonly healAmount: number;
+export interface StackableItemInfo extends BaseItemInfo {
+   readonly stackSize: number;
 }
 
+export interface MaterialItemInfo extends StackableItemInfo {}
+
+export interface FoodItemInfo extends StackableItemInfo {
+   readonly healAmount: number;
+   readonly eatTime: number;
+}
+
+export type ToolType = "weapon";
+
 export interface ToolItemInfo extends BaseItemInfo {
-   readonly toolType: string;
+   readonly toolType: ToolType;
    /** Time taken for the tool to be used */
    readonly useTime: number;
 }
@@ -20,28 +33,85 @@ export interface ToolItemInfo extends BaseItemInfo {
 export interface WeaponItemInfo extends ToolItemInfo {
    readonly toolType: "weapon";
    readonly damage: number;
-   readonly trueDamage?: number;
 }
 
-export type ItemInfo = FoodItem | WeaponItemInfo;
+export interface PlaceableItemInfo extends StackableItemInfo {
+   readonly entityType: EntityType;
+}
 
-export const ITEM_INFO_RECORD: Record<ItemType, ItemInfo> = {
+export interface ItemClassifications {
+   material: MaterialItemInfo;
+   food: FoodItemInfo;
+   weapon: WeaponItemInfo;
+   placeable: PlaceableItemInfo;
+}
+
+interface ITEM_TYPE_RECORD {
+   wood: () => "material";
+   workbench: () => "placeable";
+   wooden_sword: () => "weapon";
+   berry: () => "food";
+   raw_beef: () => "food";
+   cooked_beef: () => "food";
+}
+
+export type ItemInfoEntry<T extends ItemType> = {
+   readonly classification: ReturnType<ITEM_TYPE_RECORD[T]>;
+   readonly info: ItemClassifications[ReturnType<ITEM_TYPE_RECORD[T]>];
+}
+
+export type ItemInfo = MaterialItemInfo | FoodItemInfo | WeaponItemInfo;
+
+export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfoEntry<T> } = {
+   wood: {
+      classification: "material",
+      info: {
+         name: "Wood",
+         stackSize: 99
+      }
+   },
+   workbench: {
+      classification: "placeable",
+      info: {
+         name: "Workbench",
+         stackSize: 99,
+         entityType: "workbench"
+      }
+   },
    wooden_sword: {
-      name: "Wooden Sword",
-      toolType: "weapon",
-      useTime: 0.4,
-      damage: 3
+      classification: "weapon",
+      info: {
+         name: "Wooden Sword",
+         toolType: "weapon",
+         useTime: 0.4,
+         damage: 3
+      }
    },
    berry: {
-      name: "Berry",
-      healAmount: 5
+      classification: "food",
+      info: {
+         name: "Berry",
+         stackSize: 99,
+         healAmount: 5,
+         eatTime: 1
+      }
    },
    raw_beef: {
-      name: "Raw Beef",
-      healAmount: 2
+      classification: "food",
+      info: {
+         name: "Raw Beef",
+         stackSize: 99,
+         healAmount: 2,
+         eatTime: 2
+      }
    },
    cooked_beef: {
-      name: "Cooked Beef",
-      healAmount: 5
+      classification: "food",
+      info: {
+         name: "Cooked Beef",
+         stackSize: 99,
+         healAmount: 5,
+         eatTime: 2
+      }
    }
 };
