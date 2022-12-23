@@ -24,7 +24,7 @@ interface SettingsType {
    /** The amount of in-game seconds that pass in one real second */
    readonly TIME_PASS_RATE: number;
    /** The number of player slots that the player has */
-   readonly PLAYER_ITEM_SLOTS: number;
+   readonly PLAYER_HOTBAR_SIZE: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -40,7 +40,7 @@ export const SETTINGS: SettingsType = {
    SERVER_PORT: 8000,
    ITEM_SIZE: 16,
    TIME_PASS_RATE: 300,
-   PLAYER_ITEM_SLOTS: 5
+   PLAYER_HOTBAR_SIZE: 7
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;

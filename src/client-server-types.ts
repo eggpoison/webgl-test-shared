@@ -1,4 +1,5 @@
 import { BiomeName } from "./biomes";
+import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemType, ItemInfo } from "./items";
 import { TileType } from "./tiles";
@@ -89,8 +90,12 @@ export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
    readonly serverItemEntityDataArray: ReadonlyArray<ServerItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
-   /** The inventory of the player from the perspective of the server */
-   readonly playerInventory: ServerInventoryData;
+   /** The hotbar of the player from the perspective of the server */
+   readonly hotbarInventory: ServerInventoryData;
+   /** The item stored in the player's crafting output slot */
+   readonly craftingOutputItem: ServerItemData | null;
+   /** The item being held by the player */
+   readonly heldItem: ServerItemData | null;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
    /** Any hits the player took on the server-side */
@@ -120,7 +125,7 @@ export type PlayerDataPacket = {
 
 /** 
  * Data the server has about the player
- * Useful when syncing a player with the server when they tab back into the game
+ * Used when syncing a player with the server when they tab back into the game
  *  */
 export type ServerPlayerDataPacket = {
    readonly position: [number, number];
@@ -132,11 +137,14 @@ export type ServerPlayerDataPacket = {
 }
 
 export type AttackPacket = {
+   /** The item slot of the item which is being used to attack */
+   readonly itemSlot: number;
    /** The id's of all entities in range of the attack */
-   // Note: have to calculate the attacked entity in the server because the client doesn't have access to components
    readonly targetEntities: ReadonlyArray<number>;
-   readonly heldItem: ItemInfo | null;
 }
+
+export type PlayerInventoryType = "hotbar" | "craftingOutput";
+export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar">;
 
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
@@ -154,7 +162,12 @@ export interface ClientToServerEvents {
    player_data_packet: (playerDataPacket: PlayerDataPacket) => void;
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;
+   crafting_packet: (craftingRecipe: CraftingRecipe) => void;
+   item_hold_packet: (inventoryType: PlayerInventoryType, itemSlot: number) => void;
+   // Tells the server that the client wants to release the held item at the specified place in an inventory
+   item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number) => void;
    attack_packet: (attackPacket: AttackPacket) => void;
+   item_use_packet: (itemSlot: number) => void;
 }
 
 export interface InterServerEvents {}
