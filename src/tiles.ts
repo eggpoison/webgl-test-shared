@@ -1,4 +1,4 @@
-import { BiomeName } from "./biomes";
+export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields";
 
 // excuse the terrible formatting, I'm tired
 export type TileType =
@@ -73,6 +73,6 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
 
 export interface TileInfo {
    type: TileType;
-   biome: BiomeName;
+   biomeName: BiomeName;
    isWall: boolean;
 }

@@ -14,12 +14,19 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       product: "workbench",
       productCount: 1,
       ingredients: {
-         wood: 1
-         // wood: 15
+         wood: 15
       }
    },
    {
       product: "wooden_sword",
+      productCount: 1,
+      ingredients: {
+         wood: 10
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "wooden_axe",
       productCount: 1,
       ingredients: {
          wood: 10

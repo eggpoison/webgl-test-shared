@@ -1,8 +1,7 @@
-import { BiomeName } from "./biomes";
 import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
-import { ItemType, ItemInfo } from "./items";
-import { TileType } from "./tiles";
+import { ItemType } from "./items";
+import { BiomeName, TileType } from "./tiles";
 
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
@@ -10,7 +9,7 @@ export type ServerTileData = {
    readonly x: number;
    readonly y: number;
    readonly type: TileType;
-   readonly biome: BiomeName;
+   readonly biomeName: BiomeName;
    readonly isWall: boolean;
 }
 
@@ -82,38 +81,36 @@ export type ServerItemEntityData = {
 }
 
 export type HitData = {
-   readonly damage: number;
-   readonly angleFromDamageSource: number | null;
+   readonly knockback: number;
+   readonly angleFromDamageSource: number;
 }
 
+/** Data about the game state sent to the client each tick */
 export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
    readonly serverItemEntityDataArray: ReadonlyArray<ServerItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    /** The hotbar of the player from the perspective of the server */
-   readonly hotbarInventory: ServerInventoryData;
+   readonly playerHotbarInventory: ServerInventoryData;
    /** The item stored in the player's crafting output slot */
    readonly craftingOutputItem: ServerItemData | null;
    /** The item being held by the player */
-   readonly heldItem: ServerItemData | null;
+   readonly playerHeldItem: ServerItemData | null;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
    /** Any hits the player took on the server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
+   readonly playerHealth: number;
 }
 
+/** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
    readonly tiles: Array<Array<ServerTileData>>;
    readonly spawnPosition: [number, number];
 }
 
-export type InitialPlayerDataPacket = {
-   readonly username: string;
-   readonly position: [number, number];
-   readonly visibleChunkBounds: VisibleChunkBounds;
-}
-
+/** Data the player sends to the server each tick */
 export type PlayerDataPacket = {
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
@@ -124,21 +121,25 @@ export type PlayerDataPacket = {
 }
 
 /** 
- * Data the server has about the player
- * Used when syncing a player with the server when they tab back into the game
+ * Data the server has about the player.
+ * Used when syncing a player with the server when they tab back into the game.
  *  */
-export type ServerPlayerDataPacket = {
+export type GameDataSyncPacket = {
    readonly position: [number, number];
    readonly velocity: [number, number] | null;
    readonly acceleration: [number, number] | null;
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly health: number;
+   readonly playerHotbarInventory: ServerInventoryData;
 }
 
+/** Data sent to the server when an attack is performed */
 export type AttackPacket = {
    /** The item slot of the item which is being used to attack */
    readonly itemSlot: number;
+   /** The direction that the attack is being done */
+   readonly attackDirection: number;
    /** The id's of all entities in range of the attack */
    readonly targetEntities: ReadonlyArray<number>;
 }
@@ -152,6 +153,7 @@ export interface SocketData {}
 export interface ServerToClientEvents {
    initial_game_data_packet: (gameDataPacket: InitialGameDataPacket) => void;
    game_data_packet: (gameDataPacket: GameDataPacket) => void;
+   game_data_sync_packet: (gameDataSyncPacket: GameDataSyncPacket) => void;
    chat_message: (senderName: string, message: string) => void;
    client_disconnect: (clientID: string) => void;
 }
@@ -159,6 +161,8 @@ export interface ServerToClientEvents {
 export interface ClientToServerEvents {
    initial_player_data: (username: string, windowWidth: number, windowHeight: number) => void;
    initial_game_data_request: () => void;
+   deactivate: () => void;
+   activate: () => void;
    player_data_packet: (playerDataPacket: PlayerDataPacket) => void;
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;

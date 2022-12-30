@@ -1,5 +1,4 @@
 export * from "./settings";
-export * from "./biomes";
 export * from "./tiles";
 export * from "./client-server-types";
 export * from "./entity-info";

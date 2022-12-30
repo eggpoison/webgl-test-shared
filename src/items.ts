@@ -25,18 +25,18 @@ export type ToolType = "weapon" | "axe";
 
 export interface ToolItemInfo extends BaseItemInfo {
    readonly toolType: ToolType;
+   readonly damage: number;
+   readonly knockback: number;
    /** Cooldown between attacks */
    readonly attackCooldown: number;
 }
 
 export interface WeaponItemInfo extends ToolItemInfo {
    readonly toolType: "weapon";
-   readonly damage: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
    readonly toolType: "axe";
-   readonly damage: number;
 }
 
 export interface PlaceableItemInfo extends StackableItemInfo {
@@ -86,16 +86,18 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfoEntry<T> } = {
       classification: "weapon",
       info: {
          toolType: "weapon",
-         attackCooldown: 0.3,
-         damage: 3
+         damage: 3,
+         knockback: 150,
+         attackCooldown: 0.3
       }
    },
    wooden_axe: {
       classification: "axe",
       info: {
          toolType: "axe",
-         attackCooldown: 0.5,
-         damage: 3
+         damage: 3,
+         knockback: 100,
+         attackCooldown: 0.5
       }
    },
    berry: {

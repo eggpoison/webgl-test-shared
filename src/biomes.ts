@@ -1,1 +1,0 @@
-export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields";
