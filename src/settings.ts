@@ -29,6 +29,8 @@ interface SettingsType {
    readonly PLAYER_HOTBAR_SIZE: number;
    /** Distance that placeable items are placed from the player */
    readonly ITEM_PLACE_DISTANCE: number;
+   /** Determines the amount of friction that entities experience. */
+   readonly FRICTION_CONSTANT: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -46,7 +48,8 @@ export const SETTINGS: SettingsType = {
    ENTITY_PUSH_FORCE: 200,
    TIME_PASS_RATE: 300,
    PLAYER_HOTBAR_SIZE: 7,
-   ITEM_PLACE_DISTANCE: 90
+   ITEM_PLACE_DISTANCE: 90,
+   FRICTION_CONSTANT: 50
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;

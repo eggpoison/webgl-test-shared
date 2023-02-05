@@ -4,7 +4,8 @@ export type CraftingStation = "workbench";
 
 export interface CraftingRecipe {
    readonly product: ItemType;
-   readonly productCount: number;
+   /** Number of products created when the crafting recipe is used */
+   readonly yield: number;
    readonly ingredients: Partial<Record<ItemType, number>>;
    readonly craftingStation?: CraftingStation;
 }
@@ -12,14 +13,22 @@ export interface CraftingRecipe {
 export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    {
       product: "workbench",
-      productCount: 1,
+      yield: 1,
       ingredients: {
          wood: 15
       }
    },
    {
       product: "wooden_sword",
-      productCount: 1,
+      yield: 1,
+      ingredients: {
+         wood: 15
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "wooden_pickaxe",
+      yield: 1,
       ingredients: {
          wood: 10
       },
@@ -27,9 +36,36 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    },
    {
       product: "wooden_axe",
-      productCount: 1,
+      yield: 1,
       ingredients: {
          wood: 10
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "stone_sword",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 20
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "stone_pickaxe",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 15
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "stone_axe",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 15
       },
       craftingStation: "workbench"
    }
@@ -83,7 +119,7 @@ export function canCraftRecipe(inventory: Inventory, recipe: CraftingRecipe, inv
 
    // If the product can be added to existing stacks in entirety, then there is space and it can be crafted
    {
-      let remainingAmountToAdd = recipe.productCount;
+      let remainingAmountToAdd = recipe.yield;
       for (const item of Object.values(inventory)) {
          if (item.type !== recipe.product) {
             continue;

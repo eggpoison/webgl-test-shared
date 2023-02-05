@@ -76,6 +76,7 @@ export type ServerItemEntityData = {
    readonly itemID: ItemType;
    readonly count: number;
    readonly position: [number, number];
+   readonly velocity: [number, number] | null;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>;
    readonly rotation: number;
 }
@@ -121,10 +122,10 @@ export type PlayerDataPacket = {
 }
 
 /** 
- * Data the server has about the player.
+ * Data the server has about the player and game state.
  * Used when syncing a player with the server when they tab back into the game.
  *  */
-export type GameDataSyncPacket = {
+export interface GameDataSyncPacket {
    readonly position: [number, number];
    readonly velocity: [number, number] | null;
    readonly acceleration: [number, number] | null;
@@ -147,6 +148,11 @@ export type AttackPacket = {
 export type PlayerInventoryType = "hotbar" | "craftingOutput";
 export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar">;
 
+export type RespawnDataPacket = {
+   readonly playerID: number;
+   readonly spawnPosition: [number, number];
+}
+
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
@@ -156,6 +162,7 @@ export interface ServerToClientEvents {
    game_data_sync_packet: (gameDataSyncPacket: GameDataSyncPacket) => void;
    chat_message: (senderName: string, message: string) => void;
    client_disconnect: (clientID: string) => void;
+   respawn_data_packet: (respawnDataPacket: RespawnDataPacket) => void;
 }
 
 export interface ClientToServerEvents {
@@ -172,6 +179,9 @@ export interface ClientToServerEvents {
    item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number) => void;
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
+   throw_held_item_packet: (throwDirection: number) => void;
+   // Tells the server to respawn the client
+   respawn: () => void;
 }
 
 export interface InterServerEvents {}

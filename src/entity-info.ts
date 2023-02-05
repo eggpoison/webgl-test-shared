@@ -5,7 +5,8 @@ export type EntityType = "cow"
    | "tombstone"
    | "player"
    | "tree"
-   | "workbench";
+   | "workbench"
+   | "boulder";
 type NarrowEntityType<E extends EntityType> = E;
 export type MobType = NarrowEntityType<"cow" | "zombie">;
 export type ResourceType = NarrowEntityType<"tree">;
@@ -59,6 +60,9 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
    },
    workbench: {
       category: "other"
+   },
+   boulder: {
+      category: "resource"
    }
 };
 
@@ -69,4 +73,5 @@ export interface EntityInfoClientArgs {
    player: (displayName: string) => void;
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
+   boulder: (boulderType: number) => void;
 };
