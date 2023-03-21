@@ -68,6 +68,15 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          rock: 15
       },
       craftingStation: "workbench"
+   },
+   {
+      product: "leather_backpack",
+      yield: 1,
+      ingredients: {
+         leather: 5,
+         wood: 5
+      },
+      craftingStation: "workbench"
    }
 ];
 
@@ -100,8 +109,8 @@ export function canCraftRecipe(inventory: Inventory, recipe: CraftingRecipe, inv
    // Find the stack size of the product
    let productStackSize: number;
    const productInfo = ITEM_INFO_RECORD[recipe.product];
-   if (productInfo.info.hasOwnProperty("stackSize")) {
-      productStackSize = (productInfo.info as StackableItemInfo).stackSize;
+   if (productInfo.hasOwnProperty("stackSize")) {
+      productStackSize = (productInfo as StackableItemInfo).stackSize;
    } else {
       productStackSize = 1;
    }

@@ -11,7 +11,9 @@ export type ItemType = "wood"
    | "rock"
    | "stone_sword"
    | "stone_axe"
-   | "stone_pickaxe";
+   | "stone_pickaxe"
+   | "leather"
+   | "leather_backpack";
 
 export interface BaseItemInfo {}
 
@@ -52,13 +54,19 @@ export interface PlaceableItemInfo extends StackableItemInfo {
    readonly entityType: EntityType;
 }
 
-export interface ItemClassifications {
+export interface BackpackItemInfo extends BaseItemInfo {
+   /** Number of extra item slots given to the player when the backpack is worn. */
+   readonly numExtraItemSlots: number;
+}
+
+export interface ItemInfoRecord {
    material: MaterialItemInfo;
    food: FoodItemInfo;
    weapon: WeaponItemInfo;
    axe: AxeItemInfo;
    pickaxe: PickaxeItemInfo
    placeable: PlaceableItemInfo;
+   backpack: BackpackItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -73,112 +81,79 @@ export const ITEM_TYPE_RECORD = {
    rock: "material",
    stone_sword: "weapon",
    stone_axe: "axe",
-   stone_pickaxe: "pickaxe"
-} satisfies Record<ItemType, keyof ItemClassifications>;
+   stone_pickaxe: "pickaxe",
+   leather: "material",
+   leather_backpack: "backpack"
+} satisfies Record<ItemType, keyof ItemInfoRecord>;
 
-export type ItemInfoEntry<T extends ItemType> = {
-   readonly classification: typeof ITEM_TYPE_RECORD[T];
-   readonly info: ItemClassifications[typeof ITEM_TYPE_RECORD[T]];
-}
+export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
 
-export type ItemInfo = MaterialItemInfo | FoodItemInfo | WeaponItemInfo;
-
-export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfoEntry<T> } = {
+export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    wood: {
-      classification: "material",
-      info: {
-         stackSize: 99
-      }
+      stackSize: 99
    },
    workbench: {
-      classification: "placeable",
-      info: {
-         stackSize: 99,
-         entityType: "workbench"
-      }
+      stackSize: 99,
+      entityType: "workbench"
    },
    wooden_sword: {
-      classification: "weapon",
-      info: {
-         toolType: "weapon",
-         damage: 3,
-         knockback: 150,
-         attackCooldown: 0.3
-      }
+      toolType: "weapon",
+      damage: 3,
+      knockback: 150,
+      attackCooldown: 0.3
    },
    wooden_axe: {
-      classification: "axe",
-      info: {
-         toolType: "axe",
-         damage: 3,
-         knockback: 100,
-         attackCooldown: 0.5
-      }
+      toolType: "axe",
+      damage: 3,
+      knockback: 100,
+      attackCooldown: 0.5
    },
    wooden_pickaxe: {
-      classification: "pickaxe",
-      info: {
-         toolType: "pickaxe",
-         damage: 5,
-         knockback: 100,
-         attackCooldown: 0.5
-      }
+      toolType: "pickaxe",
+      damage: 5,
+      knockback: 100,
+      attackCooldown: 0.5
    },
    berry: {
-      classification: "food",
-      info: {
-         stackSize: 99,
-         healAmount: 5,
-         eatTime: 0.5
-      }
+      stackSize: 99,
+      healAmount: 5,
+      eatTime: 0.5
    },
    raw_beef: {
-      classification: "food",
-      info: {
-         stackSize: 99,
-         healAmount: 2,
-         eatTime: 2
-      }
+      stackSize: 99,
+      healAmount: 2,
+      eatTime: 2
    },
    cooked_beef: {
-      classification: "food",
-      info: {
-         stackSize: 99,
-         healAmount: 5,
-         eatTime: 1.5
-      }
+      stackSize: 99,
+      healAmount: 5,
+      eatTime: 1.5
    },
    rock: {
-      classification: "material",
-      info: {
-         stackSize: 99
-      }
+      stackSize: 99
    },
    stone_sword: {
-      classification: "weapon",
-      info: {
-         toolType: "weapon",
-         damage: 5,
-         knockback: 150,
-         attackCooldown: 0.3
-      }
+      toolType: "weapon",
+      damage: 5,
+      knockback: 150,
+      attackCooldown: 0.3
    },
    stone_axe: {
-      classification: "axe",
-      info: {
-         toolType: "axe",
-         damage: 5,
-         knockback: 100,
-         attackCooldown: 0.5
-      }
+      toolType: "axe",
+      damage: 5,
+      knockback: 100,
+      attackCooldown: 0.5
    },
    stone_pickaxe: {
-      classification: "pickaxe",
-      info: {
-         toolType: "pickaxe",
-         damage: 8,
-         knockback: 100,
-         attackCooldown: 0.5
-      }
+      toolType: "pickaxe",
+      damage: 8,
+      knockback: 100,
+      attackCooldown: 0.5
+   },
+   leather: {
+      stackSize: 99
+   },
+   leather_backpack: {
+      numExtraItemSlots: 2
    }
 };

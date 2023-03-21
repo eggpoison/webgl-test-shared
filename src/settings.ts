@@ -26,7 +26,7 @@ interface SettingsType {
    /** The amount of in-game seconds that pass in one real second */
    readonly TIME_PASS_RATE: number;
    /** The number of player slots that the player has */
-   readonly PLAYER_HOTBAR_SIZE: number;
+   readonly INITIAL_PLAYER_HOTBAR_SIZE: number;
    /** Distance that placeable items are placed from the player */
    readonly ITEM_PLACE_DISTANCE: number;
    /** Determines the amount of friction that entities experience. */
@@ -47,7 +47,7 @@ export const SETTINGS: SettingsType = {
    ITEM_SIZE: 16,
    ENTITY_PUSH_FORCE: 200,
    TIME_PASS_RATE: 300,
-   PLAYER_HOTBAR_SIZE: 7,
+   INITIAL_PLAYER_HOTBAR_SIZE: 7,
    ITEM_PLACE_DISTANCE: 90,
    FRICTION_CONSTANT: 50
 };

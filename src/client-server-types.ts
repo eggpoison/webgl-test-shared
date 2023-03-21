@@ -3,6 +3,32 @@ import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemType } from "./items";
 import { BiomeName, TileType } from "./tiles";
 
+/*
+- In general, the "Data" suffix on a type indicates that it is a common type between the client and server used to communicate with the two.
+*/
+
+/********************
+   Items/Inventory
+********************/
+
+export interface ItemData {
+   readonly type: ItemType;
+   readonly count: number;
+}
+
+export type ItemSlotData = ItemData | null;
+
+export type InventoryData = { [itemSlot: number]: ItemData };
+
+export interface PlayerInventoryData {
+   readonly hotbar: InventoryData;
+   readonly backpackItemSlot: ItemSlotData;
+   /** Item currently being held by the player */
+   readonly heldItemSlot: ItemSlotData;
+   /** Item held in the player's crafting output slot */
+   readonly craftingOutputItemSlot: ItemSlotData;
+}
+
 export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
 export type ServerTileData = {
@@ -64,13 +90,6 @@ export type ServerEntityData = {
    readonly special?: ServerEntitySpecialData;
 }
 
-export type ServerItemData = {
-   readonly type: ItemType;
-   readonly count: number;
-}
-
-export type ServerInventoryData = Partial<Record<number, ServerItemData>>;
-
 export type ServerItemEntityData = {
    readonly id: number;
    readonly itemID: ItemType;
@@ -91,12 +110,7 @@ export type GameDataPacket = {
    readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
    readonly serverItemEntityDataArray: ReadonlyArray<ServerItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
-   /** The hotbar of the player from the perspective of the server */
-   readonly playerHotbarInventory: ServerInventoryData;
-   /** The item stored in the player's crafting output slot */
-   readonly craftingOutputItem: ServerItemData | null;
-   /** The item being held by the player */
-   readonly playerHeldItem: ServerItemData | null;
+   readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
    /** Any hits the player took on the server-side */
@@ -132,7 +146,7 @@ export interface GameDataSyncPacket {
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly health: number;
-   readonly playerHotbarInventory: ServerInventoryData;
+   readonly inventory: PlayerInventoryData;
 }
 
 /** Data sent to the server when an attack is performed */
@@ -145,8 +159,8 @@ export type AttackPacket = {
    readonly targetEntities: ReadonlyArray<number>;
 }
 
-export type PlayerInventoryType = "hotbar" | "craftingOutput";
-export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar">;
+export type PlayerInventoryType = "hotbar" | "craftingOutput" | "backpackItemSlot";
+export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot">;
 
 export type RespawnDataPacket = {
    readonly playerID: number;
