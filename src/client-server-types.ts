@@ -23,13 +23,12 @@ export type InventoryData = { [itemSlot: number]: ItemData };
 export interface PlayerInventoryData {
    readonly hotbar: InventoryData;
    readonly backpackItemSlot: ItemSlotData;
+   readonly backpackInventory: InventoryData;
    /** Item currently being held by the player */
    readonly heldItemSlot: ItemSlotData;
    /** Item held in the player's crafting output slot */
    readonly craftingOutputItemSlot: ItemSlotData;
 }
-
-export type VisibleChunkBounds = [minX: number, maxX: number, minY: number, maxY: number];
 
 export type ServerTileData = {
    readonly x: number;
@@ -75,7 +74,7 @@ interface HitboxTypesRecord {
 
 export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxTypesRecord[T]>;
 
-export type ServerEntityData = {
+export type EntityData = {
    readonly id: number;
    readonly type: EntityType;
    readonly position: [number, number]; // Point
@@ -90,7 +89,7 @@ export type ServerEntityData = {
    readonly special?: ServerEntitySpecialData;
 }
 
-export type ServerItemEntityData = {
+export type ItemEntityData = {
    readonly id: number;
    readonly itemID: ItemType;
    readonly count: number;
@@ -107,8 +106,8 @@ export type HitData = {
 
 /** Data about the game state sent to the client each tick */
 export type GameDataPacket = {
-   readonly serverEntityDataArray: ReadonlyArray<ServerEntityData>;
-   readonly serverItemEntityDataArray: ReadonlyArray<ServerItemEntityData>;
+   readonly entityDataArray: ReadonlyArray<EntityData>;
+   readonly itemEntityDataArray: ReadonlyArray<ItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
@@ -132,7 +131,6 @@ export type PlayerDataPacket = {
    readonly acceleration: [number, number] | null; // Vector | null
    readonly rotation: number;
    readonly terminalVelocity: number;
-   readonly visibleChunkBounds: VisibleChunkBounds;
 }
 
 /** 
@@ -159,8 +157,8 @@ export type AttackPacket = {
    readonly targetEntities: ReadonlyArray<number>;
 }
 
-export type PlayerInventoryType = "hotbar" | "craftingOutput" | "backpackItemSlot";
-export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot">;
+export type PlayerInventoryType = "hotbar" | "backpackInventory" | "craftingOutput" | "backpackItemSlot";
+export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot" | "backpackInventory">;
 
 export type RespawnDataPacket = {
    readonly playerID: number;
@@ -180,7 +178,7 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
-   initial_player_data: (username: string, windowWidth: number, windowHeight: number) => void;
+   initial_player_data: (username: string) => void;
    initial_game_data_request: () => void;
    deactivate: () => void;
    activate: () => void;

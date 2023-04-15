@@ -55,8 +55,10 @@ export interface PlaceableItemInfo extends StackableItemInfo {
 }
 
 export interface BackpackItemInfo extends BaseItemInfo {
-   /** Number of extra item slots given to the player when the backpack is worn. */
-   readonly numExtraItemSlots: number;
+   /** Width of the backpack inventory in terms of item slots. */
+   readonly inventoryWidth: number;
+   /** Width of the backpack inventory in terms of item slots. */
+   readonly inventoryHeight: number
 }
 
 export interface ItemInfoRecord {
@@ -154,6 +156,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    leather_backpack: {
-      numExtraItemSlots: 2
+      inventoryWidth: 2,
+      inventoryHeight: 2
    }
 };
