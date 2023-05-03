@@ -186,9 +186,9 @@ export interface ClientToServerEvents {
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;
    crafting_packet: (craftingRecipe: CraftingRecipe) => void;
-   item_hold_packet: (inventoryType: PlayerInventoryType, itemSlot: number) => void;
+   item_pickup_packet: (inventoryType: PlayerInventoryType, itemSlot: number, amount: number) => void;
    // Tells the server that the client wants to release the held item at the specified place in an inventory
-   item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number) => void;
+   item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number, amount: number) => void;
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
    throw_held_item_packet: (throwDirection: number) => void;
