@@ -156,3 +156,5 @@ const CONSOLE_COMMANDS: ConsoleCommands = [
       ]
    }
 ];
+
+export default CONSOLE_COMMANDS;

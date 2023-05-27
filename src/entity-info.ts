@@ -70,7 +70,7 @@ export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
    tombstone: (tombstoneType: number) => void;
-   player: (displayName: string) => void;
+   player: (username: string) => void;
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
    boulder: (boulderType: number) => void;
