@@ -194,6 +194,7 @@ export interface ClientToServerEvents {
    throw_held_item_packet: (throwDirection: number) => void;
    // Tells the server to respawn the client
    respawn: () => void;
+   command: (command: string) => void;
 }
 
 export interface InterServerEvents {}

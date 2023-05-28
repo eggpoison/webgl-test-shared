@@ -1,9 +1,9 @@
-enum CommandPermissions {
+export enum CommandPermissions {
    player = 0,
    dev = 1
 };
 
-interface CommandParameter {
+interface CommandParameterSpecifications {
    readonly id: number;
    readonly prompt: string | null;
    readonly dataType: "string" | "number" | null;
@@ -11,7 +11,7 @@ interface CommandParameter {
 
 export interface CommandSpecifications {
    readonly name: string;
-   readonly parameters: ReadonlyArray<CommandParameter>;
+   readonly parameters: ReadonlyArray<CommandParameterSpecifications>;
    readonly configurations: ReadonlyArray<CommandConfiguration>;
 }
 
@@ -181,7 +181,7 @@ const userHasPermissions = (requiredPermissions: CommandPermissions, permissions
    }
 }
 
-const commandComponentMatchesParameter = (commandComponent: string | number, parameter: CommandParameter): boolean => {
+const commandComponentMatchesParameter = (commandComponent: string | number, parameter: CommandParameterSpecifications): boolean => {
    // Make sure the data type matches
    switch (parameter.dataType) {
       case "number":
@@ -195,50 +195,18 @@ const commandComponentMatchesParameter = (commandComponent: string | number, par
    return true;
 }
 
-/**
- * Checks whether the given command is valid or not.
- * @param commandComponents 
- * @param permissions 
- * @returns 
- */
-export function consoleCommandIsValid(commandComponents: Array<string | number>, permissions: CommandPermissions): boolean {
-   // Find the command
-   let command: CommandSpecifications | null = null;
-   for (const currentCommand of COMMANDS) {
-      if (currentCommand.name === commandComponents[0]) {
-         command = currentCommand;
+const findParameterSpecifications = (commandSpecifications: CommandSpecifications, parameterID: number): CommandParameterSpecifications | null => {
+   let parameter: CommandParameterSpecifications | null = null;
+
+   // Find the corresponding parameter
+   for (const currentParameter of commandSpecifications.parameters) {
+      if (currentParameter.id === parameterID) {
+         parameter = currentParameter;
          break;
       }
    }
 
-   // If there is no matching command, it isn't valid
-   if (command === null) return false;
-
-   // See if there is a configuration of parameters which matches the command
-   for (const configuration of command.configurations) {
-      // Skip if the user doesn't have the required permissions
-      if (!userHasPermissions(configuration.permissions, permissions)) return false;
-      
-      // Check each parameter in the command
-      for (const parameterID of configuration.parameterConfigurations) {
-         // Find the corresponding parameter
-         let parameter: CommandParameter | null = null;
-         for (const currentParameter of command.parameters) {
-            if (currentParameter.id === parameterID) {
-               parameter = currentParameter;
-               break;
-            }
-         }
-         
-         if (parameter === null) throw new Error("Couldn't find the corresponding parameter!");
-
-         if (!commandComponentMatchesParameter(commandComponents[parameterID], parameter)) {
-            return false;
-         }
-      }
-   }
-   
-   return true;
+   return parameter;
 }
 
 /**
@@ -246,7 +214,7 @@ export function consoleCommandIsValid(commandComponents: Array<string | number>,
  * @param command The command to parse.
  * @returns The command's components.
  */
-export function parseConsoleCommand(command: string): Array<string | number> {
+export function parseCommand(command: string): Array<string | number> {
    // Split the command
    let commandComponents: Array<string | number> = command.split(" ");
 
@@ -254,4 +222,50 @@ export function parseConsoleCommand(command: string): Array<string | number> {
    commandComponents = commandComponents.map(component => !isNaN ? Number(component) : component);
 
    return commandComponents;
+}
+
+/**
+ * Checks whether the given command is valid or not.
+ * @param commandComponents 
+ * @param permissions 
+ * @returns 
+ */
+export function commandIsValid(command: string, permissions: CommandPermissions): boolean {
+   const commandComponents = parseCommand(command);
+   
+   // Find the command
+   let commandSpecifications: CommandSpecifications | null = null;
+   for (const currentCommand of COMMANDS) {
+      if (currentCommand.name === commandComponents[0]) {
+         commandSpecifications = currentCommand;
+         break;
+      }
+   }
+
+   // If there is no matching command, it isn't valid
+   if (commandSpecifications === null) return false;
+
+   // See if there is a configuration of parameters which matches the command
+   for (const configuration of commandSpecifications.configurations) {
+      
+      // Skip if the user doesn't have the required permissions
+      if (!userHasPermissions(configuration.permissions, permissions)) return false;
+
+      let isValid = true;
+      
+      // Check each parameter in the command
+      for (const parameterID of configuration.parameterConfigurations) {
+         const parameterSpecifications = findParameterSpecifications(commandSpecifications, parameterID);
+         if (parameterSpecifications === null) throw new Error("Couldn't find the corresponding parameter!");
+
+         if (!commandComponentMatchesParameter(commandComponents[parameterID], parameterSpecifications)) {
+            isValid = false;
+            break;
+         }
+      }
+
+      if (isValid) return true;
+   }
+   
+   return false;
 }
