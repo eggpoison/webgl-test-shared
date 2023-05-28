@@ -22,7 +22,7 @@ interface CommandConfiguration {
 
 type Commands = ReadonlyArray<CommandSpecifications>;
 
-const COMMANDS: Commands = [
+export const COMMANDS: Commands = [
    /*
    Command to kill a player.
    */
@@ -189,9 +189,7 @@ const COMMANDS: Commands = [
    }
 ];
 
-export default COMMANDS;
-
-const userHasPermissions = (requiredPermissions: CommandPermissions, permissions: CommandPermissions): boolean => {
+export function userHasCommandPermissions(requiredPermissions: CommandPermissions, permissions: CommandPermissions): boolean {
    switch (permissions) {
       case CommandPermissions.dev:
          return true;
@@ -200,7 +198,7 @@ const userHasPermissions = (requiredPermissions: CommandPermissions, permissions
    }
 }
 
-const commandComponentMatchesParameter = (commandComponent: string | number, parameter: CommandParameterSpecifications): boolean => {
+export function commandComponentMatchesParameter(commandComponent: string | number, parameter: CommandParameterSpecifications): boolean {
    // Make sure the data type matches
    switch (parameter.dataType) {
       case "number":
@@ -214,7 +212,7 @@ const commandComponentMatchesParameter = (commandComponent: string | number, par
    return true;
 }
 
-const findParameterSpecifications = (commandSpecifications: CommandSpecifications, parameterID: number): CommandParameterSpecifications | null => {
+export function findParameterSpecifications(commandSpecifications: CommandSpecifications, parameterID: number): CommandParameterSpecifications | null {
    let parameter: CommandParameterSpecifications | null = null;
 
    // Find the corresponding parameter
@@ -238,7 +236,7 @@ export function parseCommand(command: string): Array<string | number> {
    let commandComponents: Array<string | number> = command.split(" ");
 
    // Number-ise any numbers
-   commandComponents = commandComponents.map(component => !isNaN ? Number(component) : component);
+   commandComponents = commandComponents.map(component => !isNaN(component as number) ? Number(component) : component);
 
    return commandComponents;
 }
@@ -268,7 +266,7 @@ export function commandIsValid(command: string, permissions: CommandPermissions)
    for (const configuration of commandSpecifications.configurations) {
       
       // Skip if the user doesn't have the required permissions
-      if (!userHasPermissions(configuration.permissions, permissions)) return false;
+      if (!userHasCommandPermissions(configuration.permissions, permissions)) continue;
 
       let isValid = true;
       

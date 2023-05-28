@@ -112,6 +112,8 @@ export type GameDataPacket = {
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
+   /** Current time of the server */
+   readonly serverTime: number;
    /** Any hits the player took on the server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
    readonly playerHealth: number;
