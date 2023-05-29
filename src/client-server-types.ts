@@ -12,6 +12,8 @@ import { BiomeName, TileType } from "./tiles";
 ********************/
 
 export interface ItemData {
+   /** Unique identifier for the number */
+   readonly id: number;
    readonly type: ItemType;
    readonly count: number;
 }
@@ -22,7 +24,7 @@ export type InventoryData = { [itemSlot: number]: ItemData };
 
 export interface PlayerInventoryData {
    readonly hotbar: InventoryData;
-   readonly backpackItemSlot: ItemSlotData;
+   readonly backpackSlot: ItemSlotData;
    readonly backpackInventory: InventoryData;
    /** Item currently being held by the player */
    readonly heldItemSlot: ItemSlotData;
