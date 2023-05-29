@@ -125,7 +125,19 @@ export const COMMANDS: Commands = [
          }
       ],
       configurations: [
-         {
+         { // Command for player to give themselves one of the item
+            parameterConfigurations: [2],
+            permissions: CommandPermissions.dev
+         },
+         { // Command for player to give themselves any amount of the item
+            parameterConfigurations: [2, 3],
+            permissions: CommandPermissions.dev
+         },
+         { // Command to give any player one of the item
+            parameterConfigurations: [1, 2],
+            permissions: CommandPermissions.dev
+         },
+         { // Command to give any player any amount of the item
             parameterConfigurations: [1, 2, 3],
             permissions: CommandPermissions.dev
          }
