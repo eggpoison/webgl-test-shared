@@ -108,11 +108,6 @@ export const COMMANDS: Commands = [
    {
       name: "give",
       parameters: [
-         { // Player name
-            id: 1,
-            prompt: null,
-            dataType: "string"
-         },
          { // Item type
             id: 2,
             prompt: null,
@@ -125,20 +120,12 @@ export const COMMANDS: Commands = [
          }
       ],
       configurations: [
-         { // Command for player to give themselves one of the item
+         { // Command for player to give one of the item
             parameterConfigurations: [2],
             permissions: CommandPermissions.dev
          },
-         { // Command for player to give themselves any amount of the item
+         { // Command for player to give any amount of the item
             parameterConfigurations: [2, 3],
-            permissions: CommandPermissions.dev
-         },
-         { // Command to give any player one of the item
-            parameterConfigurations: [1, 2],
-            permissions: CommandPermissions.dev
-         },
-         { // Command to give any player any amount of the item
-            parameterConfigurations: [1, 2, 3],
             permissions: CommandPermissions.dev
          }
       ]
@@ -276,18 +263,19 @@ export function commandIsValid(command: string, permissions: CommandPermissions)
 
    // See if there is a configuration of parameters which matches the command
    for (const configuration of commandSpecifications.configurations) {
-      
       // Skip if the user doesn't have the required permissions
       if (!userHasCommandPermissions(configuration.permissions, permissions)) continue;
 
       let isValid = true;
       
       // Check each parameter in the command
-      for (const parameterID of configuration.parameterConfigurations) {
+      for (let i = 0; i < configuration.parameterConfigurations.length; i++) {
+         const parameterID = configuration.parameterConfigurations[i];
+
          const parameterSpecifications = findParameterSpecifications(commandSpecifications, parameterID);
          if (parameterSpecifications === null) throw new Error("Couldn't find the corresponding parameter!");
 
-         if (!commandComponentMatchesParameter(commandComponents[parameterID], parameterSpecifications)) {
+         if (!commandComponentMatchesParameter(commandComponents[i + 1], parameterSpecifications)) {
             isValid = false;
             break;
          }
