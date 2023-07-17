@@ -36,7 +36,7 @@ interface SettingsType {
 export const SETTINGS: SettingsType = {
    TPS: 20,
    TILE_SIZE: 64,
-   BOARD_SIZE: 16,
+   BOARD_SIZE: 64,
    CHUNK_SIZE: 4,
    BOARD_DIMENSIONS: -1,
    BACKGROUND_COLOUR: "#09120b",
