@@ -34,7 +34,7 @@ interface SettingsType {
 }
 
 export const SETTINGS: SettingsType = {
-   TPS: 20,
+   TPS: 60,
    TILE_SIZE: 64,
    BOARD_SIZE: 64,
    CHUNK_SIZE: 4,

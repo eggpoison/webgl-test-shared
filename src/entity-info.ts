@@ -42,38 +42,6 @@ interface OtherEntityInfo extends BaseEntityInfo {
 
 export type EntityInfo = MobEntityInfo | ResourceEntityInfo | OtherEntityInfo;
 
-export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
-   cow: {
-      category: "mob",
-      behaviour: "passive"
-   },
-   zombie: {
-      category: "mob",
-      behaviour: "hostile"
-   },
-   tombstone: {
-      category: "other"
-   },
-   player: {
-      category: "other"
-   },
-   tree: {
-      category: "resource"
-   },
-   workbench: {
-      category: "other"
-   },
-   boulder: {
-      category: "resource"
-   },
-   berry_bush: {
-      category: "resource"
-   },
-   cactus: {
-      category: "resource"
-   }
-};
-
 export enum CactusFlowerType {
    pinkGreen,
    pinkRed,
@@ -82,7 +50,12 @@ export enum CactusFlowerType {
    yellow
 }
 
-export type CactusFlowerPositions = ReadonlyArray<[column: number, height: number]>
+export interface CactusFlowerData {
+   readonly type: CactusFlowerType;
+   readonly column: number;
+   readonly height: number;
+   readonly size: number;
+}
 
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
@@ -93,5 +66,5 @@ export interface EntityInfoClientArgs {
    workbench: () => void;
    boulder: (boulderType: number) => void;
    berry_bush: (numBerries: number) => void;
-   cactus: (flowers: ReadonlyArray<CactusFlowerType>, flowerPositions: CactusFlowerPositions) => void;
+   cactus: (flowers: ReadonlyArray<CactusFlowerData>) => void;
 };
