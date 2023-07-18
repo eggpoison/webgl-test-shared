@@ -78,5 +78,5 @@ export interface EntityInfoClientArgs {
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
    boulder: (boulderType: number) => void;
-   berry_bush: () => void;
+   berry_bush: (numBerries: number) => void;
 };

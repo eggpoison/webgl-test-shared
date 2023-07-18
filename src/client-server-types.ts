@@ -76,15 +76,15 @@ interface HitboxTypesRecord {
 
 export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxTypesRecord[T]>;
 
-export type EntityData = {
+export type EntityData<T extends EntityType> = {
    readonly id: number;
-   readonly type: EntityType;
+   readonly type: T;
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
    readonly acceleration: [number, number] | null; // Vector | null
    readonly terminalVelocity: number;
    readonly rotation: number;
-   readonly clientArgs: Parameters<EntityInfoClientArgs[EntityType]>;
+   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
    readonly secondsSinceLastHit: number | null;
    readonly hitboxes: ReadonlyArray<HitboxInfo<HitboxType>>;
@@ -108,7 +108,7 @@ export type HitData = {
 
 /** Data about the game state sent to the client each tick */
 export type GameDataPacket = {
-   readonly entityDataArray: ReadonlyArray<EntityData>;
+   readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly itemEntityDataArray: ReadonlyArray<ItemEntityData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;

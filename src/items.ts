@@ -118,12 +118,12 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    berry: {
       stackSize: 99,
-      healAmount: 5,
+      healAmount: 1,
       eatTime: 0.5
    },
    raw_beef: {
       stackSize: 99,
-      healAmount: 2,
+      healAmount: 1,
       eatTime: 2
    },
    cooked_beef: {
