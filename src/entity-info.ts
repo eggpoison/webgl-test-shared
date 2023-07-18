@@ -7,7 +7,8 @@ export type EntityType = "cow"
    | "tree"
    | "workbench"
    | "boulder"
-   | "berry_bush";
+   | "berry_bush"
+   | "cactus";
 type NarrowEntityType<E extends EntityType> = E;
 export type MobType = NarrowEntityType<"cow" | "zombie">;
 export type ResourceType = NarrowEntityType<"tree">;
@@ -67,8 +68,21 @@ export const ENTITY_INFO_RECORD: Record<EntityType, EntityInfo> = {
    },
    berry_bush: {
       category: "resource"
+   },
+   cactus: {
+      category: "resource"
    }
 };
+
+export enum CactusFlowerType {
+   pinkGreen,
+   pinkRed,
+   white,
+   pinkYellow,
+   yellow
+}
+
+export type CactusFlowerPositions = ReadonlyArray<[column: number, height: number]>
 
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
@@ -79,4 +93,5 @@ export interface EntityInfoClientArgs {
    workbench: () => void;
    boulder: (boulderType: number) => void;
    berry_bush: (numBerries: number) => void;
+   cactus: (flowers: ReadonlyArray<CactusFlowerType>, flowerPositions: CactusFlowerPositions) => void;
 };
