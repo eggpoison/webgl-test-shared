@@ -117,6 +117,7 @@ export function rectanglesDoIntersect(pos1: Point, w1: number, h1: number, r1: n
    }
 
    for (const axis of axes) {
+      if (!Array.isArray(rect1vertices) || !Array.isArray(rect2vertices)) throw new Error("verybad");
       const min1 = findMin(rect1vertices, axis);
       const max1 = findMax(rect1vertices, axis);
       const min2 = findMin(rect2vertices, axis);
@@ -140,6 +141,8 @@ export function computeSideAxis(point1: Point, point2: Point): Vector {
 
 /** Allows for precomputation of points for optimization */
 export function rectanglePointsDoIntersect(vertexPositions1: HitboxVertexPositions, vertexPositions2: HitboxVertexPositions, axes1: ReadonlyArray<Vector>, axes2: ReadonlyArray<Vector>): boolean {
+   if (vertexPositions1[0].x + vertexPositions2[0].y === 1) console.log("re");
+   
    const axes = axes1.concat(axes2);
    for (const axis of axes) {
       const min1 = findMin(vertexPositions1, axis);

@@ -8,20 +8,11 @@ export type EntityType = "cow"
    | "workbench"
    | "boulder"
    | "berry_bush"
-   | "cactus";
+   | "cactus"
+   | "yeti";
 type NarrowEntityType<E extends EntityType> = E;
 export type MobType = NarrowEntityType<"cow" | "zombie">;
 export type ResourceType = NarrowEntityType<"tree">;
-
-export enum CowSpecies {
-   brown,
-   black
-}
-
-export enum TreeSize {
-   small,
-   large
-}
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
@@ -42,19 +33,26 @@ interface OtherEntityInfo extends BaseEntityInfo {
 
 export type EntityInfo = MobEntityInfo | ResourceEntityInfo | OtherEntityInfo;
 
-export enum CactusFlowerType {
-   pinkGreen,
-   pinkRed,
-   white,
-   pinkYellow,
-   yellow
+export enum CowSpecies {
+   brown,
+   black
+}
+
+export enum TreeSize {
+   small,
+   large
+}
+
+export enum CactusFlowerSize {
+   small = 0,
+   large = 1
 }
 
 export interface CactusFlowerData {
-   readonly type: CactusFlowerType;
+   readonly type: number;
    readonly column: number;
    readonly height: number;
-   readonly size: number;
+   readonly size: CactusFlowerSize
 }
 
 export interface EntityInfoClientArgs {
@@ -67,4 +65,5 @@ export interface EntityInfoClientArgs {
    boulder: (boulderType: number) => void;
    berry_bush: (numBerries: number) => void;
    cactus: (flowers: ReadonlyArray<CactusFlowerData>) => void;
+   yeti: () => void;
 };

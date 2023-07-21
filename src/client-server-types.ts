@@ -91,7 +91,7 @@ export type EntityData<T extends EntityType> = {
    readonly special?: ServerEntitySpecialData;
 }
 
-export type ItemEntityData = {
+export type DroppedItemData = {
    readonly id: number;
    readonly itemID: ItemType;
    readonly count: number;
@@ -103,13 +103,13 @@ export type ItemEntityData = {
 
 export type HitData = {
    readonly knockback: number;
-   readonly angleFromDamageSource: number;
+   readonly knockbackDirection: number;
 }
 
 /** Data about the game state sent to the client each tick */
 export type GameDataPacket = {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
-   readonly itemEntityDataArray: ReadonlyArray<ItemEntityData>;
+   readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
