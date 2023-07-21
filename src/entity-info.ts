@@ -50,9 +50,22 @@ export enum CactusFlowerSize {
 
 export interface CactusFlowerData {
    readonly type: number;
+}
+
+export interface CactusBodyFlowerData extends CactusFlowerData {
+   readonly size: CactusFlowerSize
    readonly column: number;
    readonly height: number;
-   readonly size: CactusFlowerSize
+}
+
+export interface CactusLimbFlowerData extends CactusFlowerData {
+   readonly height: number;
+   readonly direction: number;
+}
+
+export interface CactusLimbData {
+   readonly direction: number;
+   readonly flower?: CactusLimbFlowerData;
 }
 
 export interface EntityInfoClientArgs {
@@ -64,6 +77,6 @@ export interface EntityInfoClientArgs {
    workbench: () => void;
    boulder: (boulderType: number) => void;
    berry_bush: (numBerries: number) => void;
-   cactus: (flowers: ReadonlyArray<CactusFlowerData>) => void;
+   cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
    yeti: () => void;
 };

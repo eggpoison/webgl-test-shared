@@ -11,6 +11,7 @@ export type TileType =
    "sandstone" |
    "snow" |
    "ice" |
+   "permafrost" |
    "magma" |
 "lava";
 
@@ -60,6 +61,10 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
       isLiquid: false,
       friction: 0.3,
       moveSpeedMultiplier: 1.3
+   },
+   permafrost: {
+      isLiquid: false,
+      friction: 0.5
    },
    magma: {
       isLiquid: false,

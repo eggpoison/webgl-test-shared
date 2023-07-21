@@ -2,6 +2,7 @@ import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemType } from "./items";
 import { BiomeName, TileType } from "./tiles";
+import { Point } from "./utils";
 
 /*
 - In general, the "Data" suffix on a type indicates that it is a common type between the client and server used to communicate with the two.
@@ -53,8 +54,32 @@ export type ServerEntitySpecialData = {
 
 export type HitboxType = "circular" | "rectangular";
 
-interface BaseHitboxInfo<T extends HitboxType> {
+interface BaseHitboxData<T extends HitboxType> {
    readonly type: T;
+   readonly offset?: [number, number];
+}
+
+export interface CircularHitboxData extends BaseHitboxData<"circular"> {
+   readonly type: "circular";
+   readonly radius: number;
+}
+
+export interface RectangularHitboxData extends BaseHitboxData<"rectangular"> {
+   readonly type: "rectangular";
+   readonly width: number;
+   readonly height: number;
+}
+
+interface HitboxDataTypesRecord {
+   circular: () => CircularHitboxData,
+   rectangular: () => RectangularHitboxData
+}
+
+export type HitboxData<T extends HitboxType> = ReturnType<HitboxDataTypesRecord[T]>;
+
+export interface BaseHitboxInfo<T extends HitboxType> {
+   readonly type: T;
+   readonly offset?: Point;
 }
 
 export interface CircularHitboxInfo extends BaseHitboxInfo<"circular"> {
@@ -68,13 +93,12 @@ export interface RectangularHitboxInfo extends BaseHitboxInfo<"rectangular"> {
    readonly height: number;
 }
 
-
-interface HitboxTypesRecord {
+interface HitboxInfoTypesRecord {
    circular: () => CircularHitboxInfo,
    rectangular: () => RectangularHitboxInfo
 }
 
-export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxTypesRecord[T]>;
+export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxInfoTypesRecord[T]>;
 
 export type EntityData<T extends EntityType> = {
    readonly id: number;
@@ -87,7 +111,7 @@ export type EntityData<T extends EntityType> = {
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
    readonly secondsSinceLastHit: number | null;
-   readonly hitboxes: ReadonlyArray<HitboxInfo<HitboxType>>;
+   readonly hitboxes: ReadonlyArray<HitboxData<HitboxType>>;
    readonly special?: ServerEntitySpecialData;
 }
 
