@@ -1,6 +1,7 @@
 import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entity-info";
 import { ItemType } from "./items";
+import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { Point } from "./utils";
 
@@ -115,6 +116,7 @@ export interface EntityData<T extends EntityType> extends GameObjectData {
    readonly type: T;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
    readonly secondsSinceLastHit: number | null;
+   readonly statusEffects: Array<StatusEffectType>;
    readonly special?: ServerEntitySpecialData;
 }
 
@@ -147,6 +149,7 @@ export type GameDataPacket = {
    /** Any hits the player took on the server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
    readonly playerHealth: number;
+   readonly statusEffects: Array<StatusEffectType>;
 }
 
 /** Initial data sent to the client */
@@ -156,6 +159,8 @@ export interface InitialGameDataPacket extends GameDataPacket {
    readonly spawnPosition: [number, number];
 }
 
+export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];
+
 /** Data the player sends to the server each tick */
 export type PlayerDataPacket = {
    readonly position: [number, number]; // Point
@@ -163,6 +168,7 @@ export type PlayerDataPacket = {
    readonly acceleration: [number, number] | null; // Vector | null
    readonly rotation: number;
    readonly terminalVelocity: number;
+   readonly visibleChunkBounds: VisibleChunkBounds;
 }
 
 /** 
