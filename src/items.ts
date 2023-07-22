@@ -15,7 +15,8 @@ export type ItemType = "wood"
    | "leather"
    | "leather_backpack"
    | "cactus_spine"
-   | "yeti_hide";
+   | "yeti_hide"
+   | "frostcicle";
 
 export interface BaseItemInfo {}
 
@@ -89,7 +90,8 @@ export const ITEM_TYPE_RECORD = {
    leather: "material",
    leather_backpack: "backpack",
    cactus_spine: "material",
-   yeti_hide: "material"
+   yeti_hide: "material",
+   frostcicle: "material"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -167,6 +169,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    yeti_hide: {
+      stackSize: 99
+   },
+   frostcicle: {
       stackSize: 99
    }
 };

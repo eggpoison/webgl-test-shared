@@ -40,7 +40,8 @@ export class Point {
    }
 
    public calculateAngleBetween(other: Point): number {
-      return Math.atan2(other.y - this.y, other.x - this.x);
+      let angle = Math.atan2(other.y - this.y, other.x - this.x);
+      return Math.PI/2 - angle;
    }
 
    public convertToVector(other?: Point): Vector {
@@ -74,8 +75,9 @@ export class Vector {
    }
 
    public convertToPoint(): Point {
-      const x = Math.cos(this.direction) * this.magnitude;
-      const y = Math.sin(this.direction) * this.magnitude;
+      // Note: direction is measured clockwise from the positive y axis, so we flip the purposes of sin and cos here
+      const x = Math.sin(this.direction) * this.magnitude;
+      const y = Math.cos(this.direction) * this.magnitude;
       return new Point(x, y);
    }
 
@@ -129,12 +131,12 @@ export function randItem<T>(arr: Array<T> | ReadonlyArray<T>): T {
 }
 
 export function flipAngle(angle: number): number {
-   return ((angle % Math.PI) + Math.PI) % Math.PI;
+   return (angle + Math.PI) % Math.PI;
 }
 
 export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
-   const _rotation = -rotation + Math.PI / 2;
-   // math ew
+   // const _rotation = -rotation + Math.PI / 2;
+   const _rotation = rotation;
    const x = Math.cos(_rotation) * (point.x - pivotPoint.x) + Math.sin(_rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
    const y = -Math.sin(_rotation) * (point.x - pivotPoint.x) + Math.cos(_rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
    return new Point(x, y);

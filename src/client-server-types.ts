@@ -100,32 +100,35 @@ interface HitboxInfoTypesRecord {
 
 export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxInfoTypesRecord[T]>;
 
-export type EntityData<T extends EntityType> = {
+export interface GameObjectData {
    readonly id: number;
-   readonly type: T;
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
    readonly acceleration: [number, number] | null; // Vector | null
    readonly terminalVelocity: number;
    readonly rotation: number;
-   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
-   readonly secondsSinceLastHit: number | null;
    readonly hitboxes: ReadonlyArray<HitboxData<HitboxType>>;
+}
+
+export interface EntityData<T extends EntityType> extends GameObjectData {
+   readonly type: T;
+   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
+   readonly secondsSinceLastHit: number | null;
    readonly special?: ServerEntitySpecialData;
 }
 
-export type DroppedItemData = {
-   readonly id: number;
-   readonly itemID: ItemType;
-   readonly count: number;
-   readonly position: [number, number];
-   readonly velocity: [number, number] | null;
-   readonly chunkCoordinates: ReadonlyArray<[number, number]>;
-   readonly rotation: number;
+export interface DroppedItemData extends GameObjectData {
+   readonly type: ItemType;
 }
 
-export type HitData = {
+export type ProjectileType = "ice_shards";
+
+export interface ProjectileData extends GameObjectData {
+   readonly type: ProjectileType;
+}
+
+export interface HitData {
    readonly knockback: number;
    readonly knockbackDirection: number;
 }
@@ -134,6 +137,7 @@ export type HitData = {
 export type GameDataPacket = {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
+   readonly projectileDataArray: ReadonlyArray<ProjectileData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
