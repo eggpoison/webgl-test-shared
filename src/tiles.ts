@@ -6,6 +6,7 @@ export type TileType =
    "dirt" |
    "water" |
    "sludge" |
+   "slime" |
    "rock" |
    "sand" |
    "sandstone" |
@@ -38,7 +39,13 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    },
    sludge: {
       isLiquid: false,
-      friction: 0.75
+      friction: 0.9,
+      moveSpeedMultiplier: 0.8
+   },
+   slime: {
+      isLiquid: false,
+      friction: 1,
+      moveSpeedMultiplier: 0.4
    },
    rock: {
       isLiquid: false,
@@ -54,17 +61,17 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    },
    snow: {
       isLiquid: false,
-      friction: 0.8,
+      friction: 0.9,
       moveSpeedMultiplier: 0.65
    },
    ice: {
       isLiquid: false,
-      friction: 0.3,
-      moveSpeedMultiplier: 1.3
+      friction: 0.2,
+      moveSpeedMultiplier: 1.5
    },
    permafrost: {
       isLiquid: false,
-      friction: 0.5
+      friction: 0.65
    },
    magma: {
       isLiquid: false,

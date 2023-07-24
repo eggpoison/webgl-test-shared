@@ -150,13 +150,14 @@ export type GameDataPacket = {
    readonly hitsTaken: ReadonlyArray<HitData>;
    readonly playerHealth: number;
    readonly statusEffects: Array<StatusEffectType>;
+   /** Extra debug information about a game object being tracked */
+   readonly gameObjectDebugData?: GameObjectDebugData;
 }
 
 /** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
    readonly tiles: Array<Array<ServerTileData>>;
-   readonly spawnPosition: [number, number];
 }
 
 export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];
@@ -186,7 +187,7 @@ export interface GameDataSyncPacket {
 }
 
 /** Data sent to the server when an attack is performed */
-export type AttackPacket = {
+export interface AttackPacket {
    /** The item slot of the item which is being used to attack */
    readonly itemSlot: number;
    /** The direction that the attack is being done */
@@ -198,15 +199,40 @@ export type AttackPacket = {
 export type PlayerInventoryType = "hotbar" | "backpackInventory" | "craftingOutput" | "backpackItemSlot";
 export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot" | "backpackInventory">;
 
-export type RespawnDataPacket = {
+export interface RespawnDataPacket {
    readonly playerID: number;
    readonly spawnPosition: [number, number];
+}
+
+export interface DebugData {
+   readonly colour: [r: number, g: number, b: number];
+}
+
+export interface LineDebugData {
+   readonly targetPosition: [number, number];
+}
+
+export interface CircleDebugData {
+   readonly radius: number;
+}
+
+export interface TileHighlightData {
+   readonly tilePosition: [tileX: number, tileY: number];
+}
+
+export interface GameObjectDebugData {
+   /** ID of the game object being tracked */
+   readonly gameObjectID: number;
+   readonly lines: ReadonlyArray<LineDebugData>;
+   readonly circles: ReadonlyArray<CircleDebugData>;
+   readonly tileHighlights: ReadonlyArray<TileHighlightData>;
 }
 
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
 export interface ServerToClientEvents {
+   spawn_position: (spawnPosition: [number, number]) => void;
    initial_game_data_packet: (gameDataPacket: InitialGameDataPacket) => void;
    game_data_packet: (gameDataPacket: GameDataPacket) => void;
    game_data_sync_packet: (gameDataSyncPacket: GameDataSyncPacket) => void;
@@ -216,7 +242,8 @@ export interface ServerToClientEvents {
 }
 
 export interface ClientToServerEvents {
-   initial_player_data: (username: string) => void;
+   spawn_position_request: () => void;
+   initial_player_data: (username: string, visibleChunkBounds: VisibleChunkBounds) => void;
    initial_game_data_request: () => void;
    deactivate: () => void;
    activate: () => void;
@@ -233,6 +260,8 @@ export interface ClientToServerEvents {
    // Tells the server to respawn the client
    respawn: () => void;
    command: (command: string) => void;
+   // Tells the server to start sending debug information about a certain game object
+   track_game_object: (gameObjectID: number) => void;
 }
 
 export interface InterServerEvents {}

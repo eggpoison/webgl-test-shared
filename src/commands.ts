@@ -185,6 +185,40 @@ export const COMMANDS: Commands = [
             permissions: CommandPermissions.dev
          }
       ]
+   },
+   // "lightspeed on" and "lightspeed off"
+   {
+      name: "lightspeed",
+      parameters: [
+         {
+            id: 1,
+            prompt: null,
+            dataType: "string"
+         }
+      ],
+      configurations: [
+         {
+            parameterConfigurations: [1],
+            permissions: CommandPermissions.dev
+         }
+      ]
+   },
+   // Tracks a game object with the given ID
+   {
+      name: "track",
+      parameters: [
+         {
+            id: 1,
+            prompt: null,
+            dataType: "number"
+         }
+      ],
+      configurations: [
+         {
+            parameterConfigurations: [1],
+            permissions: CommandPermissions.dev
+         }
+      ]
    }
 ];
 
