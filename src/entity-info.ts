@@ -10,7 +10,8 @@ export type EntityType = "cow"
    | "berry_bush"
    | "cactus"
    | "yeti"
-   | "ice_spikes";
+   | "ice_spikes"
+   | "slime";
 type NarrowEntityType<E extends EntityType> = E;
 export type MobType = NarrowEntityType<"cow" | "zombie">;
 export type ResourceType = NarrowEntityType<"tree">;
@@ -81,4 +82,5 @@ export interface EntityInfoClientArgs {
    cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
    yeti: () => void;
    ice_spikes: () => void;
+   slime: (eyeRotation: number) => void;
 };

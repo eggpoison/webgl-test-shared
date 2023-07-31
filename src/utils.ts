@@ -161,3 +161,13 @@ export function curveWeight(baseWeight: number, power: number, flatWeight?: numb
    
    return curvedWeight;
 }
+
+export function veryBadHash(seed: string): number {
+   let hash = 0;
+   for (let i = 0, len = seed.length; i < len; i++) {
+      let chr = seed.charCodeAt(i);
+      hash = (hash << 5) - hash + chr;
+      hash |= 0; // Convert to 32bit integer
+   }
+   return hash;
+}

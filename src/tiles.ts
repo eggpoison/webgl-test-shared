@@ -40,12 +40,12 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    sludge: {
       isLiquid: false,
       friction: 0.9,
-      moveSpeedMultiplier: 0.8
+      moveSpeedMultiplier: 0.75
    },
    slime: {
       isLiquid: false,
       friction: 1,
-      moveSpeedMultiplier: 0.4
+      moveSpeedMultiplier: 0.3
    },
    rock: {
       isLiquid: false,

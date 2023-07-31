@@ -208,24 +208,24 @@ export interface DebugData {
    readonly colour: [r: number, g: number, b: number];
 }
 
-export interface LineDebugData {
+export interface LineDebugData extends DebugData {
    readonly targetPosition: [number, number];
 }
 
-export interface CircleDebugData {
+export interface CircleDebugData extends DebugData {
    readonly radius: number;
 }
 
-export interface TileHighlightData {
+export interface TileHighlightData extends DebugData {
    readonly tilePosition: [tileX: number, tileY: number];
 }
 
 export interface GameObjectDebugData {
    /** ID of the game object being tracked */
    readonly gameObjectID: number;
-   readonly lines: ReadonlyArray<LineDebugData>;
-   readonly circles: ReadonlyArray<CircleDebugData>;
-   readonly tileHighlights: ReadonlyArray<TileHighlightData>;
+   readonly lines: Array<LineDebugData>;
+   readonly circles: Array<CircleDebugData>;
+   readonly tileHighlights: Array<TileHighlightData>;
 }
 
 // Note to stupid future self: don't remove this, it's important
@@ -261,7 +261,7 @@ export interface ClientToServerEvents {
    respawn: () => void;
    command: (command: string) => void;
    // Tells the server to start sending debug information about a certain game object
-   track_game_object: (gameObjectID: number) => void;
+   track_game_object: (gameObjectID: number | null) => void;
 }
 
 export interface InterServerEvents {}
