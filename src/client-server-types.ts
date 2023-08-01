@@ -132,7 +132,7 @@ export interface ProjectileData extends GameObjectData {
 
 export interface HitData {
    readonly knockback: number;
-   readonly knockbackDirection: number;
+   readonly hitDirection: number | null;
 }
 
 /** Data about the game state sent to the client each tick */
