@@ -13,9 +13,9 @@ export type EntityType = "cow"
    | "ice_spikes"
    | "slime"
    | "slimewisp";
-type NarrowEntityType<E extends EntityType> = E;
-export type MobType = NarrowEntityType<"cow" | "zombie">;
-export type ResourceType = NarrowEntityType<"tree">;
+// type NarrowEntityType<E extends EntityType> = E;
+// export type MobType = NarrowEntityType<"cow" | "zombie">;
+export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus"];
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
@@ -81,6 +81,8 @@ export enum SlimeSize {
 export interface SlimeOrbData {
    readonly size: SlimeSize;
    readonly rotation: number;
+   /** Offset of the orb from the center of the slime (from 0->1) */
+   readonly offset: number;
 }
 
 export interface EntityInfoClientArgs {
