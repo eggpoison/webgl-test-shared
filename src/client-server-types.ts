@@ -210,10 +210,12 @@ export interface DebugData {
 
 export interface LineDebugData extends DebugData {
    readonly targetPosition: [number, number];
+   readonly thickness: number;
 }
 
 export interface CircleDebugData extends DebugData {
    readonly radius: number;
+   readonly thickness: number;
 }
 
 export interface TileHighlightData extends DebugData {

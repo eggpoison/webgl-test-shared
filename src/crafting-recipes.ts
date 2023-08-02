@@ -42,33 +42,33 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       },
       craftingStation: "workbench"
    },
-   // {
-   //    product: "stone_sword",
-   //    yield: 1,
-   //    ingredients: {
-   //       wood: 5,
-   //       rock: 15
-   //    },
-   //    craftingStation: "workbench"
-   // },
-   // {
-   //    product: "stone_pickaxe",
-   //    yield: 1,
-   //    ingredients: {
-   //       wood: 5,
-   //       rock: 10
-   //    },
-   //    craftingStation: "workbench"
-   // },
-   // {
-   //    product: "stone_axe",
-   //    yield: 1,
-   //    ingredients: {
-   //       wood: 5,
-   //       rock: 10
-   //    },
-   //    craftingStation: "workbench"
-   // },
+   {
+      product: "stone_sword",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 15
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "stone_pickaxe",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 10
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "stone_axe",
+      yield: 1,
+      ingredients: {
+         wood: 5,
+         rock: 10
+      },
+      craftingStation: "workbench"
+   },
    {
       product: "leather_backpack",
       yield: 1,

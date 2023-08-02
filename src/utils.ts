@@ -111,6 +111,10 @@ export class Vector {
       return [this.magnitude, this.direction];
    }
 
+   public normalise(): void {
+      this.magnitude = 1;
+   }
+
    public static unpackage(packagedVector: [number, number]): Vector {
       return new Vector(packagedVector[0], packagedVector[1]);
    }
