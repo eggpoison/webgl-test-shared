@@ -1,23 +1,27 @@
 import { EntityType } from "./entities";
 
-export type ItemType = "wood"
-   | "workbench"
-   | "wooden_sword"
-   | "wooden_axe"
-   | "wooden_pickaxe"
-   | "berry"
-   | "raw_beef"
-   | "cooked_beef"
-   | "rock"
-   | "stone_sword"
-   | "stone_axe"
-   | "stone_pickaxe"
-   | "leather"
-   | "leather_backpack"
-   | "cactus_spine"
-   | "yeti_hide"
-   | "frostcicle"
-   | "slimeball";
+export const ITEM_TYPE_LITERALS = [
+   "wood",
+   "workbench",
+   "wooden_sword",
+   "wooden_axe",
+   "wooden_pickaxe",
+   "berry",
+   "raw_beef",
+   "cooked_beef",
+   "rock",
+   "stone_sword",
+   "stone_axe",
+   "stone_pickaxe",
+   "leather",
+   "leather_backpack",
+   "cactus_spine",
+   "yeti_hide",
+   "frostcicle",
+   "slimeball"
+] as const;
+
+export type ItemType = typeof ITEM_TYPE_LITERALS[number];
 
 export interface BaseItemInfo {}
 

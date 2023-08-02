@@ -241,6 +241,7 @@ export interface ServerToClientEvents {
    chat_message: (senderName: string, message: string) => void;
    client_disconnect: (clientID: string) => void;
    respawn_data_packet: (respawnDataPacket: RespawnDataPacket) => void;
+   force_position_update: (position: [number, number]) => void;
 }
 
 export interface ClientToServerEvents {

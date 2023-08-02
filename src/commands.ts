@@ -202,6 +202,45 @@ export const COMMANDS: Commands = [
             permissions: CommandPermissions.dev
          }
       ]
+   },
+   // Teleports you to the specified coordinates
+   {
+      name: "tp",
+      parameters: [
+         { // X coordinate
+            id: 1,
+            prompt: null,
+            dataType: "number"
+         },
+         { // Y coordinate
+            id: 2,
+            prompt: null,
+            dataType: "number"
+         }
+      ],
+      configurations: [
+         {
+            parameterConfigurations: [1, 2],
+            permissions: CommandPermissions.dev
+         }
+      ]
+   },
+   // Teleports you to a random position in the specified biome type
+   {
+      name: "tpbiome",
+      parameters: [
+         { // Biome name
+            id: 1,
+            prompt: null,
+            dataType: "string"
+         }
+      ],
+      configurations: [
+         {
+            parameterConfigurations: [1],
+            permissions: CommandPermissions.dev
+         }
+      ]
    }
 ];
 
