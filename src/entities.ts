@@ -11,7 +11,8 @@ export type EntityType = "cow"
    | "cactus"
    | "yeti"
    | "ice_spikes"
-   | "slime";
+   | "slime"
+   | "slimewisp";
 type NarrowEntityType<E extends EntityType> = E;
 export type MobType = NarrowEntityType<"cow" | "zombie">;
 export type ResourceType = NarrowEntityType<"tree">;
@@ -70,6 +71,18 @@ export interface CactusLimbData {
    readonly flower?: CactusLimbFlowerData;
 }
 
+export enum SlimeSize {
+   small = 0,
+   medium = 1,
+   large = 2
+}
+
+/** Information about an orb inside a slime */
+export interface SlimeOrbData {
+   readonly size: SlimeSize;
+   readonly rotation: number;
+}
+
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
@@ -82,5 +95,6 @@ export interface EntityInfoClientArgs {
    cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
    yeti: () => void;
    ice_spikes: () => void;
-   slime: (eyeRotation: number) => void;
+   slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
+   slimewisp: () => void;
 };

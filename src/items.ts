@@ -1,4 +1,4 @@
-import { EntityType } from "./entity-info";
+import { EntityType } from "./entities";
 
 export type ItemType = "wood"
    | "workbench"
@@ -16,7 +16,8 @@ export type ItemType = "wood"
    | "leather_backpack"
    | "cactus_spine"
    | "yeti_hide"
-   | "frostcicle";
+   | "frostcicle"
+   | "slimeball";
 
 export interface BaseItemInfo {}
 
@@ -91,7 +92,8 @@ export const ITEM_TYPE_RECORD = {
    leather_backpack: "backpack",
    cactus_spine: "material",
    yeti_hide: "material",
-   frostcicle: "material"
+   frostcicle: "material",
+   slimeball: "material"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -172,6 +174,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    frostcicle: {
+      stackSize: 99
+   },
+   slimeball: {
       stackSize: 99
    }
 };

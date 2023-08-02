@@ -1,5 +1,5 @@
 import { CraftingRecipe } from "./crafting-recipes";
-import { EntityInfoClientArgs, EntityType } from "./entity-info";
+import { EntityInfoClientArgs, EntityType } from "./entities";
 import { ItemType } from "./items";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
