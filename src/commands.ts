@@ -241,6 +241,17 @@ export const COMMANDS: Commands = [
             permissions: CommandPermissions.dev
          }
       ]
+   },
+   // Clears the terminal
+   {
+      name: "clear",
+      parameters: [],
+      configurations: [
+         {
+            parameterConfigurations: [],
+            permissions: CommandPermissions.dev
+         }
+      ]
    }
 ];
 
