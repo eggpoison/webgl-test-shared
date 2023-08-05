@@ -3,7 +3,8 @@ export enum ParticleType {
    bloodPoolMedium,
    bloodPoolLarge,
    blood,
-   cactusSpine
+   cactusSpine,
+   dirt
 }
 
 export interface ParticleData {
