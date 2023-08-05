@@ -187,3 +187,7 @@ export function clampToBoardDimensions(tileCoord: number): number {
    }
    return tileCoord;
 }
+
+export function randSign(): number {
+   return Math.random() < 0.5 ? 1 : 0;
+}

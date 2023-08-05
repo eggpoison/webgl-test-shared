@@ -4,7 +4,18 @@ export enum ParticleType {
    bloodPoolLarge,
    blood,
    cactusSpine,
-   dirt
+   dirt,
+   leaf,
+   rock,
+   cactusFlower1,
+   cactusFlower1_2,
+   cactusFlower2,
+   cactusFlower2_2,
+   cactusFlower3,
+   cactusFlower3_2,
+   cactusFlower4,
+   cactusFlower4_2,
+   cactusFlower5
 }
 
 export interface ParticleData {

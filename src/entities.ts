@@ -53,16 +53,16 @@ export enum CactusFlowerSize {
 
 export interface CactusFlowerData {
    readonly type: number;
+   readonly height: number;
+   readonly rotation: number;
 }
 
 export interface CactusBodyFlowerData extends CactusFlowerData {
    readonly size: CactusFlowerSize
    readonly column: number;
-   readonly height: number;
 }
 
 export interface CactusLimbFlowerData extends CactusFlowerData {
-   readonly height: number;
    readonly direction: number;
 }
 
