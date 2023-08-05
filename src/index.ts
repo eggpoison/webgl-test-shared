@@ -8,3 +8,4 @@ export * from "./items";
 export * from "./crafting-recipes";
 export * from "./commands";
 export * from "./status-effects";
+export * from "./particles";

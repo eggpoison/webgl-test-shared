@@ -1,6 +1,7 @@
 import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entities";
 import { ItemType } from "./items";
+import { ParticleData } from "./particles";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { Point } from "./utils";
@@ -140,6 +141,7 @@ export type GameDataPacket = {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly projectileDataArray: ReadonlyArray<ProjectileData>;
+   readonly particles: ReadonlyArray<ParticleData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
@@ -228,6 +230,8 @@ export interface GameObjectDebugData {
    readonly lines: Array<LineDebugData>;
    readonly circles: Array<CircleDebugData>;
    readonly tileHighlights: Array<TileHighlightData>;
+   readonly health?: number;
+   readonly maxHealth?: number;
 }
 
 // Note to stupid future self: don't remove this, it's important

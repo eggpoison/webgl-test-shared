@@ -1,3 +1,5 @@
+import { SETTINGS } from "./settings";
+
 /**
  * Returns a random integer inclusively.
  * @param min The minimum value of the random number.
@@ -174,4 +176,14 @@ export function veryBadHash(seed: string): number {
       hash |= 0; // Convert to 32bit integer
    }
    return hash;
+}
+
+export function clampToBoardDimensions(tileCoord: number): number {
+   if (tileCoord < 0) {
+      return 0;
+   }
+   if (tileCoord >= SETTINGS.BOARD_DIMENSIONS) {
+      return SETTINGS.BOARD_DIMENSIONS - 1;
+   }
+   return tileCoord;
 }
