@@ -20,7 +20,8 @@ export const ITEM_TYPE_LITERALS = [
    "frostcicle",
    "slimeball",
    "eyeball",
-   "flesh_sword"
+   "flesh_sword",
+   "tribe_totem"
 ] as const;
 
 export type ItemType = typeof ITEM_TYPE_LITERALS[number];
@@ -101,7 +102,8 @@ export const ITEM_TYPE_RECORD = {
    frostcicle: "material",
    slimeball: "material",
    eyeball: "material",
-   flesh_sword: "weapon"
+   flesh_sword: "weapon",
+   tribe_totem: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -195,5 +197,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       damage: 2,
       knockback: 150,
       attackCooldown: 0.3
+   },
+   tribe_totem: {
+      stackSize: 99,
+      entityType: "tribe_totem"
    }
 };

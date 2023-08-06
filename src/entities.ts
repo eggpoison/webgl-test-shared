@@ -3,7 +3,6 @@ export type EntityBehaviour = "passive" | "neutral" | "hostile";
 export type EntityType = "cow"
    | "zombie"
    | "tombstone"
-   | "player"
    | "tree"
    | "workbench"
    | "boulder"
@@ -12,7 +11,10 @@ export type EntityType = "cow"
    | "yeti"
    | "ice_spikes"
    | "slime"
-   | "slimewisp";
+   | "slimewisp"
+   | "ai_tribesman"
+   | "player"
+   | "tribe_totem";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -97,4 +99,6 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
+   ai_tribesman: () => void;
+   tribe_totem: () => void;
 };
