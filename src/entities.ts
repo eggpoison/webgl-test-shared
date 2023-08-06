@@ -13,7 +13,7 @@ export type EntityType = "cow"
    | "ice_spikes"
    | "slime"
    | "slimewisp";
-export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus"];
+export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";

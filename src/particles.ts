@@ -8,6 +8,7 @@ export enum ParticleType {
    dirt,
    leaf,
    rock,
+   rockLarge,
    cactusFlower1,
    cactusFlower1_2,
    cactusFlower2,
@@ -18,7 +19,8 @@ export enum ParticleType {
    cactusFlower4_2,
    cactusFlower5,
    smoke,
-   footprint
+   footprint,
+   poisonDroplet
 }
 
 export interface ParticleData {

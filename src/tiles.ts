@@ -8,6 +8,7 @@ export type TileType =
    "sludge" |
    "slime" |
    "rock" |
+   "darkRock" |
    "sand" |
    "sandstone" |
    "snow" |
@@ -48,6 +49,10 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
       moveSpeedMultiplier: 0.3
    },
    rock: {
+      isLiquid: false,
+      friction: 0.65
+   },
+   darkRock: {
       isLiquid: false,
       friction: 0.65
    },

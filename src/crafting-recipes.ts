@@ -1,6 +1,8 @@
-import { ItemType, ITEM_INFO_RECORD, StackableItemInfo } from "./items";
+import { EntityType } from "./entities";
+import { ItemType } from "./items";
 
-export type CraftingStation = "workbench";
+export const CRAFTING_STATIONS = ["workbench", "slime"] satisfies Array<EntityType>;
+export type CraftingStation = "workbench" | "slime";
 
 export interface CraftingRecipe {
    readonly product: ItemType;
@@ -76,6 +78,16 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          leather: 5
       },
       craftingStation: "workbench"
+   },
+   {
+      product: "flesh_sword",
+      yield: 1,
+      ingredients: {
+         raw_beef: 10,
+         slimeball: 10,
+         eyeball: 1
+      },
+      craftingStation: "slime"
    }
 ];
 
