@@ -93,8 +93,17 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       product: "tribe_totem",
       yield: 1,
       ingredients: {
-         wood: 30,
-         rock: 30
+         wood: 40,
+         rock: 40
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "tribe_hut",
+      yield: 1,
+      ingredients: {
+         wood: 20,
+         rock: 10
       },
       craftingStation: "workbench"
    }

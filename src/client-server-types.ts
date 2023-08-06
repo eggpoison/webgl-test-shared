@@ -4,15 +4,8 @@ import { ItemType } from "./items";
 import { ParticleData } from "./particles";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
+import { TribeType } from "./tribes";
 import { Point } from "./utils";
-
-/*
-- In general, the "Data" suffix on a type indicates that it is a common type between the client and server used to communicate with the two.
-*/
-
-/********************
-   Items/Inventory
-********************/
 
 export interface ItemData {
    /** Unique identifier for the number */
@@ -136,6 +129,12 @@ export interface HitData {
    readonly hitDirection: number | null;
 }
 
+export interface TribeData {
+   readonly tribeType: TribeType;
+   readonly numHuts: number;
+   readonly tribesmanCap: number;
+}
+
 /** Data about the game state sent to the client each tick */
 export type GameDataPacket = {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
@@ -154,6 +153,7 @@ export type GameDataPacket = {
    readonly statusEffects: Array<StatusEffectType>;
    /** Extra debug information about a game object being tracked */
    readonly gameObjectDebugData?: GameObjectDebugData;
+   readonly tribeData: TribeData | null;
 }
 
 /** Initial data sent to the client */

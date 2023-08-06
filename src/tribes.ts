@@ -3,26 +3,36 @@ import { BiomeName } from "./tiles";
 export enum TribeType {
    plainspeople,
    barbarians,
-   frostlings
+   frostlings,
+   goblins
 }
 
 interface TribeInfo {
    readonly maxHealth: number;
-   readonly biome: BiomeName;
+   readonly biomes: ReadonlyArray<BiomeName>;
+   readonly baseTribesmanCap: number;
 }
 
 const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    [TribeType.plainspeople]: {
       maxHealth: 20,
-      biome: "grasslands"
+      biomes: ["grasslands"],
+      baseTribesmanCap: 4
    },
    [TribeType.barbarians]: {
       maxHealth: 25,
-      biome: "desert"
+      biomes: ["desert"],
+      baseTribesmanCap: 2
    },
    [TribeType.frostlings]: {
       maxHealth: 20,
-      biome: "tundra"
+      biomes: ["tundra"],
+      baseTribesmanCap: 5
+   },
+   [TribeType.goblins]: {
+      maxHealth: 15,
+      biomes: ["grasslands", "desert", "tundra"],
+      baseTribesmanCap: 8
    }
 };
 

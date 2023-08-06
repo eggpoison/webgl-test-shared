@@ -1,3 +1,5 @@
+import { TribeType } from "./tribes";
+
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
 export type EntityType = "cow"
@@ -12,9 +14,10 @@ export type EntityType = "cow"
    | "ice_spikes"
    | "slime"
    | "slimewisp"
-   | "ai_tribesman"
+   | "tribesman"
    | "player"
-   | "tribe_totem";
+   | "tribe_totem"
+   | "tribe_hut";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -89,7 +92,6 @@ export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
    tombstone: (tombstoneType: number) => void;
-   player: (username: string) => void;
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
    boulder: (boulderType: number) => void;
@@ -99,6 +101,8 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   ai_tribesman: () => void;
+   tribesman: (tribeType: TribeType) => void;
+   player: (tribeType: TribeType, username: string) => void;
    tribe_totem: () => void;
+   tribe_hut: () => void;
 };
