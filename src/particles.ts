@@ -3,6 +3,7 @@ export enum ParticleType {
    bloodPoolMedium,
    bloodPoolLarge,
    blood,
+   bloodLarge,
    cactusSpine,
    dirt,
    leaf,
