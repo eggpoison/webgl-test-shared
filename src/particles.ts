@@ -15,7 +15,9 @@ export enum ParticleType {
    cactusFlower3_2,
    cactusFlower4,
    cactusFlower4_2,
-   cactusFlower5
+   cactusFlower5,
+   smoke,
+   footprint
 }
 
 export interface ParticleData {
@@ -26,4 +28,6 @@ export interface ParticleData {
    readonly acceleration: [number, number] | null;
    readonly rotation: number;
    readonly opacity: number;
+   /** How much the particle's size is multiplied. 1 = normal, 2 = double, etc. */
+   readonly scale: number;
 }

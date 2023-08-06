@@ -13,8 +13,6 @@ export type EntityType = "cow"
    | "ice_spikes"
    | "slime"
    | "slimewisp";
-// type NarrowEntityType<E extends EntityType> = E;
-// export type MobType = NarrowEntityType<"cow" | "zombie">;
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus"];
 
 type BaseEntityInfo = {
