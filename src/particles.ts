@@ -20,7 +20,8 @@ export enum ParticleType {
    cactusFlower5,
    smoke,
    footprint,
-   poisonDroplet
+   poisonDroplet,
+   slimePuddle
 }
 
 export interface ParticleData {
