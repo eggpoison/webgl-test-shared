@@ -1,3 +1,4 @@
+import { InventoryData } from "./client-server-types";
 import { TribeType } from "./tribes";
 
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
@@ -106,5 +107,5 @@ export interface EntityInfoClientArgs {
    player: (tribeType: TribeType, username: string) => void;
    tribe_totem: () => void;
    tribe_hut: () => void;
-   barrel: () => void;
+   barrel: (inventory: InventoryData) => void;
 };

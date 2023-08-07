@@ -16,12 +16,20 @@ export interface ItemData {
 
 export type ItemSlotData = ItemData | null;
 
-export type InventoryData = { [itemSlot: number]: ItemData };
+export type ItemSlotsData = { [itemSlot: number]: ItemData };
+
+export interface InventoryData {
+   readonly itemSlots: ItemSlotsData;
+   readonly width: number;
+   readonly height: number;
+   readonly entityID: number;
+   readonly inventoryName: string;
+}
 
 export interface PlayerInventoryData {
-   readonly hotbar: InventoryData;
+   readonly hotbar: ItemSlotsData;
    readonly backpackSlot: ItemSlotData;
-   readonly backpackInventory: InventoryData;
+   readonly backpackInventory: ItemSlotsData;
    /** Item currently being held by the player */
    readonly heldItemSlot: ItemSlotData;
    /** Item held in the player's crafting output slot */
@@ -198,9 +206,6 @@ export interface AttackPacket {
    readonly targetEntities: ReadonlyArray<number>;
 }
 
-export type PlayerInventoryType = "hotbar" | "backpackInventory" | "craftingOutput" | "backpackItemSlot";
-export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot" | "backpackInventory">;
-
 export interface RespawnDataPacket {
    readonly playerID: number;
    readonly spawnPosition: [number, number];
@@ -258,9 +263,9 @@ export interface ClientToServerEvents {
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;
    crafting_packet: (craftingRecipe: CraftingRecipe) => void;
-   item_pickup_packet: (inventoryType: PlayerInventoryType, itemSlot: number, amount: number) => void;
+   item_pickup_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
    // Tells the server that the client wants to release the held item at the specified place in an inventory
-   item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number, amount: number) => void;
+   item_release_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
    throw_held_item_packet: (throwDirection: number) => void;
