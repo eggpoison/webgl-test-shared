@@ -22,7 +22,8 @@ export const ITEM_TYPE_LITERALS = [
    "eyeball",
    "flesh_sword",
    "tribe_totem",
-   "tribe_hut"
+   "tribe_hut",
+   "barrel"
 ] as const;
 
 export type ItemType = typeof ITEM_TYPE_LITERALS[number];
@@ -105,7 +106,8 @@ export const ITEM_TYPE_RECORD = {
    eyeball: "material",
    flesh_sword: "weapon",
    tribe_totem: "placeable",
-   tribe_hut: "placeable"
+   tribe_hut: "placeable",
+   barrel: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -207,5 +209,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    tribe_hut: {
       stackSize: 99,
       entityType: "tribe_hut"
+   },
+   barrel: {
+      stackSize: 99,
+      entityType: "barrel"
    }
 };

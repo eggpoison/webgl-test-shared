@@ -17,7 +17,8 @@ export type EntityType = "cow"
    | "tribesman"
    | "player"
    | "tribe_totem"
-   | "tribe_hut";
+   | "tribe_hut"
+   | "barrel";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -105,4 +106,5 @@ export interface EntityInfoClientArgs {
    player: (tribeType: TribeType, username: string) => void;
    tribe_totem: () => void;
    tribe_hut: () => void;
+   barrel: () => void;
 };
