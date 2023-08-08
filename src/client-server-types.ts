@@ -138,9 +138,11 @@ export interface HitData {
 }
 
 export interface TribeData {
+   readonly id: number;
    readonly tribeType: TribeType;
    readonly numHuts: number;
    readonly tribesmanCap: number;
+   readonly area: ReadonlyArray<[tileX: number, tileY: number]>;
 }
 
 /** Data about the game state sent to the client each tick */

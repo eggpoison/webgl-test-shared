@@ -103,9 +103,9 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribeType: TribeType, inventory: InventoryData) => void;
-   player: (tribeType: TribeType, username: string) => void;
-   tribe_totem: () => void;
-   tribe_hut: () => void;
-   barrel: (inventory: InventoryData) => void;
+   tribesman: (tribe: number | null, tribeType: TribeType, inventory: InventoryData) => void;
+   player: (tribe: number | null, tribeType: TribeType, username: string) => void;
+   tribe_totem: (tribe: number) => void;
+   tribe_hut: (tribe: number) => void;
+   barrel: (tribe: number | null, inventory: InventoryData) => void;
 };
