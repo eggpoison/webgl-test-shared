@@ -103,7 +103,7 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribeType: TribeType) => void;
+   tribesman: (tribeType: TribeType, inventory: InventoryData) => void;
    player: (tribeType: TribeType, username: string) => void;
    tribe_totem: () => void;
    tribe_hut: () => void;

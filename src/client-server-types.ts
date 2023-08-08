@@ -27,13 +27,13 @@ export interface InventoryData {
 }
 
 export interface PlayerInventoryData {
-   readonly hotbar: ItemSlotsData;
-   readonly backpackSlot: ItemSlotData;
-   readonly backpackInventory: ItemSlotsData;
+   readonly hotbar: InventoryData;
+   readonly backpackSlot: InventoryData;
+   readonly backpackInventory: InventoryData;
    /** Item currently being held by the player */
-   readonly heldItemSlot: ItemSlotData;
+   readonly heldItemSlot: InventoryData;
    /** Item held in the player's crafting output slot */
-   readonly craftingOutputItemSlot: ItemSlotData;
+   readonly craftingOutputItemSlot: InventoryData;
 }
 
 export type ServerTileData = {

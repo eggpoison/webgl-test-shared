@@ -302,8 +302,14 @@ export function parseCommand(command: string): Array<string | number> {
    let commandComponents: Array<string | number> = command.split(" ");
 
    // Number-ise any numbers
-   commandComponents = commandComponents.map(component => !isNaN(component as number) ? Number(component) : component);
+   commandComponents = commandComponents.map(component => !isNaN(component as number) && !isNaN(parseFloat(component.toString())) ? Number(component) : component);
 
+   // Remove any whitespace
+   for (let i = commandComponents.length - 1; i >= 0; i--) {
+      if (commandComponents[i] === "") {
+         commandComponents.splice(i, 1);
+      }
+   }
    return commandComponents;
 }
 
