@@ -76,7 +76,7 @@ export interface BackpackItemInfo extends BaseItemInfo {
 }
 
 export interface ArmourItemInfo extends BaseItemInfo {
-   readonly armour: number;
+   readonly defence: number;
 }
 
 export interface ItemInfoRecord {
@@ -222,6 +222,6 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: "barrel"
    },
    frost_armour: {
-      armour: 1
+      defence: 0.25
    }
 };

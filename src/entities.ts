@@ -91,6 +91,12 @@ export interface SlimeOrbData {
    readonly offset: number;
 }
 
+export interface TribeTotemBanner {
+   /** The ring layer in the totem which the banner is on */
+   readonly layer: number;
+   readonly direction: number;
+}
+
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
@@ -106,7 +112,7 @@ export interface EntityInfoClientArgs {
    slimewisp: () => void;
    tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, inventory: InventoryData) => void;
    player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, username: string) => void;
-   tribe_totem: (tribe: number) => void;
+   tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;
 };
