@@ -1,4 +1,5 @@
 import { InventoryData } from "./client-server-types";
+import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
@@ -103,8 +104,8 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribe: number | null, tribeType: TribeType, inventory: InventoryData) => void;
-   player: (tribe: number | null, tribeType: TribeType, username: string) => void;
+   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, inventory: InventoryData) => void;
+   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, username: string) => void;
    tribe_totem: (tribe: number) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;

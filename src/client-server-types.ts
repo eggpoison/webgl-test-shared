@@ -34,6 +34,7 @@ export interface PlayerInventoryData {
    readonly heldItemSlot: InventoryData;
    /** Item held in the player's crafting output slot */
    readonly craftingOutputItemSlot: InventoryData;
+   readonly armourSlot: InventoryData;
 }
 
 export type ServerTileData = {

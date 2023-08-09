@@ -114,6 +114,15 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          wood: 20,
       },
       craftingStation: "workbench"
+   },
+   {
+      product: "frost_armour",
+      yield: 1,
+      ingredients: {
+         frostcicle: 20,
+         yeti_hide: 10
+      },
+      craftingStation: "workbench"
    }
 ];
 

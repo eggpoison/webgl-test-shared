@@ -19,6 +19,7 @@ export enum ParticleType {
    cactusFlower4_2,
    cactusFlower5,
    smoke,
+   ember,
    footprint,
    poisonDroplet,
    slimePuddle

@@ -23,7 +23,8 @@ export const ITEM_TYPE_LITERALS = [
    "flesh_sword",
    "tribe_totem",
    "tribe_hut",
-   "barrel"
+   "barrel",
+   "frost_armour"
 ] as const;
 
 export type ItemType = typeof ITEM_TYPE_LITERALS[number];
@@ -74,6 +75,10 @@ export interface BackpackItemInfo extends BaseItemInfo {
    readonly inventoryHeight: number
 }
 
+export interface ArmourItemInfo extends BaseItemInfo {
+   readonly armour: number;
+}
+
 export interface ItemInfoRecord {
    material: MaterialItemInfo;
    food: FoodItemInfo;
@@ -82,6 +87,7 @@ export interface ItemInfoRecord {
    pickaxe: PickaxeItemInfo
    placeable: PlaceableItemInfo;
    backpack: BackpackItemInfo;
+   armour: ArmourItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -107,7 +113,8 @@ export const ITEM_TYPE_RECORD = {
    flesh_sword: "weapon",
    tribe_totem: "placeable",
    tribe_hut: "placeable",
-   barrel: "placeable"
+   barrel: "placeable",
+   frost_armour: "armour"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -213,5 +220,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    barrel: {
       stackSize: 99,
       entityType: "barrel"
+   },
+   frost_armour: {
+      armour: 1
    }
 };
