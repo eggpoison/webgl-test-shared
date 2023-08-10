@@ -123,6 +123,21 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          yeti_hide: 10
       },
       craftingStation: "workbench"
+   },
+   {
+      product: "campfire",
+      yield: 1,
+      ingredients: {
+         wood: 15
+      }
+   },
+   {
+      product: "furnace",
+      yield: 1,
+      ingredients: {
+         campfire: 1,
+         rock: 20
+      }
    }
 ];
 

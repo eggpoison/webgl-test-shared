@@ -20,7 +20,9 @@ export type EntityType = "cow"
    | "player"
    | "tribe_totem"
    | "tribe_hut"
-   | "barrel";
+   | "barrel"
+   | "campfire"
+   | "furnace";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -116,4 +118,6 @@ export interface EntityInfoClientArgs {
    tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;
+   campfire: (inventory: InventoryData) => void;
+   furnace: (fuelInventory: InventoryData, outputInventory: InventoryData) => void;
 };
