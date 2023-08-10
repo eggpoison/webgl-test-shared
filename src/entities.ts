@@ -92,6 +92,7 @@ export interface SlimeOrbData {
 }
 
 export interface TribeTotemBanner {
+   readonly hutNum: number;
    /** The ring layer in the totem which the banner is on */
    readonly layer: number;
    readonly direction: number;

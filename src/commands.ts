@@ -92,6 +92,10 @@ export const COMMANDS: Commands = [
          }
       ],
       configurations: [
+         { // Command for player to fully heal themselves
+            parameterConfigurations: [],
+            permissions: CommandPermissions.dev
+         },
          { // Command for player to heal themselves
             parameterConfigurations: [1],
             permissions: CommandPermissions.dev
