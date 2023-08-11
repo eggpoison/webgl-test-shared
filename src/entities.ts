@@ -98,7 +98,7 @@ export interface EntityInfoClientArgs {
    boulder: (boulderType: number) => void;
    berry_bush: (numBerries: number) => void;
    cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
-   yeti: () => void;
+   yeti: (attackProgress: number) => void;
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;

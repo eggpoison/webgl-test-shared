@@ -2,6 +2,7 @@ import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entities";
 import { ItemType } from "./items";
 import { ParticleData } from "./particles";
+import { ProjectileType } from "./projectiles";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
@@ -117,8 +118,6 @@ export interface EntityData<T extends EntityType> extends GameObjectData {
 export interface DroppedItemData extends GameObjectData {
    readonly type: ItemType;
 }
-
-export type ProjectileType = "ice_shards";
 
 export interface ProjectileData extends GameObjectData {
    readonly type: ProjectileType;
