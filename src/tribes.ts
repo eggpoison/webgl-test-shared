@@ -32,7 +32,7 @@ const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    [TribeType.goblins]: {
       maxHealth: 15,
       biomes: ["grasslands", "desert", "tundra"],
-      baseTribesmanCap: 8
+      baseTribesmanCap: 100
    }
 };
 

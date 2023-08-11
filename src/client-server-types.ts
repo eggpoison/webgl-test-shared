@@ -17,16 +17,25 @@ export interface ItemData {
 
 export type ItemSlotData = ItemData | null;
 
-export type InventoryData = { [itemSlot: number]: ItemData };
+export type ItemSlotsData = { [itemSlot: number]: ItemData };
+
+export interface InventoryData {
+   readonly itemSlots: ItemSlotsData;
+   readonly width: number;
+   readonly height: number;
+   readonly entityID: number;
+   readonly inventoryName: string;
+}
 
 export interface PlayerInventoryData {
    readonly hotbar: InventoryData;
-   readonly backpackSlot: ItemSlotData;
+   readonly backpackSlot: InventoryData;
    readonly backpackInventory: InventoryData;
    /** Item currently being held by the player */
-   readonly heldItemSlot: ItemSlotData;
+   readonly heldItemSlot: InventoryData;
    /** Item held in the player's crafting output slot */
-   readonly craftingOutputItemSlot: ItemSlotData;
+   readonly craftingOutputItemSlot: InventoryData;
+   readonly armourSlot: InventoryData;
 }
 
 export type ServerTileData = {
@@ -129,9 +138,11 @@ export interface HitData {
 }
 
 export interface TribeData {
+   readonly id: number;
    readonly tribeType: TribeType;
    readonly numHuts: number;
    readonly tribesmanCap: number;
+   readonly area: ReadonlyArray<[tileX: number, tileY: number]>;
 }
 
 /** Data about the game state sent to the client each tick */
@@ -197,9 +208,6 @@ export interface AttackPacket {
    readonly targetEntities: ReadonlyArray<number>;
 }
 
-export type PlayerInventoryType = "hotbar" | "backpackInventory" | "craftingOutput" | "backpackItemSlot";
-export type PlaceablePlayerInventoryType = Extract<PlayerInventoryType, "hotbar" | "backpackItemSlot" | "backpackInventory">;
-
 export interface RespawnDataPacket {
    readonly playerID: number;
    readonly spawnPosition: [number, number];
@@ -257,9 +265,9 @@ export interface ClientToServerEvents {
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;
    crafting_packet: (craftingRecipe: CraftingRecipe) => void;
-   item_pickup_packet: (inventoryType: PlayerInventoryType, itemSlot: number, amount: number) => void;
+   item_pickup_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
    // Tells the server that the client wants to release the held item at the specified place in an inventory
-   item_release_packet: (inventoryType: PlaceablePlayerInventoryType, itemSlot: number, amount: number) => void;
+   item_release_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
    throw_held_item_packet: (throwDirection: number) => void;

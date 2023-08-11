@@ -1,6 +1,5 @@
-export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields";
+export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields" | "river";
 
-// excuse the terrible formatting, I'm tired
 export type TileType =
    "grass" |
    "dirt" |

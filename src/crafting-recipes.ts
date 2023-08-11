@@ -103,7 +103,6 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       yield: 1,
       ingredients: {
          wood: 20,
-         rock: 10,
          leather: 15
       },
       craftingStation: "workbench"
@@ -113,9 +112,32 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       yield: 1,
       ingredients: {
          wood: 20,
-         leather: 10
       },
       craftingStation: "workbench"
+   },
+   {
+      product: "frost_armour",
+      yield: 1,
+      ingredients: {
+         frostcicle: 20,
+         yeti_hide: 10
+      },
+      craftingStation: "workbench"
+   },
+   {
+      product: "campfire",
+      yield: 1,
+      ingredients: {
+         wood: 15
+      }
+   },
+   {
+      product: "furnace",
+      yield: 1,
+      ingredients: {
+         campfire: 1,
+         rock: 20
+      }
    }
 ];
 

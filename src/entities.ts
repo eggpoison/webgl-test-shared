@@ -1,3 +1,5 @@
+import { InventoryData } from "./client-server-types";
+import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
@@ -18,7 +20,9 @@ export type EntityType = "cow"
    | "player"
    | "tribe_totem"
    | "tribe_hut"
-   | "barrel";
+   | "barrel"
+   | "campfire"
+   | "furnace";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -89,6 +93,13 @@ export interface SlimeOrbData {
    readonly offset: number;
 }
 
+export interface TribeTotemBanner {
+   readonly hutNum: number;
+   /** The ring layer in the totem which the banner is on */
+   readonly layer: number;
+   readonly direction: number;
+}
+
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
@@ -102,9 +113,11 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribeType: TribeType) => void;
-   player: (tribeType: TribeType, username: string) => void;
-   tribe_totem: () => void;
-   tribe_hut: () => void;
-   barrel: () => void;
+   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, inventory: InventoryData) => void;
+   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, username: string) => void;
+   tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
+   tribe_hut: (tribe: number) => void;
+   barrel: (tribe: number | null, inventory: InventoryData) => void;
+   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
+   furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
 };
