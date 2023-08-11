@@ -118,6 +118,6 @@ export interface EntityInfoClientArgs {
    tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;
-   campfire: (inventory: InventoryData) => void;
-   furnace: (fuelInventory: InventoryData, outputInventory: InventoryData) => void;
+   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
+   furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
 };
