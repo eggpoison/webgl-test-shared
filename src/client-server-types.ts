@@ -23,7 +23,6 @@ export interface InventoryData {
    readonly itemSlots: ItemSlotsData;
    readonly width: number;
    readonly height: number;
-   readonly entityID: number;
    readonly inventoryName: string;
 }
 
@@ -38,7 +37,7 @@ export interface PlayerInventoryData {
    readonly armourSlot: InventoryData;
 }
 
-export type ServerTileData = {
+export interface ServerTileData {
    readonly x: number;
    readonly y: number;
    readonly type: TileType;
@@ -166,10 +165,43 @@ export type GameDataPacket = {
    readonly tribeData: TribeData | null;
 }
 
+export enum WaterRockSize {
+   small,
+   large
+}
+
+export interface WaterRockData {
+   readonly position: [number, number];
+   readonly rotation: number;
+   readonly size: WaterRockSize;
+   readonly opacity: number;
+}
+
+export enum RiverSteppingStoneSize {
+   small,
+   medium,
+   large
+}
+
+export const RIVER_STEPPING_STONE_SIZES: Record<RiverSteppingStoneSize, number> = {
+   [RiverSteppingStoneSize.small]: 32,
+   [RiverSteppingStoneSize.medium]: 48,
+   [RiverSteppingStoneSize.large]: 56
+};
+
+export interface RiverSteppingStoneData {
+   readonly position: [number, number];
+   readonly rotation: number;
+   readonly size: RiverSteppingStoneSize;
+}
+
 /** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
    readonly tiles: Array<Array<ServerTileData>>;
+   readonly waterRocks: ReadonlyArray<WaterRockData>;
+   readonly riverSteppingStones: ReadonlyArray<RiverSteppingStoneData>;
+   readonly riverFlowDirections: Record<number, Record<number, number>>;
 }
 
 export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];

@@ -138,6 +138,13 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          campfire: 1,
          rock: 20
       }
+   },
+   {
+      product: "wooden_bow",
+      yield: 1,
+      ingredients: {
+         wood: 20
+      }
    }
 ];
 

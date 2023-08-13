@@ -35,7 +35,8 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    },
    water: {
       isLiquid: true,
-      friction: 0.65
+      friction: 0.65,
+      moveSpeedMultiplier: 0.6
    },
    sludge: {
       isLiquid: false,

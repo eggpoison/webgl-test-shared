@@ -24,8 +24,13 @@ export enum ParticleType {
    emberOrange,
    footprint,
    poisonDroplet,
-   slimePuddle
+   slimePuddle,
+   waterSplash,
+   waterDroplet,
+   snow
 }
+
+export type ParticleTint = [r: number, g: number, b: number];
 
 export interface ParticleData {
    readonly id: number;
@@ -37,4 +42,6 @@ export interface ParticleData {
    readonly opacity: number;
    /** How much the particle's size is multiplied. 1 = normal, 2 = double, etc. */
    readonly scale: number;
+   /** Multiplies the particle's colour */
+   readonly tint: ParticleTint;
 }

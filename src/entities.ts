@@ -22,7 +22,8 @@ export type EntityType = "cow"
    | "tribe_hut"
    | "barrel"
    | "campfire"
-   | "furnace";
+   | "furnace"
+   | "snowball";
 export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 
 type BaseEntityInfo = {
@@ -100,6 +101,16 @@ export interface TribeTotemBanner {
    readonly direction: number;
 }
 
+export enum SnowballSize {
+   small,
+   large
+}
+
+export const SNOWBALL_SIZES: Record<SnowballSize, number> = {
+   [SnowballSize.small]: 44,
+   [SnowballSize.large]: 60
+};
+
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
@@ -120,4 +131,5 @@ export interface EntityInfoClientArgs {
    barrel: (tribe: number | null, inventory: InventoryData) => void;
    campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
    furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
+   snowball: (size: SnowballSize) => void;
 };

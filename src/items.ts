@@ -26,7 +26,8 @@ export const ITEM_TYPE_LITERALS = [
    "barrel",
    "frost_armour",
    "campfire",
-   "furnace"
+   "furnace",
+   "wooden_bow"
 ] as const;
 
 export type ItemType = typeof ITEM_TYPE_LITERALS[number];
@@ -44,7 +45,7 @@ export interface FoodItemInfo extends StackableItemInfo {
    readonly eatTime: number;
 }
 
-export type ToolType = "weapon" | "axe" | "pickaxe";
+export type ToolType = "sword" | "bow" | "axe" | "pickaxe";
 
 export interface ToolItemInfo extends BaseItemInfo {
    readonly toolType: ToolType;
@@ -54,8 +55,15 @@ export interface ToolItemInfo extends BaseItemInfo {
    readonly attackCooldown: number;
 }
 
-export interface WeaponItemInfo extends ToolItemInfo {
-   readonly toolType: "weapon";
+export interface SwordItemInfo extends ToolItemInfo {
+   readonly toolType: "sword";
+}
+
+export interface BowItemInfo extends ToolItemInfo {
+   readonly toolType: "bow";
+   readonly projectileDamage: number;
+   readonly projectileKnockback: number;
+   readonly projectileAttackCooldown: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
@@ -84,7 +92,8 @@ export interface ArmourItemInfo extends BaseItemInfo {
 export interface ItemInfoRecord {
    material: MaterialItemInfo;
    food: FoodItemInfo;
-   weapon: WeaponItemInfo;
+   sword: SwordItemInfo;
+   bow: BowItemInfo;
    axe: AxeItemInfo;
    pickaxe: PickaxeItemInfo
    placeable: PlaceableItemInfo;
@@ -95,14 +104,14 @@ export interface ItemInfoRecord {
 export const ITEM_TYPE_RECORD = {
    wood: "material",
    workbench: "placeable",
-   wooden_sword: "weapon",
+   wooden_sword: "sword",
    wooden_axe: "axe",
    wooden_pickaxe: "pickaxe",
    berry: "food",
    raw_beef: "food",
    cooked_beef: "food",
    rock: "material",
-   stone_sword: "weapon",
+   stone_sword: "sword",
    stone_axe: "axe",
    stone_pickaxe: "pickaxe",
    leather: "material",
@@ -112,13 +121,14 @@ export const ITEM_TYPE_RECORD = {
    frostcicle: "material",
    slimeball: "material",
    eyeball: "material",
-   flesh_sword: "weapon",
+   flesh_sword: "sword",
    tribe_totem: "placeable",
    tribe_hut: "placeable",
    barrel: "placeable",
    frost_armour: "armour",
    campfire: "placeable",
-   furnace: "placeable"
+   furnace: "placeable",
+   wooden_bow: "bow"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -132,7 +142,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: "workbench"
    },
    wooden_sword: {
-      toolType: "weapon",
+      toolType: "sword",
       damage: 3,
       knockback: 150,
       attackCooldown: 0.3
@@ -168,7 +178,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    stone_sword: {
-      toolType: "weapon",
+      toolType: "sword",
       damage: 5,
       knockback: 150,
       attackCooldown: 0.3
@@ -208,7 +218,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    flesh_sword: {
-      toolType: "weapon",
+      toolType: "sword",
       damage: 2,
       knockback: 150,
       attackCooldown: 0.3
@@ -235,5 +245,14 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    furnace: {
       stackSize: 99,
       entityType: "furnace"
+   },
+   wooden_bow: {
+      toolType: "bow",
+      damage: 1,
+      knockback: 50,
+      attackCooldown: 0.3,
+      projectileDamage: 3,
+      projectileKnockback: 150,
+      projectileAttackCooldown: 1
    }
 };
