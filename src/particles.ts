@@ -27,7 +27,8 @@ export enum ParticleType {
    slimePuddle,
    waterSplash,
    waterDroplet,
-   snow
+   snow,
+   wind
 }
 
 export type ParticleTint = [r: number, g: number, b: number];

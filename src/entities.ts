@@ -111,10 +111,31 @@ export const SNOWBALL_SIZES: Record<SnowballSize, number> = {
    [SnowballSize.large]: 60
 };
 
+export enum PlayerCauseOfDeath {
+   yeti = 0,
+   zombie = 1,
+   berry_bush = 2,
+   poison = 3,
+   fire = 4,
+   tribe_member = 5,
+   arrow = 6,
+   ice_spikes = 7,
+   ice_shards = 8,
+   cactus = 9,
+   snowball = 10,
+   slime = 11,
+   god = 12
+}
+
+export interface DeathInfo {
+   readonly username: string;
+   readonly causeOfDeath: PlayerCauseOfDeath;
+}
+
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies) => void;
    zombie: (zombieType: number) => void;
-   tombstone: (tombstoneType: number) => void;
+   tombstone: (tombstoneType: number, deathInfo: DeathInfo | null) => void;
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
    boulder: (boulderType: number) => void;

@@ -64,6 +64,7 @@ export interface BowItemInfo extends ToolItemInfo {
    readonly projectileDamage: number;
    readonly projectileKnockback: number;
    readonly projectileAttackCooldown: number;
+   readonly projectileSpeed: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
@@ -220,7 +221,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    flesh_sword: {
       toolType: "sword",
       damage: 2,
-      knockback: 150,
+      knockback: 0,
       attackCooldown: 0.3
    },
    tribe_totem: {
@@ -253,6 +254,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       attackCooldown: 0.3,
       projectileDamage: 3,
       projectileKnockback: 150,
-      projectileAttackCooldown: 1
+      projectileAttackCooldown: 1,
+      projectileSpeed: 750
    }
 };

@@ -56,53 +56,18 @@ export type ServerEntitySpecialData = {
    readonly mobAIType: string;
 }
 
-export type HitboxType = "circular" | "rectangular";
-
-interface BaseHitboxData<T extends HitboxType> {
-   readonly type: T;
+export interface BaseHitboxData {
    readonly offset?: [number, number];
 }
 
-export interface CircularHitboxData extends BaseHitboxData<"circular"> {
-   readonly type: "circular";
+export interface CircularHitboxData extends BaseHitboxData {
    readonly radius: number;
 }
 
-export interface RectangularHitboxData extends BaseHitboxData<"rectangular"> {
-   readonly type: "rectangular";
+export interface RectangularHitboxData extends BaseHitboxData {
    readonly width: number;
    readonly height: number;
 }
-
-interface HitboxDataTypesRecord {
-   circular: () => CircularHitboxData,
-   rectangular: () => RectangularHitboxData
-}
-
-export type HitboxData<T extends HitboxType> = ReturnType<HitboxDataTypesRecord[T]>;
-
-export interface BaseHitboxInfo<T extends HitboxType> {
-   readonly type: T;
-   readonly offset?: Point;
-}
-
-export interface CircularHitboxInfo extends BaseHitboxInfo<"circular"> {
-   readonly type: "circular";
-   readonly radius: number;
-}
-
-export interface RectangularHitboxInfo extends BaseHitboxInfo<"rectangular"> {
-   readonly type: "rectangular";
-   readonly width: number;
-   readonly height: number;
-}
-
-interface HitboxInfoTypesRecord {
-   circular: () => CircularHitboxInfo,
-   rectangular: () => RectangularHitboxInfo
-}
-
-export type HitboxInfo<T extends HitboxType> = ReturnType<HitboxInfoTypesRecord[T]>;
 
 export interface GameObjectData {
    readonly id: number;
@@ -111,8 +76,9 @@ export interface GameObjectData {
    readonly acceleration: [number, number] | null; // Vector | null
    readonly terminalVelocity: number;
    readonly rotation: number;
+   readonly mass: number;
    readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
-   readonly hitboxes: ReadonlyArray<HitboxData<HitboxType>>;
+   readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
 }
 
 export interface EntityData<T extends EntityType> extends GameObjectData {

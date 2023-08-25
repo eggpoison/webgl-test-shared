@@ -166,6 +166,10 @@ export const COMMANDS: Commands = [
       ],
       configurations: [
          {
+            parameterConfigurations: [1],
+            permissions: CommandPermissions.dev
+         },
+         {
             parameterConfigurations: [1, 2],
             permissions: CommandPermissions.dev
          }
