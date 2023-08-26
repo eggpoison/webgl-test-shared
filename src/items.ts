@@ -168,7 +168,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    raw_beef: {
       stackSize: 99,
       healAmount: 1,
-      eatTime: 2
+      eatTime: 1.5
    },
    cooked_beef: {
       stackSize: 99,
