@@ -14,136 +14,136 @@ export interface CraftingRecipe {
 
 export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    {
-      product: "workbench",
+      product: ItemType.workbench,
       yield: 1,
       ingredients: {
-         wood: 15
+         [ItemType.wood]: 15
       }
    },
    {
-      product: "wooden_sword",
+      product: ItemType.wooden_sword,
       yield: 1,
       ingredients: {
-         wood: 15
+         [ItemType.wood]: 15
       },
       craftingStation: "workbench"
    },
    {
-      product: "wooden_pickaxe",
+      product: ItemType.wooden_pickaxe,
       yield: 1,
       ingredients: {
-         wood: 10
+         [ItemType.wood]: 10
       },
       craftingStation: "workbench"
    },
    {
-      product: "wooden_axe",
+      product: ItemType.wooden_axe,
       yield: 1,
       ingredients: {
-         wood: 10
+         [ItemType.wood]: 10
       },
       craftingStation: "workbench"
    },
    {
-      product: "stone_sword",
+      product: ItemType.stone_sword,
       yield: 1,
       ingredients: {
-         wood: 5,
-         rock: 15
+         [ItemType.wood]: 5,
+         [ItemType.rock]: 15
       },
       craftingStation: "workbench"
    },
    {
-      product: "stone_pickaxe",
+      product: ItemType.stone_pickaxe,
       yield: 1,
       ingredients: {
-         wood: 5,
-         rock: 10
+         [ItemType.wood]: 5,
+         [ItemType.rock]: 10
       },
       craftingStation: "workbench"
    },
    {
-      product: "stone_axe",
+      product: ItemType.stone_axe,
       yield: 1,
       ingredients: {
-         wood: 5,
-         rock: 10
+         [ItemType.wood]: 5,
+         [ItemType.rock]: 10
       },
       craftingStation: "workbench"
    },
    {
-      product: "leather_backpack",
+      product: ItemType.leather_backpack,
       yield: 1,
       ingredients: {
-         leather: 5
+         [ItemType.leather]: 5
       },
       craftingStation: "workbench"
    },
    {
-      product: "flesh_sword",
+      product: ItemType.flesh_sword,
       yield: 1,
       ingredients: {
-         raw_beef: 10,
-         slimeball: 10,
-         eyeball: 1
+         [ItemType.raw_beef]: 10,
+         [ItemType.slimeball]: 10,
+         [ItemType.eyeball]: 1
       },
       craftingStation: "slime"
    },
    {
-      product: "tribe_totem",
+      product: ItemType.tribe_totem,
       yield: 1,
       ingredients: {
-         wood: 40,
-         rock: 40
+         [ItemType.wood]: 40,
+         [ItemType.rock]: 40
       },
       craftingStation: "workbench"
    },
    {
-      product: "tribe_hut",
+      product: ItemType.tribe_hut,
       yield: 1,
       ingredients: {
-         wood: 20,
-         leather: 15
+         [ItemType.wood]: 20,
+         [ItemType.leather]: 15
       },
       craftingStation: "workbench"
    },
    {
-      product: "barrel",
+      product: ItemType.barrel,
       yield: 1,
       ingredients: {
-         wood: 20,
+         [ItemType.wood]: 20,
       },
       craftingStation: "workbench"
    },
    {
-      product: "frost_armour",
+      product: ItemType.frost_armour,
       yield: 1,
       ingredients: {
-         frostcicle: 20,
-         yeti_hide: 10
+         [ItemType.frostcicle]: 20,
+         [ItemType.yeti_hide]: 10
       },
       craftingStation: "workbench"
    },
    {
-      product: "campfire",
+      product: ItemType.campfire,
       yield: 1,
       ingredients: {
-         wood: 15
+         [ItemType.wood]: 15
       }
    },
    {
-      product: "furnace",
+      product: ItemType.furnace,
       yield: 1,
       ingredients: {
-         campfire: 1,
-         rock: 20
+         [ItemType.campfire]: 1,
+         [ItemType.rock]: 20
       }
    },
    {
-      product: "wooden_bow",
+      product: ItemType.wooden_bow,
       yield: 1,
       ingredients: {
-         wood: 20
+         [ItemType.wood]: 20
       }
    }
 ];
@@ -164,7 +164,7 @@ export function canCraftRecipe(itemSlotRecords: ReadonlyArray<ItemSlots>, recipe
       }
    }
    
-   for (const [ingredientType, ingredientCount] of Object.entries(recipe.ingredients) as ReadonlyArray<[ItemType, number]>) {
+   for (const [ingredientType, ingredientCount] of Object.entries(recipe.ingredients) as unknown as ReadonlyArray<[ItemType, number]>) {
       // If there is none of the ingredient available, the recipe cannot be crafted
       if (!availableResources.hasOwnProperty(ingredientType)) {
          return false;

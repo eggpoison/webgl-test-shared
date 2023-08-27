@@ -1,36 +1,34 @@
 import { EntityType } from "./entities";
 
-export const ITEM_TYPE_LITERALS = [
-   "wood",
-   "workbench",
-   "wooden_sword",
-   "wooden_axe",
-   "wooden_pickaxe",
-   "berry",
-   "raw_beef",
-   "cooked_beef",
-   "rock",
-   "stone_sword",
-   "stone_axe",
-   "stone_pickaxe",
-   "leather",
-   "leather_backpack",
-   "cactus_spine",
-   "yeti_hide",
-   "frostcicle",
-   "slimeball",
-   "eyeball",
-   "flesh_sword",
-   "tribe_totem",
-   "tribe_hut",
-   "barrel",
-   "frost_armour",
-   "campfire",
-   "furnace",
-   "wooden_bow"
-] as const;
-
-export type ItemType = typeof ITEM_TYPE_LITERALS[number];
+export enum ItemType {
+   wood,
+   workbench,
+   wooden_sword,
+   wooden_axe,
+   wooden_pickaxe,
+   berry,
+   raw_beef,
+   cooked_beef,
+   rock,
+   stone_sword,
+   stone_axe,
+   stone_pickaxe,
+   leather,
+   leather_backpack,
+   cactus_spine,
+   yeti_hide,
+   frostcicle,
+   slimeball,
+   eyeball,
+   flesh_sword,
+   tribe_totem,
+   tribe_hut,
+   barrel,
+   frost_armour,
+   campfire,
+   furnace,
+   wooden_bow,
+}
 
 export interface BaseItemInfo {}
 
@@ -103,151 +101,151 @@ export interface ItemInfoRecord {
 }
 
 export const ITEM_TYPE_RECORD = {
-   wood: "material",
-   workbench: "placeable",
-   wooden_sword: "sword",
-   wooden_axe: "axe",
-   wooden_pickaxe: "pickaxe",
-   berry: "food",
-   raw_beef: "food",
-   cooked_beef: "food",
-   rock: "material",
-   stone_sword: "sword",
-   stone_axe: "axe",
-   stone_pickaxe: "pickaxe",
-   leather: "material",
-   leather_backpack: "backpack",
-   cactus_spine: "material",
-   yeti_hide: "material",
-   frostcicle: "material",
-   slimeball: "material",
-   eyeball: "material",
-   flesh_sword: "sword",
-   tribe_totem: "placeable",
-   tribe_hut: "placeable",
-   barrel: "placeable",
-   frost_armour: "armour",
-   campfire: "placeable",
-   furnace: "placeable",
-   wooden_bow: "bow"
+   [ItemType.wood]: "material",
+   [ItemType.workbench]: "placeable",
+   [ItemType.wooden_sword]: "sword",
+   [ItemType.wooden_axe]: "axe",
+   [ItemType.wooden_pickaxe]: "pickaxe",
+   [ItemType.berry]: "food",
+   [ItemType.raw_beef]: "food",
+   [ItemType.cooked_beef]: "food",
+   [ItemType.rock]: "material",
+   [ItemType.stone_sword]: "sword",
+   [ItemType.stone_axe]: "axe",
+   [ItemType.stone_pickaxe]: "pickaxe",
+   [ItemType.leather]: "material",
+   [ItemType.leather_backpack]: "backpack",
+   [ItemType.cactus_spine]: "material",
+   [ItemType.yeti_hide]: "material",
+   [ItemType.frostcicle]: "material",
+   [ItemType.slimeball]: "material",
+   [ItemType.eyeball]: "material",
+   [ItemType.flesh_sword]: "sword",
+   [ItemType.tribe_totem]: "placeable",
+   [ItemType.tribe_hut]: "placeable",
+   [ItemType.barrel]: "placeable",
+   [ItemType.frost_armour]: "armour",
+   [ItemType.campfire]: "placeable",
+   [ItemType.furnace]: "placeable",
+   [ItemType.wooden_bow]: "bow"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
 
 export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
-   wood: {
+   [ItemType.wood]: {
       stackSize: 99
    },
-   workbench: {
+   [ItemType.workbench]: {
       stackSize: 99,
       entityType: "workbench"
    },
-   wooden_sword: {
+   [ItemType.wooden_sword]: {
       toolType: "sword",
       damage: 3,
       knockback: 150,
       attackCooldown: 0.3
    },
-   wooden_axe: {
+   [ItemType.wooden_axe]: {
       toolType: "axe",
       damage: 3,
       knockback: 100,
       attackCooldown: 0.5
    },
-   wooden_pickaxe: {
+   [ItemType.wooden_pickaxe]: {
       toolType: "pickaxe",
       damage: 5,
       knockback: 100,
       attackCooldown: 0.5
    },
-   berry: {
+   [ItemType.berry]: {
       stackSize: 99,
       healAmount: 1,
       eatTime: 0.75
    },
-   raw_beef: {
+   [ItemType.raw_beef]: {
       stackSize: 99,
       healAmount: 1,
       eatTime: 1.5
    },
-   cooked_beef: {
+   [ItemType.cooked_beef]: {
       stackSize: 99,
       healAmount: 5,
       eatTime: 1.5
    },
-   rock: {
+   [ItemType.rock]: {
       stackSize: 99
    },
-   stone_sword: {
+   [ItemType.stone_sword]: {
       toolType: "sword",
       damage: 5,
       knockback: 150,
       attackCooldown: 0.3
    },
-   stone_axe: {
+   [ItemType.stone_axe]: {
       toolType: "axe",
       damage: 5,
       knockback: 100,
       attackCooldown: 0.5
    },
-   stone_pickaxe: {
+   [ItemType.stone_pickaxe]: {
       toolType: "pickaxe",
       damage: 8,
       knockback: 100,
       attackCooldown: 0.5
    },
-   leather: {
+   [ItemType.leather]: {
       stackSize: 99
    },
-   leather_backpack: {
+   [ItemType.leather_backpack]: {
       inventoryWidth: 2,
       inventoryHeight: 2
    },
-   cactus_spine: {
+   [ItemType.cactus_spine]: {
       stackSize: 99
    },
-   yeti_hide: {
+   [ItemType.yeti_hide]: {
       stackSize: 99
    },
-   frostcicle: {
+   [ItemType.frostcicle]: {
       stackSize: 99
    },
-   slimeball: {
+   [ItemType.slimeball]: {
       stackSize: 99
    },
-   eyeball: {
+   [ItemType.eyeball]: {
       stackSize: 99
    },
-   flesh_sword: {
+   [ItemType.flesh_sword]: {
       toolType: "sword",
       damage: 2,
       knockback: 0,
       attackCooldown: 0.3
    },
-   tribe_totem: {
+   [ItemType.tribe_totem]: {
       stackSize: 99,
       entityType: "tribe_totem"
    },
-   tribe_hut: {
+   [ItemType.tribe_hut]: {
       stackSize: 99,
       entityType: "tribe_hut"
    },
-   barrel: {
+   [ItemType.barrel]: {
       stackSize: 99,
       entityType: "barrel"
    },
-   frost_armour: {
+   [ItemType.frost_armour]: {
       defence: 0.25
    },
-   campfire: {
+   [ItemType.campfire]: {
       stackSize: 99,
       entityType: "campfire"
    },
-   furnace: {
+   [ItemType.furnace]: {
       stackSize: 99,
       entityType: "furnace"
    },
-   wooden_bow: {
+   [ItemType.wooden_bow]: {
       toolType: "bow",
       damage: 1,
       knockback: 50,
