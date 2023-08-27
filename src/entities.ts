@@ -145,8 +145,8 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, inventory: InventoryData) => void;
-   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, username: string) => void;
+   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, swingProgress: number, inventory: InventoryData) => void;
+   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, swingProgress: number, username: string) => void;
    tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;

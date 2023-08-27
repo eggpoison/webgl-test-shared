@@ -180,6 +180,7 @@ export type PlayerDataPacket = {
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly visibleChunkBounds: VisibleChunkBounds;
+   readonly selectedItemSlot: number;
 }
 
 /** 
