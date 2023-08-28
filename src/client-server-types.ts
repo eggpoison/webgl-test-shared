@@ -181,6 +181,7 @@ export type PlayerDataPacket = {
    readonly terminalVelocity: number;
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
+   readonly isEating: boolean;
 }
 
 /** 

@@ -31,6 +31,8 @@ interface SettingsType {
    readonly ITEM_PLACE_DISTANCE: number;
    /** Determines the amount of friction that entities experience. */
    readonly FRICTION_CONSTANT: number;
+   /** Minimum number of seconds between attacks */
+   readonly DEFAULT_ATTACK_COOLDOWN: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -49,7 +51,8 @@ export const SETTINGS: SettingsType = {
    TIME_PASS_RATE: 300,
    INITIAL_PLAYER_HOTBAR_SIZE: 7,
    ITEM_PLACE_DISTANCE: 90,
-   FRICTION_CONSTANT: 50
+   FRICTION_CONSTANT: 50,
+   DEFAULT_ATTACK_COOLDOWN: 0.2
 };
 
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;

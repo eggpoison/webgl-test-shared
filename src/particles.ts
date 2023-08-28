@@ -1,3 +1,5 @@
+import { ItemType } from "./items";
+
 export enum ParticleType {
    bloodPoolSmall,
    bloodPoolMedium,
@@ -46,4 +48,6 @@ export interface ParticleData {
    readonly scale: number;
    /** Multiplies the particle's colour */
    readonly tint: ParticleTint;
+   // TODO: Rework
+   readonly foodItemType: ItemType | -1;
 }
