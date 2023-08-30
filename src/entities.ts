@@ -145,8 +145,9 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
    slimewisp: () => void;
-   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, lastActionTicks: number, inventory: InventoryData) => void;
-   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, lastActionTicks: number, username: string) => void;
+   // TODO: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
+   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, lastAttackTicks: number, lastEatTicks: number, inventory: InventoryData) => void;
+   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, lastAttackTicks: number, lastEatTicks: number, username: string) => void;
    tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;

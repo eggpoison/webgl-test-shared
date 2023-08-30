@@ -73,11 +73,8 @@ export interface GameObjectData {
    readonly id: number;
    readonly position: [number, number]; // Point
    readonly velocity: [number, number] | null; // Vector | null
-   readonly acceleration: [number, number] | null; // Vector | null
-   readonly terminalVelocity: number;
    readonly rotation: number;
    readonly mass: number;
-   readonly chunkCoordinates: ReadonlyArray<[number, number]>; // Array of chunk coordinates
    readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
 }
 
@@ -111,7 +108,7 @@ export interface TribeData {
 }
 
 /** Data about the game state sent to the client each tick */
-export type GameDataPacket = {
+export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly projectileDataArray: ReadonlyArray<ProjectileData>;
@@ -204,8 +201,6 @@ export interface AttackPacket {
    readonly itemSlot: number;
    /** The direction that the attack is being done */
    readonly attackDirection: number;
-   /** The id's of all entities in range of the attack */
-   readonly targetEntities: ReadonlyArray<number>;
 }
 
 export interface RespawnDataPacket {

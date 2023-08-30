@@ -78,6 +78,7 @@ export class Vector {
 
    public convertToPoint(): Point {
       // Note: direction is measured clockwise from the positive y axis, so we flip the purposes of sin and cos here
+      // (E.g. at theta = 0, we want x = 0, so we use sin)
       const x = Math.sin(this.direction) * this.magnitude;
       const y = Math.cos(this.direction) * this.magnitude;
       return new Point(x, y);
@@ -141,10 +142,8 @@ export function flipAngle(angle: number): number {
 }
 
 export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
-   // const _rotation = -rotation + Math.PI / 2;
-   const _rotation = rotation;
-   const x = Math.cos(_rotation) * (point.x - pivotPoint.x) + Math.sin(_rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
-   const y = -Math.sin(_rotation) * (point.x - pivotPoint.x) + Math.cos(_rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
+   const x = Math.cos(rotation) * (point.x - pivotPoint.x) + Math.sin(rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
+   const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
    return new Point(x, y);
 }
 
