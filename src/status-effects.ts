@@ -1,11 +1,11 @@
-export type StatusEffectType = "fire" | "freezing" | "poisoned";
+export type StatusEffectType = "burning" | "freezing" | "poisoned";
 
 interface StatusEffectModifiers {
    readonly moveSpeedMultiplier: number;
 }
 
 export const STATUS_EFFECT_MODIFIERS: Record<StatusEffectType, StatusEffectModifiers> = {
-   fire: {
+   burning: {
       moveSpeedMultiplier: 1
    },
    freezing: {

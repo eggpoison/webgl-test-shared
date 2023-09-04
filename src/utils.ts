@@ -65,6 +65,12 @@ export class Point {
    public static unpackage(packagedPoint: [number, number]): Point {
       return new Point(packagedPoint[0], packagedPoint[1]);
    }
+
+   public static fromVectorForm(magnitude: number, direction: number): Point {
+      const x = magnitude * Math.sin(direction);
+      const y = magnitude * Math.cos(direction);
+      return new Point(x, y);
+   }
 }
 
 export class Vector {
@@ -141,6 +147,14 @@ export function flipAngle(angle: number): number {
    return (angle + Math.PI) % Math.PI;
 }
 
+export function rotateXAroundPoint(x: number, y: number, pivotX: number, pivotY: number, rotation: number): number {
+   return Math.cos(rotation) * (x - pivotX) + Math.sin(rotation) * (y - pivotY) + pivotX;
+}
+
+export function rotateYAroundPoint(x: number, y: number, pivotX: number, pivotY: number, rotation: number): number {
+   return -Math.sin(rotation) * (x - pivotX) + Math.cos(rotation) * (y - pivotY) + pivotY;
+}
+
 export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
    const x = Math.cos(rotation) * (point.x - pivotPoint.x) + Math.sin(rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
    const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
@@ -185,6 +199,16 @@ export function clampToBoardDimensions(tileCoord: number): number {
       return SETTINGS.BOARD_DIMENSIONS - 1;
    }
    return tileCoord;
+}
+
+export function clamp(num: number, min: number, max: number): number {
+   if (num < min) {
+      return min;
+   }
+   if (num > max) {
+      return max;
+   }
+   return num;
 }
 
 export function randSign(): number {

@@ -1,12 +1,11 @@
 import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entities";
 import { ItemType } from "./items";
-import { ParticleData } from "./particles";
+import { MonocolourParticleData, TexturedParticleData } from "./particles";
 import { ProjectileType } from "./projectiles";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
-import { Point } from "./utils";
 
 export interface ItemData {
    /** Unique identifier for the number */
@@ -52,12 +51,9 @@ export type ServerTileUpdateData = {
    readonly isWall: boolean;
 }
 
-export type ServerEntitySpecialData = {
-   readonly mobAIType: string;
-}
-
 export interface BaseHitboxData {
-   readonly offset?: [number, number];
+   readonly offsetX?: number;
+   readonly offsetY?: number;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
@@ -78,12 +74,18 @@ export interface GameObjectData {
    readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
 }
 
+export interface StatusEffectData {
+   readonly type: StatusEffectType;
+   readonly ticksElapsed: number;
+}
+
 export interface EntityData<T extends EntityType> extends GameObjectData {
    readonly type: T;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
-   readonly secondsSinceLastHit: number | null;
-   readonly statusEffects: Array<StatusEffectType>;
-   readonly special?: ServerEntitySpecialData;
+   readonly statusEffects: Array<StatusEffectData>;
+   /** Any hits the entity took server-side */
+   readonly hitsTaken: ReadonlyArray<HitData>;
+   readonly mobAIType?: string;
 }
 
 export interface DroppedItemData extends GameObjectData {
@@ -96,7 +98,7 @@ export interface ProjectileData extends GameObjectData {
 
 export interface HitData {
    readonly knockback: number;
-   readonly hitDirection: number | null;
+   readonly angleFromAttacker: number | null;
 }
 
 export interface TribeData {
@@ -112,20 +114,18 @@ export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly projectileDataArray: ReadonlyArray<ProjectileData>;
-   readonly particles: ReadonlyArray<ParticleData>;
+   readonly particles: ReadonlyArray<MonocolourParticleData | TexturedParticleData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
    /** Current time of the server */
    readonly serverTime: number;
-   /** Any hits the player took on the server-side */
-   readonly hitsTaken: ReadonlyArray<HitData>;
    readonly playerHealth: number;
-   readonly statusEffects: Array<StatusEffectType>;
    /** Extra debug information about a game object being tracked */
    readonly gameObjectDebugData?: GameObjectDebugData;
    readonly tribeData: TribeData | null;
+   readonly killedEntityIDs: ReadonlyArray<number>;
 }
 
 export enum WaterRockSize {

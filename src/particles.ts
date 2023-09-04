@@ -1,5 +1,3 @@
-import { ItemType } from "./items";
-
 export enum ParticleType {
    bloodPoolSmall,
    bloodPoolMedium,
@@ -21,7 +19,6 @@ export enum ParticleType {
    cactusFlower4_2,
    cactusFlower5,
    smokeBlack,
-   smokeWhite,
    emberRed,
    emberOrange,
    footprint,
@@ -29,14 +26,13 @@ export enum ParticleType {
    slimePuddle,
    waterSplash,
    waterDroplet,
-   snow,
-   wind,
-   white1x1
+   snow
 }
 
 export type ParticleTint = [r: number, g: number, b: number];
+export type ParticleColour = [r: number, g: number, b: number];
 
-export interface ParticleData {
+export interface BaseParticleData {
    readonly id: number;
    readonly type: ParticleType;
    readonly position: [number, number];
@@ -46,8 +42,13 @@ export interface ParticleData {
    readonly opacity: number;
    /** How much the particle's size is multiplied. 1 = normal, 2 = double, etc. */
    readonly scale: number;
+   readonly age: number;
+   readonly lifetime: number;
+}
+
+export interface TexturedParticleData extends BaseParticleData {
    /** Multiplies the particle's colour */
    readonly tint: ParticleTint;
-   // TODO: Rework
-   readonly foodItemType: ItemType | -1;
 }
+
+export interface MonocolourParticleData extends BaseParticleData {}
