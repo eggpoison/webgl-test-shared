@@ -61,7 +61,7 @@ export interface BowItemInfo extends ToolItemInfo {
    readonly toolType: "bow";
    readonly projectileDamage: number;
    readonly projectileKnockback: number;
-   readonly projectileAttackCooldown: number;
+   readonly shotCooldown: number;
    readonly projectileSpeed: number;
 }
 
@@ -252,7 +252,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       attackCooldown: 0.3,
       projectileDamage: 3,
       projectileKnockback: 150,
-      projectileAttackCooldown: 1,
+      shotCooldown: 1,
       projectileSpeed: 750
    }
 };

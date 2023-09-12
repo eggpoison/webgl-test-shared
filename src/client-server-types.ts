@@ -1,7 +1,5 @@
-import { CraftingRecipe } from "./crafting-recipes";
 import { EntityInfoClientArgs, EntityType } from "./entities";
 import { ItemType } from "./items";
-import { MonocolourParticleData, TexturedParticleData } from "./particles";
 import { ProjectileType } from "./projectiles";
 import { StatusEffectType } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
@@ -114,7 +112,6 @@ export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly projectileDataArray: ReadonlyArray<ProjectileData>;
-   readonly particles: ReadonlyArray<MonocolourParticleData | TexturedParticleData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
@@ -259,10 +256,11 @@ export interface ClientToServerEvents {
    player_data_packet: (playerDataPacket: PlayerDataPacket) => void;
    chat_message: (message: string) => void;
    player_movement: (position: [number, number], movementHash: number) => void;
-   crafting_packet: (craftingRecipe: CraftingRecipe) => void;
-   item_pickup_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
+   crafting_packet: (recipeIndex: number) => void;
+   item_pickup: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
    // Tells the server that the client wants to release the held item at the specified place in an inventory
-   item_release_packet: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
+   item_release: (entityID: number, inventoryName: string, itemSlot: number, amount: number) => void;
+   // Effectively the item_pickup and item_release events combined
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
    throw_held_item_packet: (throwDirection: number) => void;

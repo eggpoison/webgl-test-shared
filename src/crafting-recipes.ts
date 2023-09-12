@@ -164,7 +164,7 @@ export function canCraftRecipe(itemSlotRecords: ReadonlyArray<ItemSlots>, recipe
       }
    }
    
-   for (const [ingredientType, ingredientCount] of Object.entries(recipe.ingredients) as unknown as ReadonlyArray<[ItemType, number]>) {
+   for (const [ingredientType, ingredientCount] of Object.entries(recipe.ingredients).map(entry => [Number(entry[0]), entry[1]]) as ReadonlyArray<[ItemType, number]>) {
       // If there is none of the ingredient available, the recipe cannot be crafted
       if (!availableResources.hasOwnProperty(ingredientType)) {
          return false;

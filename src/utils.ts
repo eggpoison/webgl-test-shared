@@ -65,7 +65,6 @@ export class Point {
    public static unpackage(packagedPoint: [number, number]): Point {
       return new Point(packagedPoint[0], packagedPoint[1]);
    }
-
    public static fromVectorForm(magnitude: number, direction: number): Point {
       const x = magnitude * Math.sin(direction);
       const y = magnitude * Math.cos(direction);
