@@ -23,8 +23,10 @@ export type EntityType = "cow"
    | "barrel"
    | "campfire"
    | "furnace"
-   | "snowball";
-export const RESOURCE_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
+   | "snowball"
+   | "krumblid";
+export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
+export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid"];
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
@@ -133,9 +135,9 @@ export interface DeathInfo {
 }
 
 export interface EntityInfoClientArgs {
-   cow: (species: CowSpecies) => void;
+   cow: (species: CowSpecies, grazeProgress: number) => void;
    zombie: (zombieType: number) => void;
-   tombstone: (tombstoneType: number, deathInfo: DeathInfo | null) => void;
+   tombstone: (tombstoneType: number, zombieSpawnProgress: number, zombieSpawnX: number, zombieSpawnY: number, deathInfo: DeathInfo | null) => void;
    tree: (treeSize: TreeSize) => void;
    workbench: () => void;
    boulder: (boulderType: number) => void;
@@ -151,7 +153,8 @@ export interface EntityInfoClientArgs {
    tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribe: number) => void;
    barrel: (tribe: number | null, inventory: InventoryData) => void;
-   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
-   furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData) => void;
+   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
+   furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
    snowball: (size: SnowballSize) => void;
+   krumblid: () => void;
 };

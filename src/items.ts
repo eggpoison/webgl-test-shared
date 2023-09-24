@@ -63,6 +63,8 @@ export interface BowItemInfo extends ToolItemInfo {
    readonly projectileKnockback: number;
    readonly shotCooldown: number;
    readonly projectileSpeed: number;
+   /** The units of speed that the arrow's velocity gets decreased by each second */
+   readonly airResistance: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
@@ -253,6 +255,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       projectileDamage: 3,
       projectileKnockback: 150,
       shotCooldown: 1,
-      projectileSpeed: 750
+      projectileSpeed: 1100,
+      airResistance: 400
    }
 };

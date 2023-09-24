@@ -10,3 +10,4 @@ export * from "./commands";
 export * from "./status-effects";
 export * from "./projectiles";
 export * from "./tribes";
+export * from "./cooking-info";

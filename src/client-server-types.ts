@@ -70,11 +70,22 @@ export interface GameObjectData {
    readonly rotation: number;
    readonly mass: number;
    readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
+   readonly ageTicks: number;
 }
 
 export interface StatusEffectData {
    readonly type: StatusEffectType;
    readonly ticksElapsed: number;
+}
+
+export enum HitFlags {
+   HIT_BY_FLESH_SWORD = 1 << 0
+}
+
+export interface HitData {
+   readonly knockback: number;
+   readonly angleFromAttacker: number | null;
+   readonly flags: number;
 }
 
 export interface EntityData<T extends EntityType> extends GameObjectData {
@@ -92,11 +103,6 @@ export interface DroppedItemData extends GameObjectData {
 
 export interface ProjectileData extends GameObjectData {
    readonly type: ProjectileType;
-}
-
-export interface HitData {
-   readonly knockback: number;
-   readonly angleFromAttacker: number | null;
 }
 
 export interface TribeData {
