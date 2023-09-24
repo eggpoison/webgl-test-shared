@@ -145,6 +145,15 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       ingredients: {
          [ItemType.wood]: 20
       }
+   },
+   {
+      product: ItemType.meat_suit,
+      yield: 1,
+      ingredients: {
+         [ItemType.raw_beef]: 15,
+         [ItemType.cactus_spine]: 10
+      },
+      craftingStation: "workbench"
    }
 ];
 
