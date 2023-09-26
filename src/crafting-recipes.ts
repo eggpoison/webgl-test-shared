@@ -160,7 +160,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
 type Item = { type: ItemType, count: number };
 type ItemSlots = { [itemSlot: number]: Item };
 
-export function canCraftRecipe(itemSlotRecords: ReadonlyArray<ItemSlots>, recipe: CraftingRecipe, inventorySize: number): boolean {
+export function canCraftRecipe(itemSlotRecords: ReadonlyArray<ItemSlots>, recipe: CraftingRecipe): boolean {
    // Tally the total resources available for crafting
    const availableResources: Partial<Record<ItemType, number>> = {};
    for (const itemSlots of itemSlotRecords) {
