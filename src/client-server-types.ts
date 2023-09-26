@@ -78,8 +78,8 @@ export interface StatusEffectData {
    readonly ticksElapsed: number;
 }
 
-export enum HitFlags {
-   HIT_BY_FLESH_SWORD = 1 << 0
+export const HitFlags = {
+   HIT_BY_FLESH_SWORD: 1 << 0
 }
 
 export interface HitData {
@@ -94,6 +94,7 @@ export interface EntityData<T extends EntityType> extends GameObjectData {
    readonly statusEffects: Array<StatusEffectData>;
    /** Any hits the entity took server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
+   readonly amountHealed: number;
    readonly mobAIType?: string;
 }
 
