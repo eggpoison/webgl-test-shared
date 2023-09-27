@@ -281,3 +281,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    }
 };
+
+// Some typescript wizardry
+type ExcludeNonPlaceableItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "placeable" ? T : never;
+export type PlaceableItemType = keyof {
+   [T in ItemType as ExcludeNonPlaceableItemTypes<T>]: T;
+}
