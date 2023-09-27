@@ -52,6 +52,8 @@ export interface ToolItemInfo extends BaseItemInfo {
    readonly knockback: number;
    /** Cooldown between attacks */
    readonly attackCooldown: number;
+   /** Rough estimate of how powerful the item is. */
+   readonly level: number;
 }
 
 export interface SwordItemInfo extends ToolItemInfo {
@@ -85,10 +87,14 @@ export interface BackpackItemInfo extends BaseItemInfo {
    readonly inventoryWidth: number;
    /** Width of the backpack inventory in terms of item slots. */
    readonly inventoryHeight: number
+   /** Rough estimate of how powerful the item is. */
+   readonly level: number;
 }
 
 export interface ArmourItemInfo extends BaseItemInfo {
    readonly defence: number;
+   /** Rough estimate of how powerful the item is. */
+   readonly level: number;
 }
 
 export interface ItemInfoRecord {
@@ -148,19 +154,22 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       toolType: "sword",
       damage: 3,
       knockback: 150,
-      attackCooldown: 0.3
+      attackCooldown: 0.3,
+      level: 1
    },
    [ItemType.wooden_axe]: {
       toolType: "axe",
       damage: 3,
       knockback: 100,
-      attackCooldown: 0.5
+      attackCooldown: 0.5,
+      level: 1
    },
    [ItemType.wooden_pickaxe]: {
       toolType: "pickaxe",
       damage: 5,
       knockback: 100,
-      attackCooldown: 0.5
+      attackCooldown: 0.5,
+      level: 1
    },
    [ItemType.berry]: {
       stackSize: 99,
@@ -184,26 +193,30 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       toolType: "sword",
       damage: 5,
       knockback: 150,
-      attackCooldown: 0.3
+      attackCooldown: 0.3,
+      level: 2
    },
    [ItemType.stone_axe]: {
       toolType: "axe",
       damage: 5,
       knockback: 100,
-      attackCooldown: 0.5
+      attackCooldown: 0.5,
+      level: 2
    },
    [ItemType.stone_pickaxe]: {
       toolType: "pickaxe",
       damage: 8,
       knockback: 100,
-      attackCooldown: 0.5
+      attackCooldown: 0.5,
+      level: 2
    },
    [ItemType.leather]: {
       stackSize: 99
    },
    [ItemType.leather_backpack]: {
       inventoryWidth: 2,
-      inventoryHeight: 2
+      inventoryHeight: 2,
+      level: 1
    },
    [ItemType.cactus_spine]: {
       stackSize: 99
@@ -224,7 +237,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       toolType: "sword",
       damage: 2,
       knockback: 0,
-      attackCooldown: 0.3
+      attackCooldown: 0.3,
+      level: 1.5
    },
    [ItemType.tribe_totem]: {
       stackSize: 99,
@@ -239,7 +253,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: "barrel"
    },
    [ItemType.frost_armour]: {
-      defence: 0.25
+      defence: 0.25,
+      level: 2
    },
    [ItemType.campfire]: {
       stackSize: 99,
@@ -258,9 +273,11 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       projectileKnockback: 150,
       shotCooldown: 1,
       projectileSpeed: 1100,
-      airResistance: 400
+      airResistance: 400,
+      level: 2
    },
    [ItemType.meat_suit]: {
-      defence: 0
+      defence: 0,
+      level: 1
    }
 };
