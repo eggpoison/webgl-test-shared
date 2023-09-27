@@ -1,6 +1,6 @@
 import { ItemType } from "./items";
 
-export const COOKING_INGREDIENT_ITEM_TYPES = [ItemType.raw_beef] satisfies ReadonlyArray<ItemType>;
+export const COOKING_INGREDIENT_ITEM_TYPES = [ItemType.raw_beef, ItemType.meat_suit] satisfies ReadonlyArray<ItemType>;
 export type CookingIngredientItemType = typeof COOKING_INGREDIENT_ITEM_TYPES[number];
 
 export const FUEL_SOURCE_ITEM_TYPES = [ItemType.wood] satisfies ReadonlyArray<ItemType>;

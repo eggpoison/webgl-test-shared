@@ -1,4 +1,4 @@
-import { InventoryData } from "./client-server-types";
+import { InventoryData, ItemData } from "./client-server-types";
 import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
@@ -134,6 +134,7 @@ export interface DeathInfo {
    readonly causeOfDeath: PlayerCauseOfDeath;
 }
 
+// @Cleanup: Make all of these things into structures
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies, grazeProgress: number) => void;
    zombie: (zombieType: number) => void;
@@ -145,16 +146,16 @@ export interface EntityInfoClientArgs {
    cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
    yeti: (attackProgress: number) => void;
    ice_spikes: () => void;
-   slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>) => void;
+   slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number) => void;
    slimewisp: () => void;
-   // TODO: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
-   tribesman: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, inventory: InventoryData) => void;
-   player: (tribe: number | null, tribeType: TribeType, armour: ItemType | null, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, username: string) => void;
-   tribe_totem: (tribe: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
-   tribe_hut: (tribe: number) => void;
-   barrel: (tribe: number | null, inventory: InventoryData) => void;
+   // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
+   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
+   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, username: string) => void;
+   tribe_totem: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
+   tribe_hut: (tribeID: number) => void;
+   barrel: (tribeID: number | null, inventory: InventoryData) => void;
    campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
-   furnace: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
+   furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
 };
