@@ -130,6 +130,7 @@ export interface GameDataPacket {
    readonly gameObjectDebugData?: GameObjectDebugData;
    readonly tribeData: TribeData | null;
    readonly killedEntityIDs: ReadonlyArray<number>;
+   readonly hasFrostShield: boolean;
 }
 
 export enum WaterRockSize {
