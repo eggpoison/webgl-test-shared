@@ -29,7 +29,11 @@ export enum ItemType {
    furnace,
    wooden_bow,
    meat_suit,
-   deep_frost_heart
+   deep_frost_heart,
+   deep_frost_sword,
+   deep_frost_pickaxe,
+   deep_frost_axe,
+   deep_frost_armour
 }
 
 export interface BaseItemInfo {}
@@ -139,7 +143,11 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.furnace]: "placeable",
    [ItemType.wooden_bow]: "bow",
    [ItemType.meat_suit]: "armour",
-   [ItemType.deep_frost_heart]: "material"
+   [ItemType.deep_frost_heart]: "material",
+   [ItemType.deep_frost_sword]: "sword",
+   [ItemType.deep_frost_pickaxe]: "pickaxe",
+   [ItemType.deep_frost_axe]: "axe",
+   [ItemType.deep_frost_armour]: "armour"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -193,7 +201,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.stone_sword]: {
       toolType: "sword",
-      damage: 5,
+      damage: 4,
       knockback: 150,
       attackCooldown: 0.3,
       level: 2
@@ -284,6 +292,31 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.deep_frost_heart]: {
       stackSize: 99
+   },
+   [ItemType.deep_frost_sword]: {
+      toolType: "sword",
+      damage: 7,
+      knockback: 170,
+      attackCooldown: 0.3,
+      level: 3
+   },
+   [ItemType.deep_frost_pickaxe]: {
+      toolType: "pickaxe",
+      damage: 13,
+      knockback: 100,
+      attackCooldown: 0.5,
+      level: 3
+   },
+   [ItemType.deep_frost_axe]: {
+      toolType: "axe",
+      damage: 8,
+      knockback: 100,
+      attackCooldown: 0.5,
+      level: 3
+   },
+   [ItemType.deep_frost_armour]: {
+      defence: 0.4,
+      level: 3
    }
 };
 

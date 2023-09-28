@@ -13,7 +13,7 @@ interface TribeInfo {
    readonly baseTribesmanCap: number;
 }
 
-const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
+export const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    [TribeType.plainspeople]: {
       maxHealth: 20,
       biomes: ["grasslands"],
@@ -35,5 +35,3 @@ const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
       baseTribesmanCap: 100
    }
 };
-
-export default TRIBE_INFO_RECORD;
