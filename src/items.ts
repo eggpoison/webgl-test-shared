@@ -28,7 +28,8 @@ export enum ItemType {
    campfire,
    furnace,
    wooden_bow,
-   meat_suit
+   meat_suit,
+   deep_frost_heart
 }
 
 export interface BaseItemInfo {}
@@ -137,7 +138,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.campfire]: "placeable",
    [ItemType.furnace]: "placeable",
    [ItemType.wooden_bow]: "bow",
-   [ItemType.meat_suit]: "armour"
+   [ItemType.meat_suit]: "armour",
+   [ItemType.deep_frost_heart]: "material"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -279,6 +281,9 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.meat_suit]: {
       defence: 0,
       level: 1
+   },
+   [ItemType.deep_frost_heart]: {
+      stackSize: 99
    }
 };
 

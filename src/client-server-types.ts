@@ -1,4 +1,4 @@
-import { EntityInfoClientArgs, EntityType } from "./entities";
+import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
 import { ItemType } from "./items";
 import { ProjectileType } from "./projectiles";
 import { StatusEffectType } from "./status-effects";
@@ -182,7 +182,7 @@ export type PlayerDataPacket = {
    readonly terminalVelocity: number;
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
-   readonly isEating: boolean;
+   readonly action: TribeMemberAction;
 }
 
 /** 

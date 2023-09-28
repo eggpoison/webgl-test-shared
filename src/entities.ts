@@ -1,4 +1,4 @@
-import { InventoryData, ItemData } from "./client-server-types";
+import { InventoryData } from "./client-server-types";
 import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
@@ -24,9 +24,10 @@ export type EntityType = "cow"
    | "campfire"
    | "furnace"
    | "snowball"
-   | "krumblid";
+   | "krumblid"
+   | "frozen_yeti";
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
-export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid"];
+export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid", "frozen_yeti"];
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
@@ -134,7 +135,13 @@ export interface DeathInfo {
    readonly causeOfDeath: PlayerCauseOfDeath;
 }
 
-// @Cleanup: Make all of these things into structures
+export enum TribeMemberAction {
+   charge_bow,
+   eat,
+   none
+}
+
+// @Cleanup (???): Make all of these things into structures
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies, grazeProgress: number) => void;
    zombie: (zombieType: number) => void;
@@ -148,9 +155,10 @@ export interface EntityInfoClientArgs {
    ice_spikes: () => void;
    slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number) => void;
    slimewisp: () => void;
+   // @Cleanup: Maybe foodEatingType can be removed, just use activeItemType instead
    // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
-   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
-   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, foodEatingType: ItemType | -1, lastAttackTicks: number, lastEatTicks: number, username: string) => void;
+   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
+   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, username: string) => void;
    tribe_totem: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribeID: number) => void;
    barrel: (tribeID: number | null, inventory: InventoryData) => void;
@@ -158,4 +166,5 @@ export interface EntityInfoClientArgs {
    furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
+   frozen_yeti: () => void;
 };
