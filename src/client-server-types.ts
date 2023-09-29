@@ -1,4 +1,4 @@
-import { EntityInfoClientArgs, EntityType } from "./entities";
+import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
 import { ItemType } from "./items";
 import { ProjectileType } from "./projectiles";
 import { StatusEffectType } from "./status-effects";
@@ -130,6 +130,7 @@ export interface GameDataPacket {
    readonly gameObjectDebugData?: GameObjectDebugData;
    readonly tribeData: TribeData | null;
    readonly killedEntityIDs: ReadonlyArray<number>;
+   readonly hasFrostShield: boolean;
 }
 
 export enum WaterRockSize {
@@ -182,7 +183,7 @@ export type PlayerDataPacket = {
    readonly terminalVelocity: number;
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
-   readonly isEating: boolean;
+   readonly action: TribeMemberAction;
 }
 
 /** 

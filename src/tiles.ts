@@ -14,7 +14,8 @@ export type TileType =
    "ice" |
    "permafrost" |
    "magma" |
-"lava";
+   "lava" |
+   "frost";
 
 export type TileTypeInfo = {
    readonly isLiquid: boolean;
@@ -85,6 +86,10 @@ export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
    lava: {
       isLiquid: true,
       friction: 0.85
+   },
+   frost: {
+      isLiquid: false,
+      friction: 0.65
    }
 };
 

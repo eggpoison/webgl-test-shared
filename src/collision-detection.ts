@@ -1,4 +1,4 @@
-import { Point, rotatePoint, Vector } from "./utils";
+import { Point, rotatePoint, rotateXAroundPoint, rotateYAroundPoint, Vector } from "./utils";
 
 export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
 
@@ -33,30 +33,16 @@ export function circlesDoIntersect(pos1: Point, radius1: number, pos2: Point, ra
 
 /** Checks if a circle and rectangle are intersecting */
 export function circleAndRectangleDoIntersect(circlePos: Point, circleRadius: number, rectPos: Point, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
-   const x1 = rectPos.x - rectWidth / 2;
-   const x2 = rectPos.x + rectWidth / 2;
-   const y1 = rectPos.y - rectHeight / 2;
-   const y2 = rectPos.y + rectHeight / 2;
-   let tl = new Point(x1, y2);
-   let tr = new Point(x2, y2);
-   let bl = new Point(x1, y1);
-   let br = new Point(x2, y1);
-
-   // Rotate the rectangle's points to be axis aligned
-   tl = rotatePoint(tl, rectPos, -rectRotation);
-   tr = rotatePoint(tr, rectPos, -rectRotation);
-   bl = rotatePoint(bl, rectPos, -rectRotation);
-   br = rotatePoint(br, rectPos, -rectRotation);
-
    // Rotate the circle around the rectangle to "align" it
-   const alignedCirclePos = rotatePoint(circlePos, rectPos, -rectRotation);
+   const alignedCirclePosX = rotateXAroundPoint(circlePos.x, circlePos.y, rectPos.x, rectPos.y, -rectRotation);
+   const alignedCirclePosY = rotateYAroundPoint(circlePos.x, circlePos.y, rectPos.x, rectPos.y, -rectRotation);
 
    // 
    // Then do a regular rectangle check
    // 
 
-   const distanceX = Math.abs(alignedCirclePos.x - rectPos.x);
-   const distanceY = Math.abs(alignedCirclePos.y - rectPos.y);
+   const distanceX = Math.abs(alignedCirclePosX - rectPos.x);
+   const distanceY = Math.abs(alignedCirclePosY - rectPos.y);
 
    if (distanceX > (rectWidth/2 + circleRadius)) return false;
    if (distanceY > (rectHeight/2 + circleRadius)) return false;

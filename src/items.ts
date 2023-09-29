@@ -28,7 +28,12 @@ export enum ItemType {
    campfire,
    furnace,
    wooden_bow,
-   meat_suit
+   meat_suit,
+   deep_frost_heart,
+   deep_frost_sword,
+   deep_frost_pickaxe,
+   deep_frost_axe,
+   deep_frost_armour
 }
 
 export interface BaseItemInfo {}
@@ -60,14 +65,14 @@ export interface SwordItemInfo extends ToolItemInfo {
    readonly toolType: "sword";
 }
 
-export interface BowItemInfo extends ToolItemInfo {
-   readonly toolType: "bow";
+export interface BowItemInfo extends BaseItemInfo {
    readonly projectileDamage: number;
    readonly projectileKnockback: number;
    readonly shotCooldown: number;
    readonly projectileSpeed: number;
    /** The units of speed that the arrow's velocity gets decreased by each second */
    readonly airResistance: number;
+   readonly level: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
@@ -137,7 +142,12 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.campfire]: "placeable",
    [ItemType.furnace]: "placeable",
    [ItemType.wooden_bow]: "bow",
-   [ItemType.meat_suit]: "armour"
+   [ItemType.meat_suit]: "armour",
+   [ItemType.deep_frost_heart]: "material",
+   [ItemType.deep_frost_sword]: "sword",
+   [ItemType.deep_frost_pickaxe]: "pickaxe",
+   [ItemType.deep_frost_axe]: "axe",
+   [ItemType.deep_frost_armour]: "armour"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -191,7 +201,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.stone_sword]: {
       toolType: "sword",
-      damage: 5,
+      damage: 4,
       knockback: 150,
       attackCooldown: 0.3,
       level: 2
@@ -265,11 +275,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: "furnace"
    },
    [ItemType.wooden_bow]: {
-      toolType: "bow",
-      damage: 1,
-      knockback: 50,
-      attackCooldown: 0.3,
-      projectileDamage: 3,
+      projectileDamage: 4,
       projectileKnockback: 150,
       shotCooldown: 1,
       projectileSpeed: 1100,
@@ -279,5 +285,39 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.meat_suit]: {
       defence: 0,
       level: 1
+   },
+   [ItemType.deep_frost_heart]: {
+      stackSize: 99
+   },
+   [ItemType.deep_frost_sword]: {
+      toolType: "sword",
+      damage: 7,
+      knockback: 170,
+      attackCooldown: 0.3,
+      level: 3
+   },
+   [ItemType.deep_frost_pickaxe]: {
+      toolType: "pickaxe",
+      damage: 13,
+      knockback: 100,
+      attackCooldown: 0.5,
+      level: 3
+   },
+   [ItemType.deep_frost_axe]: {
+      toolType: "axe",
+      damage: 8,
+      knockback: 100,
+      attackCooldown: 0.5,
+      level: 3
+   },
+   [ItemType.deep_frost_armour]: {
+      defence: 0.4,
+      level: 3
    }
 };
+
+// Some typescript wizardry
+type ExcludeNonPlaceableItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "placeable" ? T : never;
+export type PlaceableItemType = keyof {
+   [T in ItemType as ExcludeNonPlaceableItemTypes<T>]: T;
+}
