@@ -213,3 +213,7 @@ export function clamp(num: number, min: number, max: number): number {
 export function randSign(): number {
    return Math.random() < 0.5 ? 1 : 0;
 }
+
+export function angle(x: number, y: number): number {
+   return Math.PI/2 - Math.atan2(y, x);
+}

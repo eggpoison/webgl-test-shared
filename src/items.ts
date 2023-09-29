@@ -65,14 +65,14 @@ export interface SwordItemInfo extends ToolItemInfo {
    readonly toolType: "sword";
 }
 
-export interface BowItemInfo extends ToolItemInfo {
-   readonly toolType: "bow";
+export interface BowItemInfo extends BaseItemInfo {
    readonly projectileDamage: number;
    readonly projectileKnockback: number;
    readonly shotCooldown: number;
    readonly projectileSpeed: number;
    /** The units of speed that the arrow's velocity gets decreased by each second */
    readonly airResistance: number;
+   readonly level: number;
 }
 
 export interface AxeItemInfo extends ToolItemInfo {
@@ -275,11 +275,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: "furnace"
    },
    [ItemType.wooden_bow]: {
-      toolType: "bow",
-      damage: 1,
-      knockback: 50,
-      attackCooldown: 0.3,
-      projectileDamage: 3,
+      projectileDamage: 4,
       projectileKnockback: 150,
       shotCooldown: 1,
       projectileSpeed: 1100,
