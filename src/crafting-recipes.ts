@@ -2,7 +2,7 @@ import { EntityType } from "./entities";
 import { ItemType } from "./items";
 
 export const CRAFTING_STATIONS = ["workbench", "slime"] satisfies Array<EntityType>;
-export type CraftingStation = "workbench" | "slime";
+export type CraftingStation = typeof CRAFTING_STATIONS[number];
 
 export interface CraftingRecipe {
    readonly product: ItemType;
@@ -89,32 +89,32 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       },
       craftingStation: "slime"
    },
-   {
-      product: ItemType.tribe_totem,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 40,
-         [ItemType.rock]: 40
-      },
-      craftingStation: "workbench"
-   },
-   {
-      product: ItemType.tribe_hut,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 20,
-         [ItemType.leather]: 15
-      },
-      craftingStation: "workbench"
-   },
-   {
-      product: ItemType.barrel,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 20,
-      },
-      craftingStation: "workbench"
-   },
+   // {
+   //    product: ItemType.tribe_totem,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 40,
+   //       [ItemType.rock]: 40
+   //    },
+   //    craftingStation: "workbench"
+   // },
+   // {
+   //    product: ItemType.tribe_hut,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 20,
+   //       [ItemType.leather]: 15
+   //    },
+   //    craftingStation: "workbench"
+   // },
+   // {
+   //    product: ItemType.barrel,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 20,
+   //    },
+   //    craftingStation: "workbench"
+   // },
    {
       product: ItemType.frost_armour,
       yield: 1,
@@ -124,28 +124,28 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       },
       craftingStation: "workbench"
    },
-   {
-      product: ItemType.campfire,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 15
-      }
-   },
-   {
-      product: ItemType.furnace,
-      yield: 1,
-      ingredients: {
-         [ItemType.campfire]: 1,
-         [ItemType.rock]: 20
-      }
-   },
-   {
-      product: ItemType.wooden_bow,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 20
-      }
-   },
+   // {
+   //    product: ItemType.campfire,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 15
+   //    }
+   // },
+   // {
+   //    product: ItemType.furnace,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.campfire]: 1,
+   //       [ItemType.rock]: 20
+   //    }
+   // },
+   // {
+   //    product: ItemType.wooden_bow,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 20
+   //    }
+   // },
    {
       product: ItemType.meat_suit,
       yield: 1,
