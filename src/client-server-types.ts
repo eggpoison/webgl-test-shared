@@ -184,6 +184,8 @@ export type PlayerDataPacket = {
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
    readonly action: TribeMemberAction;
+   /** ID of the entity the player is interacting with */
+   readonly interactingEntityID: number | null;
 }
 
 /** 
