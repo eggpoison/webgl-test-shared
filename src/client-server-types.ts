@@ -95,7 +95,6 @@ export interface EntityData<T extends EntityType> extends GameObjectData {
    /** Any hits the entity took server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
    readonly amountHealed: number;
-   readonly mobAIType?: string;
 }
 
 export interface DroppedItemData extends GameObjectData {
@@ -237,6 +236,7 @@ export interface GameObjectDebugData {
    readonly lines: Array<LineDebugData>;
    readonly circles: Array<CircleDebugData>;
    readonly tileHighlights: Array<TileHighlightData>;
+   readonly debugEntries: Array<string>;
    readonly health?: number;
    readonly maxHealth?: number;
 }
