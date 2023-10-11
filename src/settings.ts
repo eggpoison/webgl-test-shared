@@ -7,8 +7,12 @@ interface SettingsType {
    readonly BOARD_SIZE: number;
    /** Number of tiles in the width and height of a chunk */
    readonly CHUNK_SIZE: number;
+   /** Number of units in the width and height of a chunk */
+   CHUNK_UNITS: number;
    /** Width and height of the board in tiles */
    BOARD_DIMENSIONS: number;
+   /** Width and height of the board in units */
+   BOARD_UNITS: number;
    /** The colour of the background visible near the borders */
    readonly BACKGROUND_COLOUR: string;
    /** The game's starting time, in in-game hours */
@@ -40,7 +44,9 @@ export const SETTINGS: SettingsType = {
    TILE_SIZE: 64,
    BOARD_SIZE: 64,
    CHUNK_SIZE: 4,
+   CHUNK_UNITS: -1,
    BOARD_DIMENSIONS: -1,
+   BOARD_UNITS: -1,
    BACKGROUND_COLOUR: "#09120b",
    START_TIME: 8,
    ENTITY_INVULNERABILITY_DURATION: 0.15,
@@ -55,4 +61,6 @@ export const SETTINGS: SettingsType = {
    DEFAULT_ATTACK_COOLDOWN: 0.2
 };
 
+SETTINGS.CHUNK_UNITS = SETTINGS.CHUNK_SIZE * SETTINGS.TILE_SIZE;
 SETTINGS.BOARD_DIMENSIONS = SETTINGS.BOARD_SIZE * SETTINGS.CHUNK_SIZE;
+SETTINGS.BOARD_UNITS = SETTINGS.BOARD_DIMENSIONS * SETTINGS.TILE_SIZE;

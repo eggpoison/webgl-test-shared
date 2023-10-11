@@ -115,19 +115,21 @@ export const SNOWBALL_SIZES: Record<SnowballSize, number> = {
 };
 
 export enum PlayerCauseOfDeath {
-   yeti = 0,
-   zombie = 1,
-   berry_bush = 2,
-   poison = 3,
-   fire = 4,
-   tribe_member = 5,
-   arrow = 6,
-   ice_spikes = 7,
-   ice_shards = 8,
-   cactus = 9,
-   snowball = 10,
-   slime = 11,
-   god = 12
+   yeti,
+   zombie,
+   berry_bush,
+   poison,
+   fire,
+   tribe_member,
+   arrow,
+   ice_spikes,
+   ice_shards,
+   cactus,
+   snowball,
+   slime,
+   god,
+   frozen_yeti,
+   bloodloss
 }
 
 export interface DeathInfo {
@@ -138,6 +140,14 @@ export interface DeathInfo {
 export enum TribeMemberAction {
    charge_bow,
    eat,
+   none
+}
+
+export enum FrozenYetiAttackType {
+   snowThrow,
+   roar,
+   stomp,
+   bite,
    none
 }
 
@@ -166,5 +176,5 @@ export interface EntityInfoClientArgs {
    furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
-   frozen_yeti: () => void;
+   frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number) => void;
 };

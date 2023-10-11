@@ -1,97 +1,27 @@
 export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields" | "river";
 
-export type TileType =
-   "grass" |
-   "dirt" |
-   "water" |
-   "sludge" |
-   "slime" |
-   "rock" |
-   "darkRock" |
-   "sand" |
-   "sandstone" |
-   "snow" |
-   "ice" |
-   "permafrost" |
-   "magma" |
-   "lava" |
-   "frost";
-
-export type TileTypeInfo = {
-   readonly isLiquid: boolean;
-   /** How quickly an entity loses velocity on the tile (1 = instant, 0 = no loss) */
-   readonly friction: number;
-   readonly moveSpeedMultiplier?: number;
-   readonly walkDamage?: number;
+export enum TileType {
+   "grass",
+   "dirt",
+   "water",
+   "sludge",
+   "slime",
+   "rock",
+   "darkRock",
+   "sand",
+   "sandstone",
+   "snow",
+   "ice",
+   "permafrost",
+   "magma",
+   "lava",
+   "frost"
 }
+export const ALL_TILE_TYPES: ReadonlyArray<TileType> = [TileType.grass, TileType.dirt, TileType.water, TileType.sludge, TileType.slime, TileType.rock, TileType.darkRock, TileType.sand, TileType.sandstone, TileType.snow, TileType.ice, TileType.permafrost, TileType.magma, TileType.lava, TileType.frost];
 
-export const TILE_TYPE_INFO_RECORD: Record<TileType, TileTypeInfo> = {
-   grass: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   dirt: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   water: {
-      isLiquid: true,
-      friction: 0.65,
-      moveSpeedMultiplier: 0.6
-   },
-   sludge: {
-      isLiquid: false,
-      friction: 0.9,
-      moveSpeedMultiplier: 0.75
-   },
-   slime: {
-      isLiquid: false,
-      friction: 1,
-      moveSpeedMultiplier: 0.3
-   },
-   rock: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   darkRock: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   sand: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   sandstone: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   snow: {
-      isLiquid: false,
-      friction: 0.9,
-      moveSpeedMultiplier: 0.65
-   },
-   ice: {
-      isLiquid: false,
-      friction: 0.2,
-      moveSpeedMultiplier: 1.5
-   },
-   permafrost: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   magma: {
-      isLiquid: false,
-      friction: 0.65
-   },
-   lava: {
-      isLiquid: true,
-      friction: 0.85
-   },
-   frost: {
-      isLiquid: false,
-      friction: 0.65
-   }
-};
+//                                                          grass dirt  water sludge slime rock  darkRock sand  sandstone snow  ice  permafrost magma lava  frost 
+export const TILE_FRICTIONS: ReadonlyArray<number>              = [0.65, 0.65, 0.65, 0.9,   1,    0.65, 0.65,    0.65, 0.65,     0.9,  0.2, 0.65,      0.65, 0.85, 0.65];
+export const TILE_MOVE_SPEED_MULTIPLIERS: ReadonlyArray<number> = [1,    1,    0.6,  0.75,  0.3,  1,    1,       1,    1,        0.65, 1.5, 1,         1,    1,    1];
 
 export interface TileInfo {
    type: TileType;

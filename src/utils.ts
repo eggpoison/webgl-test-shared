@@ -58,6 +58,14 @@ export class Point {
       return new Point(this.x, this.y);
    }
 
+   public length(): number {
+      return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+   }
+
+   public lengthSquared(): number {
+      return Math.pow(this.x, 2) + Math.pow(this.y, 2);
+   }
+   
    public package(): [number, number] {
       return [this.x, this.y];
    }

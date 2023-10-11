@@ -1,7 +1,7 @@
 import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
 import { ItemType } from "./items";
 import { ProjectileType } from "./projectiles";
-import { StatusEffectType } from "./status-effects";
+import { StatusEffect } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
 
@@ -43,8 +43,7 @@ export interface ServerTileData {
 }
 
 export type ServerTileUpdateData = {
-   readonly x: number;
-   readonly y: number;
+   readonly tileIndex: number;
    readonly type: TileType;
    readonly isWall: boolean;
 }
@@ -65,8 +64,8 @@ export interface RectangularHitboxData extends BaseHitboxData {
 
 export interface GameObjectData {
    readonly id: number;
-   readonly position: [number, number]; // Point
-   readonly velocity: [number, number] | null; // Vector | null
+   readonly position: [number, number];
+   readonly velocity: [number, number];
    readonly rotation: number;
    readonly mass: number;
    readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
@@ -74,7 +73,7 @@ export interface GameObjectData {
 }
 
 export interface StatusEffectData {
-   readonly type: StatusEffectType;
+   readonly type: StatusEffect;
    readonly ticksElapsed: number;
 }
 
@@ -86,6 +85,9 @@ export interface HitData {
    readonly knockback: number;
    readonly angleFromAttacker: number | null;
    readonly flags: number;
+   // @Cleanup: The client doesn't need to know this information. The server just uses this property in the data type.
+   /** The server tick the hit was done on. Used in the server for filtering out old hit data */
+   readonly tick: number;
 }
 
 export interface EntityData<T extends EntityType> extends GameObjectData {
@@ -176,8 +178,8 @@ export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunk
 /** Data the player sends to the server each tick */
 export type PlayerDataPacket = {
    readonly position: [number, number]; // Point
-   readonly velocity: [number, number] | null; // Vector | null
-   readonly acceleration: [number, number] | null; // Vector | null
+   readonly velocity: [number, number];
+   readonly acceleration: [number, number];
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly visibleChunkBounds: VisibleChunkBounds;
@@ -193,8 +195,8 @@ export type PlayerDataPacket = {
  *  */
 export interface GameDataSyncPacket {
    readonly position: [number, number];
-   readonly velocity: [number, number] | null;
-   readonly acceleration: [number, number] | null;
+   readonly velocity: [number, number];
+   readonly acceleration: [number, number];
    readonly rotation: number;
    readonly terminalVelocity: number;
    readonly health: number;
