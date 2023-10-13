@@ -129,7 +129,8 @@ export enum PlayerCauseOfDeath {
    slime,
    god,
    frozen_yeti,
-   bloodloss
+   bloodloss,
+   rock_spike
 }
 
 export interface DeathInfo {
@@ -176,5 +177,5 @@ export interface EntityInfoClientArgs {
    furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
-   frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number) => void;
+   frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;
 };

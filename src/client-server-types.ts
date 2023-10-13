@@ -105,7 +105,8 @@ export interface DroppedItemData extends GameObjectData {
 
 export interface ProjectileData extends GameObjectData {
    readonly type: ProjectileType;
-   readonly data: number;
+   // @Cleanup: This is very bad, rework into some entity-system type thing
+   readonly data: any;
 }
 
 export interface TribeData {
