@@ -105,6 +105,7 @@ export interface DroppedItemData extends GameObjectData {
 
 export interface ProjectileData extends GameObjectData {
    readonly type: ProjectileType;
+   readonly data: number;
 }
 
 export interface TribeData {

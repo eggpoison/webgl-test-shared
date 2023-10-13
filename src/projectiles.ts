@@ -1,4 +1,5 @@
 export enum ProjectileType {
    iceShards,
-   woodenArrow
+   woodenArrow,
+   rockSpike
 }
