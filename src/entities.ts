@@ -168,8 +168,9 @@ export interface EntityInfoClientArgs {
    slimewisp: () => void;
    // @Cleanup: Maybe foodEatingType can be removed, just use activeItemType instead
    // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
-   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
-   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, username: string) => void;
+   // @Cleanup: don't send backpack inventory for players.
+   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, hotbarInventory: InventoryData, activeItemSlot: number, warPaintType: number) => void;
+   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, username: string) => void;
    tribe_totem: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribeID: number) => void;
    barrel: (tribeID: number | null, inventory: InventoryData) => void;

@@ -156,37 +156,37 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       craftingStation: "workbench"
    },
    {
-      product: ItemType.deep_frost_sword,
+      product: ItemType.deepfrost_sword,
       yield: 1,
       ingredients: {
-         [ItemType.deep_frost_heart]: 1,
+         [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 30
       },
       craftingStation: "workbench"
    },
    {
-      product: ItemType.deep_frost_pickaxe,
+      product: ItemType.deepfrost_pickaxe,
       yield: 1,
       ingredients: {
-         [ItemType.deep_frost_heart]: 1,
+         [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 25
       },
       craftingStation: "workbench"
    },
    {
-      product: ItemType.deep_frost_axe,
+      product: ItemType.deepfrost_axe,
       yield: 1,
       ingredients: {
-         [ItemType.deep_frost_heart]: 1,
+         [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 20
       },
       craftingStation: "workbench"
    },
    {
-      product: ItemType.deep_frost_armour,
+      product: ItemType.deepfrost_armour,
       yield: 1,
       ingredients: {
-         [ItemType.deep_frost_heart]: 1,
+         [ItemType.deepfrost_heart]: 1,
          [ItemType.yeti_hide]: 10,
          [ItemType.frostcicle]: 50
       },
