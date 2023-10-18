@@ -25,7 +25,8 @@ export type EntityType = "cow"
    | "furnace"
    | "snowball"
    | "krumblid"
-   | "frozen_yeti";
+   | "frozen_yeti"
+   | "fish";
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid", "frozen_yeti"];
 
@@ -152,6 +153,13 @@ export enum FrozenYetiAttackType {
    none
 }
 
+export enum FishColour {
+   blue,
+   gold,
+   red,
+   lime
+}
+
 // @Cleanup (???): Make all of these things into structures
 export interface EntityInfoClientArgs {
    cow: (species: CowSpecies, grazeProgress: number) => void;
@@ -179,4 +187,5 @@ export interface EntityInfoClientArgs {
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
    frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;
+   fish: (colour: FishColour) => void;
 };
