@@ -326,7 +326,7 @@ export function parseCommand(command: string): Array<string | number> {
    let commandComponents: Array<string | number> = command.split(" ");
 
    // Number-ise any numbers
-   commandComponents = commandComponents.map(component => !isNaN(component as number) && !isNaN(parseFloat(component.toString())) ? Number(component) : component);
+   commandComponents = commandComponents.map(component => !isNaN(Number(component)) ? Number(component) : component);
 
    // Remove any whitespace
    for (let i = commandComponents.length - 1; i >= 0; i--) {
@@ -363,6 +363,10 @@ export function commandIsValid(command: string, permissions: CommandPermissions)
       // Skip if the user doesn't have the required permissions
       if (!userHasCommandPermissions(configuration.permissions, permissions)) continue;
 
+      if (configuration.parameterConfigurations.length !== commandComponents.length - 1) {
+         continue;
+      }
+      
       let isValid = true;
       
       // Check each parameter in the command

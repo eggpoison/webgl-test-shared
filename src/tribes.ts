@@ -27,11 +27,11 @@ export const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    [TribeType.frostlings]: {
       maxHealth: 20,
       biomes: ["tundra"],
-      baseTribesmanCap: 5
+      baseTribesmanCap: 4
    },
    [TribeType.goblins]: {
       maxHealth: 15,
       biomes: ["grasslands", "desert", "tundra"],
-      baseTribesmanCap: 100
+      baseTribesmanCap: 8
    }
 };
