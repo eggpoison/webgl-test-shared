@@ -131,7 +131,9 @@ export enum PlayerCauseOfDeath {
    god,
    frozen_yeti,
    bloodloss,
-   rock_spike
+   rock_spike,
+   lack_of_oxygen,
+   fish
 }
 
 export interface DeathInfo {
@@ -182,8 +184,8 @@ export interface EntityInfoClientArgs {
    tribe_totem: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    tribe_hut: (tribeID: number) => void;
    barrel: (tribeID: number | null, inventory: InventoryData) => void;
-   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
-   furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number) => void;
+   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
+   furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
    snowball: (size: SnowballSize) => void;
    krumblid: () => void;
    frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;

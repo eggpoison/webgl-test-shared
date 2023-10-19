@@ -35,7 +35,8 @@ export enum ItemType {
    deepfrost_axe,
    deepfrost_armour,
    raw_fish,
-   cooked_fish
+   cooked_fish,
+   fishlord_suit
 }
 
 export interface BaseItemInfo {}
@@ -151,7 +152,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.deepfrost_axe]: "axe",
    [ItemType.deepfrost_armour]: "armour",
    [ItemType.raw_fish]: "food",
-   [ItemType.cooked_fish]: "food"
+   [ItemType.cooked_fish]: "food",
+   [ItemType.fishlord_suit]: "armour"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -327,6 +329,10 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       eatTime: 1.5,
       healAmount: 4
+   },
+   [ItemType.fishlord_suit]: {
+      defence: 0,
+      level: 1
    }
 };
 

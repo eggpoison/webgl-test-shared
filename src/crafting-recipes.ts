@@ -1,8 +1,11 @@
-import { EntityType } from "./entities";
 import { ItemType } from "./items";
 
-export const CRAFTING_STATIONS = ["workbench", "slime"] satisfies Array<EntityType>;
-export type CraftingStation = typeof CRAFTING_STATIONS[number];
+export enum CraftingStation {
+   workbench,
+   slime,
+   water
+}
+export const CRAFTING_STATIONS: ReadonlyArray<CraftingStation> = [0, 1, 2];
 
 export interface CraftingRecipe {
    readonly product: ItemType;
@@ -26,7 +29,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       ingredients: {
          [ItemType.wood]: 15
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.wooden_pickaxe,
@@ -34,7 +37,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       ingredients: {
          [ItemType.wood]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.wooden_axe,
@@ -42,7 +45,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       ingredients: {
          [ItemType.wood]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.stone_sword,
@@ -51,7 +54,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.wood]: 5,
          [ItemType.rock]: 15
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.stone_pickaxe,
@@ -60,7 +63,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.wood]: 5,
          [ItemType.rock]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.stone_axe,
@@ -69,7 +72,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.wood]: 5,
          [ItemType.rock]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.leather_backpack,
@@ -77,7 +80,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       ingredients: {
          [ItemType.leather]: 5
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.flesh_sword,
@@ -87,34 +90,34 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.slimeball]: 10,
          [ItemType.eyeball]: 1
       },
-      craftingStation: "slime"
+      craftingStation: CraftingStation.slime
    },
-   // {
-   //    product: ItemType.tribe_totem,
-   //    yield: 1,
-   //    ingredients: {
-   //       [ItemType.wood]: 40,
-   //       [ItemType.rock]: 40
-   //    },
-   //    craftingStation: "workbench"
-   // },
-   // {
-   //    product: ItemType.tribe_hut,
-   //    yield: 1,
-   //    ingredients: {
-   //       [ItemType.wood]: 20,
-   //       [ItemType.leather]: 15
-   //    },
-   //    craftingStation: "workbench"
-   // },
-   // {
-   //    product: ItemType.barrel,
-   //    yield: 1,
-   //    ingredients: {
-   //       [ItemType.wood]: 20,
-   //    },
-   //    craftingStation: "workbench"
-   // },
+   {
+      product: ItemType.tribe_totem,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 40,
+         [ItemType.rock]: 40
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.tribe_hut,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 20,
+         [ItemType.leather]: 15
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.barrel,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 20,
+      },
+      craftingStation: CraftingStation.workbench
+   },
    {
       product: ItemType.frost_armour,
       yield: 1,
@@ -122,7 +125,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.frostcicle]: 20,
          [ItemType.yeti_hide]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    // {
    //    product: ItemType.campfire,
@@ -153,7 +156,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.raw_beef]: 15,
          [ItemType.cactus_spine]: 10
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.deepfrost_sword,
@@ -162,7 +165,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 30
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.deepfrost_pickaxe,
@@ -171,7 +174,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 25
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.deepfrost_axe,
@@ -180,7 +183,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.deepfrost_heart]: 1,
          [ItemType.frostcicle]: 20
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
    },
    {
       product: ItemType.deepfrost_armour,
@@ -190,7 +193,16 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.yeti_hide]: 10,
          [ItemType.frostcicle]: 50
       },
-      craftingStation: "workbench"
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.fishlord_suit,
+      yield: 1,
+      ingredients: {
+         [ItemType.raw_fish]: 64,
+         [ItemType.cactus_spine]: 1
+      },
+      craftingStation: CraftingStation.water
    }
 ];
 
