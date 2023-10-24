@@ -92,32 +92,32 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       },
       craftingStation: CraftingStation.slime
    },
-   {
-      product: ItemType.tribe_totem,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 40,
-         [ItemType.rock]: 40
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.tribe_hut,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 20,
-         [ItemType.leather]: 15
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.barrel,
-      yield: 1,
-      ingredients: {
-         [ItemType.wood]: 20,
-      },
-      craftingStation: CraftingStation.workbench
-   },
+   // {
+   //    product: ItemType.tribe_totem,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 40,
+   //       [ItemType.rock]: 40
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.tribe_hut,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 20,
+   //       [ItemType.leather]: 15
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.barrel,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.wood]: 20,
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
    {
       product: ItemType.frost_armour,
       yield: 1,
@@ -139,7 +139,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    //    yield: 1,
    //    ingredients: {
    //       [ItemType.campfire]: 1,
-   //       [ItemType.rock]: 20
+   //       [ItemType.rock]: 25
    //    }
    // },
    // {
@@ -149,52 +149,52 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    //       [ItemType.wood]: 20
    //    }
    // },
-   {
-      product: ItemType.meat_suit,
-      yield: 1,
-      ingredients: {
-         [ItemType.raw_beef]: 15,
-         [ItemType.cactus_spine]: 10
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.deepfrost_sword,
-      yield: 1,
-      ingredients: {
-         [ItemType.deepfrost_heart]: 1,
-         [ItemType.frostcicle]: 30
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.deepfrost_pickaxe,
-      yield: 1,
-      ingredients: {
-         [ItemType.deepfrost_heart]: 1,
-         [ItemType.frostcicle]: 25
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.deepfrost_axe,
-      yield: 1,
-      ingredients: {
-         [ItemType.deepfrost_heart]: 1,
-         [ItemType.frostcicle]: 20
-      },
-      craftingStation: CraftingStation.workbench
-   },
-   {
-      product: ItemType.deepfrost_armour,
-      yield: 1,
-      ingredients: {
-         [ItemType.deepfrost_heart]: 1,
-         [ItemType.yeti_hide]: 10,
-         [ItemType.frostcicle]: 50
-      },
-      craftingStation: CraftingStation.workbench
-   },
+   // {
+   //    product: ItemType.meat_suit,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.raw_beef]: 15,
+   //       [ItemType.cactus_spine]: 10
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.deepfrost_sword,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.deepfrost_heart]: 1,
+   //       [ItemType.frostcicle]: 30
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.deepfrost_pickaxe,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.deepfrost_heart]: 1,
+   //       [ItemType.frostcicle]: 25
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.deepfrost_axe,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.deepfrost_heart]: 1,
+   //       [ItemType.frostcicle]: 20
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
+   // {
+   //    product: ItemType.deepfrost_armour,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.deepfrost_heart]: 1,
+   //       [ItemType.yeti_hide]: 10,
+   //       [ItemType.frostcicle]: 50
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
    {
       product: ItemType.fishlord_suit,
       yield: 1,

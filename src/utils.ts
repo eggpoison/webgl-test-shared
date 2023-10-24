@@ -225,3 +225,11 @@ export function randSign(): number {
 export function angle(x: number, y: number): number {
    return Math.PI/2 - Math.atan2(y, x);
 }
+
+export function customTickIntervalHasPassed(ticks: number, intervalSeconds: number): boolean {
+   const ticksPerInterval = intervalSeconds * SETTINGS.TPS;
+   
+   const previousCheck = (ticks - 1) / ticksPerInterval;
+   const check = ticks / ticksPerInterval;
+   return Math.floor(previousCheck) !== Math.floor(check);
+}

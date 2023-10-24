@@ -132,7 +132,6 @@ export interface GameDataPacket {
    /** Extra debug information about a game object being tracked */
    readonly gameObjectDebugData?: GameObjectDebugData;
    readonly tribeData: TribeData | null;
-   readonly killedEntityIDs: ReadonlyArray<number>;
    readonly hasFrostShield: boolean;
 }
 

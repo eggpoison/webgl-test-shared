@@ -1,4 +1,4 @@
-export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields" | "river";
+export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "river";
 
 export enum TileType {
    grass,
