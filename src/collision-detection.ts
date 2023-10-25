@@ -1,5 +1,16 @@
 import { Point, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
 
+export const COLLISION_BITS = {
+   other: 1 << 0,
+   cactus: 1 << 1
+};
+
+let defaultCollisionMask = 0;
+for (const bit of Object.values(COLLISION_BITS)) {
+   defaultCollisionMask |= bit;
+}
+export const DEFAULT_COLLISION_MASK = defaultCollisionMask;
+
 export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
 
 const findMin = (vertices: ReadonlyArray<Point>, axis: Point): number => {

@@ -233,3 +233,28 @@ export function customTickIntervalHasPassed(ticks: number, intervalSeconds: numb
    const check = ticks / ticksPerInterval;
    return Math.floor(previousCheck) !== Math.floor(check);
 }
+
+function sqr(x: number) { return x * x }
+function dist2(v: Point, w: Point) {return sqr(v.x - w.x) + sqr(v.y - w.y) }
+function distToSegmentSquared(p: Point, v: Point, w: Point) {
+  var l2 = dist2(v, w);
+  if (l2 == 0) return dist2(p, v);
+  var t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+  t = Math.max(0, Math.min(1, t));
+  return dist2(p, new Point(v.x + t * (w.x - v.x),
+                    v.y + t * (w.y - v.y) ));
+}
+export function distToSegment(p: Point, v: Point, w: Point) { return Math.sqrt(distToSegmentSquared(p, v, w)); }
+
+export function pointIsInRectangle(pointX: number, pointY: number, rectPos: Point, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
+   // Rotate point around rect to make the situation axis-aligned
+   const alignedPointX = rotateXAroundPoint(pointX, pointY, rectPos.x, rectPos.y, -rectRotation);
+   const alignedPointY = rotateYAroundPoint(pointX, pointY, rectPos.x, rectPos.y, -rectRotation);
+
+   const x1 = rectPos.x - rectWidth / 2;
+   const x2 = rectPos.x + rectWidth / 2;
+   const y1 = rectPos.y - rectHeight / 2;
+   const y2 = rectPos.y + rectHeight / 2;
+   
+   return alignedPointX >= x1 && alignedPointX <= x2 && alignedPointY >= y1 && alignedPointY <= y2;
+}
