@@ -276,7 +276,9 @@ export interface ClientToServerEvents {
    // Effectively the item_pickup and item_release events combined
    attack_packet: (attackPacket: AttackPacket) => void;
    item_use_packet: (itemSlot: number) => void;
-   throw_held_item_packet: (throwDirection: number) => void;
+   held_item_drop: (dropAmount: number, dropDirection: number) => void;
+   // For dropping items on the ground
+   item_drop: (itemSlot: number, dropAmount: number, dropDirection: number) => void;
    // Tells the server to respawn the client
    respawn: () => void;
    command: (command: string) => void;
