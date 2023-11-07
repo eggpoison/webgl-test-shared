@@ -27,6 +27,7 @@ export type EntityType = "cow"
    | "krumblid"
    | "frozen_yeti"
    | "fish";
+   
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
 export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid", "frozen_yeti"];
 

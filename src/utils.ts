@@ -222,6 +222,10 @@ export function randSign(): number {
    return Math.random() < 0.5 ? 1 : 0;
 }
 
+export function distance(x1: number, y1: number, x2: number, y2: number): number {
+   return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+}
+
 export function angle(x: number, y: number): number {
    return Math.PI/2 - Math.atan2(y, x);
 }

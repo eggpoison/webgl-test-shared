@@ -1,4 +1,5 @@
 import { EntityType } from "./entities";
+import { SETTINGS } from "./settings";
 
 export enum ItemType {
    wood,
@@ -71,7 +72,7 @@ export interface SwordItemInfo extends ToolItemInfo {
 export interface BowItemInfo extends BaseItemInfo {
    readonly projectileDamage: number;
    readonly projectileKnockback: number;
-   readonly shotCooldown: number;
+   readonly shotCooldownTicks: number;
    readonly projectileSpeed: number;
    /** The units of speed that the arrow's velocity gets decreased by each second */
    readonly airResistance: number;
@@ -283,7 +284,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.wooden_bow]: {
       projectileDamage: 4,
       projectileKnockback: 150,
-      shotCooldown: 1,
+      shotCooldownTicks: 1 * SETTINGS.TPS,
       projectileSpeed: 1100,
       airResistance: 400,
       level: 2

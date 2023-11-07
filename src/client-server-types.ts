@@ -160,9 +160,12 @@ export const RIVER_STEPPING_STONE_SIZES: Record<RiverSteppingStoneSize, number> 
 };
 
 export interface RiverSteppingStoneData {
-   readonly position: [number, number];
+   readonly positionX: number;
+   readonly positionY: number;
    readonly rotation: number;
    readonly size: RiverSteppingStoneSize;
+   /** ID of the group the stepping stone belongs to */
+   readonly groupID: number;
 }
 
 /** Initial data sent to the client */
@@ -178,11 +181,13 @@ export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunk
 
 /** Data the player sends to the server each tick */
 export type PlayerDataPacket = {
+   // @Vulnerability: Implement client-side prediction
    readonly position: [number, number]; // Point
    readonly velocity: [number, number];
    readonly acceleration: [number, number];
    readonly rotation: number;
    readonly terminalVelocity: number;
+   // @Vulnerability: Allows falsely sending way larger visible chunk bounds which can slow down the server a ton
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
    readonly action: TribeMemberAction;
