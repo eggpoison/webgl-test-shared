@@ -1,20 +1,31 @@
-export type StatusEffect = "burning" | "freezing" | "poisoned" | "bleeding";
+export enum StatusEffect {
+   burning,
+   freezing,
+   poisoned,
+   bleeding
+}
+export const enum StatusEffectConst {
+   burning,
+   freezing,
+   poisoned,
+   bleeding
+}
 
 interface StatusEffectModifiers {
    readonly moveSpeedMultiplier: number;
 }
 
 export const STATUS_EFFECT_MODIFIERS: Record<StatusEffect, StatusEffectModifiers> = {
-   burning: {
+   [StatusEffect.burning]: {
       moveSpeedMultiplier: 1
    },
-   freezing: {
+   [StatusEffect.freezing]: {
       moveSpeedMultiplier: 0.5
    },
-   poisoned: {
+   [StatusEffect.poisoned]: {
       moveSpeedMultiplier: 1
    },
-   bleeding: {
+   [StatusEffect.bleeding]: {
       moveSpeedMultiplier: 1
    }
 };

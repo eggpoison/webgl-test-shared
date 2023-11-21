@@ -162,6 +162,14 @@ export function rotateYAroundPoint(x: number, y: number, pivotX: number, pivotY:
    return -Math.sin(rotation) * (x - pivotX) + Math.cos(rotation) * (y - pivotY) + pivotY;
 }
 
+export function rotateXAroundOrigin(x: number, y: number, rotation: number): number {
+   return Math.cos(rotation) * x + Math.sin(rotation) * y;
+}
+
+export function rotateYAroundOrigin(x: number, y: number, rotation: number): number {
+   return -Math.sin(rotation) * x + Math.cos(rotation) * y;
+}
+
 export function rotatePoint(point: Point, pivotPoint: Point, rotation: number): Point {
    const x = Math.cos(rotation) * (point.x - pivotPoint.x) + Math.sin(rotation) * (point.y - pivotPoint.y) + pivotPoint.x;
    const y = -Math.sin(rotation) * (point.x - pivotPoint.x) + Math.cos(rotation) * (point.y - pivotPoint.y) + pivotPoint.y;
@@ -250,15 +258,18 @@ function distToSegmentSquared(p: Point, v: Point, w: Point) {
 }
 export function distToSegment(p: Point, v: Point, w: Point) { return Math.sqrt(distToSegmentSquared(p, v, w)); }
 
-export function pointIsInRectangle(pointX: number, pointY: number, rectPos: Point, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
+export function pointIsInRectangle(pointX: number, pointY: number, rectPos: Point, rectOffset: Point, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
+   const rectPosX = rectPos.x + rectOffset.x;
+   const rectPosY = rectPos.y + rectOffset.y;
+   
    // Rotate point around rect to make the situation axis-aligned
-   const alignedPointX = rotateXAroundPoint(pointX, pointY, rectPos.x, rectPos.y, -rectRotation);
-   const alignedPointY = rotateYAroundPoint(pointX, pointY, rectPos.x, rectPos.y, -rectRotation);
+   const alignedPointX = rotateXAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);
+   const alignedPointY = rotateYAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);
 
-   const x1 = rectPos.x - rectWidth / 2;
-   const x2 = rectPos.x + rectWidth / 2;
-   const y1 = rectPos.y - rectHeight / 2;
-   const y2 = rectPos.y + rectHeight / 2;
+   const x1 = rectPosX - rectWidth / 2;
+   const x2 = rectPosX + rectWidth / 2;
+   const y1 = rectPosY - rectHeight / 2;
+   const y2 = rectPosY + rectHeight / 2;
    
    return alignedPointX >= x1 && alignedPointX <= x2 && alignedPointY >= y1 && alignedPointY <= y2;
 }

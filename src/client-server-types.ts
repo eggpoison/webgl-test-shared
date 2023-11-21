@@ -49,8 +49,8 @@ export type ServerTileUpdateData = {
 }
 
 export interface BaseHitboxData {
-   readonly offsetX?: number;
-   readonly offsetY?: number;
+   readonly offsetX: number;
+   readonly offsetY: number;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
@@ -68,7 +68,8 @@ export interface GameObjectData {
    readonly velocity: [number, number];
    readonly rotation: number;
    readonly mass: number;
-   readonly hitboxes: ReadonlyArray<RectangularHitboxData | CircularHitboxData>;
+   readonly rectangularHitboxes: ReadonlyArray<RectangularHitboxData>;
+   readonly circularHitboxes: ReadonlyArray<CircularHitboxData>;
    readonly ageTicks: number;
 }
 
@@ -171,7 +172,7 @@ export interface RiverSteppingStoneData {
 /** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
-   readonly tiles: Array<Array<ServerTileData>>;
+   readonly tiles: Array<ServerTileData>;
    readonly waterRocks: ReadonlyArray<WaterRockData>;
    readonly riverSteppingStones: ReadonlyArray<RiverSteppingStoneData>;
    readonly riverFlowDirections: Record<number, Record<number, number>>;

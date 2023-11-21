@@ -4,32 +4,63 @@ import { TribeType } from "./tribes";
 
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
 
-export type EntityType = "cow"
-   | "zombie"
-   | "tombstone"
-   | "tree"
-   | "workbench"
-   | "boulder"
-   | "berry_bush"
-   | "cactus"
-   | "yeti"
-   | "ice_spikes"
-   | "slime"
-   | "slimewisp"
-   | "tribesman"
-   | "player"
-   | "tribe_totem"
-   | "tribe_hut"
-   | "barrel"
-   | "campfire"
-   | "furnace"
-   | "snowball"
-   | "krumblid"
-   | "frozen_yeti"
-   | "fish";
+export enum EntityType {
+   cow,
+   zombie,
+   tombstone,
+   tree,
+   workbench,
+   boulder,
+   berry_bush,
+   cactus,
+   yeti,
+   ice_spikes,
+   slime,
+   slimewisp,
+   tribesman,
+   player,
+   tribe_totem,
+   tribe_hut,
+   barrel,
+   campfire,
+   furnace,
+   snowball,
+   krumblid,
+   frozen_yeti,
+   fish
+}
+
+export const enum EntityTypeConst {
+   cow,
+   zombie,
+   tombstone,
+   tree,
+   workbench,
+   boulder,
+   berry_bush,
+   cactus,
+   yeti,
+   ice_spikes,
+   slime,
+   slimewisp,
+   tribesman,
+   player,
+   tribe_totem,
+   tribe_hut,
+   barrel,
+   campfire,
+   furnace,
+   snowball,
+   krumblid,
+   frozen_yeti,
+   fish
+}
    
-export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = ["tree", "berry_bush", "ice_spikes", "cactus", "boulder"];
-export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = ["cow", "zombie", "yeti", "slime", "slimewisp", "krumblid", "frozen_yeti"];
+export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berry_bush, EntityType.ice_spikes,EntityType.cactus, EntityType.boulder];
+export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.cow, EntityType.zombie, EntityType.yeti, EntityType.slime, EntityType.slimewisp, EntityType.krumblid, EntityType.frozen_yeti];
+   
+export const RESOURCE_ENTITY_TYPES_CONST: ReadonlyArray<EntityTypeConst> = [EntityTypeConst.tree, EntityTypeConst.berry_bush, EntityTypeConst.ice_spikes,EntityTypeConst.cactus, EntityTypeConst.boulder];
+export const MOB_ENTITY_TYPES_CONST: ReadonlyArray<EntityTypeConst> = [EntityTypeConst.cow, EntityTypeConst.zombie, EntityTypeConst.yeti, EntityTypeConst.slime, EntityTypeConst.slimewisp, EntityTypeConst.krumblid, EntityTypeConst.frozen_yeti];
 
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
@@ -165,30 +196,30 @@ export enum FishColour {
 
 // @Cleanup (???): Make all of these things into structures
 export interface EntityInfoClientArgs {
-   cow: (species: CowSpecies, grazeProgress: number) => void;
-   zombie: (zombieType: number) => void;
-   tombstone: (tombstoneType: number, zombieSpawnProgress: number, zombieSpawnX: number, zombieSpawnY: number, deathInfo: DeathInfo | null) => void;
-   tree: (treeSize: TreeSize) => void;
-   workbench: () => void;
-   boulder: (boulderType: number) => void;
-   berry_bush: (numBerries: number) => void;
-   cactus: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
-   yeti: (attackProgress: number) => void;
-   ice_spikes: () => void;
-   slime: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number) => void;
-   slimewisp: () => void;
+   [EntityType.cow]: (species: CowSpecies, grazeProgress: number) => void;
+   [EntityType.zombie]: (zombieType: number) => void;
+   [EntityType.tombstone]: (tombstoneType: number, zombieSpawnProgress: number, zombieSpawnX: number, zombieSpawnY: number, deathInfo: DeathInfo | null) => void;
+   [EntityType.tree]: (treeSize: TreeSize) => void;
+   [EntityType.workbench]: () => void;
+   [EntityType.boulder]: (boulderType: number) => void;
+   [EntityType.berry_bush]: (numBerries: number) => void;
+   [EntityType.cactus]: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => void;
+   [EntityType.yeti]: (attackProgress: number) => void;
+   [EntityType.ice_spikes]: () => void;
+   [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number) => void;
+   [EntityType.slimewisp]: () => void;
    // @Cleanup: Maybe foodEatingType can be removed, just use activeItemType instead
    // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
    // @Cleanup: don't send backpack inventory for players.
-   tribesman: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
-   player:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, username: string) => void;
-   tribe_totem: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
-   tribe_hut: (tribeID: number) => void;
-   barrel: (tribeID: number | null, inventory: InventoryData) => void;
-   campfire: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
-   furnace:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
-   snowball: (size: SnowballSize) => void;
-   krumblid: () => void;
-   frozen_yeti: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;
-   fish: (colour: FishColour) => void;
+   [EntityType.tribesman]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
+   [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, username: string) => void;
+   [EntityType.tribe_totem]: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
+   [EntityType.tribe_hut]: (tribeID: number) => void;
+   [EntityType.barrel]: (tribeID: number | null, inventory: InventoryData) => void;
+   [EntityType.campfire]: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
+   [EntityType.furnace]:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => void;
+   [EntityType.snowball]: (size: SnowballSize) => void;
+   [EntityType.krumblid]: () => void;
+   [EntityType.frozen_yeti]: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;
+   [EntityType.fish]: (colour: FishColour) => void;
 };

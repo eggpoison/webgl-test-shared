@@ -1,4 +1,4 @@
-import { EntityType } from "./entities";
+import { EntityType, EntityTypeConst } from "./entities";
 import { SETTINGS } from "./settings";
 
 export enum ItemType {
@@ -89,6 +89,7 @@ export interface PickaxeItemInfo extends ToolItemInfo {
 
 export interface PlaceableItemInfo extends StackableItemInfo {
    readonly entityType: EntityType;
+   readonly entityTypeConst: EntityTypeConst;
 }
 
 export interface BackpackItemInfo extends BaseItemInfo {
@@ -165,7 +166,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.workbench]: {
       stackSize: 99,
-      entityType: "workbench"
+      entityType: EntityType.workbench,
+      entityTypeConst: EntityTypeConst.workbench
    },
    [ItemType.wooden_sword]: {
       toolType: "sword",
@@ -259,15 +261,18 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.tribe_totem]: {
       stackSize: 99,
-      entityType: "tribe_totem"
+      entityType: EntityType.tribe_totem,
+      entityTypeConst: EntityTypeConst.tribe_totem
    },
    [ItemType.tribe_hut]: {
       stackSize: 99,
-      entityType: "tribe_hut"
+      entityType: EntityType.tribe_hut,
+      entityTypeConst: EntityTypeConst.tribe_hut
    },
    [ItemType.barrel]: {
       stackSize: 99,
-      entityType: "barrel"
+      entityType: EntityType.barrel,
+      entityTypeConst: EntityTypeConst.barrel
    },
    [ItemType.frost_armour]: {
       defence: 0.25,
@@ -275,11 +280,13 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.campfire]: {
       stackSize: 99,
-      entityType: "campfire"
+      entityType: EntityType.campfire,
+      entityTypeConst: EntityTypeConst.campfire
    },
    [ItemType.furnace]: {
       stackSize: 99,
-      entityType: "furnace"
+      entityType: EntityType.furnace,
+      entityTypeConst: EntityTypeConst.furnace
    },
    [ItemType.wooden_bow]: {
       projectileDamage: 4,
@@ -341,4 +348,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
 type ExcludeNonPlaceableItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "placeable" ? T : never;
 export type PlaceableItemType = keyof {
    [T in ItemType as ExcludeNonPlaceableItemTypes<T>]: T;
+}
+type ExcludeNonArmourItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "armour" ? T : never;
+export type ArmourItemType = keyof {
+   [T in ItemType as ExcludeNonArmourItemTypes<T>]: T;
 }

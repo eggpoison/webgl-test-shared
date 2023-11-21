@@ -41,19 +41,25 @@ interface SettingsType {
 
 export const SETTINGS: SettingsType = {
    TPS: 60,
+   // TPS: 20,
    TILE_SIZE: 64,
    BOARD_SIZE: 64,
    CHUNK_SIZE: 4,
    CHUNK_UNITS: -1,
    BOARD_DIMENSIONS: -1,
    BOARD_UNITS: -1,
+   // @Cleanup: Only needs to be client-side
    BACKGROUND_COLOUR: "#09120b",
+   // @Cleanup: Only needs to be server-side
    START_TIME: 8,
+   // @Cleanup: Do we use this?
    ENTITY_INVULNERABILITY_DURATION: 0.15,
+   // @Cleanup: Only needs to eb client-side
    WALL_OUTLINE_WIDTH: 5,
    SERVER_PORT: 8000,
    ITEM_SIZE: 16,
    ENTITY_PUSH_FORCE: 200,
+   // @Cleanup: Does this need to be shared? I think only server uses it
    TIME_PASS_RATE: 300,
    INITIAL_PLAYER_HOTBAR_SIZE: 7,
    ITEM_PLACE_DISTANCE: 60,

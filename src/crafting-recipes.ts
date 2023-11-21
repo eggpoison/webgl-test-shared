@@ -118,15 +118,15 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    //    },
    //    craftingStation: CraftingStation.workbench
    // },
-   {
-      product: ItemType.frost_armour,
-      yield: 1,
-      ingredients: {
-         [ItemType.frostcicle]: 20,
-         [ItemType.yeti_hide]: 10
-      },
-      craftingStation: CraftingStation.workbench
-   },
+   // {
+   //    product: ItemType.frost_armour,
+   //    yield: 1,
+   //    ingredients: {
+   //       [ItemType.frostcicle]: 20,
+   //       [ItemType.yeti_hide]: 10
+   //    },
+   //    craftingStation: CraftingStation.workbench
+   // },
    // {
    //    product: ItemType.campfire,
    //    yield: 1,
