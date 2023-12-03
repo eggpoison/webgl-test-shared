@@ -35,6 +35,7 @@ export interface PlayerInventoryData {
 }
 
 export interface ServerTileData {
+   // @Cleanup: We don't need to send the x and y coordinates of a tile
    readonly x: number;
    readonly y: number;
    readonly type: TileType;
@@ -176,6 +177,8 @@ export interface InitialGameDataPacket extends GameDataPacket {
    readonly waterRocks: ReadonlyArray<WaterRockData>;
    readonly riverSteppingStones: ReadonlyArray<RiverSteppingStoneData>;
    readonly riverFlowDirections: Record<number, Record<number, number>>;
+   readonly edgeTiles: Array<ServerTileData>;
+   readonly edgeTileRiverFlowDirections: Record<number, Record<number, number>>;
 }
 
 export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];

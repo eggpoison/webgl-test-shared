@@ -37,11 +37,12 @@ interface SettingsType {
    readonly FRICTION_CONSTANT: number;
    /** Minimum number of seconds between attacks */
    readonly DEFAULT_ATTACK_COOLDOWN: number;
+   /** Number of tiles from the edge of the border that edge terrain is generated */
+   readonly EDGE_GENERATION_DISTANCE: number;
 }
 
 export const SETTINGS: SettingsType = {
    TPS: 60,
-   // TPS: 20,
    TILE_SIZE: 64,
    BOARD_SIZE: 64,
    CHUNK_SIZE: 4,
@@ -54,7 +55,7 @@ export const SETTINGS: SettingsType = {
    START_TIME: 8,
    // @Cleanup: Do we use this?
    ENTITY_INVULNERABILITY_DURATION: 0.15,
-   // @Cleanup: Only needs to eb client-side
+   // @Cleanup: Only needs to be client-side
    WALL_OUTLINE_WIDTH: 5,
    SERVER_PORT: 8000,
    ITEM_SIZE: 16,
@@ -64,7 +65,8 @@ export const SETTINGS: SettingsType = {
    INITIAL_PLAYER_HOTBAR_SIZE: 7,
    ITEM_PLACE_DISTANCE: 60,
    FRICTION_CONSTANT: 50,
-   DEFAULT_ATTACK_COOLDOWN: 0.2
+   DEFAULT_ATTACK_COOLDOWN: 0.2,
+   EDGE_GENERATION_DISTANCE: 16
 };
 
 SETTINGS.CHUNK_UNITS = SETTINGS.CHUNK_SIZE * SETTINGS.TILE_SIZE;

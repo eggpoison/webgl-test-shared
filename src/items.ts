@@ -339,7 +339,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       healAmount: 4
    },
    [ItemType.fishlord_suit]: {
-      defence: 0,
+      defence: 0.1,
       level: 1
    }
 };
