@@ -170,6 +170,11 @@ export interface RiverSteppingStoneData {
    readonly groupID: number;
 }
 
+export interface GrassTileInfo {
+   readonly temperature: number;
+   readonly humidity: number;
+}
+
 /** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
@@ -179,6 +184,7 @@ export interface InitialGameDataPacket extends GameDataPacket {
    readonly riverFlowDirections: Record<number, Record<number, number>>;
    readonly edgeTiles: Array<ServerTileData>;
    readonly edgeTileRiverFlowDirections: Record<number, Record<number, number>>;
+   readonly grassInfo: Record<number, Record<number, GrassTileInfo>>;
 }
 
 export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];

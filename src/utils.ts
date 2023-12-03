@@ -273,3 +273,8 @@ export function pointIsInRectangle(pointX: number, pointY: number, rectPos: Poin
    
    return alignedPointX >= x1 && alignedPointX <= x2 && alignedPointY >= y1 && alignedPointY <= y2;
 }
+
+export function smoothstep(value: number): number {
+   const clamped = clamp(value, 0, 1);
+   return clamped * clamped * (3 - 2 * clamped);
+}
