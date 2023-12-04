@@ -175,6 +175,25 @@ export interface GrassTileInfo {
    readonly humidity: number;
 }
 
+export enum DecorationType {
+   pebble,
+   rock,
+   sandstoneRock,
+   blackRock,
+   snowPile,
+   flower1,
+   flower2,
+   flower3,
+   flower4
+}
+
+export interface DecorationInfo {
+   readonly positionX: number;
+   readonly positionY: number;
+   readonly rotation: number;
+   readonly type: DecorationType;
+}
+
 /** Initial data sent to the client */
 export interface InitialGameDataPacket extends GameDataPacket {
    readonly playerID: number;
@@ -185,6 +204,7 @@ export interface InitialGameDataPacket extends GameDataPacket {
    readonly edgeTiles: Array<ServerTileData>;
    readonly edgeTileRiverFlowDirections: Record<number, Record<number, number>>;
    readonly grassInfo: Record<number, Record<number, GrassTileInfo>>;
+   readonly decorations: ReadonlyArray<DecorationInfo>;
 }
 
 export type VisibleChunkBounds = [minChunkX: number, maxChunkX: number, minChunkY: number, maxChunkY: number];
