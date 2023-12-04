@@ -179,6 +179,7 @@ export enum DecorationType {
    pebble,
    rock,
    sandstoneRock,
+   sandstoneRockBig,
    blackRock,
    snowPile,
    flower1,
@@ -202,7 +203,8 @@ export interface InitialGameDataPacket extends GameDataPacket {
    readonly riverSteppingStones: ReadonlyArray<RiverSteppingStoneData>;
    readonly riverFlowDirections: Record<number, Record<number, number>>;
    readonly edgeTiles: Array<ServerTileData>;
-   readonly edgeTileRiverFlowDirections: Record<number, Record<number, number>>;
+   readonly edgeRiverFlowDirections: Record<number, Record<number, number>>;
+   readonly edgeRiverSteppingStones: ReadonlyArray<RiverSteppingStoneData>;
    readonly grassInfo: Record<number, Record<number, GrassTileInfo>>;
    readonly decorations: ReadonlyArray<DecorationInfo>;
 }
