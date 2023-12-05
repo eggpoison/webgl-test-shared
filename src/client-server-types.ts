@@ -84,20 +84,22 @@ export const HitFlags = {
 }
 
 export interface HitData {
+   // Two following values are used for if the hit is a killing blow so the client doesn't know where the hit entity is
+   readonly entityPositionX: number;
+   readonly entityPositionY: number;
+   readonly hitEntityID: number;
+   /** Used for client-side damage numbers */
+   readonly damage: number;
    readonly knockback: number;
    readonly angleFromAttacker: number | null;
+   readonly attackerID: number;
    readonly flags: number;
-   // @Cleanup: The client doesn't need to know this information. The server just uses this property in the data type.
-   /** The server tick the hit was done on. Used in the server for filtering out old hit data */
-   readonly tick: number;
 }
 
 export interface EntityData<T extends EntityType> extends GameObjectData {
    readonly type: T;
    readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
    readonly statusEffects: Array<StatusEffectData>;
-   /** Any hits the entity took server-side */
-   readonly hitsTaken: ReadonlyArray<HitData>;
    readonly amountHealed: number;
 }
 
@@ -125,6 +127,8 @@ export interface GameDataPacket {
    readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
    readonly projectileDataArray: ReadonlyArray<ProjectileData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
+   /** All hits taken by visible entities server-side */
+   readonly hitsTaken: ReadonlyArray<HitData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
@@ -193,6 +197,7 @@ export interface DecorationInfo {
    readonly positionY: number;
    readonly rotation: number;
    readonly type: DecorationType;
+   readonly variant: number;
 }
 
 /** Initial data sent to the client */
