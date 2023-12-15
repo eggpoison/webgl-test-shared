@@ -44,7 +44,8 @@ interface SettingsType {
 export const SETTINGS: SettingsType = {
    TPS: 60,
    TILE_SIZE: 64,
-   BOARD_SIZE: 64,
+   BOARD_SIZE: 48,
+   // BOARD_SIZE: 64,
    CHUNK_SIZE: 4,
    CHUNK_UNITS: -1,
    BOARD_DIMENSIONS: -1,

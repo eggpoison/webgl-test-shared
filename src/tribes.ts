@@ -8,29 +8,34 @@ export enum TribeType {
 }
 
 interface TribeInfo {
-   readonly maxHealth: number;
+   readonly maxHealthPlayer: number;
+   readonly maxHealthWorker: number;
    readonly biomes: ReadonlyArray<BiomeName>;
    readonly baseTribesmanCap: number;
 }
 
 export const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    [TribeType.plainspeople]: {
-      maxHealth: 20,
+      maxHealthPlayer: 20,
+      maxHealthWorker: 14,
       biomes: ["grasslands"],
       baseTribesmanCap: 4
    },
    [TribeType.barbarians]: {
-      maxHealth: 25,
+      maxHealthPlayer: 25,
+      maxHealthWorker: 17,
       biomes: ["desert"],
       baseTribesmanCap: 2
    },
    [TribeType.frostlings]: {
-      maxHealth: 20,
+      maxHealthPlayer: 20,
+      maxHealthWorker: 14,
       biomes: ["tundra"],
       baseTribesmanCap: 4
    },
    [TribeType.goblins]: {
-      maxHealth: 15,
+      maxHealthPlayer: 15,
+      maxHealthWorker: 10,
       biomes: ["grasslands", "desert", "tundra"],
       baseTribesmanCap: 8
    }
