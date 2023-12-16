@@ -27,7 +27,8 @@ export enum EntityType {
    snowball,
    krumblid,
    frozen_yeti,
-   fish
+   fish,
+   berry_snowbush
 }
 
 export const enum EntityTypeConst {
@@ -53,7 +54,8 @@ export const enum EntityTypeConst {
    snowball,
    krumblid,
    frozen_yeti,
-   fish
+   fish,
+   berry_snowbush
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berry_bush, EntityType.ice_spikes,EntityType.cactus, EntityType.boulder];
@@ -228,4 +230,5 @@ export interface EntityInfoClientArgs {
    [EntityType.krumblid]: () => void;
    [EntityType.frozen_yeti]: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => void;
    [EntityType.fish]: (colour: FishColour) => void;
+   [EntityType.berry_snowbush]: (numBerries: number) => void;
 };
