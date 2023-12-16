@@ -194,6 +194,12 @@ export enum FishColour {
    lime
 }
 
+export enum TribesmanState {
+   chasing,
+   escaping,
+   normal
+}
+
 // @Cleanup (???): Make all of these things into structures
 export interface EntityInfoClientArgs {
    [EntityType.cow]: (species: CowSpecies, grazeProgress: number) => void;
@@ -211,7 +217,7 @@ export interface EntityInfoClientArgs {
    // @Cleanup: Maybe foodEatingType can be removed, just use activeItemType instead
    // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
    // @Cleanup: don't send backpack inventory for players.
-   [EntityType.tribesman]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number) => void;
+   [EntityType.tribesman]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => void;
    [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, username: string) => void;
    [EntityType.tribe_totem]: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => void;
    [EntityType.tribe_hut]: (tribeID: number) => void;
