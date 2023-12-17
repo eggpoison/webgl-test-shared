@@ -185,6 +185,7 @@ export enum DecorationType {
    rock,
    sandstoneRock,
    sandstoneRockBig,
+   blackRockSmall,
    blackRock,
    snowPile,
    flower1,
