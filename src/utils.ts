@@ -41,6 +41,12 @@ export class Point {
       return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
    }
 
+   public calculateDistanceSquaredBetween(other: Point): number {
+      const diffX = this.x - other.x;
+      const diffY = this.y - other.y;
+      return diffX * diffX + diffY * diffY;
+   }
+
    public calculateAngleBetween(other: Point): number {
       let angle = Math.atan2(other.y - this.y, other.x - this.x);
       return Math.PI/2 - angle;

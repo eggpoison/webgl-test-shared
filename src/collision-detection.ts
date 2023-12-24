@@ -1,5 +1,6 @@
 import { Point, distance, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
 
+// @Speed: Maybe make into const enum?
 export const COLLISION_BITS = {
    other: 1 << 0,
    cactus: 1 << 1

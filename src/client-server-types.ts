@@ -1,6 +1,5 @@
 import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
 import { ItemType } from "./items";
-import { ProjectileType } from "./projectiles";
 import { StatusEffect } from "./status-effects";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
@@ -63,17 +62,6 @@ export interface RectangularHitboxData extends BaseHitboxData {
    readonly height: number;
 }
 
-export interface GameObjectData {
-   readonly id: number;
-   readonly position: [number, number];
-   readonly velocity: [number, number];
-   readonly rotation: number;
-   readonly mass: number;
-   readonly rectangularHitboxes: ReadonlyArray<RectangularHitboxData>;
-   readonly circularHitboxes: ReadonlyArray<CircularHitboxData>;
-   readonly ageTicks: number;
-}
-
 export interface StatusEffectData {
    readonly type: StatusEffect;
    readonly ticksElapsed: number;
@@ -96,21 +84,19 @@ export interface HitData {
    readonly flags: number;
 }
 
-export interface EntityData<T extends EntityType> extends GameObjectData {
+export interface EntityData<T extends EntityType = EntityType> {
+   readonly id: number;
+   readonly position: [number, number];
+   readonly velocity: [number, number];
+   readonly rotation: number;
+   readonly mass: number;
+   readonly rectangularHitboxes: ReadonlyArray<RectangularHitboxData>;
+   readonly circularHitboxes: ReadonlyArray<CircularHitboxData>;
+   readonly ageTicks: number;
    readonly type: T;
-   readonly clientArgs: Parameters<EntityInfoClientArgs[T]>;
+   readonly clientArgs: Parameters<typeof EntityInfoClientArgs[T]>;
    readonly statusEffects: Array<StatusEffectData>;
    readonly amountHealed: number;
-}
-
-export interface DroppedItemData extends GameObjectData {
-   readonly type: ItemType;
-}
-
-export interface ProjectileData extends GameObjectData {
-   readonly type: ProjectileType;
-   // @Cleanup: This is very bad, rework into some entity-system type thing
-   readonly data: any;
 }
 
 export interface TribeData {
@@ -124,8 +110,6 @@ export interface TribeData {
 /** Data about the game state sent to the client each tick */
 export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
-   readonly droppedItemDataArray: ReadonlyArray<DroppedItemData>;
-   readonly projectileDataArray: ReadonlyArray<ProjectileData>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    /** All hits taken by visible entities server-side */
    readonly hitsTaken: ReadonlyArray<HitData>;
@@ -225,7 +209,6 @@ export type PlayerDataPacket = {
    readonly velocity: [number, number];
    readonly acceleration: [number, number];
    readonly rotation: number;
-   readonly terminalVelocity: number;
    // @Vulnerability: Allows falsely sending way larger visible chunk bounds which can slow down the server a ton
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
@@ -243,7 +226,6 @@ export interface GameDataSyncPacket {
    readonly velocity: [number, number];
    readonly acceleration: [number, number];
    readonly rotation: number;
-   readonly terminalVelocity: number;
    readonly health: number;
    readonly inventory: PlayerInventoryData;
 }

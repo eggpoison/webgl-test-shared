@@ -1,4 +1,4 @@
-import { EntityType, EntityTypeConst } from "./entities";
+import { EntityType, IEntityType } from "./entities";
 import { SETTINGS } from "./settings";
 
 export enum ItemType {
@@ -89,7 +89,7 @@ export interface PickaxeItemInfo extends ToolItemInfo {
 
 export interface PlaceableItemInfo extends StackableItemInfo {
    readonly entityType: EntityType;
-   readonly entityTypeConst: EntityTypeConst;
+   readonly entityTypeConst: IEntityType;
 }
 
 export interface BackpackItemInfo extends BaseItemInfo {
@@ -167,7 +167,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.workbench]: {
       stackSize: 99,
       entityType: EntityType.workbench,
-      entityTypeConst: EntityTypeConst.workbench
+      entityTypeConst: IEntityType.workbench
    },
    [ItemType.wooden_sword]: {
       toolType: "sword",
@@ -261,18 +261,18 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.tribe_totem]: {
       stackSize: 99,
-      entityType: EntityType.tribe_totem,
-      entityTypeConst: EntityTypeConst.tribe_totem
+      entityType: EntityType.tribeTotem,
+      entityTypeConst: IEntityType.tribeTotem
    },
    [ItemType.tribe_hut]: {
       stackSize: 99,
-      entityType: EntityType.tribe_hut,
-      entityTypeConst: EntityTypeConst.tribe_hut
+      entityType: EntityType.tribeHut,
+      entityTypeConst: IEntityType.tribeHut
    },
    [ItemType.barrel]: {
       stackSize: 99,
       entityType: EntityType.barrel,
-      entityTypeConst: EntityTypeConst.barrel
+      entityTypeConst: IEntityType.barrel
    },
    [ItemType.frost_armour]: {
       defence: 0.25,
@@ -281,12 +281,12 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.campfire]: {
       stackSize: 99,
       entityType: EntityType.campfire,
-      entityTypeConst: EntityTypeConst.campfire
+      entityTypeConst: IEntityType.campfire
    },
    [ItemType.furnace]: {
       stackSize: 99,
       entityType: EntityType.furnace,
-      entityTypeConst: EntityTypeConst.furnace
+      entityTypeConst: IEntityType.furnace
    },
    [ItemType.wooden_bow]: {
       projectileDamage: 4,
