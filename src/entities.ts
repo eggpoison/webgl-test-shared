@@ -31,7 +31,8 @@ export enum EntityType {
    itemEntity,
    woodenArrowProjectile,
    iceShardProjectile,
-   rockSpikeProjectile
+   rockSpikeProjectile,
+   spearProjectile
 }
 
 export const enum IEntityType {
@@ -61,7 +62,8 @@ export const enum IEntityType {
    itemEntity,
    woodenArrowProjectile,
    iceShardProjectile,
-   rockSpikeProjectile
+   rockSpikeProjectile,
+   spearProjectile
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -172,7 +174,8 @@ export enum PlayerCauseOfDeath {
    bloodloss,
    rock_spike,
    lack_of_oxygen,
-   fish
+   fish,
+   spear
 }
 
 export interface DeathInfo {
@@ -181,7 +184,8 @@ export interface DeathInfo {
 }
 
 export enum TribeMemberAction {
-   charge_bow,
+   chargeBow,
+   chargeSpear,
    eat,
    none
 }
@@ -251,5 +255,6 @@ export const EntityInfoClientArgs = {
    [EntityType.itemEntity]: (itemType: ItemType) => {},
    [EntityType.woodenArrowProjectile]: () => {},
    [EntityType.iceShardProjectile]: () => {},
-   [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {}
+   [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
+   [EntityType.spearProjectile]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;

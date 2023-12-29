@@ -30,24 +30,21 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       yield: 1,
       ingredients: {
          [ItemType.wood]: 15
-      },
-      craftingStation: CraftingStation.workbench
+      }
    },
    {
       product: ItemType.wooden_pickaxe,
       yield: 1,
       ingredients: {
          [ItemType.wood]: 10
-      },
-      craftingStation: CraftingStation.workbench
+      }
    },
    {
       product: ItemType.wooden_axe,
       yield: 1,
       ingredients: {
          [ItemType.wood]: 10
-      },
-      craftingStation: CraftingStation.workbench
+      }
    },
    {
       product: ItemType.stone_sword,

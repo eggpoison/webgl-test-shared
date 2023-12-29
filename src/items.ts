@@ -40,7 +40,8 @@ export enum ItemType {
    fishlord_suit,
    gathering_gloves,
    throngler,
-   leather_armour
+   leather_armour,
+   spear
 }
 
 export interface BaseItemInfo {}
@@ -56,7 +57,7 @@ export interface FoodItemInfo extends StackableItemInfo {
    readonly eatTime: number;
 }
 
-export type ToolType = "sword" | "bow" | "axe" | "pickaxe";
+export type ToolType = "sword" | "bow" | "axe" | "pickaxe" | "spear";
 
 export interface ToolItemInfo extends BaseItemInfo {
    readonly toolType: ToolType;
@@ -114,6 +115,8 @@ export interface GloveItemInfo extends BaseItemInfo {
    readonly level: number;
 }
 
+export interface SpearItemInfo extends ToolItemInfo {}
+
 export interface ItemInfoRecord {
    material: MaterialItemInfo;
    food: FoodItemInfo;
@@ -125,6 +128,7 @@ export interface ItemInfoRecord {
    backpack: BackpackItemInfo;
    armour: ArmourItemInfo;
    glove: GloveItemInfo;
+   spear: SpearItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -166,7 +170,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.fishlord_suit]: "armour",
    [ItemType.gathering_gloves]: "glove",
    [ItemType.throngler]: "sword",
-   [ItemType.leather_armour]: "armour"
+   [ItemType.leather_armour]: "armour",
+   [ItemType.spear]: "spear"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -182,7 +187,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.wooden_sword]: {
       toolType: "sword",
-      damage: 3,
+      damage: 2,
       knockback: 150,
       attackCooldown: 0.3,
       level: 1
@@ -221,7 +226,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.stone_sword]: {
       toolType: "sword",
-      damage: 4,
+      damage: 3,
       knockback: 150,
       attackCooldown: 0.3,
       level: 2
@@ -316,7 +321,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.deepfrost_sword]: {
       toolType: "sword",
-      damage: 7,
+      damage: 4,
       knockback: 170,
       attackCooldown: 0.3,
       level: 3
@@ -366,6 +371,13 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.leather_armour]: {
       defence: 0.1,
       level: 1
+   },
+   [ItemType.spear]: {
+      toolType: "spear",
+      damage: 4,
+      knockback: 300,
+      attackCooldown: 0.8,
+      level: 2.5
    }
 };
 

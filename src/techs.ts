@@ -1,6 +1,8 @@
 // @Cleanup: Move server-only stuff to the server and client-only stuff to the client
 
+import { ItemRequirements } from "./crafting-recipes";
 import { ItemType } from "./items";
+import { TribeType } from "./tribes";
 
 export enum TechID {
    woodenTools,
@@ -15,6 +17,19 @@ export enum TechID {
    leatherworking
 }
 
+/** The current amount of items used in each tech's research */
+export type TechUnlockProgress = Partial<Record<TechID, ItemRequirements>>;
+
+export interface TribeData {
+   readonly id: number;
+   readonly tribeType: TribeType;
+   readonly numHuts: number;
+   readonly tribesmanCap: number;
+   readonly area: ReadonlyArray<[tileX: number, tileY: number]>;
+   readonly unlockedTechs: ReadonlyArray<TechID>;
+   readonly techUnlockProgress: TechUnlockProgress;
+}
+
 export interface TechInfo {
    readonly id: TechID;
    readonly name: string;
@@ -24,7 +39,7 @@ export interface TechInfo {
    readonly positionX: number;
    readonly positionY: number;
    readonly dependencies: ReadonlyArray<TechID>;
-   readonly researchItemRequirements: ReadonlyArray<[ItemType, number]>;
+   readonly researchItemRequirements: ItemRequirements;
 }
 
 export const TECHS: ReadonlyArray<TechInfo> = [
@@ -37,9 +52,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 0,
       positionY: 0,
       dependencies: [],
-      researchItemRequirements: [
-         [ItemType.wood, 5]
-      ]
+      researchItemRequirements: {
+         [ItemType.wood]: 5
+      }
    },
    {
       id: TechID.fire,
@@ -50,9 +65,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 33,
       positionY: 10,
       dependencies: [TechID.woodenTools],
-      researchItemRequirements: [
-         [ItemType.wood, 10]
-      ]
+      researchItemRequirements: {
+         [ItemType.wood]: 10
+      }
    },
    {
       id: TechID.society,
@@ -63,10 +78,10 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 25,
       positionY: 40,
       dependencies: [TechID.fire],
-      researchItemRequirements: [
-         [ItemType.wooden_pickaxe, 1],
-         [ItemType.wood, 10]
-      ]
+      researchItemRequirements: {
+         [ItemType.wooden_pickaxe]: 1,
+         [ItemType.wood]: 10
+      }
    },
    {
       id: TechID.gathering,
@@ -77,23 +92,23 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 8,
       positionY: -28,
       dependencies: [TechID.woodenTools],
-      researchItemRequirements: [
-         [ItemType.wood, 25],
-         [ItemType.berry, 10]
-      ]
+      researchItemRequirements: {
+         [ItemType.wood]: 25,
+         [ItemType.berry]: 10
+      }
    },
    {
        id: TechID.stoneworking,
        name: "Stoneworking",
        description: "Manipulation of stone in crafting",
        iconSrc: "stoneworking.png",
-       unlockedItems: [ItemType.stone_pickaxe, ItemType.stone_axe, ItemType.stone_sword],
+       unlockedItems: [ItemType.stone_pickaxe, ItemType.stone_axe, ItemType.stone_sword, ItemType.spear],
        positionX: -40,
        positionY: -5,
        dependencies: [TechID.woodenTools],
-       researchItemRequirements: [
-         [ItemType.rock, 30]
-       ]
+       researchItemRequirements: {
+         [ItemType.rock]: 30
+       }
    },
    {
       id: TechID.furnace,
@@ -104,10 +119,10 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 55,
       positionY: 10,
       dependencies: [TechID.fire],
-      researchItemRequirements: [
-         [ItemType.campfire, 2],
-         [ItemType.rock, 20]
-      ]
+      researchItemRequirements: {
+         [ItemType.campfire]: 2,
+         [ItemType.rock]: 20
+      }
    },
    {
       id: TechID.workbench,
@@ -118,9 +133,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: 48,
       positionY: -12,
       dependencies: [TechID.fire],
-      researchItemRequirements: [
-         [ItemType.wood, 40]
-      ]
+      researchItemRequirements: {
+         [ItemType.wood]: 40
+      }
    },
    {
       id: TechID.throngling,
@@ -131,10 +146,10 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: -28,
       positionY: 18,
       dependencies: [TechID.stoneworking],
-      researchItemRequirements: [
-         [ItemType.rock, 20],
-         [ItemType.cactus_spine, 30]
-      ]
+      researchItemRequirements: {
+         [ItemType.rock]: 20,
+         [ItemType.cactus_spine]: 30
+      }
    },
    {
       id: TechID.archery,
@@ -145,9 +160,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: -55,
       positionY: 21,
       dependencies: [TechID.stoneworking],
-      researchItemRequirements: [
-         [ItemType.wood, 60]
-      ]
+      researchItemRequirements: {
+         [ItemType.wood]: 60
+      }
    },
    {
       id: TechID.leatherworking,
@@ -158,9 +173,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionX: -60,
       positionY: -18,
       dependencies: [TechID.stoneworking],
-      researchItemRequirements: [
-         [ItemType.leather, 20]
-      ]
+      researchItemRequirements: {
+         [ItemType.leather]: 20
+      }
    }
 ];
 
