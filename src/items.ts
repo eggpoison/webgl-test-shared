@@ -37,7 +37,10 @@ export enum ItemType {
    deepfrost_armour,
    raw_fish,
    cooked_fish,
-   fishlord_suit
+   fishlord_suit,
+   gathering_gloves,
+   throngler,
+   leather_armour
 }
 
 export interface BaseItemInfo {}
@@ -107,6 +110,10 @@ export interface ArmourItemInfo extends BaseItemInfo {
    readonly level: number;
 }
 
+export interface GloveItemInfo extends BaseItemInfo {
+   readonly level: number;
+}
+
 export interface ItemInfoRecord {
    material: MaterialItemInfo;
    food: FoodItemInfo;
@@ -117,6 +124,7 @@ export interface ItemInfoRecord {
    placeable: PlaceableItemInfo;
    backpack: BackpackItemInfo;
    armour: ArmourItemInfo;
+   glove: GloveItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -155,7 +163,10 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.deepfrost_armour]: "armour",
    [ItemType.raw_fish]: "food",
    [ItemType.cooked_fish]: "food",
-   [ItemType.fishlord_suit]: "armour"
+   [ItemType.fishlord_suit]: "armour",
+   [ItemType.gathering_gloves]: "glove",
+   [ItemType.throngler]: "sword",
+   [ItemType.leather_armour]: "armour"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -341,6 +352,20 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.fishlord_suit]: {
       defence: 0.1,
       level: 1
+   },
+   [ItemType.gathering_gloves]: {
+      level: 1
+   },
+   [ItemType.throngler]: {
+      toolType: "sword",
+      damage: 2,
+      knockback: 400,
+      attackCooldown: 0.5,
+      level: 2.5
+   },
+   [ItemType.leather_armour]: {
+      defence: 0.1,
+      level: 1
    }
 };
 
@@ -352,4 +377,43 @@ export type PlaceableItemType = keyof {
 type ExcludeNonArmourItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "armour" ? T : never;
 export type ArmourItemType = keyof {
    [T in ItemType as ExcludeNonArmourItemTypes<T>]: T;
+}
+
+export type ItemSlot = Item | null;
+
+/** Stores the items inside an inventory, indexed by their slot number. */
+export type ItemSlots = { [itemSlot: number]: Item };
+
+export interface Inventory {
+   itemSlots: ItemSlots;
+   width: number;
+   height: number;
+   readonly inventoryName: string;
+}
+
+export class Item {
+   /** Unique identifier for the item */
+   public readonly id: number;
+   
+   public type: ItemType;
+   public count: number;
+
+   constructor(itemType: ItemType, count: number, id: number) {
+      this.type = itemType;
+      this.count = count;
+      this.id = id;
+   }
+}
+
+/**
+ * Checks whether a given item type is able to be stacked.
+ * @param itemType The type of item to check.
+ * @returns Whether the item type is able to be stacked.
+ */
+export function itemIsStackable(itemType: ItemType): boolean {
+   return ITEM_INFO_RECORD[itemType].hasOwnProperty("stackSize");
+}
+
+export function getItemStackSize(item: Item): number {
+   return (ITEM_INFO_RECORD[item.type] as StackableItemInfo).stackSize;
 }

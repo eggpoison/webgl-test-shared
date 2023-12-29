@@ -1,6 +1,7 @@
 import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
 import { ItemType } from "./items";
 import { StatusEffect } from "./status-effects";
+import { TechID } from "./techs";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
 
@@ -105,6 +106,7 @@ export interface TribeData {
    readonly numHuts: number;
    readonly tribesmanCap: number;
    readonly area: ReadonlyArray<[tileX: number, tileY: number]>;
+   readonly unlockedTechs: ReadonlyArray<TechID>;
 }
 
 /** Data about the game state sent to the client each tick */
@@ -310,6 +312,7 @@ export interface ClientToServerEvents {
    command: (command: string) => void;
    // Tells the server to start sending debug information about a certain game object
    track_game_object: (gameObjectID: number | null) => void;
+   unlock_tech: (techID: TechID) => void;
 }
 
 export interface InterServerEvents {}

@@ -213,10 +213,17 @@ export enum RockSpikeProjectileSize {
    large
 }
 
-// @Cleanup: (???) Make all of these things into structures
+// @Cleanup: Maybe send data based on the components
+// cons:
+// - would send all data regardless of whether it is useful or not
+// pros:
+// - faster development time
+// - doesn't require defining an extra protocol for which data is sent (like with the EntityInfoClientArgs)
+// - allows easily inspecting specific entity data
+
 export const EntityInfoClientArgs = {
    [EntityType.cow]: (species: CowSpecies, grazeProgress: number) => {},
-   [EntityType.zombie]: (zombieType: number) => {},
+   [EntityType.zombie]: (zombieType: number, activeItemType: ItemType | null, lastActionTicks: number, action: TribeMemberAction) => {},
    [EntityType.tombstone]: (tombstoneType: number, zombieSpawnProgress: number, zombieSpawnX: number, zombieSpawnY: number, deathInfo: DeathInfo | null) => {},
    [EntityType.tree]: (treeSize: TreeSize) => {},
    [EntityType.workbench]: () => {},
