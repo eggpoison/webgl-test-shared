@@ -24,7 +24,7 @@ export const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
    },
    [TribeType.barbarians]: {
       maxHealthPlayer: 25,
-      maxHealthWorker: 17,
+      maxHealthWorker: 18,
       biomes: ["desert"],
       baseTribesmanCap: 2
    },

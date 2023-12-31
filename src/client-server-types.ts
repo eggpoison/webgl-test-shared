@@ -114,7 +114,7 @@ export interface GameDataPacket {
    readonly playerHealth: number;
    /** Extra debug information about a game object being tracked */
    readonly gameObjectDebugData?: GameObjectDebugData;
-   readonly tribeData: TribeData | null;
+   readonly tribeData: TribeData;
    readonly hasFrostShield: boolean;
    readonly pickedUpItem: boolean;
 }
@@ -281,7 +281,8 @@ export interface ServerToClientEvents {
 
 export interface ClientToServerEvents {
    spawn_position_request: () => void;
-   initial_player_data: (username: string, visibleChunkBounds: VisibleChunkBounds) => void;
+   initial_player_data: (username: string, tribeType: TribeType) => void;
+   visible_chunk_bounds: (visibleChunkBounds: VisibleChunkBounds) => void;
    initial_game_data_request: () => void;
    deactivate: () => void;
    activate: () => void;
@@ -303,7 +304,9 @@ export interface ClientToServerEvents {
    command: (command: string) => void;
    // Tells the server to start sending debug information about a certain game object
    track_game_object: (gameObjectID: number | null) => void;
+   select_tech: (techID: TechID) => void;
    unlock_tech: (techID: TechID) => void;
+   study_tech: (studyAmount: number) => void;
 }
 
 export interface InterServerEvents {}

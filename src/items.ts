@@ -23,7 +23,8 @@ export enum ItemType {
    eyeball,
    flesh_sword,
    tribe_totem,
-   tribe_hut,
+   worker_hut,
+   warrior_hut,
    barrel,
    frost_armour,
    campfire,
@@ -41,7 +42,9 @@ export enum ItemType {
    gathering_gloves,
    throngler,
    leather_armour,
-   spear
+   spear,
+   paper,
+   research_bench
 }
 
 export interface BaseItemInfo {}
@@ -153,7 +156,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.eyeball]: "material",
    [ItemType.flesh_sword]: "sword",
    [ItemType.tribe_totem]: "placeable",
-   [ItemType.tribe_hut]: "placeable",
+   [ItemType.worker_hut]: "placeable",
+   [ItemType.warrior_hut]: "placeable",
    [ItemType.barrel]: "placeable",
    [ItemType.frost_armour]: "armour",
    [ItemType.campfire]: "placeable",
@@ -171,7 +175,9 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.gathering_gloves]: "glove",
    [ItemType.throngler]: "sword",
    [ItemType.leather_armour]: "armour",
-   [ItemType.spear]: "spear"
+   [ItemType.spear]: "spear",
+   [ItemType.paper]: "material",
+   [ItemType.research_bench]: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -280,10 +286,15 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: EntityType.tribeTotem,
       entityTypeConst: IEntityType.tribeTotem
    },
-   [ItemType.tribe_hut]: {
+   [ItemType.worker_hut]: {
       stackSize: 99,
-      entityType: EntityType.tribeHut,
-      entityTypeConst: IEntityType.tribeHut
+      entityType: EntityType.workerHut,
+      entityTypeConst: IEntityType.workerHut
+   },
+   [ItemType.warrior_hut]: {
+      stackSize: 99,
+      entityType: EntityType.warriorHut,
+      entityTypeConst: IEntityType.warriorHut
    },
    [ItemType.barrel]: {
       stackSize: 99,
@@ -378,6 +389,14 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       knockback: 300,
       attackCooldown: 0.8,
       level: 2.5
+   },
+   [ItemType.paper]: {
+      stackSize: 99
+   },
+   [ItemType.research_bench]: {
+      stackSize: 99,
+      entityType: EntityType.researchBench,
+      entityTypeConst: IEntityType.researchBench
    }
 };
 

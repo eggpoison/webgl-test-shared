@@ -95,17 +95,28 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       product: ItemType.tribe_totem,
       yield: 1,
       ingredients: {
-         [ItemType.wood]: 40,
-         [ItemType.rock]: 40
+         [ItemType.wood]: 40
       },
       craftingStation: CraftingStation.workbench
    },
    {
-      product: ItemType.tribe_hut,
+      product: ItemType.worker_hut,
       yield: 1,
       ingredients: {
          [ItemType.wood]: 20,
-         [ItemType.leather]: 15
+         [ItemType.leather]: 10,
+         [ItemType.wooden_pickaxe]: 1
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.warrior_hut,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 25,
+         [ItemType.rock]: 30,
+         [ItemType.leather]: 15,
+         [ItemType.wooden_sword]: 1
       },
       craftingStation: CraftingStation.workbench
    },
@@ -202,6 +213,32 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.cactus_spine]: 1
       },
       craftingStation: CraftingStation.water
+   },
+   {
+      product: ItemType.spear,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 10,
+         [ItemType.rock]: 5
+      }
+   },
+   {
+      product: ItemType.paper,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 3
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.research_bench,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 30,
+         [ItemType.paper]: 10,
+         [ItemType.slimeball]: 5
+      },
+      craftingStation: CraftingStation.workbench
    }
 ];
 

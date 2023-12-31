@@ -276,6 +276,16 @@ export const COMMANDS: Commands = [
             permissions: CommandPermissions.dev
          }
       ]
+   },
+   {
+      name: "unlockall",
+      parameters: [],
+      configurations: [
+         {
+            parameterConfigurations: [],
+            permissions: CommandPermissions.dev
+         }
+      ]
    }
 ];
 

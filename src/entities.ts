@@ -17,10 +17,12 @@ export enum EntityType {
    iceSpikes,
    slime,
    slimewisp,
-   tribesman,
    player,
+   tribeWorker,
+   tribeWarrior,
    tribeTotem,
-   tribeHut,
+   workerHut,
+   warriorHut,
    barrel,
    campfire,
    furnace,
@@ -32,7 +34,8 @@ export enum EntityType {
    woodenArrowProjectile,
    iceShardProjectile,
    rockSpikeProjectile,
-   spearProjectile
+   spearProjectile,
+   researchBench
 }
 
 export const enum IEntityType {
@@ -48,10 +51,12 @@ export const enum IEntityType {
    iceSpikes,
    slime,
    slimewisp,
-   tribesman,
    player,
+   tribeWorker,
+   tribeWarrior,
    tribeTotem,
-   tribeHut,
+   workerHut,
+   warriorHut,
    barrel,
    campfire,
    furnace,
@@ -63,7 +68,8 @@ export const enum IEntityType {
    woodenArrowProjectile,
    iceShardProjectile,
    rockSpikeProjectile,
-   spearProjectile
+   spearProjectile,
+   researchBench
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -186,6 +192,7 @@ export interface DeathInfo {
 export enum TribeMemberAction {
    chargeBow,
    chargeSpear,
+   researching,
    eat,
    none
 }
@@ -238,13 +245,12 @@ export const EntityInfoClientArgs = {
    [EntityType.iceSpikes]: () => {},
    [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number) => {},
    [EntityType.slimewisp]: () => {},
-   // @Cleanup: Maybe foodEatingType can be removed, just use activeItemType instead
-   // @Cleanup: rework this stuff. Maybe combine the tribesman and player data, and figure out better system for lastAttackTicks and lastEatTicks
-   // @Cleanup: don't send backpack inventory for players.
-   [EntityType.tribesman]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
    [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, username: string) => {},
+   [EntityType.tribeWorker]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
+   [EntityType.tribeWarrior]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, activeItem: ItemType | null, action: TribeMemberAction, foodEatingType: ItemType | -1, lastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
    [EntityType.tribeTotem]: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => {},
-   [EntityType.tribeHut]: (tribeID: number) => {},
+   [EntityType.workerHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
+   [EntityType.warriorHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
    [EntityType.barrel]: (tribeID: number | null, inventory: InventoryData) => {},
    [EntityType.campfire]: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => {},
    [EntityType.furnace]:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => {},
@@ -256,5 +262,6 @@ export const EntityInfoClientArgs = {
    [EntityType.woodenArrowProjectile]: () => {},
    [EntityType.iceShardProjectile]: () => {},
    [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
-   [EntityType.spearProjectile]: () => {}
+   [EntityType.spearProjectile]: () => {},
+   [EntityType.researchBench]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
