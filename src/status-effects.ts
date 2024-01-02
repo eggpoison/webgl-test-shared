@@ -23,7 +23,7 @@ export const STATUS_EFFECT_MODIFIERS: Record<StatusEffect, StatusEffectModifiers
       moveSpeedMultiplier: 0.5
    },
    [StatusEffect.poisoned]: {
-      moveSpeedMultiplier: 1
+      moveSpeedMultiplier: 0.8
    },
    [StatusEffect.bleeding]: {
       moveSpeedMultiplier: 1

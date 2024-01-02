@@ -15,7 +15,8 @@ export enum TechID {
    throngling,
    archery,
    leatherworking,
-   warriors
+   warriors,
+   basicArchitecture
 }
 
 interface TechUnlockProgress {
@@ -211,6 +212,20 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.rock]: 50
       },
       researchStudyRequirements: 100
+   },
+   {
+      id: TechID.basicArchitecture,
+      name: "Basic Architecture",
+      description: "Primitive structures to build a defense with",
+      iconSrc: "basic-architecture.png",
+      unlockedItems: [ItemType.wooden_wall],
+      positionX: 72,
+      positionY: 0,
+      dependencies: [TechID.woodworking],
+      researchItemRequirements: {
+         [ItemType.wood]: 100
+      },
+      researchStudyRequirements: 150
    }
 ];
 

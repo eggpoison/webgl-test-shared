@@ -44,7 +44,8 @@ export enum ItemType {
    leather_armour,
    spear,
    paper,
-   research_bench
+   research_bench,
+   wooden_wall
 }
 
 export interface BaseItemInfo {}
@@ -177,7 +178,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.leather_armour]: "armour",
    [ItemType.spear]: "spear",
    [ItemType.paper]: "material",
-   [ItemType.research_bench]: "placeable"
+   [ItemType.research_bench]: "placeable",
+   [ItemType.wooden_wall]: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -397,6 +399,11 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       entityType: EntityType.researchBench,
       entityTypeConst: IEntityType.researchBench
+   },
+   [ItemType.wooden_wall]: {
+      stackSize: 99,
+      entityType: EntityType.woodenWall,
+      entityTypeConst: IEntityType.woodenWall
    }
 };
 

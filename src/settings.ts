@@ -39,6 +39,9 @@ interface SettingsType {
    readonly DEFAULT_ATTACK_COOLDOWN: number;
    /** Number of tiles from the edge of the border that edge terrain is generated */
    readonly EDGE_GENERATION_DISTANCE: number;
+   readonly STRUCTURE_SNAP_RANGE: number;
+   readonly STRUCTURE_POSITION_SNAP: number;
+   readonly STRUCTURE_ROTATION_SNAP: number;
 }
 
 export const SETTINGS: SettingsType = {
@@ -66,7 +69,10 @@ export const SETTINGS: SettingsType = {
    ITEM_PLACE_DISTANCE: 60,
    FRICTION_CONSTANT: 50,
    DEFAULT_ATTACK_COOLDOWN: 0.3,
-   EDGE_GENERATION_DISTANCE: 16
+   EDGE_GENERATION_DISTANCE: 16,
+   STRUCTURE_SNAP_RANGE: 100,
+   STRUCTURE_POSITION_SNAP: 20,
+   STRUCTURE_ROTATION_SNAP: Math.PI / 6
 };
 
 SETTINGS.CHUNK_UNITS = SETTINGS.CHUNK_SIZE * SETTINGS.TILE_SIZE;

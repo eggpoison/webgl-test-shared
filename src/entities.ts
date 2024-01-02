@@ -35,7 +35,10 @@ export enum EntityType {
    iceShardProjectile,
    rockSpikeProjectile,
    spearProjectile,
-   researchBench
+   researchBench,
+   woodenWall,
+   slimeSpit,
+   spitPoison
 }
 
 export const enum IEntityType {
@@ -69,7 +72,10 @@ export const enum IEntityType {
    iceShardProjectile,
    rockSpikeProjectile,
    spearProjectile,
-   researchBench
+   researchBench,
+   woodenWall,
+   slimeSpit,
+   spitPoison
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -263,5 +269,18 @@ export const EntityInfoClientArgs = {
    [EntityType.iceShardProjectile]: () => {},
    [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
    [EntityType.spearProjectile]: () => {},
-   [EntityType.researchBench]: () => {}
+   [EntityType.researchBench]: () => {},
+   [EntityType.woodenWall]: () => {},
+   [EntityType.slimeSpit]: (size: number) => {},
+   [EntityType.spitPoison]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
+
+export const STRUCTURE_TYPES = [EntityType.woodenWall] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall] as const;
+
+export type StructureType = typeof STRUCTURE_TYPES[number];
+export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
+
+export const SNAP_OFFSETS: Record<StructureTypeConst, number> = {
+   [IEntityType.woodenWall]: 64
+};
