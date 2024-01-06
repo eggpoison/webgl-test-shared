@@ -45,7 +45,8 @@ export enum ItemType {
    spear,
    paper,
    research_bench,
-   wooden_wall
+   wooden_wall,
+   wooden_hammer
 }
 
 export interface BaseItemInfo {}
@@ -61,7 +62,7 @@ export interface FoodItemInfo extends StackableItemInfo {
    readonly eatTime: number;
 }
 
-export type ToolType = "sword" | "bow" | "axe" | "pickaxe" | "spear";
+export type ToolType = "sword" | "bow" | "axe" | "pickaxe" | "spear" | "hammer";
 
 export interface ToolItemInfo extends BaseItemInfo {
    readonly toolType: ToolType;
@@ -93,6 +94,10 @@ export interface AxeItemInfo extends ToolItemInfo {
 
 export interface PickaxeItemInfo extends ToolItemInfo {
    readonly toolType: "pickaxe";
+}
+
+export interface HammerItemInfo extends ToolItemInfo {
+   readonly toolType: "hammer";
 }
 
 export interface PlaceableItemInfo extends StackableItemInfo {
@@ -133,6 +138,7 @@ export interface ItemInfoRecord {
    armour: ArmourItemInfo;
    glove: GloveItemInfo;
    spear: SpearItemInfo;
+   hammer: HammerItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -179,7 +185,8 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.spear]: "spear",
    [ItemType.paper]: "material",
    [ItemType.research_bench]: "placeable",
-   [ItemType.wooden_wall]: "placeable"
+   [ItemType.wooden_wall]: "placeable",
+   [ItemType.wooden_hammer]: "hammer"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -404,6 +411,13 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       entityType: EntityType.woodenWall,
       entityTypeConst: IEntityType.woodenWall
+   },
+   [ItemType.wooden_hammer]: {
+      toolType: "hammer",
+      damage: 2,
+      knockback: 150,
+      attackCooldown: 0.7,
+      level: 1
    }
 };
 

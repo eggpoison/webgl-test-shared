@@ -218,7 +218,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       name: "Basic Architecture",
       description: "Primitive structures to build a defense with",
       iconSrc: "basic-architecture.png",
-      unlockedItems: [ItemType.wooden_wall],
+      unlockedItems: [ItemType.wooden_wall, ItemType.wooden_hammer],
       positionX: 72,
       positionY: 0,
       dependencies: [TechID.woodworking],
