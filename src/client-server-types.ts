@@ -207,7 +207,8 @@ export type PlayerDataPacket = {
    // @Vulnerability: Allows falsely sending way larger visible chunk bounds which can slow down the server a ton
    readonly visibleChunkBounds: VisibleChunkBounds;
    readonly selectedItemSlot: number;
-   readonly action: TribeMemberAction;
+   readonly mainAction: TribeMemberAction;
+   readonly offhandAction: TribeMemberAction;
    /** ID of the entity the player is interacting with */
    readonly interactingEntityID: number | null;
 }
@@ -227,6 +228,7 @@ export interface GameDataSyncPacket {
 
 /** Data sent to the server when an attack is performed */
 export interface AttackPacket {
+   readonly inventoryName: string;
    /** The item slot of the item which is being used to attack */
    readonly itemSlot: number;
    /** The direction that the attack is being done */

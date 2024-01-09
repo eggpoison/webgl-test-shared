@@ -43,6 +43,6 @@ export const TRIBE_INFO_RECORD: Record<TribeType, TribeInfo> = {
       maxHealthWorker: 10,
       biomes: ["grasslands", "desert", "tundra"],
       baseTribesmanCap: 8,
-      moveSpeedMultiplier: 1
+      moveSpeedMultiplier: 1.1
    }
 };
