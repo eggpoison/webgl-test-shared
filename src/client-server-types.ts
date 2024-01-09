@@ -32,6 +32,7 @@ export interface PlayerInventoryData {
    /** Item held in the player's crafting output slot */
    readonly craftingOutputItemSlot: InventoryData;
    readonly armourSlot: InventoryData;
+   readonly offhand: InventoryData;
 }
 
 export interface ServerTileData {
@@ -100,6 +101,7 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly amountHealed: number;
 }
 
+// @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
 /** Data about the game state sent to the client each tick */
 export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
@@ -265,6 +267,10 @@ export interface GameObjectDebugData {
    readonly maxHealth?: number;
 }
 
+export enum StructureShapeType {
+   door
+}
+
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
@@ -307,6 +313,8 @@ export interface ClientToServerEvents {
    select_tech: (techID: TechID) => void;
    unlock_tech: (techID: TechID) => void;
    study_tech: (studyAmount: number) => void;
+   shape_structure: (structureID: number, type: StructureShapeType) => void;
+   structure_interact: (structureID: number) => void;
 }
 
 export interface InterServerEvents {}

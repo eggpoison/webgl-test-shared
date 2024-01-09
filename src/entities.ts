@@ -38,7 +38,8 @@ export enum EntityType {
    researchBench,
    woodenWall,
    slimeSpit,
-   spitPoison
+   spitPoison,
+   woodenDoor
 }
 
 export const enum IEntityType {
@@ -75,7 +76,8 @@ export const enum IEntityType {
    researchBench,
    woodenWall,
    slimeSpit,
-   spitPoison
+   spitPoison,
+   woodenDoor
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -272,7 +274,8 @@ export const EntityInfoClientArgs = {
    [EntityType.researchBench]: () => {},
    [EntityType.woodenWall]: () => {},
    [EntityType.slimeSpit]: (size: number) => {},
-   [EntityType.spitPoison]: () => {}
+   [EntityType.spitPoison]: () => {},
+   [EntityType.woodenDoor]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
 export const STRUCTURE_TYPES = [EntityType.woodenWall] as const;
