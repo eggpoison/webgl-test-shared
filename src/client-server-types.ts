@@ -228,7 +228,6 @@ export interface GameDataSyncPacket {
 
 /** Data sent to the server when an attack is performed */
 export interface AttackPacket {
-   readonly inventoryName: string;
    /** The item slot of the item which is being used to attack */
    readonly itemSlot: number;
    /** The direction that the attack is being done */
