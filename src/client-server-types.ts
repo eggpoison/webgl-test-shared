@@ -51,6 +51,7 @@ export type ServerTileUpdateData = {
 }
 
 export interface BaseHitboxData {
+   readonly localID: number;
    readonly offsetX: number;
    readonly offsetY: number;
 }
