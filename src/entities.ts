@@ -1,4 +1,4 @@
-import { InventoryData } from "./client-server-types";
+import { InventoryData, ItemData } from "./client-server-types";
 import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
@@ -39,7 +39,8 @@ export enum EntityType {
    woodenWall,
    slimeSpit,
    spitPoison,
-   woodenDoor
+   woodenDoor,
+   battleaxeProjectile
 }
 
 export const enum IEntityType {
@@ -77,7 +78,8 @@ export const enum IEntityType {
    woodenWall,
    slimeSpit,
    spitPoison,
-   woodenDoor
+   woodenDoor,
+   battleaxeProjectile
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -198,8 +200,10 @@ export interface DeathInfo {
 }
 
 export enum TribeMemberAction {
+   // @Cleanup: Maybe we can combine all 3 of these into one?
    chargeBow,
    chargeSpear,
+   chargeBattleaxe,
    researching,
    eat,
    none
@@ -253,9 +257,9 @@ export const EntityInfoClientArgs = {
    [EntityType.iceSpikes]: () => {},
    [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number, spitChargeProgress: number) => {},
    [EntityType.slimewisp]: () => {},
-   [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItemType: ItemType | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, leftActiveItemType: ItemType | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, hasFrostShield: boolean, warPaintType: number, username: string) => {},
-   [EntityType.tribeWorker]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItemType: ItemType | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, leftActiveItemType: ItemType | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
-   [EntityType.tribeWarrior]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItemType: ItemType | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, leftActiveItemType: ItemType | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
+   [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, username: string) => {},
+   [EntityType.tribeWorker]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
+   [EntityType.tribeWarrior]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
    [EntityType.tribeTotem]: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => {},
    [EntityType.workerHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
    [EntityType.warriorHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
@@ -275,7 +279,8 @@ export const EntityInfoClientArgs = {
    [EntityType.woodenWall]: () => {},
    [EntityType.slimeSpit]: (size: number) => {},
    [EntityType.spitPoison]: () => {},
-   [EntityType.woodenDoor]: () => {}
+   [EntityType.woodenDoor]: () => {},
+   [EntityType.battleaxeProjectile]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
 export const STRUCTURE_TYPES = [EntityType.woodenWall] as const;

@@ -14,6 +14,7 @@ export enum TechID {
    woodworking,
    throngling,
    archery,
+   warmongering,
    leatherworking,
    warriors,
    basicArchitecture
@@ -51,6 +52,8 @@ export interface TechInfo {
    readonly dependencies: ReadonlyArray<TechID>;
    readonly researchItemRequirements: ItemRequirements;
    readonly researchStudyRequirements: number;
+   /** Tribes which are unable to research the tech */
+   readonly blacklistedTribes: ReadonlyArray<TribeType>
 }
 
 export const TECHS: ReadonlyArray<TechInfo> = [
@@ -66,7 +69,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.wood]: 5
       },
-      researchStudyRequirements: 0
+      researchStudyRequirements: 0,
+      blacklistedTribes: []
    },
    {
       id: TechID.fire,
@@ -80,7 +84,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.wood]: 10
       },
-      researchStudyRequirements: 0
+      researchStudyRequirements: 0,
+      blacklistedTribes: []
    },
    {
       id: TechID.society,
@@ -95,7 +100,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.wooden_pickaxe]: 1,
          [ItemType.wood]: 10
       },
-      researchStudyRequirements: 20
+      researchStudyRequirements: 20,
+      blacklistedTribes: []
    },
    {
       id: TechID.gathering,
@@ -110,11 +116,12 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.wood]: 25,
          [ItemType.berry]: 10
       },
-      researchStudyRequirements: 0
+      researchStudyRequirements: 0,
+      blacklistedTribes: []
    },
    {
        id: TechID.stoneTools,
-       name: "Stone Tools",
+       name: "Stoneworking",
        description: "Manipulation of stone in crafting",
        iconSrc: "stoneworking.png",
        unlockedItems: [ItemType.stone_pickaxe, ItemType.stone_axe, ItemType.stone_sword, ItemType.spear],
@@ -122,9 +129,10 @@ export const TECHS: ReadonlyArray<TechInfo> = [
        positionY: -5,
        dependencies: [TechID.woodenTools],
        researchItemRequirements: {
-         [ItemType.rock]: 30
+         [ItemType.rock]: 20
        },
-       researchStudyRequirements: 30
+       researchStudyRequirements: 0,
+       blacklistedTribes: []
    },
    {
       id: TechID.woodworking,
@@ -138,7 +146,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.wood]: 40
       },
-      researchStudyRequirements: 0
+      researchStudyRequirements: 0,
+      blacklistedTribes: []
    },
    {
       id: TechID.furnace,
@@ -153,7 +162,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.campfire]: 2,
          [ItemType.rock]: 20
       },
-      researchStudyRequirements: 10
+      researchStudyRequirements: 10,
+      blacklistedTribes: []
    },
    {
       id: TechID.throngling,
@@ -168,7 +178,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.rock]: 20,
          [ItemType.cactus_spine]: 30
       },
-      researchStudyRequirements: 40
+      researchStudyRequirements: 40,
+      blacklistedTribes: []
    },
    {
       id: TechID.archery,
@@ -182,7 +193,23 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.wood]: 60
       },
-      researchStudyRequirements: 75
+      researchStudyRequirements: 75,
+      blacklistedTribes: [TribeType.barbarians]
+   },
+   {
+      id: TechID.warmongering,
+      name: "Warmongering",
+      description: "Allows the crafting of deadly battleaxes, able to be thrown at enemies.",
+      iconSrc: "warmongering.png",
+      unlockedItems: [ItemType.stone_battleaxe],
+      positionX: -55,
+      positionY: 21,
+      dependencies: [TechID.stoneTools],
+      researchItemRequirements: {
+         [ItemType.living_rock]: 30
+      },
+      researchStudyRequirements: 75,
+      blacklistedTribes: [TribeType.frostlings, TribeType.goblins, TribeType.plainspeople]
    },
    {
       id: TechID.leatherworking,
@@ -196,7 +223,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.leather]: 20
       },
-      researchStudyRequirements: 50
+      researchStudyRequirements: 50,
+      blacklistedTribes: []
    },
    {
       id: TechID.warriors,
@@ -211,7 +239,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.wood]: 50,
          [ItemType.rock]: 50
       },
-      researchStudyRequirements: 100
+      researchStudyRequirements: 100,
+      blacklistedTribes: []
    },
    {
       id: TechID.basicArchitecture,
@@ -225,7 +254,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       researchItemRequirements: {
          [ItemType.wood]: 100
       },
-      researchStudyRequirements: 150
+      researchStudyRequirements: 150,
+      blacklistedTribes: []
    }
 ];
 
