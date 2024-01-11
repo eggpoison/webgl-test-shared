@@ -51,9 +51,10 @@ export type ServerTileUpdateData = {
 }
 
 export interface BaseHitboxData {
-   readonly localID: number;
+   readonly mass: number;
    readonly offsetX: number;
    readonly offsetY: number;
+   readonly localID: number;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
@@ -74,6 +75,7 @@ export const HitFlags = {
    HIT_BY_FLESH_SWORD: 1 << 0
 }
 
+// @Cleanup: A whole bunch of this data isn't needed client-side except for when the player itself is hit, maybe make 2 types - 1 for player hits, 1 for non-player hits
 export interface HitData {
    // Two following values are used for if the hit is a killing blow so the client doesn't know where the hit entity is
    readonly entityPositionX: number;
@@ -92,7 +94,6 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly position: [number, number];
    readonly velocity: [number, number];
    readonly rotation: number;
-   readonly mass: number;
    readonly rectangularHitboxes: ReadonlyArray<RectangularHitboxData>;
    readonly circularHitboxes: ReadonlyArray<CircularHitboxData>;
    readonly ageTicks: number;
