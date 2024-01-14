@@ -122,6 +122,7 @@ export interface GameDataPacket {
    readonly tribeData: TribeData;
    readonly hasFrostShield: boolean;
    readonly pickedUpItem: boolean;
+   readonly hotbarCrossbowLoadProgressRecord: Record<number, number>;
 }
 
 export enum WaterRockSize {
