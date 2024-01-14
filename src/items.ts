@@ -48,7 +48,11 @@ export enum ItemType {
    wooden_wall,
    wooden_hammer,
    stone_battleaxe,
-   living_rock
+   living_rock,
+   planter_box,
+   reinforced_bow,
+   crossbow,
+   ice_bow
 }
 
 export interface BaseItemInfo {}
@@ -90,6 +94,8 @@ export interface BowItemInfo extends BaseItemInfo {
    readonly airResistance: number;
    readonly level: number;
 }
+
+export interface CrossbowItemInfo extends BowItemInfo {}
 
 export interface AxeItemInfo extends ToolItemInfo {
    readonly toolType: "axe";
@@ -145,6 +151,7 @@ export interface ItemInfoRecord {
    spear: SpearItemInfo;
    hammer: HammerItemInfo;
    battleaxe: BattleaxeItemInfo;
+   crossbow: CrossbowItemInfo;
 }
 
 export const ITEM_TYPE_RECORD = {
@@ -194,7 +201,11 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.wooden_wall]: "placeable",
    [ItemType.wooden_hammer]: "hammer",
    [ItemType.stone_battleaxe]: "battleaxe",
-   [ItemType.living_rock]: "material"
+   [ItemType.living_rock]: "material",
+   [ItemType.planter_box]: "placeable",
+   [ItemType.reinforced_bow]: "bow",
+   [ItemType.crossbow]: "crossbow",
+   [ItemType.ice_bow]: "bow"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -340,6 +351,30 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       airResistance: 400,
       level: 2
    },
+   [ItemType.reinforced_bow]: {
+      projectileDamage: 6,
+      projectileKnockback: 200,
+      shotCooldownTicks: 1 * SETTINGS.TPS,
+      projectileSpeed: 1500,
+      airResistance: 300,
+      level: 2.5
+   },
+   [ItemType.ice_bow]: {
+      projectileDamage: 0,
+      projectileKnockback: 0,
+      shotCooldownTicks: 1.25 * SETTINGS.TPS,
+      projectileSpeed: 1100,
+      airResistance: 400,
+      level: 2.5
+   },
+   [ItemType.crossbow]: {
+      projectileDamage: 6,
+      projectileKnockback: 200,
+      shotCooldownTicks: 1 * SETTINGS.TPS,
+      projectileSpeed: 1500,
+      airResistance: 300,
+      level: 2.5
+   },
    [ItemType.meat_suit]: {
       defence: 0,
       level: 1
@@ -436,6 +471,11 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.living_rock]: {
       stackSize: 99
+   },
+   [ItemType.planter_box]: {
+      stackSize: 99,
+      entityType: EntityType.planterBox,
+      entityTypeConst: IEntityType.planterBox
    }
 };
 
@@ -447,6 +487,10 @@ export type PlaceableItemType = keyof {
 type ExcludeNonArmourItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "armour" ? T : never;
 export type ArmourItemType = keyof {
    [T in ItemType as ExcludeNonArmourItemTypes<T>]: T;
+}
+type ExcludeNonGloveItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "glove" ? T : never;
+export type GloveItemType = keyof {
+   [T in ItemType as ExcludeNonGloveItemTypes<T>]: T;
 }
 
 export type ItemSlot = Item | null;

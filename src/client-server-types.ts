@@ -32,6 +32,7 @@ export interface PlayerInventoryData {
    /** Item held in the player's crafting output slot */
    readonly craftingOutputItemSlot: InventoryData;
    readonly armourSlot: InventoryData;
+   readonly gloveSlot: InventoryData;
    readonly offhand: InventoryData;
 }
 

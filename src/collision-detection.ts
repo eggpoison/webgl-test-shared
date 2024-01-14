@@ -1,4 +1,4 @@
-import { Point, distance, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
+import { Point, distance, rotateXAroundOrigin, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
 
 // @Speed: Maybe make into const enum?
 export const COLLISION_BITS = {
@@ -67,8 +67,8 @@ export function circlesDoIntersect(pos1: Point, radius1: number, pos2: Point, ra
    return distance <= radius1 + radius2;
 }
 
-export function circulesDoIntersectWithOffset(pos1: Point, offset1: Point, radius1: number, pos2: Point, offset2: Point, radius2: number): boolean {
-   const dist = distance(pos1.x + offset1.x, pos1.y + offset1.y, pos2.x + offset2.x, pos2.y + offset2.y);
+export function circlesDoIntersectWithOffset(circle1x: number, circle1y: number, radius1: number, circle2x: number, circle2y: number, radius2: number): boolean {
+   const dist = distance(circle1x, circle1y, circle2x, circle2y);
    return dist <= radius1 + radius2;
 }
 

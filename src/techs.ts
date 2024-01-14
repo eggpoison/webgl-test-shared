@@ -5,7 +5,6 @@ import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
 export enum TechID {
-   woodenTools,
    fire,
    society,
    gathering,
@@ -58,29 +57,14 @@ export interface TechInfo {
 
 export const TECHS: ReadonlyArray<TechInfo> = [
    {
-      id: TechID.woodenTools,
-      name: "Wooden Tools",
-      description: "Basic tools made of wood",
-      iconSrc: "wooden-tools.png",
-      unlockedItems: [ItemType.wooden_sword, ItemType.wooden_pickaxe, ItemType.wooden_axe],
-      positionX: 0,
-      positionY: 0,
-      dependencies: [],
-      researchItemRequirements: {
-         [ItemType.wood]: 5
-      },
-      researchStudyRequirements: 0,
-      blacklistedTribes: []
-   },
-   {
       id: TechID.fire,
       name: "Fire",
       description: "A primitive method of cooking your food",
       iconSrc: "fire.png",
       unlockedItems: [ItemType.campfire],
-      positionX: 33,
-      positionY: 10,
-      dependencies: [TechID.woodenTools],
+      positionX: 0, // 33
+      positionY: 0, // 10
+      dependencies: [],
       researchItemRequirements: {
          [ItemType.wood]: 10
       },
@@ -111,7 +95,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       unlockedItems: [ItemType.gathering_gloves],
       positionX: 22,
       positionY: -26,
-      dependencies: [TechID.woodenTools],
+      dependencies: [TechID.fire],
       researchItemRequirements: {
          [ItemType.wood]: 25,
          [ItemType.berry]: 10
@@ -127,7 +111,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
        unlockedItems: [ItemType.stone_pickaxe, ItemType.stone_axe, ItemType.stone_sword, ItemType.spear],
        positionX: -40,
        positionY: -5,
-       dependencies: [TechID.woodenTools],
+       dependencies: [TechID.fire],
        researchItemRequirements: {
          [ItemType.rock]: 20
        },
@@ -144,7 +128,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionY: 4,
       dependencies: [TechID.fire],
       researchItemRequirements: {
-         [ItemType.wood]: 40
+         [ItemType.wood]: 20
       },
       researchStudyRequirements: 0,
       blacklistedTribes: []
@@ -191,7 +175,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       positionY: 21,
       dependencies: [TechID.stoneTools],
       researchItemRequirements: {
-         [ItemType.wood]: 60
+         [ItemType.wood]: 35
       },
       researchStudyRequirements: 75,
       blacklistedTribes: [TribeType.barbarians]

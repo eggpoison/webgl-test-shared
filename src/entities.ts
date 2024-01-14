@@ -41,7 +41,9 @@ export enum EntityType {
    spitPoison,
    woodenDoor,
    battleaxeProjectile,
-   golem
+   golem,
+   planterBox,
+   iceArrow
 }
 
 export const enum IEntityType {
@@ -81,7 +83,9 @@ export const enum IEntityType {
    spitPoison,
    woodenDoor,
    battleaxeProjectile,
-   golem
+   golem,
+   planterBox,
+   iceArrow
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -206,6 +210,7 @@ export enum TribeMemberAction {
    chargeBow,
    chargeSpear,
    chargeBattleaxe,
+   loadCrossbow,
    researching,
    eat,
    none
@@ -236,6 +241,12 @@ export enum RockSpikeProjectileSize {
    small,
    medium,
    large
+}
+
+export enum DoorToggleType {
+   none,
+   close,
+   open
 }
 
 // @Cleanup: Maybe send data based on the components
@@ -281,17 +292,20 @@ export const EntityInfoClientArgs = {
    [EntityType.woodenWall]: () => {},
    [EntityType.slimeSpit]: (size: number) => {},
    [EntityType.spitPoison]: () => {},
-   [EntityType.woodenDoor]: () => {},
+   [EntityType.woodenDoor]: (toggleType: DoorToggleType) => {},
    [EntityType.battleaxeProjectile]: () => {},
-   [EntityType.golem]: () => {}
+   [EntityType.golem]: (wakeProgress: number) => {},
+   [EntityType.planterBox]: () => {},
+   [EntityType.iceArrow]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
-export const STRUCTURE_TYPES = [EntityType.woodenWall] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall] as const;
+export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
 
 export const SNAP_OFFSETS: Record<StructureTypeConst, number> = {
-   [IEntityType.woodenWall]: 64
+   [IEntityType.woodenWall]: 64,
+   [IEntityType.woodenDoor]: 64
 };
