@@ -264,10 +264,7 @@ function distToSegmentSquared(p: Point, v: Point, w: Point) {
 }
 export function distToSegment(p: Point, v: Point, w: Point) { return Math.sqrt(distToSegmentSquared(p, v, w)); }
 
-export function pointIsInRectangle(pointX: number, pointY: number, rectPos: Point, rectOffset: Point, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
-   const rectPosX = rectPos.x + rectOffset.x;
-   const rectPosY = rectPos.y + rectOffset.y;
-   
+export function pointIsInRectangle(pointX: number, pointY: number, rectPosX: number, rectPosY: number, rectWidth: number, rectHeight: number, rectRotation: number): boolean {
    // Rotate point around rect to make the situation axis-aligned
    const alignedPointX = rotateXAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);
    const alignedPointY = rotateYAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);

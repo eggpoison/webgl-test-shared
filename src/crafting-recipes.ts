@@ -160,6 +160,32 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       }
    },
    {
+      product: ItemType.crossbow,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 40,
+         [ItemType.rock]: 30
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.reinforced_bow,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 40,
+         [ItemType.rock]: 30
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.ice_bow,
+      yield: 1,
+      ingredients: {
+         [ItemType.frostcicle]: 20
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
       product: ItemType.meat_suit,
       yield: 1,
       ingredients: {

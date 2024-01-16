@@ -71,7 +71,7 @@ export interface FoodItemInfo extends StackableItemInfo {
 // @Cleanup: Is this necessary?
 export type ToolType = "sword" | "bow" | "axe" | "pickaxe" | "spear" | "hammer" | "battleaxe";
 
-export interface ToolItemInfo extends BaseItemInfo {
+export interface ToolItemInfo extends StackableItemInfo {
    readonly toolType: ToolType;
    readonly damage: number;
    readonly knockback: number;
@@ -220,6 +220,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityTypeConst: IEntityType.workbench
    },
    [ItemType.wooden_sword]: {
+      stackSize: 1,
       toolType: "sword",
       damage: 2,
       knockback: 150,
@@ -227,6 +228,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    },
    [ItemType.wooden_axe]: {
+      stackSize: 1,
       toolType: "axe",
       damage: 3,
       knockback: 100,
@@ -234,6 +236,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    },
    [ItemType.wooden_pickaxe]: {
+      stackSize: 1,
       toolType: "pickaxe",
       damage: 5,
       knockback: 100,
@@ -259,6 +262,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    [ItemType.stone_sword]: {
+      stackSize: 1,
       toolType: "sword",
       damage: 3,
       knockback: 150,
@@ -266,6 +270,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 2
    },
    [ItemType.stone_axe]: {
+      stackSize: 1,
       toolType: "axe",
       damage: 5,
       knockback: 100,
@@ -273,6 +278,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 2
    },
    [ItemType.stone_pickaxe]: {
+      stackSize: 1,
       toolType: "pickaxe",
       damage: 8,
       knockback: 100,
@@ -303,6 +309,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    [ItemType.flesh_sword]: {
+      stackSize: 1,
       toolType: "sword",
       damage: 2,
       knockback: 0,
@@ -383,6 +390,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99
    },
    [ItemType.deepfrost_sword]: {
+      stackSize: 1,
       toolType: "sword",
       damage: 4,
       knockback: 170,
@@ -390,6 +398,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 3
    },
    [ItemType.deepfrost_pickaxe]: {
+      stackSize: 1,
       toolType: "pickaxe",
       damage: 13,
       knockback: 100,
@@ -397,6 +406,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 3
    },
    [ItemType.deepfrost_axe]: {
+      stackSize: 1,
       toolType: "axe",
       damage: 8,
       knockback: 100,
@@ -425,6 +435,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    },
    [ItemType.throngler]: {
+      stackSize: 1,
       toolType: "sword",
       damage: 2,
       knockback: 400,
@@ -436,6 +447,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    },
    [ItemType.spear]: {
+      stackSize: 99,
       toolType: "spear",
       damage: 4,
       knockback: 300,
@@ -456,6 +468,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityTypeConst: IEntityType.woodenWall
    },
    [ItemType.wooden_hammer]: {
+      stackSize: 1,
       toolType: "hammer",
       damage: 2,
       knockback: 150,
@@ -463,6 +476,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       level: 1
    },
    [ItemType.stone_battleaxe]: {
+      stackSize: 1,
       toolType: "battleaxe",
       damage: 3,
       knockback: 150,

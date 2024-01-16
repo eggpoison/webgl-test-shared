@@ -13,10 +13,15 @@ export enum TechID {
    woodworking,
    throngling,
    archery,
+   reinforcedBows,
+   crossbows,
+   iceBows,
    warmongering,
    leatherworking,
    warriors,
-   basicArchitecture
+   basicArchitecture,
+   storage,
+   frostshaping
 }
 
 interface TechUnlockProgress {
@@ -53,13 +58,14 @@ export interface TechInfo {
    readonly researchStudyRequirements: number;
    /** Tribes which are unable to research the tech */
    readonly blacklistedTribes: ReadonlyArray<TribeType>
+   readonly conflictingTechs: ReadonlyArray<TechID>;
 }
 
 export const TECHS: ReadonlyArray<TechInfo> = [
    {
       id: TechID.fire,
       name: "Fire",
-      description: "A primitive method of cooking your food",
+      description: "A primitive method of cooking your food.",
       iconSrc: "fire.png",
       unlockedItems: [ItemType.campfire],
       positionX: 0, // 33
@@ -69,15 +75,16 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.wood]: 10
       },
       researchStudyRequirements: 0,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.society,
       name: "Society",
-      description: "The beginning of a civilisation",
+      description: "The beginning of civilisation.",
       iconSrc: "society.png",
       unlockedItems: [ItemType.tribe_totem, ItemType.worker_hut],
-      positionX: 40,
+      positionX: 1,
       positionY: 35,
       dependencies: [TechID.fire],
       researchItemRequirements: {
@@ -85,58 +92,62 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.wood]: 10
       },
       researchStudyRequirements: 20,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.gathering,
       name: "Gathering",
-      description: "More efficient gathering of resources",
+      description: "Efficient gathering of resources.",
       iconSrc: "gathering.png",
       unlockedItems: [ItemType.gathering_gloves],
       positionX: 22,
-      positionY: -26,
+      positionY: -28,
       dependencies: [TechID.fire],
       researchItemRequirements: {
          [ItemType.wood]: 25,
          [ItemType.berry]: 10
       },
       researchStudyRequirements: 0,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
        id: TechID.stoneTools,
        name: "Stoneworking",
-       description: "Manipulation of stone in crafting",
+       description: "Manipulation of stone in crafting.",
        iconSrc: "stoneworking.png",
        unlockedItems: [ItemType.stone_pickaxe, ItemType.stone_axe, ItemType.stone_sword, ItemType.spear],
        positionX: -40,
-       positionY: -5,
+       positionY: -1,
        dependencies: [TechID.fire],
        researchItemRequirements: {
          [ItemType.rock]: 20
        },
        researchStudyRequirements: 0,
-       blacklistedTribes: []
+       blacklistedTribes: [],
+       conflictingTechs: []
    },
    {
       id: TechID.woodworking,
       name: "Woodworking",
       description: "Use a workbench to manipulate wood into more complex shapes",
-      iconSrc: "workbench.png",
+      iconSrc: "woodworking.png",
       unlockedItems: [ItemType.workbench, ItemType.paper, ItemType.research_bench],
-      positionX: 56,
+      positionX: 44,
       positionY: 4,
       dependencies: [TechID.fire],
       researchItemRequirements: {
          [ItemType.wood]: 20
       },
       researchStudyRequirements: 0,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.furnace,
       name: "Furnace",
-      description: "A better way to cook your food",
+      description: "A better way to cook your food.",
       iconSrc: "furnace.png",
       unlockedItems: [ItemType.furnace],
       positionX: 62,
@@ -147,7 +158,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.rock]: 20
       },
       researchStudyRequirements: 10,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.throngling,
@@ -163,7 +175,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.cactus_spine]: 30
       },
       researchStudyRequirements: 40,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.archery,
@@ -171,14 +184,64 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       description: "Ranged combat",
       iconSrc: "archery.png",
       unlockedItems: [ItemType.wooden_bow],
-      positionX: -55,
-      positionY: 21,
+      positionX: -53,
+      positionY: 19,
       dependencies: [TechID.stoneTools],
       researchItemRequirements: {
          [ItemType.wood]: 35
       },
+      // researchStudyRequirements: 75,
+      researchStudyRequirements: 1,
+      blacklistedTribes: [TribeType.barbarians],
+      conflictingTechs: []
+   },
+   {
+      id: TechID.reinforcedBows,
+      name: "Reinforced Bows",
+      description: "Reinforced bows",
+      iconSrc: "reinforced-bows.png",
+      unlockedItems: [ItemType.reinforced_bow],
+      positionX: -67,
+      positionY: 26,
+      dependencies: [TechID.archery],
+      researchItemRequirements: {
+         [ItemType.wood]: 35
+      },
       researchStudyRequirements: 75,
-      blacklistedTribes: [TribeType.barbarians]
+      blacklistedTribes: [],
+      conflictingTechs: [TechID.crossbows]
+   },
+   {
+      id: TechID.crossbows,
+      name: "Crossbows",
+      description: "Crossbows",
+      iconSrc: "crossbows.png",
+      unlockedItems: [ItemType.crossbow],
+      positionX: -50,
+      positionY: 34,
+      dependencies: [TechID.archery],
+      researchItemRequirements: {
+         [ItemType.wood]: 35
+      },
+      researchStudyRequirements: 75,
+      blacklistedTribes: [],
+      conflictingTechs: [TechID.reinforcedBows]
+   },
+   {
+      id: TechID.iceBows,
+      name: "Ice Bows",
+      description: "Ice bows",
+      iconSrc: "ice-bows.png",
+      unlockedItems: [ItemType.ice_bow],
+      positionX: -76,
+      positionY: 17,
+      dependencies: [TechID.archery, TechID.frostshaping],
+      researchItemRequirements: {
+         [ItemType.wood]: 35
+      },
+      researchStudyRequirements: 75,
+      blacklistedTribes: [TribeType.plainspeople, TribeType.barbarians, TribeType.goblins],
+      conflictingTechs: []
    },
    {
       id: TechID.warmongering,
@@ -193,7 +256,8 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.living_rock]: 30
       },
       researchStudyRequirements: 75,
-      blacklistedTribes: [TribeType.frostlings, TribeType.goblins, TribeType.plainspeople]
+      blacklistedTribes: [TribeType.frostlings, TribeType.goblins, TribeType.plainspeople],
+      conflictingTechs: []
    },
    {
       id: TechID.leatherworking,
@@ -201,14 +265,15 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       description: "Stretch and meld leather into armour",
       iconSrc: "leatherworking.png",
       unlockedItems: [ItemType.leather_armour],
-      positionX: -60,
+      positionX: -56,
       positionY: -18,
       dependencies: [TechID.stoneTools],
       researchItemRequirements: {
          [ItemType.leather]: 20
       },
       researchStudyRequirements: 50,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.warriors,
@@ -216,15 +281,16 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       description: "Combat-focused tribesmen",
       iconSrc: "warriors.png",
       unlockedItems: [ItemType.warrior_hut],
-      positionX: 50,
-      positionY: 43,
+      positionX: 14,
+      positionY: 48,
       dependencies: [TechID.society],
       researchItemRequirements: {
-         [ItemType.wood]: 50,
+         [ItemType.wood]: 30,
          [ItemType.rock]: 50
       },
       researchStudyRequirements: 100,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
    },
    {
       id: TechID.basicArchitecture,
@@ -232,14 +298,47 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       description: "Primitive structures to build a defense with",
       iconSrc: "basic-architecture.png",
       unlockedItems: [ItemType.wooden_wall, ItemType.wooden_hammer],
-      positionX: 72,
-      positionY: 0,
+      positionX: 69,
+      positionY: -4,
       dependencies: [TechID.woodworking],
       researchItemRequirements: {
-         [ItemType.wood]: 100
+         [ItemType.wood]: 40
       },
       researchStudyRequirements: 150,
-      blacklistedTribes: []
+      blacklistedTribes: [],
+      conflictingTechs: []
+   },
+   {
+      id: TechID.storage,
+      name: "Storage",
+      description: "",
+      iconSrc: "storage.png",
+      unlockedItems: [ItemType.barrel],
+      positionX: 51,
+      positionY: -15,
+      dependencies: [TechID.woodworking],
+      researchItemRequirements: {
+         [ItemType.wood]: 50
+      },
+      researchStudyRequirements: 50,
+      blacklistedTribes: [],
+      conflictingTechs: []
+   },
+   {
+      id: TechID.frostshaping,
+      name: "Frostshaping",
+      description: "",
+      iconSrc: "frostshaping.png",
+      unlockedItems: [ItemType.frost_armour, ItemType.deepfrost_pickaxe, ItemType.deepfrost_sword, ItemType.deepfrost_axe, ItemType.deepfrost_armour],
+      positionX: -65,
+      positionY: 0,
+      dependencies: [TechID.stoneTools],
+      researchItemRequirements: {
+         [ItemType.frostcicle]: 15
+      },
+      researchStudyRequirements: 50,
+      blacklistedTribes: [],
+      conflictingTechs: []
    }
 ];
 

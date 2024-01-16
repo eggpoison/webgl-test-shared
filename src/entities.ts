@@ -43,7 +43,8 @@ export enum EntityType {
    battleaxeProjectile,
    golem,
    planterBox,
-   iceArrow
+   iceArrow,
+   pebblum
 }
 
 export const enum IEntityType {
@@ -85,7 +86,8 @@ export const enum IEntityType {
    battleaxeProjectile,
    golem,
    planterBox,
-   iceArrow
+   iceArrow,
+   pebblum
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -296,7 +298,8 @@ export const EntityInfoClientArgs = {
    [EntityType.battleaxeProjectile]: () => {},
    [EntityType.golem]: (wakeProgress: number) => {},
    [EntityType.planterBox]: () => {},
-   [EntityType.iceArrow]: () => {}
+   [EntityType.iceArrow]: () => {},
+   [EntityType.pebblum]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
 export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor] as const;
