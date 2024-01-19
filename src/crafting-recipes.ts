@@ -265,6 +265,23 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.slimeball]: 5
       },
       craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.stone_battleaxe,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 15,
+         [ItemType.living_rock]: 25
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.ice_bow,
+      yield: 1,
+      ingredients: {
+         [ItemType.frostcicle]: 25
+      },
+      craftingStation: CraftingStation.workbench
    }
 ];
 

@@ -52,7 +52,10 @@ export enum ItemType {
    planter_box,
    reinforced_bow,
    crossbow,
-   ice_bow
+   ice_bow,
+   poop,
+   wooden_spikes,
+   punji_sticks
 }
 
 export interface BaseItemInfo {}
@@ -107,6 +110,8 @@ export interface PickaxeItemInfo extends ToolItemInfo {
 
 export interface HammerItemInfo extends ToolItemInfo {
    readonly toolType: "hammer";
+   /** Health that the hammer restores when hitting friendly buildings */
+   readonly repairAmount: number;
 }
 
 export interface PlaceableItemInfo extends StackableItemInfo {
@@ -205,7 +210,10 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.planter_box]: "placeable",
    [ItemType.reinforced_bow]: "bow",
    [ItemType.crossbow]: "crossbow",
-   [ItemType.ice_bow]: "bow"
+   [ItemType.ice_bow]: "bow",
+   [ItemType.poop]: "material",
+   [ItemType.wooden_spikes]: "placeable",
+   [ItemType.punji_sticks]: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -473,7 +481,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       damage: 2,
       knockback: 150,
       attackCooldown: 0.7,
-      level: 1
+      level: 1,
+      repairAmount: 3
    },
    [ItemType.stone_battleaxe]: {
       stackSize: 1,
@@ -490,6 +499,19 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       entityType: EntityType.planterBox,
       entityTypeConst: IEntityType.planterBox
+   },
+   [ItemType.poop]: {
+      stackSize: 99
+   },
+   [ItemType.wooden_spikes]: {
+      stackSize: 99,
+      entityType: EntityType.woodenFloorSpikes,
+      entityTypeConst: IEntityType.woodenFloorSpikes
+   },
+   [ItemType.punji_sticks]: {
+      stackSize: 99,
+      entityType: EntityType.floorPunjiSticks,
+      entityTypeConst: IEntityType.floorPunjiSticks
    }
 };
 
@@ -505,6 +527,10 @@ export type ArmourItemType = keyof {
 type ExcludeNonGloveItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "glove" ? T : never;
 export type GloveItemType = keyof {
    [T in ItemType as ExcludeNonGloveItemTypes<T>]: T;
+}
+type ExcludeNonHammerItemTypes<T extends ItemType> = typeof ITEM_TYPE_RECORD[T] extends "hammer" ? T : never;
+export type HammerItemType = keyof {
+   [T in ItemType as ExcludeNonHammerItemTypes<T>]: T;
 }
 
 export type ItemSlot = Item | null;

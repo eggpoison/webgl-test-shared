@@ -1,40 +1,22 @@
-import { Point, distance, rotateXAroundOrigin, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
+import { IEntityType } from "./entities";
+import { Point, distance, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
 
 // @Speed: Maybe make into const enum?
 export const COLLISION_BITS = {
-   other: 1 << 0,
-   cactus: 1 << 1
+   default: 1 << 0,
+   cactus: 1 << 1,
+   none: 1 << 2
 };
 
-let defaultCollisionMask = 0;
-for (const bit of Object.values(COLLISION_BITS)) {
-   defaultCollisionMask |= bit;
-}
-export const DEFAULT_COLLISION_MASK = defaultCollisionMask;
+export const DEFAULT_COLLISION_MASK = COLLISION_BITS.default | COLLISION_BITS.cactus;
 
 export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
 
-// @Speed: In the following 4 functions: instead of setting min/max to an initial immediately overridden value, just set min/max to the first dot product directly
-
-const findMin = (vertices: ReadonlyArray<Point>, axis: Point): number => {
-   let min = 999999;
-   for (const vertex of vertices) {
-      const dot = axis.calculateDotProduct(vertex);
-      if (dot < min) min = dot;
-   }
-
-   return min;
+export function entityHasHardCollision(entityType: IEntityType): boolean {
+   return entityType === IEntityType.woodenWall || entityType === IEntityType.woodenEmbrasure || entityType === IEntityType.woodenDoor;
 }
 
-const findMax = (vertices: ReadonlyArray<Point>, axis: Point): number => {
-   let max = -999999;
-   for (const vertex of vertices) {
-      const dot = axis.calculateDotProduct(vertex);
-      if (dot > max) max = dot;
-   }
-
-   return max;
-}
+// @Speed: In the following 2 functions: instead of setting min/max to an initial immediately overridden value, just set min/max to the first dot product directly
 
 const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axis: Point): number => {
    let min = 999999;

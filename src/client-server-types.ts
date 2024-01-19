@@ -65,6 +65,7 @@ export interface CircularHitboxData extends BaseHitboxData {
 export interface RectangularHitboxData extends BaseHitboxData {
    readonly width: number;
    readonly height: number;
+   readonly rotation: number;
 }
 
 export interface StatusEffectData {
@@ -273,7 +274,8 @@ export interface GameObjectDebugData {
 }
 
 export enum StructureShapeType {
-   door
+   door,
+   embrasure
 }
 
 // Note to stupid future self: don't remove this, it's important
@@ -317,6 +319,7 @@ export interface ClientToServerEvents {
    track_game_object: (gameObjectID: number | null) => void;
    select_tech: (techID: TechID) => void;
    unlock_tech: (techID: TechID) => void;
+   force_unlock_tech: (techID: TechID) => void;
    study_tech: (studyAmount: number) => void;
    shape_structure: (structureID: number, type: StructureShapeType) => void;
    structure_interact: (structureID: number) => void;
