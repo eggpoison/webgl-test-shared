@@ -21,7 +21,8 @@ export enum TechID {
    warriors,
    basicArchitecture,
    storage,
-   frostshaping
+   frostshaping,
+   basicMachinery
 }
 
 interface TechUnlockProgress {
@@ -295,9 +296,9 @@ export const TECHS: ReadonlyArray<TechInfo> = [
    {
       id: TechID.basicArchitecture,
       name: "Basic Architecture",
-      description: "Primitive structures to build a defense with",
+      description: "Primitive structures to build your first defences with.",
       iconSrc: "basic-architecture.png",
-      unlockedItems: [ItemType.wooden_wall, ItemType.wooden_hammer],
+      unlockedItems: [ItemType.wooden_wall, ItemType.wooden_hammer, ItemType.wooden_spikes, ItemType.punji_sticks],
       positionX: 69,
       positionY: -4,
       dependencies: [TechID.woodworking],
@@ -337,6 +338,23 @@ export const TECHS: ReadonlyArray<TechInfo> = [
          [ItemType.frostcicle]: 15
       },
       researchStudyRequirements: 50,
+      blacklistedTribes: [],
+      conflictingTechs: []
+   },
+   {
+      id: TechID.basicMachinery,
+      name: "Basic Machinery",
+      description: "The first turrets and automatic buildings.",
+      iconSrc: "basic-machinery.png",
+      unlockedItems: [ItemType.sling_turret, ItemType.primitive_turret],
+      positionX: 79,
+      positionY: -14,
+      dependencies: [TechID.basicArchitecture],
+      researchItemRequirements: {
+         [ItemType.wood]: 50,
+         [ItemType.rock]: 50
+      },
+      researchStudyRequirements: 200,
       blacklistedTribes: [],
       conflictingTechs: []
    }

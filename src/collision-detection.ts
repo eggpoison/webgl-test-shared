@@ -1,26 +1,22 @@
-import { IEntityType } from "./entities";
 import { Point, distance, rotateXAroundPoint, rotateYAroundPoint } from "./utils";
 
 // @Speed: Maybe make into const enum?
 export const COLLISION_BITS = {
    default: 1 << 0,
    cactus: 1 << 1,
-   none: 1 << 2
+   none: 1 << 2,
+   iceSpikes: 1 << 3
 };
 
-export const DEFAULT_COLLISION_MASK = COLLISION_BITS.default | COLLISION_BITS.cactus;
+export const DEFAULT_COLLISION_MASK = COLLISION_BITS.default | COLLISION_BITS.cactus | COLLISION_BITS.iceSpikes;
 
 export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
 
-export function entityHasHardCollision(entityType: IEntityType): boolean {
-   return entityType === IEntityType.woodenWall || entityType === IEntityType.woodenEmbrasure || entityType === IEntityType.woodenDoor;
-}
-
-// @Speed: In the following 2 functions: instead of setting min/max to an initial immediately overridden value, just set min/max to the first dot product directly
-
 const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axis: Point): number => {
-   let min = 999999;
-   for (let i = 0; i < 4; i++) {
+   const firstVertex = vertices[0];
+   let min = axis.x * (firstVertex.x + offsetX) + axis.y * (firstVertex.y + offsetY);
+
+   for (let i = 1; i < 4; i++) {
       const vertex = vertices[i];
       const dotProduct = axis.x * (vertex.x + offsetX) + axis.y * (vertex.y + offsetY);
       if (dotProduct < min) {
@@ -32,8 +28,10 @@ const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offs
 }
 
 const findMaxWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axis: Point): number => {
-   let max = -999999;
-   for (let i = 0; i < 4; i++) {
+   const firstVertex = vertices[0];
+   let max = axis.x * (firstVertex.x + offsetX) + axis.y * (firstVertex.y + offsetY);
+
+   for (let i = 1; i < 4; i++) {
       const vertex = vertices[i];
       const dotProduct = axis.x * (vertex.x + offsetX) + axis.y * (vertex.y + offsetY);
       if (dotProduct > max) {

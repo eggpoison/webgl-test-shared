@@ -55,7 +55,9 @@ export enum ItemType {
    ice_bow,
    poop,
    wooden_spikes,
-   punji_sticks
+   punji_sticks,
+   primitive_turret,
+   sling_turret
 }
 
 export interface BaseItemInfo {}
@@ -213,7 +215,9 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.ice_bow]: "bow",
    [ItemType.poop]: "material",
    [ItemType.wooden_spikes]: "placeable",
-   [ItemType.punji_sticks]: "placeable"
+   [ItemType.punji_sticks]: "placeable",
+   [ItemType.primitive_turret]: "placeable",
+   [ItemType.sling_turret]: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
 export type ItemInfo<T extends ItemType> = ItemInfoRecord[typeof ITEM_TYPE_RECORD[T]];
@@ -512,6 +516,16 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       entityType: EntityType.floorPunjiSticks,
       entityTypeConst: IEntityType.floorPunjiSticks
+   },
+   [ItemType.primitive_turret]: {
+      stackSize: 99,
+      entityType: EntityType.primitiveTurret,
+      entityTypeConst: IEntityType.primitiveTurret
+   },
+   [ItemType.sling_turret]: {
+      stackSize: 99,
+      entityType: EntityType.slingTurret,
+      entityTypeConst: IEntityType.slingTurret
    }
 };
 

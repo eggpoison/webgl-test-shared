@@ -17,9 +17,9 @@ export type ItemSlotData = ItemData | null;
 export type ItemSlotsData = { [itemSlot: number]: ItemData };
 
 export interface InventoryData {
-   readonly itemSlots: ItemSlotsData;
    readonly width: number;
    readonly height: number;
+   readonly itemSlots: ItemSlotsData;
    readonly inventoryName: string;
 }
 

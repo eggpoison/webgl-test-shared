@@ -50,7 +50,11 @@ export enum EntityType {
    woodenWallSpikes,
    floorPunjiSticks,
    wallPunjiSticks,
-   blueprintEntity
+   blueprintEntity,
+   primitiveTurret,
+   woodenBolt,
+   slingTurret,
+   slingRock
 }
 
 export const enum IEntityType {
@@ -99,13 +103,17 @@ export const enum IEntityType {
    woodenWallSpikes,
    floorPunjiSticks,
    wallPunjiSticks,
-   blueprintEntity
+   blueprintEntity,
+   primitiveTurret,
+   woodenBolt,
+   slingTurret,
+   slingRock
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
 export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.cow, EntityType.zombie, EntityType.yeti, EntityType.slime, EntityType.slimewisp, EntityType.krumblid, EntityType.frozenYeti];
 
-// export const RESOURCE_ENTITY_TYPES_CONST: ReadonlyArray<IEntityType> = [IEntityType.tree, IEntityType.berry_bush, EntityTypeConst.ice_spikes,EntityTypeConst.cactus, EntityTypeConst.boulder];
+export const RESOURCE_ENTITY_TYPES_CONST: ReadonlyArray<IEntityType> = [IEntityType.tree, IEntityType.berryBush, IEntityType.iceSpikes, IEntityType.cactus, IEntityType.boulder];
 // export const MOB_ENTITY_TYPES_CONST: ReadonlyArray<IEntityType> = [IEntityType.cow, IEntityType.zombie, EntityTypeConst.yeti, EntityTypeConst.slime, EntityTypeConst.slimewisp, EntityTypeConst.krumblid, EntityTypeConst.frozen_yeti];
 
 type BaseEntityInfo = {
@@ -303,10 +311,10 @@ export const EntityInfoClientArgs = {
    [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
    [EntityType.spearProjectile]: () => {},
    [EntityType.researchBench]: () => {},
-   [EntityType.woodenWall]: () => {},
+   [EntityType.woodenWall]: (health: number) => {},
    [EntityType.slimeSpit]: (size: number) => {},
    [EntityType.spitPoison]: () => {},
-   [EntityType.woodenDoor]: (toggleType: DoorToggleType) => {},
+   [EntityType.woodenDoor]: (toggleType: DoorToggleType, openProgress: number) => {},
    [EntityType.battleaxeProjectile]: () => {},
    [EntityType.golem]: (wakeProgress: number) => {},
    [EntityType.planterBox]: () => {},
@@ -317,11 +325,15 @@ export const EntityInfoClientArgs = {
    [EntityType.woodenWallSpikes]: () => {},
    [EntityType.floorPunjiSticks]: () => {},
    [EntityType.wallPunjiSticks]: () => {},
-   [EntityType.blueprintEntity]: (shapeType: StructureShapeType, blueprintProgress: number) => {}
+   [EntityType.blueprintEntity]: (shapeType: StructureShapeType, buildProgress: number) => {},
+   [EntityType.primitiveTurret]: (aimDirection: number, ammoBoxInventory: InventoryData) => {},
+   [EntityType.woodenBolt]: () => {},
+   [EntityType.slingTurret]: (aimDirection: number, chargeProgress: number, reloadProgress: number) => {},
+   [EntityType.slingRock]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
-export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenFloorSpikes, EntityType.woodenWallSpikes] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenFloorSpikes, IEntityType.woodenWallSpikes] as const;
+export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenFloorSpikes, EntityType.woodenWallSpikes, EntityType.floorPunjiSticks, EntityType.wallPunjiSticks] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenFloorSpikes, IEntityType.woodenWallSpikes, IEntityType.floorPunjiSticks, IEntityType.wallPunjiSticks] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
@@ -331,5 +343,7 @@ export const SNAP_OFFSETS: Record<StructureTypeConst, number> = {
    [IEntityType.woodenDoor]: 64,
    [IEntityType.woodenEmbrasure]: 64,
    [IEntityType.woodenFloorSpikes]: 56,
-   [IEntityType.woodenWallSpikes]: 32
+   [IEntityType.woodenWallSpikes]: 28,
+   [IEntityType.floorPunjiSticks]: 56,
+   [IEntityType.wallPunjiSticks]: 32
 };

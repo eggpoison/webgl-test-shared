@@ -282,6 +282,42 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.frostcicle]: 25
       },
       craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.wooden_spikes,
+      yield: 3,
+      ingredients: {
+         [ItemType.wood]: 10
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.punji_sticks,
+      yield: 1,
+      ingredients: {
+         [ItemType.wooden_spikes]: 1,
+         [ItemType.slimeball]: 1,
+         [ItemType.poop]: 2
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.sling_turret,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 20,
+         [ItemType.rock]: 30
+      },
+      craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.primitive_turret,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 60,
+         [ItemType.rock]: 50
+      },
+      craftingStation: CraftingStation.workbench
    }
 ];
 
