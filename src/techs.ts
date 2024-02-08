@@ -346,7 +346,7 @@ export const TECHS: ReadonlyArray<TechInfo> = [
       name: "Basic Machinery",
       description: "The first turrets and automatic buildings.",
       iconSrc: "basic-machinery.png",
-      unlockedItems: [ItemType.sling_turret, ItemType.primitive_turret],
+      unlockedItems: [ItemType.sling_turret, ItemType.ballista],
       positionX: 79,
       positionY: -14,
       dependencies: [TechID.basicArchitecture],

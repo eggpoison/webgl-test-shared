@@ -130,12 +130,6 @@ export interface SlimeSpitComponentData {
 
 export interface SlimewispComponentData {}
 
-export interface SlingTurretComponent {
-   readonly aimDirection: number;
-   readonly chargeProgress: number;
-   readonly reloadProgress: number;
-}
-
 export interface SnowballComponentData {
    readonly size: SnowballSize;
 }
@@ -175,7 +169,8 @@ export interface TribesmanComponentData {}
 
 export interface TurretComponentData {
    readonly aimDirection: number;
-   readonly fireCooldownTicks: number;
+   readonly chargeProgress: number;
+   readonly reloadProgress: number;
 }
 
 export interface YetiComponentData {

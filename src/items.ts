@@ -56,7 +56,7 @@ export enum ItemType {
    poop,
    wooden_spikes,
    punji_sticks,
-   primitive_turret,
+   ballista,
    sling_turret
 }
 
@@ -216,7 +216,7 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.poop]: "material",
    [ItemType.wooden_spikes]: "placeable",
    [ItemType.punji_sticks]: "placeable",
-   [ItemType.primitive_turret]: "placeable",
+   [ItemType.ballista]: "placeable",
    [ItemType.sling_turret]: "placeable"
 } satisfies Record<ItemType, keyof ItemInfoRecord>;
 
@@ -517,10 +517,10 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       entityType: EntityType.floorPunjiSticks,
       entityTypeConst: IEntityType.floorPunjiSticks
    },
-   [ItemType.primitive_turret]: {
+   [ItemType.ballista]: {
       stackSize: 99,
-      entityType: EntityType.primitiveTurret,
-      entityTypeConst: IEntityType.primitiveTurret
+      entityType: EntityType.ballista,
+      entityTypeConst: IEntityType.ballista
    },
    [ItemType.sling_turret]: {
       stackSize: 99,
@@ -585,3 +585,6 @@ export function itemIsStackable(itemType: ItemType): boolean {
 export function getItemStackSize(item: Item): number {
    return (ITEM_INFO_RECORD[item.type] as StackableItemInfo).stackSize;
 }
+
+export const BALLISTA_AMMO_TYPES = [ItemType.wood, ItemType.rock, ItemType.slimeball, ItemType.frostcicle] as const;
+export type BallistaAmmoType = typeof BALLISTA_AMMO_TYPES[number];

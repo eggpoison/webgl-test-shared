@@ -51,8 +51,7 @@ export enum EntityType {
    floorPunjiSticks,
    wallPunjiSticks,
    blueprintEntity,
-   primitiveTurret,
-   woodenBolt,
+   ballista,
    slingTurret,
    slingRock
 }
@@ -104,8 +103,7 @@ export const enum IEntityType {
    floorPunjiSticks,
    wallPunjiSticks,
    blueprintEntity,
-   primitiveTurret,
-   woodenBolt,
+   ballista,
    slingTurret,
    slingRock
 }
@@ -271,6 +269,12 @@ export enum DoorToggleType {
    open
 }
 
+export enum GenericArrowType {
+   woodenArrow,
+   woodenBolt,
+   ballistaRock
+}
+
 // @Cleanup: Maybe send data based on the components
 // cons:
 // - would send all data regardless of whether it is useful or not
@@ -306,7 +310,7 @@ export const EntityInfoClientArgs = {
    [EntityType.frozenYeti]: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => {},
    [EntityType.fish]: (colour: FishColour) => {},
    [EntityType.itemEntity]: (itemType: ItemType) => {},
-   [EntityType.woodenArrowProjectile]: () => {},
+   [EntityType.woodenArrowProjectile]: (arrowType: GenericArrowType) => {},
    [EntityType.iceShardProjectile]: () => {},
    [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
    [EntityType.spearProjectile]: () => {},
@@ -326,14 +330,13 @@ export const EntityInfoClientArgs = {
    [EntityType.floorPunjiSticks]: () => {},
    [EntityType.wallPunjiSticks]: () => {},
    [EntityType.blueprintEntity]: (shapeType: StructureShapeType, buildProgress: number) => {},
-   [EntityType.primitiveTurret]: (aimDirection: number, ammoBoxInventory: InventoryData) => {},
-   [EntityType.woodenBolt]: () => {},
+   [EntityType.ballista]: (aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData) => {},
    [EntityType.slingTurret]: (aimDirection: number, chargeProgress: number, reloadProgress: number) => {},
    [EntityType.slingRock]: () => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
-export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenFloorSpikes, EntityType.woodenWallSpikes, EntityType.floorPunjiSticks, EntityType.wallPunjiSticks] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenFloorSpikes, IEntityType.woodenWallSpikes, IEntityType.floorPunjiSticks, IEntityType.wallPunjiSticks] as const;
+export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenFloorSpikes, EntityType.woodenWallSpikes, EntityType.floorPunjiSticks, EntityType.wallPunjiSticks, EntityType.ballista, EntityType.slingTurret] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenFloorSpikes, IEntityType.woodenWallSpikes, IEntityType.floorPunjiSticks, IEntityType.wallPunjiSticks, IEntityType.ballista, IEntityType.slingTurret] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
@@ -345,5 +348,7 @@ export const SNAP_OFFSETS: Record<StructureTypeConst, number> = {
    [IEntityType.woodenFloorSpikes]: 56,
    [IEntityType.woodenWallSpikes]: 28,
    [IEntityType.floorPunjiSticks]: 56,
-   [IEntityType.wallPunjiSticks]: 32
+   [IEntityType.wallPunjiSticks]: 32,
+   [IEntityType.slingTurret]: 40,
+   [IEntityType.ballista]: 50
 };

@@ -311,7 +311,7 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
       craftingStation: CraftingStation.workbench
    },
    {
-      product: ItemType.primitive_turret,
+      product: ItemType.ballista,
       yield: 1,
       ingredients: {
          [ItemType.wood]: 60,
