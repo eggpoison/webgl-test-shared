@@ -1,4 +1,4 @@
-import { InventoryData, ItemData, StructureShapeType } from "./client-server-types";
+import { InventoryData, ItemData, BlueprintBuildingType } from "./client-server-types";
 import { ItemType } from "./items";
 import { TribeType } from "./tribes";
 
@@ -52,8 +52,7 @@ export enum EntityType {
    wallPunjiSticks,
    blueprintEntity,
    ballista,
-   slingTurret,
-   slingRock
+   slingTurret
 }
 
 export const enum IEntityType {
@@ -104,8 +103,7 @@ export const enum IEntityType {
    wallPunjiSticks,
    blueprintEntity,
    ballista,
-   slingTurret,
-   slingRock
+   slingTurret
 }
    
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
@@ -272,7 +270,10 @@ export enum DoorToggleType {
 export enum GenericArrowType {
    woodenArrow,
    woodenBolt,
-   ballistaRock
+   ballistaRock,
+   ballistaSlimeball,
+   ballistaFrostcicle,
+   slingRock
 }
 
 // @Cleanup: Maybe send data based on the components
@@ -329,10 +330,9 @@ export const EntityInfoClientArgs = {
    [EntityType.woodenWallSpikes]: () => {},
    [EntityType.floorPunjiSticks]: () => {},
    [EntityType.wallPunjiSticks]: () => {},
-   [EntityType.blueprintEntity]: (shapeType: StructureShapeType, buildProgress: number) => {},
-   [EntityType.ballista]: (aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData) => {},
-   [EntityType.slingTurret]: (aimDirection: number, chargeProgress: number, reloadProgress: number) => {},
-   [EntityType.slingRock]: () => {}
+   [EntityType.blueprintEntity]: (buildingType: BlueprintBuildingType, buildProgress: number) => {},
+   [EntityType.ballista]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData) => {},
+   [EntityType.slingTurret]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number) => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 
 export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenFloorSpikes, EntityType.woodenWallSpikes, EntityType.floorPunjiSticks, EntityType.wallPunjiSticks, EntityType.ballista, EntityType.slingTurret] as const;

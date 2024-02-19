@@ -273,10 +273,13 @@ export interface GameObjectDebugData {
    readonly maxHealth?: number;
 }
 
-export enum StructureShapeType {
+export enum BlueprintBuildingType {
    door,
-   embrasure
+   embrasure,
+   ballista,
+   slingTurret
 }
+export type BuildingShapeType = BlueprintBuildingType.door | BlueprintBuildingType.embrasure;
 
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
@@ -321,7 +324,7 @@ export interface ClientToServerEvents {
    unlock_tech: (techID: TechID) => void;
    force_unlock_tech: (techID: TechID) => void;
    study_tech: (studyAmount: number) => void;
-   shape_structure: (structureID: number, type: StructureShapeType) => void;
+   shape_structure: (structureID: number, shapeType: BuildingShapeType) => void;
    structure_interact: (structureID: number) => void;
 }
 

@@ -1,4 +1,4 @@
-import { InventoryData, StatusEffectData, StructureShapeType } from "./client-server-types";
+import { InventoryData, StatusEffectData, BlueprintBuildingType } from "./client-server-types";
 import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, RockSpikeProjectileSize, SlimeOrbData, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
 import { ItemType } from "./items";
 import { TribeType } from "./tribes";
@@ -14,7 +14,7 @@ export interface BerryBushComponentData {
 }
 
 export interface BlueprintComponentData {
-   readonly shapeType: StructureShapeType;
+   readonly buildingType: BlueprintBuildingType;
    readonly buildProgress: number;
 }
 
