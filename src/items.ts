@@ -14,6 +14,7 @@ export enum ItemType {
    stone_sword,
    stone_axe,
    stone_pickaxe,
+   stone_hammer,
    leather,
    leather_backpack,
    cactus_spine,
@@ -114,6 +115,8 @@ export interface HammerItemInfo extends ToolItemInfo {
    readonly toolType: "hammer";
    /** Health that the hammer restores when hitting friendly buildings */
    readonly repairAmount: number;
+   /** Amount of work the hammer contributes to a blueprint per swing */
+   readonly workAmount: number;
 }
 
 export interface PlaceableItemInfo extends StackableItemInfo {
@@ -174,6 +177,7 @@ export const ITEM_TYPE_RECORD = {
    [ItemType.stone_sword]: "sword",
    [ItemType.stone_axe]: "axe",
    [ItemType.stone_pickaxe]: "pickaxe",
+   [ItemType.stone_hammer]: "hammer",
    [ItemType.leather]: "material",
    [ItemType.leather_backpack]: "backpack",
    [ItemType.cactus_spine]: "material",
@@ -255,6 +259,16 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       attackCooldown: 0.5,
       level: 1
    },
+   [ItemType.wooden_hammer]: {
+      stackSize: 1,
+      toolType: "hammer",
+      damage: 2,
+      knockback: 150,
+      attackCooldown: 0.7,
+      level: 1,
+      repairAmount: 3,
+      workAmount: 1
+   },
    [ItemType.berry]: {
       stackSize: 99,
       healAmount: 1,
@@ -296,6 +310,16 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       knockback: 100,
       attackCooldown: 0.5,
       level: 2
+   },
+   [ItemType.stone_hammer]: {
+      stackSize: 1,
+      toolType: "hammer",
+      damage: 2,
+      knockback: 150,
+      attackCooldown: 0.7,
+      level: 1,
+      repairAmount: 3,
+      workAmount: 2
    },
    [ItemType.leather]: {
       stackSize: 99
@@ -478,15 +502,6 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
       stackSize: 99,
       entityType: EntityType.woodenWall,
       entityTypeConst: IEntityType.woodenWall
-   },
-   [ItemType.wooden_hammer]: {
-      stackSize: 1,
-      toolType: "hammer",
-      damage: 2,
-      knockback: 150,
-      attackCooldown: 0.7,
-      level: 1,
-      repairAmount: 3
    },
    [ItemType.stone_battleaxe]: {
       stackSize: 1,
