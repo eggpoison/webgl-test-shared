@@ -197,6 +197,7 @@ export const SNOWBALL_SIZES: Record<SnowballSize, number> = {
    [SnowballSize.large]: 60
 };
 
+// @Cleanup: Rename to something like HitCause
 export enum PlayerCauseOfDeath {
    yeti,
    zombie,
