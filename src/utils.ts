@@ -281,3 +281,18 @@ export function smoothstep(value: number): number {
    const clamped = clamp(value, 0, 1);
    return clamped * clamped * (3 - 2 * clamped);
 }
+
+export function distBetweenPointAndRectangle(pointX: number, pointY: number, rectPosX: number, rectPosY: number, rectWidth: number, rectHeight: number, rectRotation: number): number {
+   // Rotate point around rect to make the situation axis-aligned
+   const alignedPointX = rotateXAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);
+   const alignedPointY = rotateYAroundPoint(pointX, pointY, rectPosX, rectPosY, -rectRotation);
+
+   const rectMinX = rectPosX - rectWidth * 0.5;
+   const rectMaxX = rectPosX + rectWidth * 0.5;
+   const rectMinY = rectPosY - rectHeight * 0.5;
+   const rectMaxY = rectPosY + rectHeight * 0.5;
+   
+   var dx = Math.max(rectMinX - alignedPointX, 0, alignedPointX - rectMaxX);
+   var dy = Math.max(rectMinY - alignedPointY, 0, alignedPointY - rectMaxY);
+   return Math.sqrt(dx * dx + dy * dy);
+}

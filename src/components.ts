@@ -245,7 +245,7 @@ export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
       ammoMultiplier: 4,
       statusEffect: {
          type: StatusEffectConst.poisoned,
-         durationTicks: 2 * SETTINGS.TPS
+         durationTicks: 2.5 * SETTINGS.TPS
       }
    },
    [ItemType.frostcicle]: {
