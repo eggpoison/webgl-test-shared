@@ -115,7 +115,6 @@ export interface HammerItemInfo extends ToolItemInfo {
    readonly toolType: "hammer";
    /** Health that the hammer restores when hitting friendly buildings */
    readonly repairAmount: number;
-   /** Amount of work the hammer contributes to a blueprint per swing */
    readonly workAmount: number;
 }
 
