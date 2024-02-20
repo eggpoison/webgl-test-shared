@@ -1,10 +1,17 @@
 import { InventoryData, StatusEffectData, BlueprintBuildingType } from "./client-server-types";
-import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, RockSpikeProjectileSize, SlimeOrbData, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
-import { ItemType } from "./items";
+import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, GenericArrowType, RockSpikeProjectileSize, SlimeOrbData, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
+import { BallistaAmmoType, ItemType } from "./items";
+import { SETTINGS } from "./settings";
+import { StatusEffectConst } from "./status-effects";
 import { TribeType } from "./tribes";
 
 export interface AIHelperComponentData {
    readonly visionRange: number;
+}
+
+export interface ArrowStatusEffectInfo {
+   readonly type: StatusEffectConst;
+   readonly durationTicks: number;
 }
 
 export interface ArrowComponentData {}
@@ -179,4 +186,81 @@ export interface YetiComponentData {
 
 export interface ZombieComponentData {
    readonly zombieType: number;
+}
+
+export interface BallistaComponentData {
+   readonly ammoType: BallistaAmmoType;
+   readonly ammoRemaining: number;
+}
+
+// @Cleanup: Should these be here?
+
+export interface GenericAmmoInfo {
+   readonly type: GenericArrowType;
+   readonly damage: number;
+   readonly knockback: number;
+   readonly shotCooldownTicks: number;
+   readonly reloadTimeTicks: number;
+   readonly projectileSpeed: number;
+   readonly hitboxWidth: number;
+   readonly hitboxHeight: number;
+   readonly ammoMultiplier: number;
+   readonly statusEffect: ArrowStatusEffectInfo | null;
+}
+
+export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
+   [ItemType.wood]: {
+      type: GenericArrowType.woodenBolt,
+      damage: 5,
+      knockback: 150,
+      shotCooldownTicks: 2.5 * SETTINGS.TPS,
+      reloadTimeTicks: Math.floor(0.4 * SETTINGS.TPS),
+      projectileSpeed: 1100,
+      hitboxWidth: 12,
+      hitboxHeight: 80,
+      ammoMultiplier: 3,
+      statusEffect: null
+   },
+   [ItemType.rock]: {
+      type: GenericArrowType.ballistaRock,
+      damage: 8,
+      knockback: 300,
+      shotCooldownTicks: 3 * SETTINGS.TPS,
+      reloadTimeTicks: Math.floor(0.5 * SETTINGS.TPS),
+      projectileSpeed: 1000,
+      hitboxWidth: 12,
+      hitboxHeight: 80,
+      ammoMultiplier: 3,
+      statusEffect: null
+   },
+   [ItemType.slimeball]: {
+      type: GenericArrowType.ballistaSlimeball,
+      damage: 3,
+      knockback: 0,
+      shotCooldownTicks: 2 * SETTINGS.TPS,
+      reloadTimeTicks: Math.floor(0.4 * SETTINGS.TPS),
+      projectileSpeed: 800,
+      hitboxWidth: 12,
+      hitboxHeight: 80,
+      ammoMultiplier: 4,
+      statusEffect: {
+         type: StatusEffectConst.poisoned,
+         durationTicks: 2 * SETTINGS.TPS
+      }
+   },
+   [ItemType.frostcicle]: {
+      type: GenericArrowType.ballistaFrostcicle,
+      damage: 1,
+      knockback: 50,
+      shotCooldownTicks: 0.5 * SETTINGS.TPS,
+      reloadTimeTicks: Math.floor(0.15 * SETTINGS.TPS),
+      projectileSpeed: 1500,
+      hitboxWidth: 12,
+      hitboxHeight: 80,
+      ammoMultiplier: 6,
+      statusEffect: {
+         type: StatusEffectConst.freezing,
+         durationTicks: 1 * SETTINGS.TPS
+      }
+   }
 }

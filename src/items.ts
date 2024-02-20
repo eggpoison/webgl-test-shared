@@ -1,5 +1,6 @@
-import { EntityType, IEntityType } from "./entities";
+import { EntityType, GenericArrowType, IEntityType } from "./entities";
 import { SETTINGS } from "./settings";
+import { StatusEffectConst } from "./status-effects";
 
 export enum ItemType {
    wood,
@@ -313,11 +314,11 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.stone_hammer]: {
       stackSize: 1,
       toolType: "hammer",
-      damage: 2,
+      damage: 3,
       knockback: 150,
       attackCooldown: 0.7,
-      level: 1,
-      repairAmount: 3,
+      level: 2,
+      repairAmount: 5,
       workAmount: 2
    },
    [ItemType.leather]: {

@@ -1,5 +1,5 @@
 import { InventoryData, ItemData, BlueprintBuildingType } from "./client-server-types";
-import { ItemType } from "./items";
+import { BallistaAmmoType, ItemType } from "./items";
 import { TribeType } from "./tribes";
 
 export type EntityBehaviour = "passive" | "neutral" | "hostile";
@@ -331,7 +331,7 @@ export const EntityInfoClientArgs = {
    [EntityType.floorPunjiSticks]: () => {},
    [EntityType.wallPunjiSticks]: () => {},
    [EntityType.blueprintEntity]: (buildingType: BlueprintBuildingType, buildProgress: number) => {},
-   [EntityType.ballista]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData) => {},
+   [EntityType.ballista]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData, ammoType: BallistaAmmoType, ammoRemaining: number) => {},
    [EntityType.slingTurret]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number) => {}
 } satisfies Record<EntityType, (...args: any[]) => void>;
 

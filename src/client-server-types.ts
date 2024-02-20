@@ -91,6 +91,16 @@ export interface HitData {
    readonly flags: number;
 }
 
+export interface HealData {
+   readonly entityPositionX: number;
+   readonly entityPositionY: number;
+   /** ID of the entity that was healed */
+   readonly healedID: number;
+   /** ID of the entity that caused the healing to occur. -1 if no entity was responsible */
+   readonly healerID: number;
+   readonly healAmount: number;
+}
+
 export interface EntityData<T extends EntityType = EntityType> {
    readonly id: number;
    readonly position: [number, number];
@@ -102,7 +112,6 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly type: T;
    readonly clientArgs: Parameters<typeof EntityInfoClientArgs[T]>;
    readonly statusEffects: Array<StatusEffectData>;
-   readonly amountHealed: number;
 }
 
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
@@ -111,7 +120,9 @@ export interface GameDataPacket {
    readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    /** All hits taken by visible entities server-side */
-   readonly hitsTaken: ReadonlyArray<HitData>;
+   readonly hits: ReadonlyArray<HitData>;
+   /** All healing received by visible entities server-side */
+   readonly heals: ReadonlyArray<HealData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
