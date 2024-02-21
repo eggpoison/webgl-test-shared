@@ -1,5 +1,5 @@
 import { InventoryData, StatusEffectData, BlueprintBuildingType } from "./client-server-types";
-import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, GenericArrowType, RockSpikeProjectileSize, SlimeOrbData, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
+import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, GenericArrowType, RockSpikeProjectileSize, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
 import { BallistaAmmoType, ItemType } from "./items";
 import { SETTINGS } from "./settings";
 import { StatusEffectConst } from "./status-effects";
@@ -126,7 +126,7 @@ export interface RockSpikeProjectileComponentData {
 export interface SlimeComponentData {
    readonly size: SlimeSize;
    readonly eyeRotation: number;
-   readonly orbs: ReadonlyArray<SlimeOrbData>;
+   readonly orbSizes: ReadonlyArray<SlimeSize>;
    readonly anger: number;
    readonly spitChargeProgress: number;
 }

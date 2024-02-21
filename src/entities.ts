@@ -172,14 +172,6 @@ export enum SlimeSize {
    large = 2
 }
 
-/** Information about an orb inside a slime */
-export interface SlimeOrbData {
-   readonly size: SlimeSize;
-   readonly rotation: number;
-   /** Offset of the orb from the center of the slime (from 0->1) */
-   readonly offset: number;
-}
-
 export interface TribeTotemBanner {
    readonly hutNum: number;
    /** The ring layer in the totem which the banner is on */
@@ -296,7 +288,7 @@ export const EntityInfoClientArgs = {
    [EntityType.cactus]: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => {},
    [EntityType.yeti]: (attackProgress: number) => {},
    [EntityType.iceSpikes]: () => {},
-   [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbs: ReadonlyArray<SlimeOrbData>, anger: number, spitChargeProgress: number) => {},
+   [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbSizes: ReadonlyArray<SlimeSize>, anger: number, spitChargeProgress: number) => {},
    [EntityType.slimewisp]: () => {},
    [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, username: string) => {},
    [EntityType.tribeWorker]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
