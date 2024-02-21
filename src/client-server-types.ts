@@ -101,6 +101,12 @@ export interface HealData {
    readonly healAmount: number;
 }
 
+export interface ResearchOrbCompleteData {
+   readonly x: number;
+   readonly y: number;
+   readonly amount: number;
+}
+
 export interface EntityData<T extends EntityType = EntityType> {
    readonly id: number;
    readonly position: [number, number];
@@ -125,6 +131,7 @@ export interface GameDataPacket {
    readonly hits: ReadonlyArray<HitData>;
    /** All healing received by visible entities server-side */
    readonly heals: ReadonlyArray<HealData>;
+   readonly orbCompletes: ReadonlyArray<ResearchOrbCompleteData>;
    readonly inventory: PlayerInventoryData;
    /** How many ticks have passed in the server */
    readonly serverTicks: number;
