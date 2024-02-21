@@ -13,3 +13,4 @@ export * from "./tribes";
 export * from "./cooking-info";
 export * from "./techs";
 export * from "./components";
+export * from "./research";

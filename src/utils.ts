@@ -38,7 +38,9 @@ export class Point {
    }
 
    public calculateDistanceBetween(other: Point): number {
-      return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
+      const xDiff = this.x - other.x;
+      const yDiff = this.y - other.y;
+      return Math.sqrt(xDiff * xDiff + yDiff * yDiff);
    }
 
    public calculateDistanceSquaredBetween(other: Point): number {

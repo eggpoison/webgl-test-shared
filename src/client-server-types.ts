@@ -112,6 +112,8 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly type: T;
    readonly clientArgs: Parameters<typeof EntityInfoClientArgs[T]>;
    readonly statusEffects: Array<StatusEffectData>;
+   readonly collisionBit: number;
+   readonly collisionMask: number;
 }
 
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
@@ -337,6 +339,8 @@ export interface ClientToServerEvents {
    study_tech: (studyAmount: number) => void;
    shape_structure: (structureID: number, shapeType: BuildingShapeType) => void;
    structure_interact: (structureID: number) => void;
+   /** Can be sent when the player stops interacting with a structure */
+   structure_uninteract: (structureID: number) => void;
 }
 
 export interface InterServerEvents {}
