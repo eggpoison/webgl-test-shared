@@ -1,7 +1,7 @@
 import { InventoryData, StatusEffectData, BlueprintBuildingType } from "./client-server-types";
 import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, GenericArrowType, RockSpikeProjectileSize, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
 import { BallistaAmmoType, ItemType } from "./items";
-import { SETTINGS } from "./settings";
+import { SettingsConst } from "./settings";
 import { StatusEffectConst } from "./status-effects";
 import { TribeType } from "./tribes";
 
@@ -213,8 +213,8 @@ export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
       type: GenericArrowType.woodenBolt,
       damage: 5,
       knockback: 150,
-      shotCooldownTicks: 2.5 * SETTINGS.TPS,
-      reloadTimeTicks: Math.floor(0.4 * SETTINGS.TPS),
+      shotCooldownTicks: 2.5 * SettingsConst.TPS,
+      reloadTimeTicks: Math.floor(0.4 * SettingsConst.TPS),
       projectileSpeed: 1100,
       hitboxWidth: 12,
       hitboxHeight: 80,
@@ -225,8 +225,8 @@ export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
       type: GenericArrowType.ballistaRock,
       damage: 8,
       knockback: 300,
-      shotCooldownTicks: 3 * SETTINGS.TPS,
-      reloadTimeTicks: Math.floor(0.5 * SETTINGS.TPS),
+      shotCooldownTicks: 3 * SettingsConst.TPS,
+      reloadTimeTicks: Math.floor(0.5 * SettingsConst.TPS),
       projectileSpeed: 1000,
       hitboxWidth: 12,
       hitboxHeight: 80,
@@ -237,30 +237,30 @@ export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
       type: GenericArrowType.ballistaSlimeball,
       damage: 3,
       knockback: 0,
-      shotCooldownTicks: 2 * SETTINGS.TPS,
-      reloadTimeTicks: Math.floor(0.4 * SETTINGS.TPS),
+      shotCooldownTicks: 2 * SettingsConst.TPS,
+      reloadTimeTicks: Math.floor(0.4 * SettingsConst.TPS),
       projectileSpeed: 800,
       hitboxWidth: 12,
       hitboxHeight: 80,
       ammoMultiplier: 4,
       statusEffect: {
          type: StatusEffectConst.poisoned,
-         durationTicks: 2.5 * SETTINGS.TPS
+         durationTicks: 2.5 * SettingsConst.TPS
       }
    },
    [ItemType.frostcicle]: {
       type: GenericArrowType.ballistaFrostcicle,
       damage: 1,
       knockback: 50,
-      shotCooldownTicks: 0.5 * SETTINGS.TPS,
-      reloadTimeTicks: Math.floor(0.15 * SETTINGS.TPS),
+      shotCooldownTicks: 0.5 * SettingsConst.TPS,
+      reloadTimeTicks: Math.floor(0.15 * SettingsConst.TPS),
       projectileSpeed: 1500,
       hitboxWidth: 12,
       hitboxHeight: 80,
       ammoMultiplier: 6,
       statusEffect: {
          type: StatusEffectConst.freezing,
-         durationTicks: 1 * SETTINGS.TPS
+         durationTicks: 1 * SettingsConst.TPS
       }
    }
 }

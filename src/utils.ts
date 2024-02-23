@@ -1,4 +1,4 @@
-import { SETTINGS } from "./settings";
+import { SettingsConst } from "./settings";
 
 /**
  * Returns a random integer inclusively.
@@ -67,11 +67,11 @@ export class Point {
    }
 
    public length(): number {
-      return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+      return Math.sqrt(this.x * this.x + this.y * this.y);
    }
 
    public lengthSquared(): number {
-      return Math.pow(this.x, 2) + Math.pow(this.y, 2);
+      return this.x * this.x + this.y * this.y;
    }
    
    public package(): [number, number] {
@@ -218,8 +218,8 @@ export function clampToBoardDimensions(tileCoord: number): number {
    if (tileCoord < 0) {
       return 0;
    }
-   if (tileCoord >= SETTINGS.BOARD_DIMENSIONS) {
-      return SETTINGS.BOARD_DIMENSIONS - 1;
+   if (tileCoord >= SettingsConst.BOARD_DIMENSIONS) {
+      return SettingsConst.BOARD_DIMENSIONS - 1;
    }
    return tileCoord;
 }
@@ -247,7 +247,7 @@ export function angle(x: number, y: number): number {
 }
 
 export function customTickIntervalHasPassed(ticks: number, intervalSeconds: number): boolean {
-   const ticksPerInterval = intervalSeconds * SETTINGS.TPS;
+   const ticksPerInterval = intervalSeconds * SettingsConst.TPS;
    
    const previousCheck = (ticks - 1) / ticksPerInterval;
    const check = ticks / ticksPerInterval;

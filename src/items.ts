@@ -1,6 +1,5 @@
-import { EntityType, GenericArrowType, IEntityType } from "./entities";
-import { SETTINGS } from "./settings";
-import { StatusEffectConst } from "./status-effects";
+import { EntityType, IEntityType } from "./entities";
+import { SettingsConst } from "./settings";
 
 export enum ItemType {
    wood,
@@ -389,7 +388,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.wooden_bow]: {
       projectileDamage: 4,
       projectileKnockback: 150,
-      shotCooldownTicks: 1 * SETTINGS.TPS,
+      shotCooldownTicks: 1 * SettingsConst.TPS,
       projectileSpeed: 1100,
       airResistance: 400,
       level: 2
@@ -397,7 +396,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.reinforced_bow]: {
       projectileDamage: 6,
       projectileKnockback: 200,
-      shotCooldownTicks: 1 * SETTINGS.TPS,
+      shotCooldownTicks: 1 * SettingsConst.TPS,
       projectileSpeed: 1500,
       airResistance: 300,
       level: 2.5
@@ -405,7 +404,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.ice_bow]: {
       projectileDamage: 0,
       projectileKnockback: 0,
-      shotCooldownTicks: 1.25 * SETTINGS.TPS,
+      shotCooldownTicks: 1.25 * SettingsConst.TPS,
       projectileSpeed: 1100,
       airResistance: 400,
       level: 2.5
@@ -413,7 +412,7 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    [ItemType.crossbow]: {
       projectileDamage: 6,
       projectileKnockback: 200,
-      shotCooldownTicks: 1 * SETTINGS.TPS,
+      shotCooldownTicks: 1 * SettingsConst.TPS,
       projectileSpeed: 1500,
       airResistance: 300,
       level: 2.5
