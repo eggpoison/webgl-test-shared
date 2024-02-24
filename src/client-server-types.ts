@@ -55,7 +55,6 @@ export interface BaseHitboxData {
    readonly mass: number;
    readonly offsetX: number;
    readonly offsetY: number;
-   readonly localID: number;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
