@@ -1,14 +1,14 @@
 export enum StatusEffect {
-   burning,
-   freezing,
-   poisoned,
-   bleeding
+   burning = 1,
+   freezing = 2,
+   poisoned = 4,
+   bleeding = 8
 }
 export const enum StatusEffectConst {
-   burning,
-   freezing,
-   poisoned,
-   bleeding
+   burning = 1,
+   freezing = 2,
+   poisoned = 4,
+   bleeding = 8
 }
 
 interface StatusEffectModifiers {

@@ -224,7 +224,7 @@ export const AMMO_INFO_RECORD: Record<BallistaAmmoType, GenericAmmoInfo> = {
    [ItemType.rock]: {
       type: GenericArrowType.ballistaRock,
       damage: 8,
-      knockback: 300,
+      knockback: 350,
       shotCooldownTicks: 3 * SETTINGS.TPS,
       reloadTimeTicks: Math.floor(0.5 * SETTINGS.TPS),
       projectileSpeed: 1000,
