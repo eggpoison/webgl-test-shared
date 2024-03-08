@@ -33,10 +33,13 @@ interface TechUnlockProgress {
 /** The current amount of items used in each tech's research */
 export type TechTreeUnlockProgress = Partial<Record<TechID, TechUnlockProgress>>;
 
-// @Cleanup: Should this be moved to tribes.ts?
 export interface TribeData {
    readonly id: number;
    readonly tribeType: TribeType;
+}
+
+// @Cleanup: Should this be moved to tribes.ts?
+export interface PlayerTribeData extends TribeData {
    readonly hasTotem: boolean;
    readonly numHuts: number;
    readonly tribesmanCap: number;
@@ -45,6 +48,8 @@ export interface TribeData {
    readonly unlockedTechs: ReadonlyArray<TechID>;
    readonly techTreeUnlockProgress: TechTreeUnlockProgress;
 }
+
+export interface EnemyTribeData extends TribeData {}
 
 export interface TechInfo {
    readonly id: TechID;

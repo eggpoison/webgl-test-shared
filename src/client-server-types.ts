@@ -1,39 +1,22 @@
-import { EntityInfoClientArgs, EntityType, TribeMemberAction } from "./entities";
-import { ItemType } from "./items";
+import { EntityComponentsData } from "./components";
+import { EntityType, TribeMemberAction } from "./entities";
+import { Inventory } from "./items";
 import { StatusEffect } from "./status-effects";
-import { TechID, TribeData } from "./techs";
+import { EnemyTribeData, PlayerTribeData, TechID } from "./techs";
 import { BiomeName, TileType } from "./tiles";
 import { TribeType } from "./tribes";
 
-export interface ItemData {
-   /** Unique identifier for the number */
-   readonly id: number;
-   readonly type: ItemType;
-   readonly count: number;
-}
-
-export type ItemSlotData = ItemData | null;
-
-export type ItemSlotsData = { [itemSlot: number]: ItemData };
-
-export interface InventoryData {
-   readonly width: number;
-   readonly height: number;
-   readonly itemSlots: ItemSlotsData;
-   readonly inventoryName: string;
-}
-
 export interface PlayerInventoryData {
-   readonly hotbar: InventoryData;
-   readonly backpackSlot: InventoryData;
-   readonly backpackInventory: InventoryData;
+   readonly hotbar: Inventory;
+   readonly backpackSlot: Inventory;
+   readonly backpackInventory: Inventory;
    /** Item currently being held by the player */
-   readonly heldItemSlot: InventoryData;
+   readonly heldItemSlot: Inventory;
    /** Item held in the player's crafting output slot */
-   readonly craftingOutputItemSlot: InventoryData;
-   readonly armourSlot: InventoryData;
-   readonly gloveSlot: InventoryData;
-   readonly offhand: InventoryData;
+   readonly craftingOutputItemSlot: Inventory;
+   readonly armourSlot: Inventory;
+   readonly gloveSlot: Inventory;
+   readonly offhand: Inventory;
 }
 
 export interface ServerTileData {
@@ -115,16 +98,15 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly circularHitboxes: ReadonlyArray<CircularHitboxData>;
    readonly ageTicks: number;
    readonly type: T;
-   readonly clientArgs: Parameters<typeof EntityInfoClientArgs[T]>;
-   readonly statusEffects: Array<StatusEffectData>;
    readonly collisionBit: number;
    readonly collisionMask: number;
+   readonly components: EntityComponentsData<T>;
 }
 
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
 /** Data about the game state sent to the client each tick */
 export interface GameDataPacket {
-   readonly entityDataArray: ReadonlyArray<EntityData<EntityType>>;
+   readonly entityDataArray: Array<EntityData<EntityType>>;
    readonly tileUpdates: ReadonlyArray<ServerTileUpdateData>;
    /** All hits taken by visible entities server-side */
    readonly hits: ReadonlyArray<HitData>;
@@ -139,7 +121,8 @@ export interface GameDataPacket {
    readonly playerHealth: number;
    /** Extra debug information about a game object being tracked */
    readonly gameObjectDebugData?: GameObjectDebugData;
-   readonly tribeData: TribeData;
+   readonly playerTribeData: PlayerTribeData;
+   readonly enemyTribesData: ReadonlyArray<EnemyTribeData>;
    readonly hasFrostShield: boolean;
    readonly pickedUpItem: boolean;
    readonly hotbarCrossbowLoadProgressRecord: Record<number, number>;
@@ -295,10 +278,11 @@ export interface GameObjectDebugData {
 export enum BlueprintBuildingType {
    door,
    embrasure,
+   tunnel,
    ballista,
    slingTurret
 }
-export type BuildingShapeType = BlueprintBuildingType.door | BlueprintBuildingType.embrasure;
+export type BuildingShapeType = BlueprintBuildingType.door | BlueprintBuildingType.embrasure | BlueprintBuildingType.tunnel;
 
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}

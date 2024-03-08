@@ -523,13 +523,13 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.wooden_spikes]: {
       stackSize: 99,
-      entityType: EntityType.woodenFloorSpikes,
-      entityTypeConst: IEntityType.woodenFloorSpikes
+      entityType: EntityType.woodenSpikes,
+      entityTypeConst: IEntityType.woodenSpikes
    },
    [ItemType.punji_sticks]: {
       stackSize: 99,
-      entityType: EntityType.floorPunjiSticks,
-      entityTypeConst: IEntityType.floorPunjiSticks
+      entityType: EntityType.punjiSticks,
+      entityTypeConst: IEntityType.punjiSticks
    },
    [ItemType.ballista]: {
       stackSize: 99,
@@ -567,10 +567,13 @@ export type ItemSlot = Item | null;
 export type ItemSlots = { [itemSlot: number]: Item };
 
 export interface Inventory {
-   itemSlots: ItemSlots;
+   /** Width of the inventory in item slots */
    width: number;
+   /** Height of the inventory in item slots */
    height: number;
-   readonly inventoryName: string;
+   /** The items contained by the inventory. */
+   readonly itemSlots: ItemSlots;
+   readonly name: string;
 }
 
 export class Item {
