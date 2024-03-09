@@ -16,7 +16,7 @@ const enum _Settings {
    STRUCTURE_SNAP_RANGE = 100,
    STRUCTURE_POSITION_SNAP = 20,
    STRUCTURE_ROTATION_SNAP = 0.4,
-   ENTITY_PUSH_FORCE = 200
+   ENTITY_PUSH_FORCE = 20
 }
 
 export enum Settings {
