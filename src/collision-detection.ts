@@ -12,13 +12,13 @@ export const DEFAULT_COLLISION_MASK = COLLISION_BITS.default | COLLISION_BITS.ca
 
 export type HitboxVertexPositions = [tl: Point, tr: Point, bl: Point, br: Point];
 
-const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axis: Point): number => {
+const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axisX: number, axisY: number): number => {
    const firstVertex = vertices[0];
-   let min = axis.x * (firstVertex.x + offsetX) + axis.y * (firstVertex.y + offsetY);
+   let min = axisX * (firstVertex.x + offsetX) + axisY * (firstVertex.y + offsetY);
 
    for (let i = 1; i < 4; i++) {
       const vertex = vertices[i];
-      const dotProduct = axis.x * (vertex.x + offsetX) + axis.y * (vertex.y + offsetY);
+      const dotProduct = axisX * (vertex.x + offsetX) + axisY * (vertex.y + offsetY);
       if (dotProduct < min) {
          min = dotProduct;
       }
@@ -27,13 +27,13 @@ const findMinWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offs
    return min;
 }
 
-const findMaxWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axis: Point): number => {
+const findMaxWithOffset = (vertices: ReadonlyArray<Point>, offsetX: number, offsetY: number, axisX: number, axisY: number): number => {
    const firstVertex = vertices[0];
-   let max = axis.x * (firstVertex.x + offsetX) + axis.y * (firstVertex.y + offsetY);
+   let max = axisX * (firstVertex.x + offsetX) + axisY * (firstVertex.y + offsetY);
 
    for (let i = 1; i < 4; i++) {
       const vertex = vertices[i];
-      const dotProduct = axis.x * (vertex.x + offsetX) + axis.y * (vertex.y + offsetY);
+      const dotProduct = axisX * (vertex.x + offsetX) + axisY * (vertex.y + offsetY);
       if (dotProduct > max) {
          max = dotProduct;
       }
@@ -77,33 +77,41 @@ export function computeSideAxis(point1: Point, point2: Point): Point {
 }
 
 /** Allows for precomputation of points for optimization */
-export function rectanglePointsDoIntersect(vertexPositions1: HitboxVertexPositions, vertexPositions2: HitboxVertexPositions, offset1x: number, offset1y: number, offset2x: number, offset2y: number, axes1: ReadonlyArray<Point>, axes2: ReadonlyArray<Point>): boolean {
-   for (let i = 0; i < 2; i++) {
-      const axis = axes1[i];
-
-      const min1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, axis);
-      const max1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, axis);
-      const min2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, axis);
-      const max2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, axis);
-
-      const isIntersection = min2 < max1 && min1 < max2;
-      if (!isIntersection) {
-         return false;
-      }
+export function rectanglePointsDoIntersect(vertexPositions1: HitboxVertexPositions, vertexPositions2: HitboxVertexPositions, offset1x: number, offset1y: number, offset2x: number, offset2y: number, axis1x: number, axis1y: number, axis2x: number, axis2y: number): boolean {
+   // Axis 1
+   const axis1min1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, axis1x, axis1y);
+   const axis1max1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, axis1x, axis1y);
+   const axis1min2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, axis1x, axis1y);
+   const axis1max2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, axis1x, axis1y);
+   if (axis1min2 >= axis1max1 || axis1min1 >= axis1max2) {
+      return false;
    }
 
-   for (let i = 0; i < 2; i++) {
-      const axis = axes2[i];
+   // Axis 1 complement
+   const axis1ComplementMin1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, -axis1y, axis1x);
+   const axis1ComplementMax1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, -axis1y, axis1x);
+   const axis1ComplementMin2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, -axis1y, axis1x);
+   const axis1ComplementMax2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, -axis1y, axis1x);
+   if (axis1ComplementMin2 >= axis1ComplementMax1 || axis1ComplementMin1 >= axis1ComplementMax2) {
+      return false;
+   }
+   
+   // Axis 2
+   const axis2min1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, axis2x, axis2y);
+   const axis2max1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, axis2x, axis2y);
+   const axis2min2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, axis2x, axis2y);
+   const axis2max2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, axis2x, axis2y);
+   if (axis2min2 >= axis2max1 || axis2min1 >= axis2max2) {
+      return false;
+   }
 
-      const min1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, axis);
-      const max1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, axis);
-      const min2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, axis);
-      const max2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, axis);
-
-      const isIntersection = min2 < max1 && min1 < max2;
-      if (!isIntersection) {
-         return false;
-      }
+   // Axis 2 complement
+   const axis2ComplementMin1 = findMinWithOffset(vertexPositions1, offset1x, offset1y, -axis2y, axis2x);
+   const axis2ComplementMax1 = findMaxWithOffset(vertexPositions1, offset1x, offset1y, -axis2y, axis2x);
+   const axis2ComplementMin2 = findMinWithOffset(vertexPositions2, offset2x, offset2y, -axis2y, axis2x);
+   const axis2ComplementMax2 = findMaxWithOffset(vertexPositions2, offset2x, offset2y, -axis2y, axis2x);
+   if (axis2ComplementMin2 >= axis2ComplementMax1 || axis2ComplementMin1 >= axis2ComplementMax2) {
+      return false;
    }
 
    return true;
