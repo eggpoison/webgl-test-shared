@@ -1,3 +1,4 @@
+// @Memory: make into const and non-const enums as they can be stored with less memory
 export type BiomeName = "grasslands" | "desert" | "tundra" | "swamp" | "mountains" | "magmaFields" | "river";
 
 export enum TileType {

@@ -81,3 +81,19 @@ SETTINGS.BOARD_UNITS = SETTINGS.BOARD_DIMENSIONS * SETTINGS.TILE_SIZE;
 
 /** 1 / SETTINGS.TPS */
 export const I_TPS = 1 / SETTINGS.TPS;
+
+export enum PathfindingSettings {
+   /** Units of separation between the nodes horizontally and vertically */
+   NODE_SEPARATION = 16,
+   // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16384 to SettingsConst.BOARD_UNITS
+   NODES_IN_WORLD_WIDTH = 16384 / PathfindingSettings.NODE_SEPARATION,
+   NODE_REACH_DIST = 8
+}
+
+export const enum PathfindingSettingsConst {
+   /** Units of separation between the nodes horizontally and vertically */
+   NODE_SEPARATION = 16,
+   // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16384 to SettingsConst.BOARD_UNITS
+   NODES_IN_WORLD_WIDTH = 16384 / PathfindingSettings.NODE_SEPARATION,
+   NODE_REACH_DIST = 8
+}

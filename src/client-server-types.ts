@@ -139,11 +139,12 @@ export interface GameDataPacket {
    readonly serverTime: number;
    readonly playerHealth: number;
    /** Extra debug information about a game object being tracked */
-   readonly gameObjectDebugData?: GameObjectDebugData;
+   readonly entityDebugData?: EntityDebugData;
    readonly tribeData: TribeData;
    readonly hasFrostShield: boolean;
    readonly pickedUpItem: boolean;
    readonly hotbarCrossbowLoadProgressRecord: Record<number, number>;
+   readonly visiblePathfindingNodeOccupances: ReadonlyArray<PathfindingNodeIndex>;
 }
 
 export enum WaterRockSize {
@@ -282,15 +283,23 @@ export interface TileHighlightData extends DebugData {
    readonly tilePosition: [tileX: number, tileY: number];
 }
 
-export interface GameObjectDebugData {
-   /** ID of the game object being tracked */
-   readonly gameObjectID: number;
+export type PathfindingNodeIndex = number;
+
+export interface PathData {
+   readonly pathNodes: ReadonlyArray<PathfindingNodeIndex>;
+   readonly rawPathNodes: ReadonlyArray<PathfindingNodeIndex>;
+}
+
+export interface EntityDebugData {
+   /** ID of the entity being tracked */
+   readonly entityID: number;
    readonly lines: Array<LineDebugData>;
    readonly circles: Array<CircleDebugData>;
    readonly tileHighlights: Array<TileHighlightData>;
    readonly debugEntries: Array<string>;
    readonly health?: number;
    readonly maxHealth?: number;
+   readonly pathData?: PathData;
 }
 
 export enum BlueprintBuildingType {
