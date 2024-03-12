@@ -410,6 +410,9 @@ export enum TribesmanAIType {
    haulingResources,
    grabbingFood,
    patrolling,
+   eating,
+   repairing,
+   assistingOtherTribesmen,
    idle
 }
 
