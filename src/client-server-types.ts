@@ -1,4 +1,4 @@
-import { EntityComponentsData } from "./components";
+import { BlueprintType, EntityComponentsData } from "./components";
 import { EntityType, TribeMemberAction } from "./entities";
 import { Inventory } from "./items";
 import { StatusEffect } from "./status-effects";
@@ -284,17 +284,6 @@ export interface EntityDebugData {
    readonly pathData?: PathData;
 }
 
-export enum BlueprintBuildingType {
-   woodenDoor,
-   stoneWallUpgrade,
-   embrasure,
-   tunnel,
-   ballista,
-   slingTurret
-}
-// @Cleanup: Confusing
-export type BuildingShapeType = BlueprintBuildingType.woodenDoor | BlueprintBuildingType.embrasure | BlueprintBuildingType.tunnel;
-
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
 
@@ -338,8 +327,9 @@ export interface ClientToServerEvents {
    unlock_tech: (techID: TechID) => void;
    force_unlock_tech: (techID: TechID) => void;
    study_tech: (studyAmount: number) => void;
-   // @Cleanup: kinda bad to use option idx (e.g. if we add an option in the middle of existing ones)
-   shape_structure: (structureID: number, optionIdx: number) => void;
+   place_blueprint: (structureID: number, blueprintType: BlueprintType) => void;
+   modify_building: (buildingID: number) => void;
+   deconstruct_building: (structureID: number) => void;
    structure_interact: (structureID: number) => void;
    /** Can be sent when the player stops interacting with a structure */
    structure_uninteract: (structureID: number) => void;

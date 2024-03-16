@@ -1,4 +1,4 @@
-import { StatusEffectData, BlueprintBuildingType } from "./client-server-types";
+import { StatusEffectData } from "./client-server-types";
 import { CactusBodyFlowerData, CactusLimbData, CowSpecies, DeathInfo, DoorToggleType, FishColour, FrozenYetiAttackType, GenericArrowType, EntityType, RockSpikeProjectileSize, SlimeSize, SnowballSize, TreeSize, TribeMemberAction, TribeTotemBanner } from "./entities";
 import { BallistaAmmoType, Inventory, ItemType } from "./items";
 import { SettingsConst } from "./settings";
@@ -95,19 +95,19 @@ export const EntityComponents = {
    [EntityType.wall]: [ServerComponentType.health, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
    [EntityType.slimeSpit]: [ServerComponentType.physics, ServerComponentType.slimeSpit] as const,
    [EntityType.spitPoison]: [] as const,
-   [EntityType.woodenDoor]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.door, ServerComponentType.tribe] as const,
+   [EntityType.door]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.door, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
    [EntityType.battleaxeProjectile]: [ServerComponentType.physics, ServerComponentType.throwingProjectile] as const,
    [EntityType.golem]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.golem] as const,
    [EntityType.planterBox]: [ServerComponentType.health, ServerComponentType.statusEffect] as const,
    [EntityType.iceArrow]: [ServerComponentType.physics, ServerComponentType.tribe] as const,
    [EntityType.pebblum]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.pebblum] as const,
-   [EntityType.woodenEmbrasure]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const,
+   [EntityType.embrasure]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
    [EntityType.woodenSpikes]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const,
    [EntityType.punjiSticks]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const,
    [EntityType.blueprintEntity]: [ServerComponentType.health, ServerComponentType.blueprint, ServerComponentType.tribe] as const,
    [EntityType.ballista]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper, ServerComponentType.ammoBox, ServerComponentType.inventory] as const,
    [EntityType.slingTurret]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper] as const,
-   [EntityType.woodenTunnel]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tunnel] as const
+   [EntityType.tunnel]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tunnel, ServerComponentType.buildingMaterial] as const
 } satisfies Record<EntityType, ReadonlyArray<ServerComponentType>>;
 
 export type EntityComponentTypes<T extends EntityType> = typeof EntityComponents[T];
@@ -193,8 +193,20 @@ export interface BerryBushComponentData {
 
 /* Blueprint Component */
 
+export enum BlueprintType {
+   stoneWall,
+   woodenDoor,
+   stoneDoor,
+   woodenEmbrasure,
+   stoneEmbrasure,
+   woodenTunnel,
+   stoneTunnel,
+   ballista,
+   slingTurret
+}
+
 export interface BlueprintComponentData {
-   readonly buildingType: BlueprintBuildingType;
+   readonly blueprintType: BlueprintType;
    readonly buildProgress: number;
 }
 
@@ -505,6 +517,11 @@ export enum BuildingMaterial {
 export interface BuildingMaterialComponentData {
    readonly material: BuildingMaterial;
 }
+
+export const MATERIAL_TO_ITEM_MAP: Record<BuildingMaterial, ItemType> = {
+   [BuildingMaterial.wood]: ItemType.wood,
+   [BuildingMaterial.stone]: ItemType.rock
+};
 
 // @Cleanup: Should these be here?
 

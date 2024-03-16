@@ -35,14 +35,14 @@ export enum EntityType {
    wall,
    slimeSpit,
    spitPoison,
-   woodenDoor,
+   door,
    battleaxeProjectile,
    golem,
    planterBox,
    iceArrow,
    pebblum,
-   woodenEmbrasure,
-   woodenTunnel,
+   embrasure,
+   tunnel,
    woodenSpikes,
    punjiSticks,
    blueprintEntity,
@@ -85,14 +85,14 @@ export const enum IEntityType {
    wall,
    slimeSpit,
    spitPoison,
-   woodenDoor,
+   door,
    battleaxeProjectile,
    golem,
    planterBox,
    iceArrow,
    pebblum,
-   woodenEmbrasure,
-   woodenTunnel,
+   embrasure,
+   tunnel,
    woodenSpikes,
    punjiSticks,
    blueprintEntity,
@@ -256,18 +256,18 @@ export enum GenericArrowType {
    slingRock
 }
 
-export const STRUCTURE_TYPES = [EntityType.wall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenSpikes, EntityType.punjiSticks, EntityType.ballista, EntityType.slingTurret, EntityType.woodenTunnel] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.wall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenSpikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.woodenTunnel] as const;
+export const STRUCTURE_TYPES = [EntityType.wall, EntityType.door, EntityType.embrasure, EntityType.woodenSpikes, EntityType.punjiSticks, EntityType.ballista, EntityType.slingTurret, EntityType.tunnel] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.wall, IEntityType.door, IEntityType.embrasure, IEntityType.woodenSpikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.tunnel] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
 
 export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWall: boolean): number {
    switch (entityType) {
-      case IEntityType.woodenTunnel:
+      case IEntityType.tunnel:
       case IEntityType.wall:
-      case IEntityType.woodenDoor:
-      case IEntityType.woodenEmbrasure: { return 64; }
+      case IEntityType.door:
+      case IEntityType.embrasure: { return 64; }
       case IEntityType.woodenSpikes: { return 56; }
       case IEntityType.punjiSticks: { return 56; }
       case IEntityType.slingTurret: { return 40; }
@@ -277,10 +277,10 @@ export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWa
 
 export function getSnapOffsetHeight(entityType: StructureTypeConst, isPlacedOnWall: boolean): number {
    switch (entityType) {
-      case IEntityType.woodenTunnel:
+      case IEntityType.tunnel:
       case IEntityType.wall:
-      case IEntityType.woodenDoor:
-      case IEntityType.woodenEmbrasure: { return 64; }
+      case IEntityType.door:
+      case IEntityType.embrasure: { return 64; }
       case IEntityType.woodenSpikes: { return isPlacedOnWall ? 28 : 56; }
       case IEntityType.punjiSticks: { return isPlacedOnWall ? 32 : 56; }
       case IEntityType.slingTurret: { return 40; }
