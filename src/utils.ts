@@ -304,3 +304,8 @@ export function distBetweenPointAndRectangle(pointX: number, pointY: number, rec
    var dy = Math.max(rectMinY - alignedPointY, 0, alignedPointY - rectMaxY);
    return Math.sqrt(dx * dx + dy * dy);
 }
+
+export function assertUnreachable(x: never): never {
+   console.warn(x);
+   throw new Error("Why must I exist?");
+}

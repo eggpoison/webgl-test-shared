@@ -499,8 +499,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.wooden_wall]: {
       stackSize: 99,
-      entityType: EntityType.woodenWall,
-      entityTypeConst: IEntityType.woodenWall
+      entityType: EntityType.wall,
+      entityTypeConst: IEntityType.wall
    },
    [ItemType.stone_battleaxe]: {
       stackSize: 1,

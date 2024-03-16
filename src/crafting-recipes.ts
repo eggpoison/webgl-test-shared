@@ -318,6 +318,14 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
          [ItemType.rock]: 50
       },
       craftingStation: CraftingStation.workbench
+   },
+   {
+      product: ItemType.wooden_wall,
+      yield: 1,
+      ingredients: {
+         [ItemType.wood]: 5
+      },
+      craftingStation: CraftingStation.workbench
    }
 ];
 

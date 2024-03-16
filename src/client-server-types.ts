@@ -285,13 +285,15 @@ export interface EntityDebugData {
 }
 
 export enum BlueprintBuildingType {
-   door,
+   woodenDoor,
+   stoneWallUpgrade,
    embrasure,
    tunnel,
    ballista,
    slingTurret
 }
-export type BuildingShapeType = BlueprintBuildingType.door | BlueprintBuildingType.embrasure | BlueprintBuildingType.tunnel;
+// @Cleanup: Confusing
+export type BuildingShapeType = BlueprintBuildingType.woodenDoor | BlueprintBuildingType.embrasure | BlueprintBuildingType.tunnel;
 
 // Note to stupid future self: don't remove this, it's important
 export interface SocketData {}
@@ -336,7 +338,8 @@ export interface ClientToServerEvents {
    unlock_tech: (techID: TechID) => void;
    force_unlock_tech: (techID: TechID) => void;
    study_tech: (studyAmount: number) => void;
-   shape_structure: (structureID: number, shapeType: BuildingShapeType) => void;
+   // @Cleanup: kinda bad to use option idx (e.g. if we add an option in the middle of existing ones)
+   shape_structure: (structureID: number, optionIdx: number) => void;
    structure_interact: (structureID: number) => void;
    /** Can be sent when the player stops interacting with a structure */
    structure_uninteract: (structureID: number) => void;

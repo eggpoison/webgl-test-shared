@@ -55,7 +55,9 @@ export enum ServerComponentType {
    wanderAI,
    escapeAI,
    followAI,
-   researchBench
+   researchBench,
+   tunnel,
+   buildingMaterial
 }
 
 export const EntityComponents = {
@@ -90,7 +92,7 @@ export const EntityComponents = {
    [EntityType.rockSpikeProjectile]: [ServerComponentType.rockSpike] as const,
    [EntityType.spearProjectile]: [ServerComponentType.physics, ServerComponentType.throwingProjectile] as const,
    [EntityType.researchBench]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.researchBench] as const,
-   [EntityType.woodenWall]: [ServerComponentType.health, ServerComponentType.tribe] as const,
+   [EntityType.wall]: [ServerComponentType.health, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
    [EntityType.slimeSpit]: [ServerComponentType.physics, ServerComponentType.slimeSpit] as const,
    [EntityType.spitPoison]: [] as const,
    [EntityType.woodenDoor]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.door, ServerComponentType.tribe] as const,
@@ -105,7 +107,7 @@ export const EntityComponents = {
    [EntityType.blueprintEntity]: [ServerComponentType.health, ServerComponentType.blueprint, ServerComponentType.tribe] as const,
    [EntityType.ballista]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper, ServerComponentType.ammoBox, ServerComponentType.inventory] as const,
    [EntityType.slingTurret]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper] as const,
-   [EntityType.woodenTunnel]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const
+   [EntityType.woodenTunnel]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tunnel] as const
 } satisfies Record<EntityType, ReadonlyArray<ServerComponentType>>;
 
 export type EntityComponentTypes<T extends EntityType> = typeof EntityComponents[T];
@@ -153,7 +155,9 @@ const _ComponentData = {
    [ServerComponentType.wanderAI]: (): WanderAIComponentData => 0 as any,
    [ServerComponentType.escapeAI]: (): EscapeAIComponentData => 0 as any,
    [ServerComponentType.followAI]: (): FollowAIComponentData => 0 as any,
-   [ServerComponentType.researchBench]: (): ResearchBenchComponentData => 0 as any
+   [ServerComponentType.researchBench]: (): ResearchBenchComponentData => 0 as any,
+   [ServerComponentType.tunnel]: (): TunnelComponentData => 0 as any,
+   [ServerComponentType.buildingMaterial]: (): BuildingMaterialComponentData => 0 as any
 } satisfies Record<ServerComponentType, () => unknown>;
 
 export type ComponentData<T extends ServerComponentType = ServerComponentType> = ReturnType<typeof _ComponentData[T]>;
@@ -482,6 +486,24 @@ export interface ResearchBenchComponentData {
 
 export interface SpikesComponentData {
    readonly attachedWallID: number;
+}
+
+/* Tunnel Component */
+
+export interface TunnelComponentData {
+   /** 1st bit = door at top, 2nd bit = door at bottom */
+   readonly doorBitset: number;
+}
+
+/* Building Material Component Data */
+
+export enum BuildingMaterial {
+   wood,
+   stone
+}
+
+export interface BuildingMaterialComponentData {
+   readonly material: BuildingMaterial;
 }
 
 // @Cleanup: Should these be here?

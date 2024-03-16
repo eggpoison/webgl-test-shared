@@ -32,7 +32,7 @@ export enum EntityType {
    rockSpikeProjectile,
    spearProjectile,
    researchBench,
-   woodenWall,
+   wall,
    slimeSpit,
    spitPoison,
    woodenDoor,
@@ -82,7 +82,7 @@ export const enum IEntityType {
    rockSpikeProjectile,
    spearProjectile,
    researchBench,
-   woodenWall,
+   wall,
    slimeSpit,
    spitPoison,
    woodenDoor,
@@ -256,67 +256,8 @@ export enum GenericArrowType {
    slingRock
 }
 
-// @Cleanup: Maybe send data based on the components
-// cons:
-// - would send all data regardless of whether it is useful or not
-// pros:
-// - faster development time
-// - doesn't require defining an extra protocol for which data is sent (like with the EntityInfoClientArgs)
-// - allows easily inspecting specific entity data
-
-// export const EntityInfoClientArgs = {
-//    [EntityType.cow]: (species: CowSpecies, grazeProgress: number) => {},
-//    [EntityType.zombie]: (zombieType: number, activeItemType: ItemType | null, lastActionTicks: number, action: TribeMemberAction) => {},
-//    [EntityType.tombstone]: (tombstoneType: number, zombieSpawnProgress: number, zombieSpawnX: number, zombieSpawnY: number, deathInfo: DeathInfo | null) => {},
-//    [EntityType.tree]: (treeSize: TreeSize) => {},
-//    [EntityType.workbench]: () => {},
-//    [EntityType.boulder]: (boulderType: number) => {},
-//    [EntityType.berryBush]: (numBerries: number) => {},
-//    [EntityType.cactus]: (flowers: ReadonlyArray<CactusBodyFlowerData>, limbs: ReadonlyArray<CactusLimbData>) => {},
-//    [EntityType.yeti]: (attackProgress: number) => {},
-//    [EntityType.iceSpikes]: () => {},
-//    [EntityType.slime]: (size: SlimeSize, eyeRotation: number, orbSizes: ReadonlyArray<SlimeSize>, anger: number, spitChargeProgress: number) => {},
-//    [EntityType.slimewisp]: () => {},
-//    [EntityType.player]:    (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, username: string) => {},
-//    [EntityType.tribeWorker]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
-//    [EntityType.tribeWarrior]: (tribeID: number | null, tribeType: TribeType, armourSlotInventory: InventoryData, backpackSlotInventory: InventoryData, backpackInventory: InventoryData, rightActiveItem: ItemData | null, rightAction: TribeMemberAction, rightFoodEatingType: ItemType | -1, rightLastActionTicks: number, rightThrownBattleaxeItemID, leftActiveItem: ItemData | null, leftAction: TribeMemberAction, leftFoodEatingType: ItemType | -1, leftLastActionTicks: number, leftThrownBattleaxeItemID: number, hasFrostShield: boolean, warPaintType: number, hotbarInventory: InventoryData, activeItemSlot: number, state: TribesmanState) => {},
-//    [EntityType.tribeTotem]: (tribeID: number, tribeType: TribeType, banners: Array<TribeTotemBanner>) => {},
-//    [EntityType.workerHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
-//    [EntityType.warriorHut]: (tribeID: number | null, lastDoorSwingTicks: number) => {},
-//    [EntityType.barrel]: (tribeID: number | null, inventory: InventoryData) => {},
-//    [EntityType.campfire]: (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => {},
-//    [EntityType.furnace]:  (fuelInventory: InventoryData, ingredientInventory: InventoryData, outputInventory: InventoryData, heatingProgress: number, isCooking: boolean) => {},
-//    [EntityType.snowball]: (size: SnowballSize) => {},
-//    [EntityType.krumblid]: () => {},
-//    [EntityType.frozenYeti]: (attackType: FrozenYetiAttackType, attackStage: number, stageProgress: number, rockSpikePositions: Array<[number, number]>) => {},
-//    [EntityType.fish]: (colour: FishColour) => {},
-//    [EntityType.itemEntity]: (itemType: ItemType) => {},
-//    [EntityType.woodenArrowProjectile]: (arrowType: GenericArrowType) => {},
-//    [EntityType.iceShardProjectile]: () => {},
-//    [EntityType.rockSpikeProjectile]: (size: RockSpikeProjectileSize, lifetime: number) => {},
-//    [EntityType.spearProjectile]: () => {},
-//    [EntityType.researchBench]: (isOccupied: boolean) => {},
-//    [EntityType.woodenWall]: (health: number) => {},
-//    [EntityType.slimeSpit]: (size: number) => {},
-//    [EntityType.spitPoison]: () => {},
-//    [EntityType.woodenDoor]: (toggleType: DoorToggleType, openProgress: number) => {},
-//    [EntityType.battleaxeProjectile]: () => {},
-//    [EntityType.golem]: (wakeProgress: number) => {},
-//    [EntityType.planterBox]: () => {},
-//    [EntityType.iceArrow]: () => {},
-//    [EntityType.pebblum]: () => {},
-//    [EntityType.woodenEmbrasure]: () => {},
-//    [EntityType.woodenFloorSpikes]: () => {},
-//    [EntityType.woodenWallSpikes]: () => {},
-//    [EntityType.floorPunjiSticks]: () => {},
-//    [EntityType.wallPunjiSticks]: () => {},
-//    [EntityType.blueprintEntity]: (buildingType: BlueprintBuildingType, buildProgress: number) => {},
-//    [EntityType.ballista]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number, ammoBoxInventory: InventoryData, ammoType: BallistaAmmoType, ammoRemaining: number) => {},
-//    [EntityType.slingTurret]: (tribeID: number | null, aimDirection: number, chargeProgress: number, reloadProgress: number) => {}
-// } satisfies Record<EntityType, (...args: any[]) => void>;
-
-export const STRUCTURE_TYPES = [EntityType.woodenWall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenSpikes, EntityType.punjiSticks, EntityType.ballista, EntityType.slingTurret, EntityType.woodenTunnel] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.woodenWall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenSpikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.woodenTunnel] as const;
+export const STRUCTURE_TYPES = [EntityType.wall, EntityType.woodenDoor, EntityType.woodenEmbrasure, EntityType.woodenSpikes, EntityType.punjiSticks, EntityType.ballista, EntityType.slingTurret, EntityType.woodenTunnel] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.wall, IEntityType.woodenDoor, IEntityType.woodenEmbrasure, IEntityType.woodenSpikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.woodenTunnel] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
@@ -324,7 +265,7 @@ export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
 export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWall: boolean): number {
    switch (entityType) {
       case IEntityType.woodenTunnel:
-      case IEntityType.woodenWall:
+      case IEntityType.wall:
       case IEntityType.woodenDoor:
       case IEntityType.woodenEmbrasure: { return 64; }
       case IEntityType.woodenSpikes: { return 56; }
@@ -337,7 +278,7 @@ export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWa
 export function getSnapOffsetHeight(entityType: StructureTypeConst, isPlacedOnWall: boolean): number {
    switch (entityType) {
       case IEntityType.woodenTunnel:
-      case IEntityType.woodenWall:
+      case IEntityType.wall:
       case IEntityType.woodenDoor:
       case IEntityType.woodenEmbrasure: { return 64; }
       case IEntityType.woodenSpikes: { return isPlacedOnWall ? 28 : 56; }
