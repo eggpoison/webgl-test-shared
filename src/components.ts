@@ -57,7 +57,8 @@ export enum ServerComponentType {
    followAI,
    researchBench,
    tunnel,
-   buildingMaterial
+   buildingMaterial,
+   spikes
 }
 
 export const EntityComponents = {
@@ -102,8 +103,8 @@ export const EntityComponents = {
    [EntityType.iceArrow]: [ServerComponentType.physics, ServerComponentType.tribe] as const,
    [EntityType.pebblum]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.pebblum] as const,
    [EntityType.embrasure]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
-   [EntityType.woodenSpikes]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const,
-   [EntityType.punjiSticks]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe] as const,
+   [EntityType.spikes]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.spikes, ServerComponentType.buildingMaterial] as const,
+   [EntityType.punjiSticks]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.spikes] as const,
    [EntityType.blueprintEntity]: [ServerComponentType.health, ServerComponentType.blueprint, ServerComponentType.tribe] as const,
    [EntityType.ballista]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper, ServerComponentType.ammoBox, ServerComponentType.inventory] as const,
    [EntityType.slingTurret]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.turret, ServerComponentType.aiHelper] as const,
@@ -157,7 +158,8 @@ const _ComponentData = {
    [ServerComponentType.followAI]: (): FollowAIComponentData => 0 as any,
    [ServerComponentType.researchBench]: (): ResearchBenchComponentData => 0 as any,
    [ServerComponentType.tunnel]: (): TunnelComponentData => 0 as any,
-   [ServerComponentType.buildingMaterial]: (): BuildingMaterialComponentData => 0 as any
+   [ServerComponentType.buildingMaterial]: (): BuildingMaterialComponentData => 0 as any,
+   [ServerComponentType.spikes]: (): SpikesComponentData => 0 as any
 } satisfies Record<ServerComponentType, () => unknown>;
 
 export type ComponentData<T extends ServerComponentType = ServerComponentType> = ReturnType<typeof _ComponentData[T]>;
@@ -197,12 +199,16 @@ export enum BlueprintType {
    stoneWall,
    woodenDoor,
    stoneDoor,
+   stoneDoorUpgrade,
    woodenEmbrasure,
    stoneEmbrasure,
+   stoneEmbrasureUpgrade,
    woodenTunnel,
    stoneTunnel,
+   stoneTunnelUpgrade,
    ballista,
-   slingTurret
+   slingTurret,
+   stoneSpikes
 }
 
 export interface BlueprintComponentData {

@@ -523,8 +523,8 @@ export const ITEM_INFO_RECORD: { [T in ItemType]: ItemInfo<T> } = {
    },
    [ItemType.wooden_spikes]: {
       stackSize: 99,
-      entityType: EntityType.woodenSpikes,
-      entityTypeConst: IEntityType.woodenSpikes
+      entityType: EntityType.spikes,
+      entityTypeConst: IEntityType.spikes
    },
    [ItemType.punji_sticks]: {
       stackSize: 99,

@@ -286,6 +286,22 @@ export const COMMANDS: Commands = [
             permissions: CommandPermissions.dev
          }
       ]
+   },
+   {
+      name: "track",
+      parameters: [
+         {
+            id: 1,
+            prompt: null,
+            dataType: "number"
+         }
+      ],
+      configurations: [
+         {
+            parameterConfigurations: [1],
+            permissions: CommandPermissions.dev
+         }
+      ]
    }
 ];
 

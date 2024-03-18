@@ -43,7 +43,7 @@ export enum EntityType {
    pebblum,
    embrasure,
    tunnel,
-   woodenSpikes,
+   spikes,
    punjiSticks,
    blueprintEntity,
    ballista,
@@ -93,7 +93,7 @@ export const enum IEntityType {
    pebblum,
    embrasure,
    tunnel,
-   woodenSpikes,
+   spikes,
    punjiSticks,
    blueprintEntity,
    ballista,
@@ -256,8 +256,8 @@ export enum GenericArrowType {
    slingRock
 }
 
-export const STRUCTURE_TYPES = [EntityType.wall, EntityType.door, EntityType.embrasure, EntityType.woodenSpikes, EntityType.punjiSticks, EntityType.ballista, EntityType.slingTurret, EntityType.tunnel] as const;
-export const STRUCTURE_TYPES_CONST = [IEntityType.wall, IEntityType.door, IEntityType.embrasure, IEntityType.woodenSpikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.tunnel] as const;
+export const STRUCTURE_TYPES =       [EntityType.wall,  EntityType.door,  EntityType.embrasure,  EntityType.spikes,  EntityType.punjiSticks,  EntityType.ballista,  EntityType.slingTurret,  EntityType.tunnel,  EntityType.tribeTotem,  EntityType.workerHut,  EntityType.warriorHut,  EntityType.barrel] as const;
+export const STRUCTURE_TYPES_CONST = [IEntityType.wall, IEntityType.door, IEntityType.embrasure, IEntityType.spikes, IEntityType.punjiSticks, IEntityType.ballista, IEntityType.slingTurret, IEntityType.tunnel, IEntityType.tribeTotem, IEntityType.workerHut, IEntityType.warriorHut, IEntityType.barrel] as const;
 
 export type StructureType = typeof STRUCTURE_TYPES[number];
 export type StructureTypeConst = typeof STRUCTURE_TYPES_CONST[number];
@@ -268,10 +268,14 @@ export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWa
       case IEntityType.wall:
       case IEntityType.door:
       case IEntityType.embrasure: { return 64; }
-      case IEntityType.woodenSpikes: { return 56; }
+      case IEntityType.spikes: { return 56; }
       case IEntityType.punjiSticks: { return 56; }
       case IEntityType.slingTurret: { return 40; }
       case IEntityType.ballista: { return 50; }
+      case IEntityType.tribeTotem: return 120;
+      case IEntityType.workerHut: return 88;
+      case IEntityType.warriorHut: return 104;
+      case IEntityType.barrel: return 80;
    }
 }
 
@@ -281,9 +285,13 @@ export function getSnapOffsetHeight(entityType: StructureTypeConst, isPlacedOnWa
       case IEntityType.wall:
       case IEntityType.door:
       case IEntityType.embrasure: { return 64; }
-      case IEntityType.woodenSpikes: { return isPlacedOnWall ? 28 : 56; }
+      case IEntityType.spikes: { return isPlacedOnWall ? 28 : 56; }
       case IEntityType.punjiSticks: { return isPlacedOnWall ? 32 : 56; }
       case IEntityType.slingTurret: { return 40; }
       case IEntityType.ballista: { return 50; }
+      case IEntityType.tribeTotem: return 120;
+      case IEntityType.workerHut: return 88;
+      case IEntityType.warriorHut: return 104;
+      case IEntityType.barrel: return 80;
    }
 }

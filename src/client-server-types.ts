@@ -34,10 +34,21 @@ export type ServerTileUpdateData = {
    readonly isWall: boolean;
 }
 
+export enum HitboxCollisionType {
+   soft,
+   hard
+}
+
+export enum HitboxCollisionTypeConst {
+   soft,
+   hard
+}
+
 export interface BaseHitboxData {
    readonly mass: number;
    readonly offsetX: number;
    readonly offsetY: number;
+   readonly collisionType: HitboxCollisionTypeConst;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
