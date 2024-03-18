@@ -208,12 +208,14 @@ export enum BlueprintType {
    stoneTunnelUpgrade,
    ballista,
    slingTurret,
-   stoneSpikes
+   stoneFloorSpikes,
+   stoneWallSpikes
 }
 
 export interface BlueprintComponentData {
    readonly blueprintType: BlueprintType;
    readonly buildProgress: number;
+   readonly associatedEntityID: number;
 }
 
 /* Boulder Component */
@@ -511,6 +513,8 @@ export interface SpikesComponentData {
 export interface TunnelComponentData {
    /** 1st bit = door at top, 2nd bit = door at bottom */
    readonly doorBitset: number;
+   readonly topDoorOpenProgress: number;
+   readonly bottomDoorOpenProgress: number;
 }
 
 /* Building Material Component Data */

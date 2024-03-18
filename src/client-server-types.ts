@@ -49,6 +49,7 @@ export interface BaseHitboxData {
    readonly offsetX: number;
    readonly offsetY: number;
    readonly collisionType: HitboxCollisionTypeConst;
+   readonly localID: number;
 }
 
 export interface CircularHitboxData extends BaseHitboxData {
@@ -341,7 +342,7 @@ export interface ClientToServerEvents {
    place_blueprint: (structureID: number, blueprintType: BlueprintType) => void;
    modify_building: (buildingID: number) => void;
    deconstruct_building: (structureID: number) => void;
-   structure_interact: (structureID: number) => void;
+   structure_interact: (structureID: number, interactData: number) => void;
    /** Can be sent when the player stops interacting with a structure */
    structure_uninteract: (structureID: number) => void;
 }
