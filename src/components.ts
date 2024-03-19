@@ -101,7 +101,7 @@ export const EntityComponents = {
    [EntityType.golem]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.golem] as const,
    [EntityType.planterBox]: [ServerComponentType.health, ServerComponentType.statusEffect] as const,
    [EntityType.iceArrow]: [ServerComponentType.physics, ServerComponentType.tribe] as const,
-   [EntityType.pebblum]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.pebblum] as const,
+   [EntityType.pebblum]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.pebblum] as const,
    [EntityType.embrasure]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.buildingMaterial] as const,
    [EntityType.spikes]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.spikes, ServerComponentType.buildingMaterial] as const,
    [EntityType.punjiSticks]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.spikes] as const,

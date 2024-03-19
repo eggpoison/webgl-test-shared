@@ -270,7 +270,7 @@ export function getSnapOffsetWidth(entityType: StructureTypeConst, _isPlacedOnWa
       case IEntityType.embrasure: { return 64; }
       case IEntityType.spikes: { return 56; }
       case IEntityType.punjiSticks: { return 56; }
-      case IEntityType.slingTurret: { return 40; }
+      case IEntityType.slingTurret: { return 80; }
       case IEntityType.ballista: { return 50; }
       case IEntityType.tribeTotem: return 120;
       case IEntityType.workerHut: return 88;
@@ -287,7 +287,7 @@ export function getSnapOffsetHeight(entityType: StructureTypeConst, isPlacedOnWa
       case IEntityType.embrasure: { return 64; }
       case IEntityType.spikes: { return isPlacedOnWall ? 28 : 56; }
       case IEntityType.punjiSticks: { return isPlacedOnWall ? 32 : 56; }
-      case IEntityType.slingTurret: { return 40; }
+      case IEntityType.slingTurret: { return 80; }
       case IEntityType.ballista: { return 50; }
       case IEntityType.tribeTotem: return 120;
       case IEntityType.workerHut: return 88;

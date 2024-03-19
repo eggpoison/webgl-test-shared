@@ -3,7 +3,9 @@ const enum _Settings {
    TPS = 60,
    I_TPS = 1 / TPS,
    TILE_SIZE = 64,
-   BOARD_SIZE = 64,
+   // @Temporary
+   // BOARD_SIZE = 64,
+   BOARD_SIZE = 40,
    CHUNK_SIZE = 4,
    CHUNK_UNITS = CHUNK_SIZE * TILE_SIZE,
    BOARD_DIMENSIONS = BOARD_SIZE * CHUNK_SIZE,
