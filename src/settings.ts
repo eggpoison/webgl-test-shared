@@ -67,7 +67,7 @@ export enum PathfindingSettings {
    /** Units of separation between the nodes horizontally and vertically */
    NODE_SEPARATION = 16,
    // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16386 to SettingsConst.BOARD_UNITS
-   NODES_IN_WORLD_WIDTH = 16384 / PathfindingSettings.NODE_SEPARATION + 2,
+   NODES_IN_WORLD_WIDTH = SettingsConst.BOARD_UNITS / PathfindingSettings.NODE_SEPARATION + 2,
    NODE_REACH_DIST = 24
 }
 
@@ -75,6 +75,6 @@ export const enum PathfindingSettingsConst {
    /** Units of separation between the nodes horizontally and vertically */
    NODE_SEPARATION = 16,
    // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16386 to SettingsConst.BOARD_UNITS
-   NODES_IN_WORLD_WIDTH = 16384 / PathfindingSettings.NODE_SEPARATION + 2,
+   NODES_IN_WORLD_WIDTH = SettingsConst.BOARD_UNITS / PathfindingSettings.NODE_SEPARATION + 2,
    NODE_REACH_DIST = 24
 }
