@@ -103,8 +103,6 @@ export const enum IEntityType {
 export const RESOURCE_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.tree, EntityType.berryBush, EntityType.iceSpikes, EntityType.cactus, EntityType.boulder];
 export const MOB_ENTITY_TYPES: ReadonlyArray<EntityType> = [EntityType.cow, EntityType.zombie, EntityType.yeti, EntityType.slime, EntityType.slimewisp, EntityType.krumblid, EntityType.frozenYeti];
 
-export const RESOURCE_ENTITY_TYPES_CONST: ReadonlyArray<IEntityType> = [IEntityType.tree, IEntityType.berryBush, IEntityType.iceSpikes, IEntityType.cactus, IEntityType.boulder];
-
 type BaseEntityInfo = {
    readonly category: "mob" | "resource" | "other";
 }

@@ -58,7 +58,8 @@ export enum ServerComponentType {
    researchBench,
    tunnel,
    buildingMaterial,
-   spikes
+   spikes,
+   tribeWarrior
 }
 
 export const EntityComponents = {
@@ -76,7 +77,7 @@ export const EntityComponents = {
    [EntityType.slimewisp]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.slimewisp, ServerComponentType.wanderAI, ServerComponentType.aiHelper] as const,
    [EntityType.player]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tribeMember, ServerComponentType.inventory, ServerComponentType.inventoryUse, ServerComponentType.player] as const,
    [EntityType.tribeWorker]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tribeMember, ServerComponentType.inventory, ServerComponentType.inventoryUse, ServerComponentType.tribesman] as const,
-   [EntityType.tribeWarrior]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tribeMember, ServerComponentType.inventory, ServerComponentType.inventoryUse, ServerComponentType.tribesman] as const,
+   [EntityType.tribeWarrior]: [ServerComponentType.physics, ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.tribeMember, ServerComponentType.inventory, ServerComponentType.inventoryUse, ServerComponentType.tribesman, ServerComponentType.tribeWarrior] as const,
    [EntityType.tribeTotem]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.totemBanner] as const,
    [EntityType.workerHut]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.hut] as const,
    [EntityType.warriorHut]: [ServerComponentType.health, ServerComponentType.statusEffect, ServerComponentType.tribe, ServerComponentType.hut] as const,
@@ -159,7 +160,8 @@ const _ComponentData = {
    [ServerComponentType.researchBench]: (): ResearchBenchComponentData => 0 as any,
    [ServerComponentType.tunnel]: (): TunnelComponentData => 0 as any,
    [ServerComponentType.buildingMaterial]: (): BuildingMaterialComponentData => 0 as any,
-   [ServerComponentType.spikes]: (): SpikesComponentData => 0 as any
+   [ServerComponentType.spikes]: (): SpikesComponentData => 0 as any,
+   [ServerComponentType.tribeWarrior]: (): TribeWarriorComponentData => 0 as any
 } satisfies Record<ServerComponentType, () => unknown>;
 
 export type ComponentData<T extends ServerComponentType = ServerComponentType> = ReturnType<typeof _ComponentData[T]>;
@@ -532,6 +534,19 @@ export const MATERIAL_TO_ITEM_MAP: Record<BuildingMaterial, ItemType> = {
    [BuildingMaterial.wood]: ItemType.wood,
    [BuildingMaterial.stone]: ItemType.rock
 };
+
+/* Tribe Warrior Component Data */
+
+export interface ScarInfo {
+   readonly offsetX: number;
+   readonly offsetY: number;
+   readonly rotation: number;
+   readonly type: number;
+}
+
+export interface TribeWarriorComponentData {
+   readonly scars: ReadonlyArray<ScarInfo>;
+}
 
 // @Cleanup: Should these be here?
 
