@@ -1,3 +1,4 @@
+// @Cleanup: remove and infer Settings from SettingsConst
 const enum _Settings {
    SERVER_PORT = 8000,
    TPS = 60,
@@ -18,7 +19,8 @@ const enum _Settings {
    STRUCTURE_SNAP_RANGE = 100,
    STRUCTURE_POSITION_SNAP = 20,
    STRUCTURE_ROTATION_SNAP = 0.4,
-   ENTITY_PUSH_FORCE = 20
+   ENTITY_PUSH_FORCE = 20,
+   GLOBAL_ATTACK_COOLDOWN = 0.15 * TPS
 }
 
 export enum Settings {
@@ -39,7 +41,8 @@ export enum Settings {
    STRUCTURE_SNAP_RANGE = _Settings.STRUCTURE_SNAP_RANGE,
    STRUCTURE_POSITION_SNAP = _Settings.STRUCTURE_POSITION_SNAP,
    STRUCTURE_ROTATION_SNAP = _Settings.STRUCTURE_ROTATION_SNAP,
-   ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE
+   ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE,
+   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN
 }
 
 export const enum SettingsConst {
@@ -60,7 +63,8 @@ export const enum SettingsConst {
    STRUCTURE_SNAP_RANGE = _Settings.STRUCTURE_SNAP_RANGE,
    STRUCTURE_POSITION_SNAP = _Settings.STRUCTURE_POSITION_SNAP,
    STRUCTURE_ROTATION_SNAP = _Settings.STRUCTURE_ROTATION_SNAP,
-   ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE
+   ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE,
+   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN
 }
 
 export enum PathfindingSettings {

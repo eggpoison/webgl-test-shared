@@ -323,6 +323,7 @@ export interface InventoryUseInfoData {
    lastBattleaxeChargeTicks: number;
    lastCrossbowLoadTicks: number;
    thrownBattleaxeItemID: number;
+   lastAttackCooldown: number;
 }
 
 export interface InventoryUseComponentData {
