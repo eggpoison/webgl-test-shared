@@ -315,7 +315,7 @@ export interface InventoryUseInfoData {
    foodEatingTimer: number;
    // @Cleanup: Type name should not be 'tribe member action' as non tribe members can have this component
    currentAction: TribeMemberAction;
-   lastAttackTicks: number;
+lastAttackTicks: number;
    lastEatTicks: number;
    // @Cleanup: May be able to merge all 3 of these into 1
    lastBowChargeTicks: number;
