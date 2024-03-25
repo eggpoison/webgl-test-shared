@@ -1,6 +1,6 @@
 import { BlueprintType, EntityComponentsData } from "./components";
-import { EntityType, TribeMemberAction } from "./entities";
-import { Inventory } from "./items";
+import { EntityType, IEntityType, TribeMemberAction } from "./entities";
+import { Inventory, PlaceableItemType } from "./items";
 import { StatusEffect } from "./status-effects";
 import { EnemyTribeData, PlayerTribeData, TechID } from "./techs";
 import { BiomeName, TileType } from "./tiles";
@@ -115,6 +115,18 @@ export interface EntityData<T extends EntityType = EntityType> {
    readonly components: EntityComponentsData<T>;
 }
 
+export interface VulnerabilityNodeData {
+   readonly index: number;
+   readonly vulnerability: number;
+}
+
+export interface BuildingPlanData {
+   readonly x: number;
+   readonly y: number;
+   readonly rotation: number;
+   readonly entityType: IEntityType;
+}
+
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
 /** Data about the game state sent to the client each tick */
 export interface GameDataPacket {
@@ -139,6 +151,8 @@ export interface GameDataPacket {
    readonly pickedUpItem: boolean;
    readonly hotbarCrossbowLoadProgressRecord: Record<number, number>;
    readonly visiblePathfindingNodeOccupances: ReadonlyArray<PathfindingNodeIndex>;
+   readonly visibleVulnerabilityNodes: ReadonlyArray<VulnerabilityNodeData>;
+   readonly visibleBuildingPlans: ReadonlyArray<BuildingPlanData>;
 }
 
 export enum WaterRockSize {

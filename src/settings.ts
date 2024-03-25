@@ -9,6 +9,7 @@ const enum _Settings {
    CHUNK_UNITS = CHUNK_SIZE * TILE_SIZE,
    BOARD_DIMENSIONS = BOARD_SIZE * CHUNK_SIZE,
    BOARD_UNITS = BOARD_DIMENSIONS * TILE_SIZE,
+   TILES_IN_WORLD_WIDTH = BOARD_UNITS / TILE_SIZE,
    ITEM_SIZE = 16,
    INITIAL_PLAYER_HOTBAR_SIZE = 7,
    ITEM_PLACE_DISTANCE = 60,
@@ -18,7 +19,10 @@ const enum _Settings {
    STRUCTURE_POSITION_SNAP = 20,
    STRUCTURE_ROTATION_SNAP = 0.4,
    ENTITY_PUSH_FORCE = 20,
-   GLOBAL_ATTACK_COOLDOWN = 0.15 * TPS
+   GLOBAL_ATTACK_COOLDOWN = 0.15 * TPS,
+   // @Cleanup: Should these be here?
+   VULNERABILITY_NODE_SEPARATION = 16,
+   VULNERABILITY_NODES_IN_WORLD_WIDTH = BOARD_UNITS / VULNERABILITY_NODE_SEPARATION
 }
 
 export enum Settings {
@@ -31,6 +35,7 @@ export enum Settings {
    CHUNK_UNITS = _Settings.CHUNK_UNITS,
    BOARD_DIMENSIONS = _Settings.BOARD_DIMENSIONS,
    BOARD_UNITS = _Settings.BOARD_UNITS,
+   TILES_IN_WORLD_WIDTH = _Settings.TILES_IN_WORLD_WIDTH,
    ITEM_SIZE = _Settings.ITEM_SIZE,
    INITIAL_PLAYER_HOTBAR_SIZE = _Settings.INITIAL_PLAYER_HOTBAR_SIZE,
    ITEM_PLACE_DISTANCE = _Settings.ITEM_PLACE_DISTANCE,
@@ -40,7 +45,9 @@ export enum Settings {
    STRUCTURE_POSITION_SNAP = _Settings.STRUCTURE_POSITION_SNAP,
    STRUCTURE_ROTATION_SNAP = _Settings.STRUCTURE_ROTATION_SNAP,
    ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE,
-   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN
+   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN,
+   VULNERABILITY_NODE_SEPARATION = _Settings.VULNERABILITY_NODE_SEPARATION,
+   VULNERABILITY_NODES_IN_WORLD_WIDTH = _Settings.VULNERABILITY_NODES_IN_WORLD_WIDTH
 }
 
 export const enum SettingsConst {
@@ -53,6 +60,7 @@ export const enum SettingsConst {
    CHUNK_UNITS = _Settings.CHUNK_UNITS,
    BOARD_DIMENSIONS = _Settings.BOARD_DIMENSIONS,
    BOARD_UNITS = _Settings.BOARD_UNITS,
+   TILES_IN_WORLD_WIDTH = _Settings.TILES_IN_WORLD_WIDTH,
    ITEM_SIZE = _Settings.ITEM_SIZE,
    INITIAL_PLAYER_HOTBAR_SIZE = _Settings.INITIAL_PLAYER_HOTBAR_SIZE,
    ITEM_PLACE_DISTANCE = _Settings.ITEM_PLACE_DISTANCE,
@@ -62,13 +70,14 @@ export const enum SettingsConst {
    STRUCTURE_POSITION_SNAP = _Settings.STRUCTURE_POSITION_SNAP,
    STRUCTURE_ROTATION_SNAP = _Settings.STRUCTURE_ROTATION_SNAP,
    ENTITY_PUSH_FORCE = _Settings.ENTITY_PUSH_FORCE,
-   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN
+   GLOBAL_ATTACK_COOLDOWN = _Settings.GLOBAL_ATTACK_COOLDOWN,
+   VULNERABILITY_NODE_SEPARATION = _Settings.VULNERABILITY_NODE_SEPARATION,
+   VULNERABILITY_NODES_IN_WORLD_WIDTH = _Settings.VULNERABILITY_NODES_IN_WORLD_WIDTH
 }
 
 export enum PathfindingSettings {
    /** Units of separation between the nodes horizontally and vertically */
    NODE_SEPARATION = 16,
-   // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16386 to SettingsConst.BOARD_UNITS
    NODES_IN_WORLD_WIDTH = SettingsConst.BOARD_UNITS / PathfindingSettings.NODE_SEPARATION + 2,
    NODE_REACH_DIST = 24
 }
@@ -76,7 +85,6 @@ export enum PathfindingSettings {
 export const enum PathfindingSettingsConst {
    /** Units of separation between the nodes horizontally and vertically */
    NODE_SEPARATION = 16,
-   // @Robustness @Cleanup: Once merged with the laptop with SettingsConst, change from 16386 to SettingsConst.BOARD_UNITS
    NODES_IN_WORLD_WIDTH = SettingsConst.BOARD_UNITS / PathfindingSettings.NODE_SEPARATION + 2,
    NODE_REACH_DIST = 24
 }
