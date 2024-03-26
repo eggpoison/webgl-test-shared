@@ -329,6 +329,18 @@ export const CRAFTING_RECIPES: ReadonlyArray<CraftingRecipe> = [
    }
 ];
 
+export function getItemRecipe(itemType: ItemType): CraftingRecipe | null {
+   for (let i = 0; i < CRAFTING_RECIPES.length; i++) {
+      const recipe = CRAFTING_RECIPES[i];
+
+      if (recipe.product === itemType) {
+         return recipe;
+      }
+   }
+
+   return null;
+}
+
 type Item = { type: ItemType, count: number };
 type ItemSlots = { [itemSlot: number]: Item };
 
