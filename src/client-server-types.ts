@@ -119,6 +119,7 @@ export interface VulnerabilityNodeData {
    readonly index: number;
    readonly vulnerability: number;
    readonly isOccupied: boolean;
+   readonly isContained: boolean;
 }
 
 export interface BuildingPlanData {
@@ -162,6 +163,7 @@ export interface GameDataPacket {
    readonly visibleVulnerabilityNodes: ReadonlyArray<VulnerabilityNodeData>;
    readonly visibleBuildingPlans: ReadonlyArray<BuildingPlanData>;
    readonly visibleBuildingVulnerabilities: ReadonlyArray<BuildingVulnerabilityData>;
+   readonly visibleRestrictedBuildingAreas: ReadonlyArray<RestrictedBuildingAreaData>;
 }
 
 export enum WaterRockSize {
@@ -317,6 +319,14 @@ export interface EntityDebugData {
    readonly health?: number;
    readonly maxHealth?: number;
    readonly pathData?: PathData;
+}
+
+export interface RestrictedBuildingAreaData {
+   readonly x: number;
+   readonly y: number;
+   readonly width: number;
+   readonly height: number;
+   readonly rotation: number;
 }
 
 // Note to stupid future self: don't remove this, it's important
