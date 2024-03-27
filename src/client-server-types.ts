@@ -118,6 +118,7 @@ export interface EntityData<T extends EntityType = EntityType> {
 export interface VulnerabilityNodeData {
    readonly index: number;
    readonly vulnerability: number;
+   readonly isOccupied: boolean;
 }
 
 export interface BuildingPlanData {
@@ -125,6 +126,13 @@ export interface BuildingPlanData {
    readonly y: number;
    readonly rotation: number;
    readonly entityType: IEntityType;
+}
+
+export interface BuildingVulnerabilityData {
+   readonly x: number;
+   readonly y: number;
+   readonly minVulnerability: number;
+   readonly averageVulnerability: number;
 }
 
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
@@ -153,6 +161,7 @@ export interface GameDataPacket {
    readonly visiblePathfindingNodeOccupances: ReadonlyArray<PathfindingNodeIndex>;
    readonly visibleVulnerabilityNodes: ReadonlyArray<VulnerabilityNodeData>;
    readonly visibleBuildingPlans: ReadonlyArray<BuildingPlanData>;
+   readonly visibleBuildingVulnerabilities: ReadonlyArray<BuildingVulnerabilityData>;
 }
 
 export enum WaterRockSize {

@@ -440,6 +440,7 @@ export enum TribesmanAIType {
    eating,
    repairing,
    assistingOtherTribesmen,
+   building,
    idle
 }
 
