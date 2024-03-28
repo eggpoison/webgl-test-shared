@@ -136,6 +136,17 @@ export interface BuildingVulnerabilityData {
    readonly averageVulnerability: number;
 }
 
+export interface PotentialBuildingPlanData {
+   readonly x: number;
+   readonly y: number;
+   readonly rotation: number;
+   readonly buildingType: IEntityType;
+   readonly minVulnerability: number;
+   readonly averageVulnerability: number;
+   readonly extendedAverageVulnerability: number;
+   isBestMin: boolean;
+}
+
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
 /** Data about the game state sent to the client each tick */
 export interface GameDataPacket {
@@ -164,6 +175,7 @@ export interface GameDataPacket {
    readonly visibleBuildingPlans: ReadonlyArray<BuildingPlanData>;
    readonly visibleBuildingVulnerabilities: ReadonlyArray<BuildingVulnerabilityData>;
    readonly visibleRestrictedBuildingAreas: ReadonlyArray<RestrictedBuildingAreaData>;
+   readonly visiblePotentialBuildingPlans: ReadonlyArray<PotentialBuildingPlanData>;
 }
 
 export enum WaterRockSize {
