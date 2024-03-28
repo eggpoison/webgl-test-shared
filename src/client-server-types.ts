@@ -132,8 +132,14 @@ export interface BuildingPlanData {
 export interface BuildingVulnerabilityData {
    readonly x: number;
    readonly y: number;
-   readonly minVulnerability: number;
-   readonly averageVulnerability: number;
+   readonly safety: number;
+}
+
+export interface PotentialPlanSafetyInfo {
+   readonly buildingTypes: Array<IEntityType>;
+   readonly buildingIDs: Array<EntityType>;
+   readonly buildingMinSafetys: Array<number>;
+   readonly buildingAverageSafetys: Array<number>;
 }
 
 export interface PotentialBuildingPlanData {
@@ -141,10 +147,8 @@ export interface PotentialBuildingPlanData {
    readonly y: number;
    readonly rotation: number;
    readonly buildingType: IEntityType;
-   readonly minVulnerability: number;
-   readonly averageVulnerability: number;
-   readonly extendedAverageVulnerability: number;
-   isBestMin: boolean;
+   readonly safety: number;
+   readonly safetyInfo: PotentialPlanSafetyInfo;
 }
 
 // @Cleanup: A whole bunch of the data in this for the player can be deduced from the entity data array
